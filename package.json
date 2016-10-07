@@ -1,0 +1,28 @@
+{
+  "name": "art-c",
+  "version": "0.0.0",
+  "description": "Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loomnugget/Art-C.git"
+  },
+  "author": "claudia.cedfeldt@gmail.com, broxsonl@gmail.com, maxfred0025@gmail.com, tenlia@hotmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loomnugget/Art-C/issues"
+  },
+  "homepage": "https://github.com/loomnugget/Art-C#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-mocha": "^3.0.1"
+  }
+}
