@@ -12,7 +12,7 @@ const artistSchema = mongoose.Schema({
   zip: {type: String, required: true},
   about: {type: String},
   phone: {type: String, unique: true},
-  created: {type: Date, required: true},
+  created: {type: Date, required: true, default: Date.now},
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   photoID: {type: mongoose.Schema.Types.ObjectId, required: true},
 
