@@ -28,5 +28,14 @@
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
     "mocha": "^3.1.1"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "cors": "^2.8.1",
+    "debug": "^2.2.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.3",
+    "morgan": "^1.7.0"
   }
 }
