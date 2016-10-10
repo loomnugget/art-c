@@ -4,17 +4,13 @@ const mongoose = require('mongoose'); // creates user Schema
 
 const gallerySchema = mongoose.Schema({
   name: {type: String, required: true},
-  description: {type: String, required: true},
+  username: {type: String, required: true},
+  desc: {type: String, required: true},
+  category: {type: String, required: true}, //validated string
   created: {type: Date, required: true, default: Date.now},
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
-  //- Profile ID
-  //- Category (validated string)
-  //- Gallery Name
-  //- Description
-  //- Created on (date)
-  //- UserID
-  //- listingIDs [pop]
-  //username
+  profileID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  listings: [{type: mongoose.Schema.Types.ObjectId, ref: 'listing'}],
 });
 
 module.exports = mongoose.model('gallery', gallerySchema);

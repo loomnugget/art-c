@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const listingSchema = mongoose.Schema({
   title: {type: String, required: true},
-  description: {type: String, required: true},
+  desc: {type: String, required: true},
   category: {type: String, required: true},
   photo: {type: String, required: true},
   username: {type: String, required: true},
