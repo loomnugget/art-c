@@ -19,6 +19,9 @@ authRouter.post('/api/signup', jsonParser, function(req, res, next){
   if (!password)
     return next(createError(400, 'requires password'));
 
+  if (password.length < 7)
+    return next(createError(400, 'password must be at least 7 characters'));
+
   user.generatePasswordHash(password)
   .then( user => user.save())
   .then( user => user.generateToken())
@@ -30,7 +33,9 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   debug('GET /api/login');
 
   User.findOne({username: req.auth.username})
+  .catch( err => Promise.reject(createError(401, err.message)))
   .then( user => user.comparePasswordHash(req.auth.password))
+  .catch(err => Promise.reject(createError(401, err.message)))
   .then( user => user.generateToken())
   .then( token => res.send(token))
   .catch(next);

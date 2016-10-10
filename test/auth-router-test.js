@@ -51,7 +51,115 @@ describe('testing auth-router', function() {
         });
       });
     });
-    //TODO: More tests for POST here.
+
+    describe('with no username', function() {
+
+      it('should return a status 400, bad request', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          password: exampleUser.password,
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
+
+    describe('with no password', function() {
+
+      it('should return a status 400, bad request', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
+
+    describe('with no email', function() {
+
+      it('should return a status 400, bad request', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: exampleUser.password,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
+
+    describe('with duplicate username', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 409', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: this.tempUser.username,
+          password: exampleUser.password,
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+    });
+
+    describe('with duplicate email', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 409', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: exampleUser.password,
+          email: this.tempUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+    });
+
+    describe('with password < 7 characters', function() {
+
+      it('should return a status 400', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: 'dog',
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
 
   });
 
@@ -74,7 +182,34 @@ describe('testing auth-router', function() {
       });
     });
 
-    //TODO: More tests for GET here.
+    describe('with a bad username', function() {
 
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 401, bad request', (done) => {
+        request.get(`${url}/api/login`)
+        .auth('notgood', this.tempPassword)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.text).to.equal('UnauthorizedError');
+          done();
+        });
+      });
+    });
+
+    describe('with a bad password', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 401, bad request', (done) => {
+        request.get(`${url}/api/login`)
+        .auth(this.tempUser.username, 'baddpassword')
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.text).to.equal('UnauthorizedError');
+          done();
+        });
+      });
+    });
   });
 });

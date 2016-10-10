@@ -6,7 +6,6 @@ const artistSchema = mongoose.Schema({
   firstname: {type: String, required: true, minlength: 3},
   lastname: {type: String, required: true, minlength: 3},
   username: {type: String, required: true, unique: true},
-  photo: {type: String},
   email: {type: String, required: true, unique: true},
   city: {type: String, required: true},
   zip: {type: String, required: true},
@@ -14,7 +13,7 @@ const artistSchema = mongoose.Schema({
   phone: {type: String, unique: true},
   created: {type: Date, required: true, default: Date.now},
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
-  photoID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  photoID: {type: mongoose.Schema.Types.ObjectId},
 
 });
 
