@@ -12,10 +12,8 @@ addons:
       - g++-4.8
 env:
   - CXX=g++-4.8
-  - MONGODB_URI=mongodb://localhost/test
-  - PORT=3000
-  - APP_SECRET='lulwat top secret'
 sudo: required
 before_script: npm i -g eslint mocha
 script:
-  - ./script/test-submissions.sh
+  - npm test
+  - npm run lint
