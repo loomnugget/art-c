@@ -22,18 +22,6 @@ mongoose.Promise = Promise;
 const server = require('../server.js');
 const url = `http://localhost:${process.env.PORT}`;
 
-const exampleUser = {
-  username: 'fakeuser',
-  password: '192837465',
-  email: 'fake@fakestuff.fake',
-};
-
-const exampleUser2 = {
-  username: 'robguy',
-  password: '12345678',
-  email: 'blerpderpy@blerp.com',
-};
-
 const exampleArtist = {
   firstname: 'Jimbob',
   lastname: 'Jimbobberson',
@@ -84,5 +72,42 @@ describe('testing artist-router', function() {
       });
       });
     });
+
+    //TODO: More POST tests here
   });
+
+  describe('testing GET to /api/artist/:id', () => {
+
+    describe('with valid token and id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return a artist', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.firstname).to.equal(exampleArtist.firstname);
+          expect(res.body.lastname).to.equal(exampleArtist.lastname);
+          expect(res.body.username).to.equal(exampleArtist.username);
+          expect(res.body.email).to.equal(exampleArtist.email);
+          expect(res.body.city).to.equal(exampleArtist.city);
+          expect(res.body.zip).to.equal(exampleArtist.zip);
+          expect(res.body.about).to.equal(exampleArtist.about);
+          expect(res.body.phone).to.equal(exampleArtist.phone);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    //TODO: More GET tests here
+  });
+
 });
