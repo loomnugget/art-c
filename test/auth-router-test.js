@@ -54,4 +54,27 @@ describe('testing auth-router', function() {
     //TODO: More tests for POST here.
 
   });
+
+  describe('testing GET /api/signup', function() {
+
+    describe('with valid authorization', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a token', (done) => {
+        request.get(`${url}/api/login`)
+        .auth(this.tempUser.username, this.tempPassword)
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(!!res.text).to.equal(true);
+          done();
+        });
+      });
+    });
+
+    //TODO: More tests for GET here.
+
+  });
 });
