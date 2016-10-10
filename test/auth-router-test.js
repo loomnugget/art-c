@@ -86,6 +86,23 @@ describe('testing auth-router', function() {
       });
     });
 
+    describe('with no email', function() {
+
+      it('should return a status 400, bad request', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: exampleUser.password,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
+
   });
 
   describe('testing GET /api/signup', function() {
