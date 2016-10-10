@@ -27,7 +27,8 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.1.1"
+    "mocha": "^3.1.1",
+    "superagent": "^2.3.0"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
