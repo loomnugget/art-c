@@ -197,8 +197,20 @@ describe('testing auth-router', function() {
       });
     });
 
+    describe('with a bad password', function() {
 
-    //TODO: More tests for GET here.
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 401, bad request', (done) => {
+        request.get(`${url}/api/login`)
+        .auth(this.tempUser.username, 'baddpassword')
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.text).to.equal('UnauthorizedError');
+          done();
+        });
+      });
+    });
 
   });
 });
