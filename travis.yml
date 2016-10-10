@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - '4.4.3'
+services:
+  - mongodb
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+env:
+  - CXX=g++-4.8
+  - MONGODB_URI=mongodb://localhost/test
+  - PORT=3000
+  - APP_SECRET='lulwat top secret'
+sudo: required
+before_script: npm i -g eslint mocha
+script:
+  - ./script/test-submissions.sh
