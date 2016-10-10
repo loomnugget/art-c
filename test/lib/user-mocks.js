@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('leegram:user-mock');
+const debug = require('debug')('artc:user-mock');
 const User = require('../../model/user.js');
 const lorem = require('lorem-ipsum');
 

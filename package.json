@@ -39,6 +39,7 @@
     "express": "^4.14.0",
     "http-errors": "^1.5.0",
     "jsonwebtoken": "^7.1.9",
+    "lorem-ipsum": "^1.0.3",
     "mongoose": "^4.6.3",
     "morgan": "^1.7.0"
   }
