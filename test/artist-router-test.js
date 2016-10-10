@@ -71,6 +71,28 @@ describe('testing artist-router', function() {
         done();
       });
       });
+
+
+    });
+
+    describe('with an invalid body', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should a status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist`)
+      .send('badbody')
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        done();
+      });
+      });
+
+
     });
 
     //TODO: More POST tests here
@@ -109,5 +131,11 @@ describe('testing artist-router', function() {
 
     //TODO: More GET tests here
   });
+
+  //TODO: PUT tests here
+
+
+
+  //TODO: DELETE tests here
 
 });
