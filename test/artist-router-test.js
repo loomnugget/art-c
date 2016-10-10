@@ -82,17 +82,33 @@ describe('testing artist-router', function() {
       it('should a status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist`)
-      .send('badbody')
-      .set({
-        Authorization: `Bearer ${this.tempToken}`,
-      })
-      .end((err, res) => {
-        expect(res.status).to.equal(400);
-        done();
+        .send('badbody')
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
       });
+    });
+
+    describe('with no token', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should a status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
       });
-
-
     });
 
     //TODO: More POST tests here
