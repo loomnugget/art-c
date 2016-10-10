@@ -57,6 +57,8 @@ describe('testing artist-router', function() {
 
     describe('with a valid body', function() {
 
+      before(done => mockUser.call(this, done));
+
       it('should return an artist profile and a status 200', (done) => {
 
         request.post(`${url}/api/artist`)
