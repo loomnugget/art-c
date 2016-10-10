@@ -19,6 +19,9 @@ authRouter.post('/api/signup', jsonParser, function(req, res, next){
   if (!password)
     return next(createError(400, 'requires password'));
 
+  if (password.length < 7)
+    return next(createError(400, 'password must be at least 7 characters'));
+
   user.generatePasswordHash(password)
   .then( user => user.save())
   .then( user => user.generateToken())
