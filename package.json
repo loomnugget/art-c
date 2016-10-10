@@ -22,12 +22,15 @@
   },
   "homepage": "https://github.com/loomnugget/art-c#readme",
   "devDependencies": {
+    "aws-sdk": "^2.6.7",
     "chai": "^3.5.0",
+    "del": "^2.2.2",
     "eslint": "^3.7.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
     "mocha": "^3.1.1",
+    "multer": "^1.2.0",
     "superagent": "^2.3.0"
   },
   "dependencies": {
