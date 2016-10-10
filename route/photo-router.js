@@ -10,7 +10,7 @@ const path = require('path'); //has ext paramater to get extension name of file
 const del = require('del');
 const AWS = require('aws-sdk');
 const multer = require('multer'); //body parser
-const debug = require('debug')('TastyToast:pic-router');
+const debug = require('debug')('artc:pic-router');
 const createError = require('http-errors');
 
 //APP MOUDLES
@@ -24,7 +24,7 @@ const BUCKET = process.env.BUCKET;
 const s3 = new AWS.S3();
 const dataDir =`${__dirname}/../data`;
 const upload = multer({dest: dataDir});
-const picRouter = module.exports = require('express').Router();
+const photoRouter = module.exports = require('express').Router();
 
 function s3UploadPromise(params){
   return new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ function s3UploadPromise(params){
   });
 }
 
-picRouter.post('/api/artist/:artistID/photo', upload.single('image'), function(req, res, next){
+photoRouter.post('/api/artist/:artistID/photo', upload.single('image'), function(req, res, next){
   debug('hit POST /api/artist/:artistID/photo');
 
   if (!req.file)
