@@ -1,6 +1,6 @@
 ##Standup Notes:
 
-**10/10/2016 - 11am
+**10/10/2016, 11am
 
     - Do you have deployment?
         YES
@@ -15,4 +15,27 @@
 
         - Claudia/Liz: Building out the other models. 80% done by 1pm. Will pair program on that.
 
-        - Lee: Writing tests for auth router and creating necessary mocks and server control
+**10/10/2016, 1:30pm
+
+    - Liz and Claudia made all of the models.
+        - Blockers? Ensuring that the photo IDs and references for each thing are properly aligned
+
+    -  Max got the middlewares done and post and get route for the auth.
+
+    - Lee got the auth router tests passing for 200s. Also created the ./lib/ helper files and user mocks.
+
+    Misc:
+        - We don't need photos required for gallery, artist and listing.
+        - BONUS: Create a route to check if a username has been taken. It would do a findOne. e.g. /api/useravailable POST and you send back a 204 for success, 409 for duplicate (RED). This POST request would trigger on every single keystroke.
+
+    - What's everyone working on today until 5pm?
+
+        - All: Try to get as many of the test and routes done with basic testing by end of day so we can jump into making lots of tests tonight or tomorrow.
+
+        - Max: Will finish writing the mocks. 100% mocks.
+
+        - Lee: Auth-router testing and start writing tests for artists, galleries and listings. 50% on artist routes and tests.
+
+        - Elizabeth: Tests and routes for artists, galleries and listings.
+
+        - Claudia: Tests and routes for artists, galleries and listings.
