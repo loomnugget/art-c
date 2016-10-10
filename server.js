@@ -11,6 +11,7 @@ const dotenv = require('dotenv');
 
 // app modules
 // TODO: add routers and middleware
+const errorMiddleware = require('./lib/error-middleware.js');
 
 // load env variables
 dotenv.load();
@@ -28,6 +29,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // app routes
+app.use(errorMiddleware);
 
 // start server
 const server = module.exports = app.listen(PORT, function() {
