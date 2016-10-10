@@ -1,5 +1,8 @@
 'use strict';
 
+// bringing in test environment
+require('./lib/test-env.js');
+
 // npm modules
 const expect = require('chai').expect;
 const request = require('superagent');
@@ -41,3 +44,43 @@ const exampleArtist = {
   about: 'I\m just a simple kinda man who likes to do art stuff.',
   phone: '(555)555-5555',
 };
+
+describe('testing artist-router', function() {
+
+  before( done => serverCtrl.serverUp(server, done));
+
+  after( done => serverCtrl.serverDown(server, done));
+
+  afterEach( done => cleanDB(done));
+
+  describe('testing POST /api/artist', function() {
+
+    describe('with a valid body', function() {
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+      .send(exampleArtist)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.firstname).to.equal(exampleArtist.firstname);
+        expect(res.body.lastname).to.equal(exampleArtist.lastname);
+        expect(res.body.username).to.equal(exampleArtist.username);
+        expect(res.body.email).to.equal(exampleArtist.email);
+        expect(res.body.city).to.equal(exampleArtist.city);
+        expect(res.body.zip).to.equal(exampleArtist.zip);
+        expect(res.body.about).to.equal(exampleArtist.about);
+        expect(res.body.phone).to.equal(exampleArtist.phone);
+        expect(res.body.userID).to.equal(this.tempUser._id.toString());
+        let date = new Date(res.body.created).toString();
+        expect(date).to.not.equal('Invalid Date');
+        done();
+      });
+      });
+    });
+  });
+});
