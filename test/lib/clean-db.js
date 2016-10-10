@@ -12,11 +12,11 @@ const Listing = require('../../model/listing.js');
 module.exports = function(done){
   debug('clean up database');
   Promise.all([
-    Photo.remove({}),
+    // Photo.remove({}),
     User.remove({}),
-    Artist.remove({}),
-    Gallery.remove({}),
-    Listing.remove({}),
+    // Artist.remove({}),
+    // Gallery.remove({}),
+    // Listing.remove({}),
   ])
   .then( () => done())
   .catch(done);
