@@ -6,7 +6,6 @@ const listingSchema = mongoose.Schema({
   title: {type: String, required: true},
   desc: {type: String, required: true},
   category: {type: String, required: true}, // validated string
-  photo: {type: String, required: true},
   username: {type: String, required: true},
   created: {type: Date, required: true, default: Date.now},
   galleryID: {type: mongoose.Schema.Types.ObjectId, required: true},
