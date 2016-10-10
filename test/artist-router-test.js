@@ -75,6 +75,38 @@ describe('testing artist-router', function() {
 
     });
 
+    describe('with no', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+      .send(exampleArtist)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.firstname).to.equal(exampleArtist.firstname);
+        expect(res.body.lastname).to.equal(exampleArtist.lastname);
+        expect(res.body.username).to.equal(exampleArtist.username);
+        expect(res.body.email).to.equal(exampleArtist.email);
+        expect(res.body.city).to.equal(exampleArtist.city);
+        expect(res.body.zip).to.equal(exampleArtist.zip);
+        expect(res.body.about).to.equal(exampleArtist.about);
+        expect(res.body.phone).to.equal(exampleArtist.phone);
+        expect(res.body.userID).to.equal(this.tempUser._id.toString());
+        let date = new Date(res.body.created).toString();
+        expect(date).to.not.equal('Invalid Date');
+        done();
+      });
+      });
+
+
+    });
+
     describe('with an invalid body', function() {
 
       before(done => mockUser.call(this, done));
@@ -93,11 +125,44 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with no token', function() {
+    describe('with no authorization header', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should a status 401 unauthorized', (done) => {
+      it('should status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .set({
+          Authorization: 'bad request',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no authorization header', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with a bad token', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', (done) => {
 
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
