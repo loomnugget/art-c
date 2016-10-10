@@ -137,7 +137,7 @@ describe('testing artist-router', function() {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: '',
+          firstname: 'Jimbob',
           lastname: 'Jimbobberson',
           username: '',
           email: 'jimbobguy14@stuff.com',
@@ -165,11 +165,65 @@ describe('testing artist-router', function() {
         request.post(`${url}/api/artist`)
         .send({
           firstname: 'Jimbob',
-          lastname: '',
+          lastname: 'Jimbobberson',
           username: 'Jimbobguy316',
           email: '',
           city: 'Dallas',
           zip: '98114',
+          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          phone: '(555)555-5555',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no city', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: 'Jimbob',
+          lastname: 'Jimbobberson',
+          username: 'Jimbobguy316',
+          email: 'jimbobguy14@stuff.com',
+          city: '',
+          zip: '98114',
+          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          phone: '(555)555-5555',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no zip', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: 'Jimbob',
+          lastname: 'Jimbobberson',
+          username: 'Jimbobguy316',
+          email: 'jimbobguy14@stuff.com',
+          city: 'Dallas',
+          zip: '',
           about: 'I\m just a simple kinda man who likes to do art stuff.',
           phone: '(555)555-5555',
         })
