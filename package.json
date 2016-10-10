@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha",
+    "test": "DEBUG=art* ./node_modules/mocha/bin/mocha",
     "start": "node server.js",
     "lint": "./node_modules/eslint/bin/eslint.js"
   },
@@ -27,11 +27,13 @@
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.1.1"
+    "mocha": "^3.1.1",
+    "superagent": "^2.3.0"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
+    "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "crypto": "0.0.3",
     "debug": "^2.2.0",
@@ -39,6 +41,7 @@
     "express": "^4.14.0",
     "http-errors": "^1.5.0",
     "jsonwebtoken": "^7.1.9",
+    "lorem-ipsum": "^1.0.3",
     "mongoose": "^4.6.3",
     "morgan": "^1.7.0"
   }

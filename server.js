@@ -11,6 +11,7 @@ const dotenv = require('dotenv');
 
 // app modules
 // TODO: add routers and middleware
+const authRouter = require('./route/auth-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 // load env variables
@@ -29,6 +30,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // app routes
+app.use(authRouter);
 app.use(errorMiddleware);
 
 // start server
