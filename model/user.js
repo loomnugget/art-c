@@ -6,20 +6,19 @@ const jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
 const createError = require('http-errors');
-const debug = require('debug')('artc:user'); 
+const debug = require('debug')('artc:user');
 
 // module constants
-const Schema = mongoose.Schema; //convenience var to point to mongoose.Schema
+const Schema = mongoose.Schema;
 
 const userSchema = Schema({
-  username: {type: String, require: true, unique: true},
-  email: {type: String, require: true, unique: true},
+  username: {type: String, required: true, unique: true, minlength: 3},
+  email: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   findHash: {type: String, unique: true},
 });
 
 userSchema.methods.generatePasswordHash = function(password) {
-  //We hash a password, which is one-way.
   debug('generatePasswordHash');
   return new Promise((resolve, reject) => {
     bcrypt.hash(password, 10, (err, hash) => {
@@ -31,7 +30,6 @@ userSchema.methods.generatePasswordHash = function(password) {
 };
 
 userSchema.methods.comparePasswordHash = function(password) {
-  //We hash the pw we're comparing. If it matches, thumbs up.
   debug('comparePasswordHash');
   return new Promise((resolve, reject) => {
     bcrypt.compare(password, this.password, (err, valid) => {
@@ -69,4 +67,4 @@ userSchema.methods.generateToken = function() {
   });
 };
 
-module.exports = mongoose.model('user', userSchema); //Has to be done at end. Mongoose freaks if model is created before schema method finishes.
+module.exports = mongoose.model('user', userSchema);
