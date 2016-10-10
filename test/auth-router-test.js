@@ -123,6 +123,27 @@ describe('testing auth-router', function() {
       });
     });
 
+    describe('with duplicate email', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 409', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: exampleUser.password,
+          email: this.tempUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+    });
+
+
   });
 
   describe('testing GET /api/signup', function() {
