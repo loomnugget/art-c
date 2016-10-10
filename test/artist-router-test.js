@@ -129,6 +129,60 @@ describe('testing artist-router', function() {
       });
     });
 
+    describe('with no username', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: '',
+          lastname: 'Jimbobberson',
+          username: '',
+          email: 'jimbobguy14@stuff.com',
+          city: 'Dallas',
+          zip: '98114',
+          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          phone: '(555)555-5555',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no email', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: 'Jimbob',
+          lastname: '',
+          username: 'Jimbobguy316',
+          email: '',
+          city: 'Dallas',
+          zip: '98114',
+          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          phone: '(555)555-5555',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
     describe('with an invalid body', function() {
 
       before(done => mockUser.call(this, done));
