@@ -143,6 +143,23 @@ describe('testing auth-router', function() {
       });
     });
 
+    describe('with password < 7 characters', function() {
+
+      it('should return a status 400', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          username: exampleUser.username,
+          password: 'dog',
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
 
   });
 
@@ -164,6 +181,22 @@ describe('testing auth-router', function() {
         });
       });
     });
+
+    describe('with a bad username', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 401, bad request', (done) => {
+        request.get(`${url}/api/login`)
+        .auth('notgood', this.tempPassword)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.text).to.equal('UnauthorizedError');
+          done();
+        });
+      });
+    });
+
 
     //TODO: More tests for GET here.
 
