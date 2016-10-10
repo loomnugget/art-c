@@ -7,22 +7,26 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node server.js",
+    "lint": "./node_modules/eslint/bin/eslint.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/loomnugget/Art-C.git"
+    "url": "git+https://github.com/loomnugget/art-c.git"
   },
   "author": "claudia.cedfeldt@gmail.com, broxsonl@gmail.com, maxfred0025@gmail.com, tenlia@hotmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/loomnugget/Art-C/issues"
+    "url": "https://github.com/loomnugget/art-c/issues"
   },
-  "homepage": "https://github.com/loomnugget/Art-C#readme",
+  "homepage": "https://github.com/loomnugget/art-c#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.7.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-mocha": "^3.0.1"
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.1"
   }
 }
