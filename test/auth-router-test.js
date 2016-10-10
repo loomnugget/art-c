@@ -51,7 +51,23 @@ describe('testing auth-router', function() {
         });
       });
     });
-    //TODO: More tests for POST here.
+
+    describe('with no username', function() {
+
+      it('should return a status 400, bad request', (done) => {
+
+        request.post(`${url}/api/signup`)
+        .send({
+          password: exampleUser.password,
+          email: exampleUser.email,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
 
   });
 
