@@ -12,7 +12,7 @@ module.exports = function(done) {
   let exampleUser = {
     username,
     password,
-    email: `${email}@blah.blahblah`,
+    email: `${email}@art.fancyartist`,
   };
   this.tempPassword = password;
   new User(exampleUser)
