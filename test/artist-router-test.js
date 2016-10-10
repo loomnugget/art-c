@@ -76,7 +76,7 @@ describe('testing artist-router', function() {
     //TODO: More POST tests here
   });
 
-  describe('testing GET to /api/artist/:id', () => {
+  describe('testing GET to /api/artist/:artistID', () => {
 
     describe('with valid token and id', function(){
 
@@ -91,14 +91,14 @@ describe('testing artist-router', function() {
           if (err)
             return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.firstname).to.equal(exampleArtist.firstname);
-          expect(res.body.lastname).to.equal(exampleArtist.lastname);
-          expect(res.body.username).to.equal(exampleArtist.username);
-          expect(res.body.email).to.equal(exampleArtist.email);
-          expect(res.body.city).to.equal(exampleArtist.city);
-          expect(res.body.zip).to.equal(exampleArtist.zip);
-          expect(res.body.about).to.equal(exampleArtist.about);
-          expect(res.body.phone).to.equal(exampleArtist.phone);
+          expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+          expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+          expect(res.body.username).to.equal(this.tempArtist.username);
+          expect(res.body.email).to.equal(this.tempArtist.email);
+          expect(res.body.city).to.equal(this.tempArtist.city);
+          expect(res.body.zip).to.equal(this.tempArtist.zip);
+          expect(res.body.about).to.equal(this.tempArtist.about);
+          expect(res.body.phone).to.equal(this.tempArtist.phone);
           expect(res.body.userID).to.equal(this.tempUser._id.toString());
           let date = new Date(res.body.created).toString();
           expect(date).to.not.equal('Invalid Date');
