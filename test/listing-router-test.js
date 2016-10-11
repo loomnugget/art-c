@@ -41,13 +41,14 @@
 //       before(done => mockGallery.call(this, done));
 //
 //       it('should return a listing and status 200', done => {
-//         console.log(this.tempGallery);
 //         request.post(`${url}/api/gallery/${this.tempGallery._id}/listing`)
 //         .send(exampleListing)
-//         .set({Authorization: `Bearer ${this.tempToken}`})
+//         .set({
+//           Authorization: `Bearer ${this.tempToken}`,
+//         })
 //         .end((err, res) => {
-//           console.log(res.body);
 //           if(err) return done(err);
+//           console.log(res.body);
 //           expect(res.status).to.equal(200);
 //           expect(res.body.title).to.equal(exampleListing.title);
 //           expect(res.body.desc).to.equal(exampleListing.desc);
