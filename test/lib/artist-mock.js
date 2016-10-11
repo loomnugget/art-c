@@ -9,7 +9,6 @@ module.exports = function(done){
   let exampleArtist = {
     firstname: 'george',
     lastname: 'bush',
-    // email: 'george_bush@gmail.com',
     city: 'houston',
     zip: '85749',
     about: 'former president of the united states of america, avid painter',
