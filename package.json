@@ -34,6 +34,7 @@
     "superagent": "^2.3.0"
   },
   "dependencies": {
+    "aws-sdk-mock": "^1.5.0",
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
