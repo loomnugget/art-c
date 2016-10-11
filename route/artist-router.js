@@ -36,26 +36,26 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
   });
 });
 
-artistRouter.put('/api/artist/:id', bearerAuth, jsonParser, function(req, res, next) {
-  debug('hit route PUT /api/artist/:id');
-  Artist.findByIdAndUpdate(req.params.id, req.body, {new: true})
+artistRouter.put('/api/artist/:artistID', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/artist/:artistID');
+  Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true})
   .then( artist => res.json(artist))
   .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
+    if (err.name === 'ValartistIDationError') return next(err);
     next(createError(404, err.message));
   });
 });
 
-artistRouter.delete('/api/artist/:id', bearerAuth, function(req, res, next) {
-  debug('hit route DELETE /api/artist/:id');
-  Artist.findByIdAndRemove(req.params.id)
+artistRouter.delete('/api/artist/:artistID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/artist/:artistID');
+  Artist.findByIdAndRemove(req.params.artistID)
   .then( () => res.sendStatus(204))
   .catch( err => next(createError(404, err.message)));
 });
 
-// artistRouter.get('/api/artist/:artistUsername', bearerAuth, function(req, res, next) {
-//   debug('GET /api/artist/:artistUsername');
-//   Artist.find({'artist.username': req.params.artistUsername})
+// artistRouter.get('/api/artistname/:username', bearerAuth, function(req, res, next) {
+//   debug('GET /api/artist/:username');
+//   Artist.find({username: req.params.username})
 //   .then( artist => {
 //     if (artist.username !== req.username)
 //       return next(createError(401, 'invalid username'));

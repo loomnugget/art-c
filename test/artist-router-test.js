@@ -426,6 +426,7 @@ describe('testing artist-router', function() {
           Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
+          console.log(res.body.firstname);
           if (err)
             return done(err);
           expect(res.status).to.equal(200);
@@ -492,19 +493,19 @@ describe('testing artist-router', function() {
     });
   });
 
-  // describe('testing GET to /api/artist/:artistUsername', () => {
+  // describe('testing GET to /api/artistname/:username', () => {
   //
   //   describe('with valid token and Username', function(){
   //
   //     before(done => mockArtist.call(this, done));
   //
   //     it('should return an artist', done => {
-  //       request.get(`${url}/api/artistUsername/${this.tempArtist.username}`)
+  //       request.get(`${url}/api/artistname/${this.tempArtist.username}`)
   //       .set({
   //         Authorization: `Bearer ${this.tempToken}`,
   //       })
   //       .end((err, res) => {
-  //         console.log(this.tempArtist);
+  //         console.log('THIS IS IT', res.body);
   //         if (err)
   //           return done(err);
   //         expect(res.status).to.equal(200);
