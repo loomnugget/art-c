@@ -319,7 +319,7 @@ describe('testing gallery-router', function() {
             return done(err);
           expect(res.status).to.equal(200);
           expect(res.body.username).to.equal(this.tempGallery.username);
-          expect(res.body.name).to.equal(this.tempGallery.name);
+          expect(res.body.name).to.equal(updateData.name);
           expect(res.body.desc).to.equal(this.tempGallery.desc);
           expect(res.body.category).to.equal(this.tempGallery.category);
           expect(res.body.userID).to.equal(this.tempUser._id.toString());
