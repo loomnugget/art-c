@@ -433,6 +433,32 @@ describe('testing artist-router', function() {
       });
     });
 
+    describe('with invalid token and valid id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong user', function(){
+
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
   });
 
   //TODO: PUT tests here
