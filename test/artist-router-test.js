@@ -384,7 +384,6 @@ describe('testing artist-router', function() {
       });
     });
 
-
   });
 
   describe('testing GET to /api/artist/:artistID', () => {
@@ -418,7 +417,22 @@ describe('testing artist-router', function() {
       });
     });
 
-    //TODO: More GET tests here
+    describe('with valid token and invalid id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 404 not found', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
   });
 
   //TODO: PUT tests here
