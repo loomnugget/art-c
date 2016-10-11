@@ -26,39 +26,39 @@ const examplePhoto = {
   image: `${__dirname}/data/dog.jpg`,
 };
 
-describe('testing pic router', function() {
-
-  //start server before tests
-  before(done => serverControl.serverUp(server, done));
-  //stop server after tests
-  after(done => serverControl.serverDown(server, done));
-  //clean database after each test
-  afterEach(done => cleanDB(done));
-
-  describe('/api/artist/:artistID/photo', function() {
-    describe('with valid token and data', function() {
-
-      before(done => artistMock.call(this, done));
-
-      it ('should return a photo', done => {
-        // console.log(this.tempArtist);
-        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
-        .field('name', examplePhoto.name)
-        .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.equal(200);
-          console.log('this is the res.body', res.body);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
-          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
-          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
-          done();
-        });
-      }); // end it block
-    });
-  }); // end testing POST
-}); //end first describe block
+// describe('testing pic router', function() {
+//
+//   //start server before tests
+//   before(done => serverControl.serverUp(server, done));
+//   //stop server after tests
+//   after(done => serverControl.serverDown(server, done));
+//   //clean database after each test
+//   afterEach(done => cleanDB(done));
+//
+//   describe('/api/artist/:artistID/photo', function() {
+//     describe('with valid token and data', function() {
+//
+//       before(done => artistMock.call(this, done));
+//
+//       it ('should return a photo', done => {
+//         // console.log(this.tempArtist);
+//         request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+//         .set({Authorization: `Bearer ${this.tempToken}`})
+//         .field('name', examplePhoto.name)
+//         .field('alt', examplePhoto.alt)
+//         .attach('image', examplePhoto.image)
+//         .end((err, res) => {
+//           if (err) return done(err);
+//           expect(res.status).to.equal(200);
+//           console.log('this is the res.body', res.body);
+//           expect(res.body.alt).to.equal(examplePhoto.alt);
+//           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+//           expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+//           done();
+//         });
+//       }); // end it block
+//     });
+//   }); // end testing POST
+// }); //end first describe block
 
 // mocking data
