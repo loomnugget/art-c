@@ -16,8 +16,8 @@ const galleryRouter = module.exports = Router();
 //TODO: Populate artists and listings
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
-  req.body.artistID = req.artist._id;
-  console.log('req.body.artistID', req.body.artistID);
+  req.body.artistID = req.params.artistID;
+  console.log('req.body', req.body);
   new Gallery(req.body).save()
   .then( gallery => res.json(gallery))
   .catch(next);

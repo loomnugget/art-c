@@ -45,23 +45,24 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery profile and a status 200', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.status).to.equal(200);
-        expect(res.body.name).to.equal(exampleGallery.name);
-        expect(res.body.desc).to.equal(exampleGallery.desc);
-        expect(res.body.category).to.equal(exampleGallery.category);
-        expect(res.body.userID).to.equal(this.tempUser._id.toString());
-        expect(res.body.artestID).to.equal(this.tempArtist._id);
-        let date = new Date(res.body.created).toString();
-        expect(date).to.not.equal('Invalid Date');
-        done();
-      });
+        .end((err, res) => {
+          console.log(res.body);
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal(exampleGallery.name);
+          expect(res.body.desc).to.equal(exampleGallery.desc);
+          expect(res.body.category).to.equal(exampleGallery.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id);
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
       });
 
 
@@ -73,7 +74,7 @@ describe('testing gallery-router', function() {
 
       it('should status 400 bad request', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           username: exampleGallery.username,
           desc: exampleGallery.desc,
