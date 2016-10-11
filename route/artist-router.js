@@ -35,3 +35,17 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
     next(createError(404, err.message));
   });
 });
+
+// artistRouter.get('/api/artist/:artistUsername', bearerAuth, function(req, res, next) {
+//   debug('GET /api/artist/:artistUsername');
+//   Artist.find({'artist.username': req.params.artistUsername})
+//   .then( artist => {
+//     if (artist.username !== req.username)
+//       return next(createError(401, 'invalid username'));
+//     res.json(artist);
+//   })
+//   .catch( err => {
+//     if (err.name === 'ValidationError') return next(err);
+//     next(createError(404, err.message));
+//   });
+// });
