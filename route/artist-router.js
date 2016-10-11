@@ -36,6 +36,16 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
   });
 });
 
+artistRouter.put('/api/artist/:id', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/artist/:id');
+  Artist.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then( artist => res.json(artist))
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
+
 // artistRouter.get('/api/artist/:artistUsername', bearerAuth, function(req, res, next) {
 //   debug('GET /api/artist/:artistUsername');
 //   Artist.find({'artist.username': req.params.artistUsername})
