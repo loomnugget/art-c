@@ -83,8 +83,10 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 
 photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
   debug('DELETE /api/artist/:artistID/photo/:photoID');
+
   Photo.findById(req.params.photoID)
   .catch(err => Promise.reject(createError(404, err.message)))
+
   .then( photo => {
     if(photo.artistID.toString() !== req.params.artistID)
       return Promise.reject(createError(400, 'Bad request - wrong artist'));
