@@ -231,6 +231,34 @@ describe('testing artist-router', function() {
       });
     });
 
+    describe('with invalid date--string', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 400', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+          created: 'striiiing',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
     describe('with an invalid body', function() {
 
       before(done => mockUser.call(this, done));
