@@ -14,7 +14,6 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 // module constants
 const listingRouter = module.exports = Router();
 
-//TODO: Populate artists and listings
 listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/listing');
   let tempGallery;
