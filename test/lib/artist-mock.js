@@ -1,7 +1,7 @@
 'use strict';
 
 const debug = require('debug')('artc:artist-mock');
-const userMock = require('./user-mocks.js');
+const userMock = require('./user-mock.js');
 const Artist = require('../../model/artist.js');
 
 module.exports = function(done){
