@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db.js');
-const mockUser = require('./lib/user-mocks.js');
+const mockUser = require('./lib/user-mock.js');
 
 mongoose.Promise = Promise;
 

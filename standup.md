@@ -1,6 +1,6 @@
 ##Standup Notes:
 
-**10/10/2016, 11am
+**10/10/2016, 11am**
 
     - Do you have deployment?
         YES
@@ -15,7 +15,7 @@
 
         - Claudia/Liz: Building out the other models. 80% done by 1pm. Will pair program on that.
 
-**10/10/2016, 1:30pm
+**10/10/2016, 1:30pm**
 
     - Liz and Claudia made all of the models.
         - Blockers? Ensuring that the photo IDs and references for each thing are properly aligned
@@ -39,3 +39,24 @@
         - Elizabeth: Tests and routes for artists, galleries and listings.
 
         - Claudia: Tests and routes for artists, galleries and listings.
+
+**10/10/2016, 11:00pm**
+
+    Question: Why are two tests failing on Liz's machine for Mongo-related errors and not on others?
+
+
+**10/11/2016, 11:00am**
+
+    - From yesterday:
+
+      - Lee: finished most of Artist routes/tests
+      - Claudia: AWS, photo artist/ POST
+      - Max: Finished all the mocks, helped Claudia/Elizabeth with AWS upload.
+      - Elizabeth: AWS, photo artist/ POST, mongo error fix (duplicates)
+
+    - Working on till 1pm
+
+      - Lee: working on Gallery Routes/Tests
+      - Claudia: working on Photo Router/Tests
+      - Max: helping Lee with Gallery Routes/Tests
+      - Elizabeth: Listing Routes

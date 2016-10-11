@@ -3,8 +3,10 @@
 const debug = require('debug')('artc:photo-mock');
 
 const Photo = require('../../model/photo.js');
+
 const artistMock = require('./artist-mock.js');
 const awsMocks = require('./aws-mock.js');
+
 
 module.exports = function(done){
   debug('creating mock photo');

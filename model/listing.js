@@ -5,13 +5,15 @@ const mongoose = require('mongoose');
 const listingSchema = mongoose.Schema({
   title: {type: String, required: true},
   desc: {type: String, required: true},
+  // query-sortable properties
   category: {type: String, required: true}, // validated string
   username: {type: String, required: true},
   created: {type: Date, required: true, default: Date.now},
-  galleryID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  // path params
+  userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  galleryID: {type: mongoose.Schema.Types.ObjectId, required: true},
   photoID: {type: mongoose.Schema.Types.ObjectId},
-
 });
 
 module.exports = mongoose.model('listing', listingSchema);
