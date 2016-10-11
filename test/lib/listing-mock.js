@@ -20,7 +20,6 @@ module.exports = function(done){
     exampleListing.galleryID = this.tempGallery._id.toString();
     new Listing(exampleListing).save()
     .then( listing => {
-      console.log('listing', listing);
       this.tempListing = listing;
       done();
     });

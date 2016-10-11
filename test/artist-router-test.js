@@ -16,6 +16,7 @@ const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
 const mockUser = require('./lib/user-mock');
 const mockArtist = require('./lib/artist-mock');
+const mockMultipleGalleries = require('./lib/populate-artist-galleries-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -445,6 +446,30 @@ describe('testing artist-router', function() {
         });
       });
     });
+
+    // describe('testing populate artist galleries', function(){
+    //
+    //   before(done => mockMultipleGalleries.call(this, 10, done));
+    //   before(done => {
+    //     this.tempArtist.galleries.push(this.tempGalleries);
+    //     this.tempArtist.save();
+    //     done();
+    //   });
+    //
+    //   it('should return an artist with populated galleries', done => {
+    //     request.get(`${url}/api/artist/${this.tempArtist._id}`)
+    //     .set({
+    //       Authorization: `Bearer ${this.tempToken}`,
+    //     })
+    //     .end((err, res) => {
+    //       if (err) return done(err);
+    //       console.log(res.body, 'TESTING MULTIPLE GALLERY MOCK');
+    //       expect(res.status).to.equal(200);
+    //       expect(res.body.galleries.length).to.equal(10);
+    //       done();
+    //     });
+    //   });
+    // });
 
     describe('with valid token and invalid id', function(){
 

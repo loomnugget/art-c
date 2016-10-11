@@ -20,7 +20,6 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ((gallery) => {
-    // console.log(gallery);
     req.body.galleryID = gallery._id;
     req.body.artistID = gallery.artistID;
     req.body.userID = req.user._id;
@@ -29,7 +28,6 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
     return new Listing(req.body).save();
   })
   .then(listing => {
-    // console.log('getting a listing', listing);
     tempGallery.listings.push(listing._id);
     tempListing = listing;
     return tempGallery.save();

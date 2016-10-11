@@ -19,7 +19,6 @@ module.exports = function(done) {
   .generatePasswordHash(exampleUser.password)
   .then( user => user.save())
   .then( user => {
-    console.log('user', user);
     this.tempUser = user;
     return user.generateToken();
   })

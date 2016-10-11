@@ -19,7 +19,6 @@ module.exports = function(done){
     exampleGallery.artistID = this.tempArtist._id.toString();
     new Gallery(exampleGallery).save()
     .then( gallery => {
-      console.log('gallery', gallery);
       this.tempGallery = gallery;
       done();
     });
