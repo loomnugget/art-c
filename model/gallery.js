@@ -8,6 +8,7 @@ const gallerySchema = mongoose.Schema({
   desc: {type: String, required: true},
   category: {type: String, required: true}, //validated string
   created: {type: Date, required: true, default: Date.now},
+  userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
   photoID: {type: mongoose.Schema.Types.ObjectId},
   listings: [{type: mongoose.Schema.Types.ObjectId, ref: 'listing'}],

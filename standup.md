@@ -40,6 +40,23 @@
 
         - Claudia: Tests and routes for artists, galleries and listings.
 
-**10/10/2016, 11:00am**
+**10/10/2016, 11:00pm**
 
     Question: Why are two tests failing on Liz's machine for Mongo-related errors and not on others?
+
+
+**10/11/2016, 11:00am**
+
+    - From yesterday:
+
+      - Lee: finished most of Artist routes/tests
+      - Claudia: AWS, photo artist/ POST
+      - Max: Finished all the mocks, helped Claudia/Elizabeth with AWS upload.
+      - Elizabeth: AWS, photo artist/ POST, mongo error fix (duplicates)
+
+    - Working on till 1pm
+
+      - Lee: working on Gallery Routes/Tests
+      - Claudia: working on Photo Router/Tests
+      - Max: helping Lee with Gallery Routes/Tests
+      - Elizabeth: Listing Routes
