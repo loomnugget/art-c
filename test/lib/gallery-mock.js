@@ -15,6 +15,7 @@ module.exports = function(done){
     if (err)
       return done(err);
     exampleGallery.username = this.tempUser.username;
+    exampleGallery.userID = this.tempArtist.userID;
     exampleGallery.artistID = this.tempArtist._id.toString();
     new Gallery(exampleGallery).save()
     .then( gallery => {
