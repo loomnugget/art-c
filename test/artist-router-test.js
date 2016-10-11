@@ -550,7 +550,7 @@ describe('testing artist-router', function() {
       before(done => mockArtist.call(this, done));
 
       it('should return a artist', done => {
-        let updateData = {firstName: 'bob'};
+        let updateData = {firstname: 'bob'};
         request.put(`${url}/api/artist/${this.tempArtist._id}`)
         .send(updateData)
         .set({
