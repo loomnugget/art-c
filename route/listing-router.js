@@ -3,7 +3,7 @@
 // npm modules
 const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
-const debug = require('debug')('artc:artist-route');
+const debug = require('debug')('artc:listing-route');
 const createError = require('http-errors');
 
 // app modules

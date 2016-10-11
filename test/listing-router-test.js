@@ -2,7 +2,7 @@
 
 // bringing in test environment
 require('./lib/test-env.js');
-require('./lib/aws-mock.js');
+// require('./lib/aws-mock.js');
 
 // npm modules
 const expect = require('chai').expect;
@@ -23,9 +23,9 @@ const server = require('../server.js');
 const url = `http://localhost:${process.env.PORT}`;
 
 const exampleListing = {
-  title: 'Such Cool Art',
-  desc: 'I made it, you wanna buy it',
-  category: 'cool',
+  title: 'a cat',
+  desc: 'george does cat portraits',
+  category: 'portraits',
 };
 
 describe('testing listing-router', function(){
@@ -41,6 +41,7 @@ describe('testing listing-router', function(){
       before(done => mockGallery.call(this, done));
 
       it('should return a listing and status 200', done => {
+        console.log(this.tempGallery);
         request.post(`${url}/api/gallery/${this.tempGallery._id}/listing`)
         .send(exampleListing)
         .set({Authorization: `Bearer ${this.tempToken}`})
@@ -51,7 +52,7 @@ describe('testing listing-router', function(){
           expect(res.body.title).to.equal(exampleListing.title);
           expect(res.body.desc).to.equal(exampleListing.desc);
           expect(res.body.category).to.equal(exampleListing.category);
-          expect(res.body.username).to.equal(this.tempArtist.username);
+          expect(res.body.username).to.equal(this.tempGallery.username);
           expect(res.body.userID).to.equal(this.tempUser._id.toString());
           expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
           expect(res.body.galleryID).to.equal(this.tempGallery._id.toString());
