@@ -13,7 +13,8 @@ const mongoose = require('mongoose');
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
 const mockArtist = require('./lib/artist-mock');
-// const mockGallery = require('./lib/gallery-mock');
+const mockGallery = require('./lib/gallery-mock');
+const mockUser = require('./lib/user-mock');
 
 mongoose.Promise = Promise;
 
@@ -225,84 +226,80 @@ describe('testing gallery-router', function() {
       });
     });
   });
-  //
-  // describe('testing GET to /api/artist/:artistID', () => {
-  //
-  //   describe('with valid token and id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should return a artist', done => {
-  //       request.get(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         console.log(res.body.firstname);
-  //         if (err)
-  //           return done(err);
-  //         expect(res.status).to.equal(200);
-  //         expect(res.body.firstname).to.equal(this.tempArtist.firstname);
-  //         expect(res.body.lastname).to.equal(this.tempArtist.lastname);
-  //         expect(res.body.username).to.equal(this.tempArtist.username);
-  //         expect(res.body.email).to.equal(this.tempArtist.email);
-  //         expect(res.body.city).to.equal(this.tempArtist.city);
-  //         expect(res.body.zip).to.equal(this.tempArtist.zip);
-  //         expect(res.body.about).to.equal(this.tempArtist.about);
-  //         expect(res.body.phone).to.equal(this.tempArtist.phone);
-  //         expect(res.body.userID).to.equal(this.tempUser._id.toString());
-  //         let date = new Date(res.body.created).toString();
-  //         expect(date).to.not.equal('Invalid Date');
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with valid token and invalid id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should status 404 not found', done => {
-  //       request.get(`${url}/api/artist/${this.tempArtist._id}bad`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(404);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with invalid token and valid id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should status 401 unauthorized', done => {
-  //       request.get(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .set({
-  //         Authorization: 'Bearer ',
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with wrong user', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should status 401 unauthorized', done => {
-  //       request.get(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  // });
+
+  describe('testing GET to /api/gallery/:galleryID', () => {
+
+    describe('with valid token and id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should return a gallery', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempGallery.username);
+          expect(res.body.name).to.equal(this.tempGallery.name);
+          expect(res.body.desc).to.equal(this.tempGallery.desc);
+          expect(res.body.category).to.equal(this.tempGallery.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and invalid id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should status 404 not found', done => {
+        request.get(`${url}/api/artist/${this.tempGallery._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token and valid id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.get(`${url}/api/artist/${this.tempGallery._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong user', function(){
+
+      before(done => mockGallery.call(this, done));
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.get(`${url}/api/artist/${this.tempGallery._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  });
   //
   // describe('testing PUT to /api/artist/:artistID', () => {
   //

@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
-const mockUser = require('./lib/user-mocks');
+const mockUser = require('./lib/user-mock');
 const mockArtist = require('./lib/artist-mock');
 
 mongoose.Promise = Promise;
@@ -427,7 +427,6 @@ describe('testing artist-router', function() {
           Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
-          console.log(res.body.firstname);
           if (err)
             return done(err);
           expect(res.status).to.equal(200);

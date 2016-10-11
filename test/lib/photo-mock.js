@@ -3,7 +3,7 @@
 const debug = require('debug')('artc:photo-mock');
 
 const Photo = require('../../model/photo.js');
-//const artistMock = require('./user-mocks.js');
+//const artistMock = require('./user-mock.js');
 
 module.exports = function(done){
   debug('creating mock photo');
