@@ -17,6 +17,7 @@ const listingRouter = module.exports = Router();
 //TODO: Populate artists and listings
 listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/listing');
+  let tempGallery;
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ((gallery) => {
@@ -26,6 +27,24 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
     req.body.username = req.gallery.username;
     return new Listing(req.body).save();
   })
-  .then(listing => res.json(listing))
+  .then(listing => {
+    tempGallery.listings.push(listing._id);
+    tempGallery.save();
+    res.json(listing);
+  })
   .catch(next);
+});
+
+listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next) {
+  debug('GET /api/listing/:listingID');
+  Listing.findById(req.params.listingID)
+  .then(listing => {
+    if(listing.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid userid'));
+    res.json(listing);
+  })
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
 });
