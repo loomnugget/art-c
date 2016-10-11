@@ -58,3 +58,11 @@ galleryRouter.put('/api/gallery/:galleryID', bearerAuth, jsonParser, function(re
     next(createError(404, err.message));
   });
 });
+
+//TODO: Delete the reference of gallery to its associated artist
+galleryRouter.delete('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/gallery/:galleryID');
+  Gallery.findByIdAndRemove(req.params.galleryID)
+  .then( () => res.sendStatus(204))
+  .catch( err => next(createError(404, err.message)));
+});

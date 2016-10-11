@@ -550,71 +550,71 @@ describe('testing gallery-router', function() {
     });
   });
 
-  // describe('testing DELETE to /api/artist/:artistID', () => {
-  //
-  //   describe('with valid token and id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should delete a artist', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         if (err)
-  //           return done(err);
-  //         expect(res.status).to.equal(204);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with valid token and invalid id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should status 404 not found', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}bad`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(404);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with invalid token and valid id', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //
-  //     it('should status 401 unauthorized', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .set({
-  //         Authorization: 'Bearer ',
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with wrong user', function(){
-  //
-  //     before(done => mockArtist.call(this, done));
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should status 401 unauthorized', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}`)
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  // });
+  describe('testing DELETE to /api/gallery/:galleryID', () => {
+
+    describe('with valid token and id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should delete a gallery', done => {
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and invalid id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should status 404 not found', done => {
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token and valid id', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong user', function(){
+
+      before(done => mockGallery.call(this, done));
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  });
 
 });
