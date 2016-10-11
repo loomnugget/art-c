@@ -12,7 +12,6 @@ const mongoose = require('mongoose');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
-const mockUser = require('./lib/user-mocks');
 const mockArtist = require('./lib/artist-mock');
 // const mockGallery = require('./lib/gallery-mock');
 
@@ -58,7 +57,7 @@ describe('testing gallery-router', function() {
           expect(res.body.desc).to.equal(exampleGallery.desc);
           expect(res.body.category).to.equal(exampleGallery.category);
           expect(res.body.userID).to.equal(this.tempUser._id.toString());
-          expect(res.body.artistID).to.equal(this.tempArtist._id);
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
           let date = new Date(res.body.created).toString();
           expect(date).to.not.equal('Invalid Date');
           done();
@@ -70,7 +69,7 @@ describe('testing gallery-router', function() {
 
     describe('with no name', function() {
 
-      before(done => mockUser.call(this, done));
+      before(done => mockArtist.call(this, done));
 
       it('should status 400 bad request', (done) => {
 
@@ -96,7 +95,7 @@ describe('testing gallery-router', function() {
 
       it('should status 400 bad request', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           name: exampleGallery.name,
           username: exampleGallery.username,
@@ -114,11 +113,11 @@ describe('testing gallery-router', function() {
 
     describe('with no username', function() {
 
-      before(done => mockUser.call(this, done));
+      before(done => mockArtist.call(this, done));
 
       it('should status 400 bad request', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           name: exampleGallery.name,
           desc: exampleGallery.desc,
@@ -140,7 +139,7 @@ describe('testing gallery-router', function() {
 
       it('should return an gallery profile and a status 400', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           name: exampleGallery.name,
           desc: exampleGallery.desc,
@@ -162,7 +161,7 @@ describe('testing gallery-router', function() {
 
       it('should return an gallery profile and a status 400', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           name: exampleGallery.name,
           desc: exampleGallery.desc,
@@ -186,7 +185,7 @@ describe('testing gallery-router', function() {
 
       it('should a status 400 bad request', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send('badbody')
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -204,7 +203,7 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
         .set({
           Authorization: 'bad request',
@@ -222,7 +221,7 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
         .end((err, res) => {
           expect(res.status).to.equal(401);
@@ -237,7 +236,7 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', (done) => {
 
-        request.post(`${url}/api/artist/:artistID/gallery`)
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
         .set({
           Authorization: 'Bearer ',

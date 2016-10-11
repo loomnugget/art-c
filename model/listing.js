@@ -8,6 +8,7 @@ const listingSchema = mongoose.Schema({
   category: {type: String, required: true}, // validated string
   username: {type: String, required: true},
   created: {type: Date, required: true, default: Date.now},
+  userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   galleryID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
   photoID: {type: mongoose.Schema.Types.ObjectId},
