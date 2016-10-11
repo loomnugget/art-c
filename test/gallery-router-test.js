@@ -41,7 +41,7 @@ const exampleGallery = {
 //
 //     describe('with a valid body', function() {
 //
-//       // before(done => mockUser.call(this, done));
+//       before(done => mockUser.call(this, done));
 //       before(done => mockArtist.call(this, done));
 //
 //       it('should return a gallery profile and a status 200', (done) => {
@@ -480,4 +480,4 @@ const exampleGallery = {
   //   });
   // });
 
-});
+// });
