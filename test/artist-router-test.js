@@ -306,7 +306,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with duplicate username', function() {
+    describe('with already-existing username', function() {
 
       before( done => mockArtist.call(this, done));
 
@@ -334,7 +334,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with duplicate email', function() {
+    describe('with already-existing email', function() {
 
       before( done => mockArtist.call(this, done));
 
@@ -353,6 +353,34 @@ describe('testing artist-router', function() {
           zip: '98114',
           about: 'I\m just a simple kinda man who likes to do art stuff.',
           phone: '(555)555-5555',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+    });
+
+    describe('with already-existing phone number', function() {
+
+      before( done => mockArtist.call(this, done));
+
+      it('should return a status 409', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.phone,
+          email: 'jimbobguy14@stuff.com',
+          city: 'Dallas',
+          zip: '98114',
+          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          phone: this.tempArtist.phone,
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
