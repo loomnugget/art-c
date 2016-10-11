@@ -39,3 +39,7 @@
         - Elizabeth: Tests and routes for artists, galleries and listings.
 
         - Claudia: Tests and routes for artists, galleries and listings.
+
+        **10/10/2016, 1:30pm
+
+              Question: Why are two tests failing on Liz's machine for Mongo-related errors and not on others?
