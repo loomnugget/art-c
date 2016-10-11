@@ -14,7 +14,7 @@ const mongoose = require('mongoose');
 const serverCtrl = require('./lib/server-control.js');
 const cleanDB = require('./lib/clean-db.js');
 const mockGallery = require('./lib/gallery-mock.js');
-// const mockListing = require('./lib/listing-mock.js');
+const mockListing = require('./lib/listing-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -57,6 +57,37 @@ describe('testing listing-router', function(){
           expect(res.body.userID).to.equal(this.tempUser._id.toString());
           expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
           expect(res.body.galleryID).to.equal(this.tempGallery._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+  });
+
+  describe('testing GET to /api/listing/:listingID', () => {
+
+    describe('with valid token and id', function(){
+
+      before(done => mockListing.call(this, done));
+
+      it('should return a listing', done => {
+        request.get(`${url}/api/listing/${this.tempListing._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log(res.body);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempListing.username);
+          expect(res.body.title).to.equal(this.tempListing.title);
+          expect(res.body.desc).to.equal(this.tempListing.desc);
+          expect(res.body.category).to.equal(this.tempListing.category);
+          expect(res.body.userID).to.equal(this.tempListing.userID);
+          expect(res.body.artistID).to.equal(this.tempListing.artistID);
+          expect(res.body.galleryID).to.equal(this.tempListing.galleryID);
           let date = new Date(res.body.created).toString();
           expect(date).to.not.equal('Invalid Date');
           done();
