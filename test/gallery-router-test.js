@@ -387,13 +387,124 @@ describe('testing gallery-router', function() {
       });
     });
 
+    describe('updating name and category properties with valid token and id, ', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should return a gallery', done => {
+        let updateData = {name: 'bob', category: 'bob2'};
+        request.put(`${url}/api/gallery/${this.tempGallery._id}`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempGallery.username);
+          expect(res.body.name).to.equal(updateData.name);
+          expect(res.body.desc).to.equal(this.tempGallery.desc);
+          expect(res.body.category).to.equal(updateData.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    describe('updating name and desc properties with valid token and id, ', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should return a gallery', done => {
+        let updateData = {name: 'bob', desc: 'bob2'};
+        request.put(`${url}/api/gallery/${this.tempGallery._id}`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempGallery.username);
+          expect(res.body.name).to.equal(updateData.name);
+          expect(res.body.desc).to.equal(updateData.desc);
+          expect(res.body.category).to.equal(this.tempGallery.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    describe('updating desc and category properties with valid token and id, ', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should return a gallery', done => {
+        let updateData = {desc: 'bob', category: 'bob2'};
+        request.put(`${url}/api/gallery/${this.tempGallery._id}`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempGallery.username);
+          expect(res.body.name).to.equal(this.tempGallery.name);
+          expect(res.body.desc).to.equal(updateData.desc);
+          expect(res.body.category).to.equal(updateData.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    describe('updating name, desc and category properties with valid token and id, ', function(){
+
+      before(done => mockGallery.call(this, done));
+
+      it('should return a gallery', done => {
+        let updateData = {name: 'bob', desc: 'bob2', category: 'bob3'};
+        request.put(`${url}/api/gallery/${this.tempGallery._id}`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempGallery.username);
+          expect(res.body.name).to.equal(updateData.name);
+          expect(res.body.desc).to.equal(updateData.desc);
+          expect(res.body.category).to.equal(updateData.category);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
 
     describe('with valid token and invalid id', function(){
 
       before(done => mockGallery.call(this, done));
 
       it('should status 404 not found', done => {
-        let updateData = {firstName: 'bob'};
+        let updateData = {name: 'bob'};
         request.put(`${url}/api/gallery/${this.tempGallery._id}bad`)
         .send(updateData)
         .set({
@@ -411,7 +522,7 @@ describe('testing gallery-router', function() {
       before(done => mockGallery.call(this, done));
 
       it('should status 401 unauthorized', done => {
-        let updateData = {firstName: 'bob'};
+        let updateData = {name: 'bob'};
         request.put(`${url}/api/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
@@ -427,6 +538,7 @@ describe('testing gallery-router', function() {
     describe('with wrong user', function(){
 
       before(done => mockGallery.call(this, done));
+      before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
         request.put(`${url}/api/gallery/${this.tempGallery._id}`)
@@ -493,6 +605,7 @@ describe('testing gallery-router', function() {
   //   describe('with wrong user', function(){
   //
   //     before(done => mockArtist.call(this, done));
+  //     before(done => mockUser.call(this, done));
   //
   //     it('should status 401 unauthorized', done => {
   //       request.delete(`${url}/api/artist/${this.tempArtist._id}`)
