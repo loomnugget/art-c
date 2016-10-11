@@ -23,7 +23,6 @@ const url = `http://localhost:${process.env.PORT}`;
 
 const exampleGallery = {
   name: 'Happy Stuff',
-  username: 'stuff',
   desc: 'this is the best album',
   category: 'fun',
 };
@@ -50,9 +49,9 @@ describe('testing gallery-router', function() {
           Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
-          console.log(res.body);
           if (err) return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(this.tempArtist.username);
           expect(res.body.name).to.equal(exampleGallery.name);
           expect(res.body.desc).to.equal(exampleGallery.desc);
           expect(res.body.category).to.equal(exampleGallery.category);
@@ -75,7 +74,7 @@ describe('testing gallery-router', function() {
 
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
-          username: exampleGallery.username,
+          username: this.tempArtist.username,
           desc: exampleGallery.desc,
           category: exampleGallery.category,
         })
@@ -98,29 +97,7 @@ describe('testing gallery-router', function() {
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
           name: exampleGallery.name,
-          username: exampleGallery.username,
-          category: exampleGallery.category,
-        })
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
-          done();
-        });
-      });
-    });
-
-    describe('with no username', function() {
-
-      before(done => mockArtist.call(this, done));
-
-      it('should status 400 bad request', (done) => {
-
-        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
-        .send({
-          name: exampleGallery.name,
-          desc: exampleGallery.desc,
+          username: this.tempArtist.username,
           category: exampleGallery.category,
         })
         .set({
@@ -143,7 +120,7 @@ describe('testing gallery-router', function() {
         .send({
           name: exampleGallery.name,
           desc: exampleGallery.desc,
-          username: exampleGallery.username,
+          username: this.tempArtist.username,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,

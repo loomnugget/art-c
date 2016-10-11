@@ -23,6 +23,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   .then ((artist) => {
     req.body.artistID = artist._id;
     req.body.userID = req.user._id;
+    req.body.username = artist.username;
     return new Gallery(req.body).save();
   })
   .then( gallery => res.json(gallery))
