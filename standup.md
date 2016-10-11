@@ -1,6 +1,6 @@
 ##Standup Notes:
 
-**10/10/2016, 11am
+**10/10/2016, 11am**
 
     - Do you have deployment?
         YES
@@ -15,7 +15,7 @@
 
         - Claudia/Liz: Building out the other models. 80% done by 1pm. Will pair program on that.
 
-**10/10/2016, 1:30pm
+**10/10/2016, 1:30pm**
 
     - Liz and Claudia made all of the models.
         - Blockers? Ensuring that the photo IDs and references for each thing are properly aligned
@@ -40,6 +40,6 @@
 
         - Claudia: Tests and routes for artists, galleries and listings.
 
-        **10/10/2016, 1:30pm
+**10/10/2016, 11:00am**
 
-              Question: Why are two tests failing on Liz's machine for Mongo-related errors and not on others?
+    Question: Why are two tests failing on Liz's machine for Mongo-related errors and not on others?
