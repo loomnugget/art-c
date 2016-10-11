@@ -79,18 +79,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: '',
-          lastname: 'Jimbobberson',
-          username: 'Jimbobguy316',
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -106,18 +105,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: 'Jimbob',
-          lastname: '',
-          username: 'Jimbobguy316',
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          firstname: exampleArtist.firstname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -133,18 +131,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
-          username: '',
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -160,18 +157,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
-          username: 'Jimbobguy316',
-          email: '',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -187,18 +183,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
-          username: 'Jimbobguy316',
-          email: 'jimbobguy14@stuff.com',
-          city: '',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -214,18 +209,17 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 200', (done) => {
+      it('should return an artist profile and a status 400', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
-          username: 'Jimbobguy316',
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -317,14 +311,14 @@ describe('testing artist-router', function() {
           Authorization: `Bearer ${this.tempToken}`,
         })
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
           username: this.tempArtist.username,
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: this.tempArtist.phone,
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
@@ -345,14 +339,14 @@ describe('testing artist-router', function() {
           Authorization: `Bearer ${this.tempToken}`,
         })
         .send({
-          firstname: 'Jimbob',
-          lastname: 'Jimbobberson',
-          username: 'Jimbobguy316',
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.phone,
           email: this.tempArtist.email,
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
-          phone: '(555)555-5555',
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
@@ -376,10 +370,10 @@ describe('testing artist-router', function() {
           firstname: exampleArtist.firstname,
           lastname: exampleArtist.lastname,
           username: exampleArtist.phone,
-          email: 'jimbobguy14@stuff.com',
-          city: 'Dallas',
-          zip: '98114',
-          about: 'I\m just a simple kinda man who likes to do art stuff.',
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
           phone: this.tempArtist.phone,
         })
         .end((err, res) => {
