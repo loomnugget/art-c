@@ -14,6 +14,7 @@ const artistSchema = mongoose.Schema({
   created: {type: Date, required: true, default: Date.now},
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   photoID: {type: mongoose.Schema.Types.ObjectId},
+  galleries: [{type: mongoose.Schema.Types.ObjectId, ref: 'gallery'}],
 
 });
 

@@ -13,6 +13,7 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 // module constants
 const artistRouter = module.exports = Router();
 
+//TODO: Populate galleries
 artistRouter.post('/api/artist', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/artist');
   req.body.userID = req.user._id;
