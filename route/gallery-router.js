@@ -29,3 +29,17 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   .then( gallery => res.json(gallery))
   .catch(next);
 });
+
+galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
+  debug('GET /api/gallery/:galleryID');
+  Gallery.findById(req.params.galleryID)
+  .then( gallery => {
+    if (gallery.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid userid'));
+    res.json(gallery);
+  })
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
