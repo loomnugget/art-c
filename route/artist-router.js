@@ -46,6 +46,13 @@ artistRouter.put('/api/artist/:id', bearerAuth, jsonParser, function(req, res, n
   });
 });
 
+artistRouter.delete('/api/artist/:id', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/artist/:id');
+  Artist.findByIdAndRemove(req.params.id)
+  .then( () => res.sendStatus(204))
+  .catch( err => next(createError(404, err.message)));
+});
+
 // artistRouter.get('/api/artist/:artistUsername', bearerAuth, function(req, res, next) {
 //   debug('GET /api/artist/:artistUsername');
 //   Artist.find({'artist.username': req.params.artistUsername})
