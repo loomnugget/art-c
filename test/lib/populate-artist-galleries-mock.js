@@ -18,9 +18,14 @@ module.exports = function(count, done){
     }
     Promise.all(galleriesMock)
     .then( galleries => {
+      galleries.forEach(gallery => {
+        let galleryID = gallery._id.toString();
+        this.tempArtist.galleries.push(galleryID);
+      });
       this.tempGalleries = galleries;
-      done();
+      return this.tempArtist.save();
     })
+    .then(() => done())
     .catch(done);
   });
 };
