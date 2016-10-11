@@ -62,7 +62,6 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   })
   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
   .then(s3data => {
-    console.log(s3data);
     del([`${dataDir}/*`]);
     let photoData = {
       alt: req.body.alt,

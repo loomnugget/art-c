@@ -2,6 +2,7 @@
 
 // bringing in test environment
 require('./lib/test-env.js');
+require('./lib/aws-mock.js');
 
 // npm modules
 const expect = require('chai').expect;
