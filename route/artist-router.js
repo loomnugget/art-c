@@ -52,17 +52,3 @@ artistRouter.delete('/api/artist/:artistID', bearerAuth, function(req, res, next
   .then( () => res.sendStatus(204))
   .catch( err => next(createError(404, err.message)));
 });
-
-// artistRouter.get('/api/artistname/:username', bearerAuth, function(req, res, next) {
-//   debug('GET /api/artist/:username');
-//   Artist.find({username: req.params.username})
-//   .then( artist => {
-//     if (artist.username !== req.username)
-//       return next(createError(401, 'invalid username'));
-//     res.json(artist);
-//   })
-//   .catch( err => {
-//     if (err.name === 'ValidationError') return next(err);
-//     next(createError(404, err.message));
-//   });
-// });

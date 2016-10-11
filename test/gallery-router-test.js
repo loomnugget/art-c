@@ -29,226 +29,225 @@ const exampleGallery = {
   category: 'fun',
 };
 
-// describe('testing gallery-router', function() {
-//
-//   before( done => serverCtrl.serverUp(server, done));
-//
-//   after( done => serverCtrl.serverDown(server, done));
-//
-//   afterEach( done => cleanDB(done));
-//
-//   describe('testing POST /api/gallery', function() {
-//
-//     describe('with a valid body', function() {
-//
-//       before(done => mockUser.call(this, done));
-//       before(done => mockArtist.call(this, done));
-//
-//       it('should return a gallery profile and a status 200', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send(exampleGallery)
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//       .end((err, res) => {
-//         if (err) return done(err);
-//         expect(res.status).to.equal(200);
-//         expect(res.body.name).to.equal(exampleGallery.name);
-//         expect(res.body.desc).to.equal(exampleGallery.desc);
-//         expect(res.body.category).to.equal(exampleGallery.category);
-//         expect(res.body.userID).to.equal(this.tempUser._id.toString());
-//         expect(res.body.artestID).to.equal(this.tempArtist._id);
-//         let date = new Date(res.body.created).toString();
-//         expect(date).to.not.equal('Invalid Date');
-//         done();
-//       });
-//       });
-//
-//
-//     });
-//
-//     describe('with no name', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 400 bad request', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send({
-//           username: exampleGallery.username,
-//           desc: exampleGallery.desc,
-//           category: exampleGallery.category,
-//         })
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with no desc', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 400 bad request', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send({
-//           name: exampleGallery.name,
-//           username: exampleGallery.username,
-//           category: exampleGallery.category,
-//         })
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with no username', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 400 bad request', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send({
-//           name: exampleGallery.name,
-//           desc: exampleGallery.desc,
-//           category: exampleGallery.category,
-//         })
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with no category', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should return an gallery profile and a status 400', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send({
-//           name: exampleGallery.name,
-//           desc: exampleGallery.desc,
-//           username: exampleGallery.username,
-//         })
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with invalid date--string', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should return an gallery profile and a status 400', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send({
-//           name: exampleGallery.name,
-//           desc: exampleGallery.desc,
-//           username: exampleGallery.username,
-//           category: exampleGallery.category,
-//           created: 'striiiing',
-//         })
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with an invalid body', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should a status 400 bad request', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send('badbody')
-//         .set({
-//           Authorization: `Bearer ${this.tempToken}`,
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(400);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with a bad authorization header', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 401 unauthorized', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send(exampleGallery)
-//         .set({
-//           Authorization: 'bad request',
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(401);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with no authorization header', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 401 unauthorized', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send(exampleGallery)
-//         .end((err, res) => {
-//           expect(res.status).to.equal(401);
-//           done();
-//         });
-//       });
-//     });
-//
-//     describe('with bearer header with no token', function() {
-//
-//       before(done => mockUser.call(this, done));
-//
-//       it('should status 401 unauthorized', (done) => {
-//
-//         request.post(`${url}/api/gallery`)
-//         .send(exampleGallery)
-//         .set({
-//           Authorization: 'Bearer ',
-//         })
-//         .end((err, res) => {
-//           expect(res.status).to.equal(401);
-//           done();
-//         });
-//       });
-//     });
-//   });
+describe('testing gallery-router', function() {
+
+  before( done => serverCtrl.serverUp(server, done));
+
+  after( done => serverCtrl.serverDown(server, done));
+
+  afterEach( done => cleanDB(done));
+
+  describe('testing POST /api/artist/:artistID/gallery', function() {
+
+    describe('with a valid body', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return a gallery profile and a status 200', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send(exampleGallery)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+      .end((err, res) => {
+        if (err) return done(err);
+        expect(res.status).to.equal(200);
+        expect(res.body.name).to.equal(exampleGallery.name);
+        expect(res.body.desc).to.equal(exampleGallery.desc);
+        expect(res.body.category).to.equal(exampleGallery.category);
+        expect(res.body.userID).to.equal(this.tempUser._id.toString());
+        expect(res.body.artestID).to.equal(this.tempArtist._id);
+        let date = new Date(res.body.created).toString();
+        expect(date).to.not.equal('Invalid Date');
+        done();
+      });
+      });
+
+
+    });
+
+    describe('with no name', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send({
+          username: exampleGallery.username,
+          desc: exampleGallery.desc,
+          category: exampleGallery.category,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no desc', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send({
+          name: exampleGallery.name,
+          username: exampleGallery.username,
+          category: exampleGallery.category,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no username', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send({
+          name: exampleGallery.name,
+          desc: exampleGallery.desc,
+          category: exampleGallery.category,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no category', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return an gallery profile and a status 400', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send({
+          name: exampleGallery.name,
+          desc: exampleGallery.desc,
+          username: exampleGallery.username,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid date--string', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return an gallery profile and a status 400', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send({
+          name: exampleGallery.name,
+          desc: exampleGallery.desc,
+          username: exampleGallery.username,
+          category: exampleGallery.category,
+          created: 'striiiing',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with an invalid body', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should a status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send('badbody')
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with a bad authorization header', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send(exampleGallery)
+        .set({
+          Authorization: 'bad request',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no authorization header', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send(exampleGallery)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with bearer header with no token', function() {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 401 unauthorized', (done) => {
+
+        request.post(`${url}/api/artist/:artistID/gallery`)
+        .send(exampleGallery)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  });
   //
   // describe('testing GET to /api/artist/:artistID', () => {
   //
@@ -317,7 +316,6 @@ const exampleGallery = {
   //   describe('with wrong user', function(){
   //
   //     before(done => mockArtist.call(this, done));
-  //     before(done => mockUser.call(this, done));
   //
   //     it('should status 401 unauthorized', done => {
   //       request.get(`${url}/api/artist/${this.tempArtist._id}`)
@@ -401,7 +399,6 @@ const exampleGallery = {
   //   describe('with wrong user', function(){
   //
   //     before(done => mockArtist.call(this, done));
-  //     before(done => mockUser.call(this, done));
   //
   //     it('should status 401 unauthorized', done => {
   //       request.put(`${url}/api/artist/${this.tempArtist._id}`)
@@ -468,7 +465,6 @@ const exampleGallery = {
   //   describe('with wrong user', function(){
   //
   //     before(done => mockArtist.call(this, done));
-  //     before(done => mockUser.call(this, done));
   //
   //     it('should status 401 unauthorized', done => {
   //       request.delete(`${url}/api/artist/${this.tempArtist._id}`)
@@ -480,4 +476,4 @@ const exampleGallery = {
   //   });
   // });
 
-// });
+});

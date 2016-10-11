@@ -14,11 +14,10 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const galleryRouter = module.exports = Router();
 
 //TODO: Populate artists and listings
-galleryRouter.post('/api/gallery', bearerAuth, jsonParser, function(req, res, next) {
+galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
-  // req.body.userID = req.user._id;
   req.body.artistID = req.artist._id;
-
+  console.log('req.body.artistID', req.body.artistID);
   new Gallery(req.body).save()
   .then( gallery => res.json(gallery))
   .catch(next);
