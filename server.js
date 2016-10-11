@@ -12,6 +12,7 @@ const dotenv = require('dotenv');
 // app modules
 // TODO: add routers and middleware
 const authRouter = require('./route/auth-router.js');
+const artistRouter = require('./route/artist-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 // load env variables
@@ -31,6 +32,7 @@ app.use(morgan('dev'));
 
 // app routes
 app.use(authRouter);
+app.use(artistRouter);
 app.use(errorMiddleware);
 
 // start server
