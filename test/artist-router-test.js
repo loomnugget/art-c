@@ -594,6 +594,26 @@ describe('testing artist-router', function() {
       });
     });
 
+    //TODO: Set object propery to empty so it gives me 400 errors?
+
+    // describe('updated with empty firstname', function(){
+    //
+    //   before(done => mockArtist.call(this, done));
+    //
+    //   it('should status 400 bad request', done => {
+    //     let updateData = {firstname: false};
+    //     request.put(`${url}/api/artist/${this.tempArtist._id}`)
+    //     .send(updateData)
+    //     .set({
+    //       Authorization: `Bearer ${this.tempToken}`,
+    //     })
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(400);
+    //       done();
+    //     });
+    //   });
+    // });
+
     describe('with invalid token and valid id', function(){
 
       before(done => mockArtist.call(this, done));
@@ -627,6 +647,71 @@ describe('testing artist-router', function() {
     });
   });
 
-  //TODO: DELETE tests here
+  describe('testing DELETE to /api/artist/:artistID', () => {
+
+    describe('with valid token and id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should delete a artist', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and invalid id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 404 not found', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token and valid id', function(){
+
+      before(done => mockArtist.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong user', function(){
+
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(this, done));
+
+      it('should status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+  });
 
 });
