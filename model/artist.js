@@ -17,7 +17,6 @@ const artistSchema = mongoose.Schema({
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   galleries: [{type: mongoose.Schema.Types.ObjectId, ref: 'gallery'}],
   photoID: {type: mongoose.Schema.Types.ObjectId},
-
 });
 
 module.exports = mongoose.model('artist', artistSchema);
