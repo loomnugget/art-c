@@ -41,7 +41,6 @@ describe('testing pic router', function() {
       before(done => artistMock.call(this, done));
 
       it ('should return a photo', done => {
-        // console.log(this.tempArtist);
         request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
@@ -57,7 +56,56 @@ describe('testing pic router', function() {
         });
       }); // end it block
     });
-  }); // end testing POST
+  }); //end /api/artist/:artistID/photo
+
+  describe('/api/gallery/:galleryID/photo', function() {
+    describe('with valid token and data', function() {
+
+      before(done => artistMock.call(this, done));
+
+      it ('should return a photo', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .field('name', examplePhoto.name)
+        .field('alt', examplePhoto.alt)
+        .attach('image', examplePhoto.image)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.alt).to.equal(examplePhoto.alt);
+          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+          done();
+        });
+      }); // end it block
+    });
+  }); //end /api/gallery/:galleryID/photo
+
+  describe('/api/listing/:listingID/photo', function() {
+    describe('with valid token and data', function() {
+
+      before(done => artistMock.call(this, done));
+
+      it ('should return a photo', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .field('name', examplePhoto.name)
+        .field('alt', examplePhoto.alt)
+        .attach('image', examplePhoto.image)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.alt).to.equal(examplePhoto.alt);
+          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+          done();
+        });
+      }); // end it block
+    });
+  }); //end /api/listing/:listingID/photo 
+
+
+
 }); //end first describe block
 
 // mocking data

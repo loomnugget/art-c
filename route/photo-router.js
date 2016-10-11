@@ -14,6 +14,8 @@ const createError = require('http-errors');
 //APP MODULES
 const Photo = require('../model/photo.js');
 const Artist = require('../model/artist.js');
+const Gallery = require('../model/gallery.js');
+const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 AWS.config.setPromisesDependency(require('bluebird'));
@@ -78,3 +80,100 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     next(err);
   });
 });
+
+photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+  debug('hit POST /api/gallery/:galleryID/photo');
+
+  if (!req.file)
+    return next(createError(400, 'no file found'));
+  if (!req.file.path)
+    return next(createError(500, 'file not saved'));
+  let ext = path.extname(req.file.originalname);
+
+  let params = {
+    ACL: 'public-read',
+    Bucket: 'artc-staging-assets',
+    Key: `${req.file.filename}${ext}`,
+    Body: fs.createReadStream(req.file.path),
+  };
+  // console.log(AWS.config);
+
+  let tempArtist = null;
+
+  Artist.findById(req.params.artistID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  // .then(() => return(s3UploadPromise(params)))
+  .then(artist => {
+    tempArtist = artist;
+    return s3UploadPromise(params);
+  })
+  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+  .then(s3data => {
+    del([`${dataDir}/*`]);
+    let photoData = {
+      alt: req.body.alt,
+      key: s3data.Key,
+      imageURI: s3data.Location,
+      artistID: tempArtist._id,
+      // userID: req.uster
+    };
+    return new Photo(photoData).save();
+  })
+  .then(photo => res.json(photo))
+  .catch(err => {
+    del([`${dataDir}/*`]);
+    next(err);
+  });
+});
+
+photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+  debug('hit POST /api/listing/:listingID/photo');
+
+  if (!req.file)
+    return next(createError(400, 'no file found'));
+  if (!req.file.path)
+    return next(createError(500, 'file not saved'));
+  let ext = path.extname(req.file.originalname);
+
+  let params = {
+    ACL: 'public-read',
+    Bucket: 'artc-staging-assets',
+    Key: `${req.file.filename}${ext}`,
+    Body: fs.createReadStream(req.file.path),
+  };
+  // console.log(AWS.config);
+
+  let tempArtist = null;
+
+  Artist.findById(req.params.artistID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  // .then(() => return(s3UploadPromise(params)))
+  .then(artist => {
+    tempArtist = artist;
+    return s3UploadPromise(params);
+  })
+  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+  .then(s3data => {
+    del([`${dataDir}/*`]);
+    let photoData = {
+      alt: req.body.alt,
+      key: s3data.Key,
+      imageURI: s3data.Location,
+      artistID: tempArtist._id,
+      // userID: req.uster
+    };
+    return new Photo(photoData).save();
+  })
+  .then(photo => res.json(photo))
+  .catch(err => {
+    del([`${dataDir}/*`]);
+    next(err);
+  });
+});
+
+
+// /api/artist/:artistID/photo/:photoID - PUT and DELETE
+
+// /api/gallery/:galleryID/photo/:photoID - PUT and DELETE
+
+// api/listing/:listingID/photo?:photoID - PUT and DELETE
