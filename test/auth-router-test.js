@@ -10,7 +10,7 @@ const Promise = require('bluebird');
 const mongoose = require('mongoose');
 
 // app modules
-const serverCtrl = require('./lib/server-control.js');
+const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db.js');
 const mockUser = require('./lib/user-mocks.js');
 
