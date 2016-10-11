@@ -60,3 +60,21 @@
       - Claudia: working on Photo Router/Tests
       - Max: helping Lee with Gallery Routes/Tests
       - Elizabeth: Listing Routes
+
+**10/11/2016, 2:00pm**
+
+    - From earlier today:
+
+      - Elizabeth: Finished GET and POST route, tests failing.
+        - Block: update to gallery and listing mocks
+      - Lee/Max: Finished GET and POST and PUT routes for Gallery, many tests for both routes
+        - Block: added userID to gallery and listing model/mocks
+      - Claudia: ~ 1/2 through Photo model and tests
+        - Block: duplication errors
+
+    - Working till 5ish
+
+      - Lee: DELETE working for Gallery Test/Routes, collaborate on Listing routes/tests
+      - Max: get .populate working for simple GET requests, collaborate on Listing routes/tests
+      - Elizabeth: Listing tests
+      - Claudia: Finish the rest of Photo routes/tests

@@ -25,6 +25,7 @@ artistRouter.post('/api/artist', bearerAuth, jsonParser, function(req, res, next
 artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
   debug('GET /api/artist/:artistID');
   Artist.findById(req.params.artistID)
+  .populate({path: 'galleries'})
   .then( artist => {
     if (artist.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));

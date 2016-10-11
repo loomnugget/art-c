@@ -18,6 +18,7 @@ const galleryRouter = module.exports = Router();
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
   let tempArtist;
+  let tempGallery;
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ((artist) => {
@@ -28,10 +29,11 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
     return new Gallery(req.body).save();
   })
   .then( gallery => {
+    tempGallery = gallery;
     tempArtist.galleries.push(gallery._id);
-    tempArtist.save();
-    res.json(gallery);
+    return tempArtist.save();
   })
+  .then(() => res.json(tempGallery))
   .catch(next);
 });
 
