@@ -79,7 +79,7 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 400', (done) => {
+      it('should status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
@@ -105,7 +105,7 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 400', (done) => {
+      it('should status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({
@@ -131,7 +131,7 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should return an artist profile and a status 400', (done) => {
+      it('should status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist`)
         .send({

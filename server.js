@@ -13,6 +13,7 @@ const dotenv = require('dotenv');
 // TODO: add routers and middleware
 const authRouter = require('./route/auth-router.js');
 const artistRouter = require('./route/artist-router.js');
+const galleryRouter = require('./route/gallery-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 const photoRouter = require('./route/photo-router.js');
@@ -34,6 +35,7 @@ app.use(morgan('dev'));
 // app routes
 app.use(authRouter);
 app.use(artistRouter);
+app.use(galleryRouter);
 app.use(errorMiddleware);
 app.use(photoRouter);
 
