@@ -9,6 +9,7 @@ const request = require('superagent');
 
 // APP MODULES
 const artistMock = require('./lib/artist-mock.js');
+const photoMock = require('./lib/photo-mock.js');
 const cleanDB = require('./lib/clean-db.js');
 const serverControl = require('./lib/server-control.js');
 
@@ -22,7 +23,7 @@ const examplePhoto = {
   image: `${__dirname}/data/dog.jpg`,
 };
 
-describe('testing pic router', function() {
+describe('testing photo router', function() {
 
   //start server before tests
   before(done => serverControl.serverUp(server, done));
@@ -31,7 +32,7 @@ describe('testing pic router', function() {
   //clean database after each test
   afterEach(done => cleanDB(done));
 
-  describe('/api/artist/:artistID/photo', function() {
+  describe('testing POST routes - /api/artist/:artistID/photo', function() {
     describe('with valid token and data', function() {
 
       before(done => artistMock.call(this, done));
@@ -117,57 +118,71 @@ describe('testing pic router', function() {
         });
       });
     });
+  }); //end /api/artist/:artistID/photo - POST
 
-
-  }); //end /api/artist/:artistID/photo
-
-  describe('/api/gallery/:galleryID/photo', function() {
+  describe('testing DELETE routes - /api/artist/:artistID/photo/:photoID', function() {
     describe('with valid token and data', function() {
-
-      before(done => artistMock.call(this, done));
-
+      before(done => photoMock.call(this, done));
       it ('should return a photo', done => {
-        request.post(`${url}/api/gallery/${this.tempGallery._id}/photo`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
-        .field('name', examplePhoto.name)
-        .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .set({Authorization: `Bearer: ${this.tempToken}`})
         .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(examplePhoto.name);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
-          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
-          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(204);
           done();
         });
       }); // end it block
-    });
-  }); //end /api/gallery/:galleryID/photo
-
-  describe('/api/listing/:listingID/photo', function() {
-    describe('with valid token and data', function() {
-
-      before(done => artistMock.call(this, done));
-
-      it ('should return a photo', done => {
-        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
-        .set({Authorization: `Bearer ${this.tempToken}`})
-        .field('name', examplePhoto.name)
-        .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
-        .end((err, res) => {
-          if (err) return done(err);
-          expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(examplePhoto.name);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
-          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
-          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
-          done();
-        });
-      }); // end it block
-    });
-  }); //end /api/listing/:listingID/photo
+    }); //end 'with valid token'
+  });
+  //
+  // describe('/api/gallery/:galleryID/photo', function() {
+  //   describe('with valid token and data', function() {
+  //
+  //     before(done => artistMock.call(this, done));
+  //
+  //     it ('should return a photo', done => {
+  //       request.post(`${url}/api/gallery/${this.tempGallery._id}/photo`)
+  //       .set({Authorization: `Bearer ${this.tempToken}`})
+  //       .field('name', examplePhoto.name)
+  //       .field('alt', examplePhoto.alt)
+  //       .attach('image', examplePhoto.image)
+  //       .end((err, res) => {
+  //         if (err) return done(err);
+  //         expect(res.status).to.equal(200);
+  //         expect(res.body.name).to.equal(examplePhoto.name);
+  //         expect(res.body.alt).to.equal(examplePhoto.alt);
+  //         expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+  //         expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+  //         done();
+  //       });
+  //     }); // end it block
+  //   });
+  // }); //end /api/gallery/:galleryID/photo
+  //
+  // describe('/api/listing/:listingID/photo', function() {
+  //   describe('with valid token and data', function() {
+  //
+  //     before(done => artistMock.call(this, done));
+  //
+  //     it ('should return a photo', done => {
+  //       request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+  //       .set({Authorization: `Bearer ${this.tempToken}`})
+  //       .field('name', examplePhoto.name)
+  //       .field('alt', examplePhoto.alt)
+  //       .attach('image', examplePhoto.image)
+  //       .end((err, res) => {
+  //         if (err) return done(err);
+  //         expect(res.status).to.equal(200);
+  //         expect(res.body.name).to.equal(examplePhoto.name);
+  //         expect(res.body.alt).to.equal(examplePhoto.alt);
+  //         expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+  //         expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+  //         done();
+  //       });
+  //     }); // end it block
+  //   });
+  // }); //end /api/listing/:listingID/photo
 
 
 
