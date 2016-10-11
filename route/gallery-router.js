@@ -48,3 +48,21 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
     next(createError(404, err.message));
   });
 });
+
+galleryRouter.put('/api/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/gallery/:galleryID');
+  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true})
+  .then( gallery => res.json(gallery))
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
+
+//TODO: Delete the reference of gallery to its associated artist
+galleryRouter.delete('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/gallery/:galleryID');
+  Gallery.findByIdAndRemove(req.params.galleryID)
+  .then( () => res.sendStatus(204))
+  .catch( err => next(createError(404, err.message)));
+});
