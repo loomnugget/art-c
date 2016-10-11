@@ -1,9 +1,5 @@
 'use strict';
 
-// /api/artist/:artistID/photo
-// /api/gallery/:galleryID/photo
-// /api/artist/:artistID/photo/:photoID - delete
-
 require('./lib/test-env.js');
 const awsMocks = require('./lib/aws-mock.js');
 
@@ -21,7 +17,7 @@ const server = require('../server.js');
 const url = `http://localhost:${process.env.PORT}`;
 
 const examplePhoto = {
-  name: 'going hard at the club',
+  name: 'goose',
   alt: 'good times',
   image: `${__dirname}/data/dog.jpg`,
 };
@@ -49,6 +45,7 @@ describe('testing pic router', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal(examplePhoto.name);
           expect(res.body.alt).to.equal(examplePhoto.alt);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
@@ -56,6 +53,72 @@ describe('testing pic router', function() {
         });
       }); // end it block
     });
+
+    // describe('with no name', function() {
+    //
+    //   before(done => artistMock.call(this, done));
+    //
+    //   it('should respond with status 400', done => {
+    //     request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+    //     .set({Authorization: `Bearer ${this.tempToken}`})
+    //     .field('alt', examplePhoto.alt)
+    //     .attach('image', examplePhoto.image)
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(400);
+    //       done();
+    //     });
+    //   });
+    //
+    // });
+
+    describe('with no image', function() {
+      before(done => artistMock.call(this, done));
+
+      it('should respond with status 400', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .field('name', examplePhoto.name)
+        .field('alt', examplePhoto.alt)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with an invalid token', function() {
+      before(done => artistMock.call(this, done));
+
+      it('should respond with status 401', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        .set({Authorization:' Bearer '})
+        .field('name', examplePhoto.name)
+        .field('alt', examplePhoto.alt)
+        .attach('image', examplePhoto.image)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with an invalid artistID', function() {
+      before(done => artistMock.call(this, done));
+
+      it('should respond with status 404', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}goose/photo`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .field('name', examplePhoto.name)
+        .field('alt', examplePhoto.alt)
+        .attach('image', examplePhoto.image)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+
   }); //end /api/artist/:artistID/photo
 
   describe('/api/gallery/:galleryID/photo', function() {
@@ -64,7 +127,7 @@ describe('testing pic router', function() {
       before(done => artistMock.call(this, done));
 
       it ('should return a photo', done => {
-        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        request.post(`${url}/api/gallery/${this.tempGallery._id}/photo`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
@@ -72,6 +135,7 @@ describe('testing pic router', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal(examplePhoto.name);
           expect(res.body.alt).to.equal(examplePhoto.alt);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
@@ -95,6 +159,7 @@ describe('testing pic router', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.name).to.equal(examplePhoto.name);
           expect(res.body.alt).to.equal(examplePhoto.alt);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
@@ -102,7 +167,7 @@ describe('testing pic router', function() {
         });
       }); // end it block
     });
-  }); //end /api/listing/:listingID/photo 
+  }); //end /api/listing/:listingID/photo
 
 
 

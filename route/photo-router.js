@@ -57,7 +57,6 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // .then(() => return(s3UploadPromise(params)))
   .then(artist => {
     tempArtist = artist;
     return s3UploadPromise(params);
@@ -66,11 +65,12 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
+      name: req.body.name,
       alt: req.body.alt,
       key: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
-      // userID: req.uster
+      userID: req.user._id,
     };
     return new Photo(photoData).save();
   })
@@ -102,7 +102,6 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
 
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // .then(() => return(s3UploadPromise(params)))
   .then(artist => {
     tempArtist = artist;
     return s3UploadPromise(params);
@@ -111,11 +110,13 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
+      name: req.body.name,
       alt: req.body.alt,
       key: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
-      // userID: req.uster
+      galleryID: tempGallery._id,
+      userID: req.user._id,
     };
     return new Photo(photoData).save();
   })
@@ -147,7 +148,6 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
 
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // .then(() => return(s3UploadPromise(params)))
   .then(artist => {
     tempArtist = artist;
     return s3UploadPromise(params);
@@ -156,11 +156,12 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
+      name: req.body.name,
       alt: req.body.alt,
       key: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
-      // userID: req.uster
+      userID: req.user._id,
     };
     return new Photo(photoData).save();
   })
