@@ -16,21 +16,25 @@ const listingRouter = module.exports = Router();
 
 listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/listing');
-  let tempGallery;
+  let tempGallery, tempListing;
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ((gallery) => {
+    // console.log(gallery);
     req.body.galleryID = gallery._id;
     req.body.artistID = gallery.artistID;
     req.body.userID = req.user._id;
-    req.body.username = req.gallery.username;
+    req.body.username = req.user.username;
+    tempGallery = gallery;
     return new Listing(req.body).save();
   })
   .then(listing => {
+    // console.log('getting a listing', listing);
     tempGallery.listings.push(listing._id);
-    tempGallery.save();
-    res.json(listing);
+    tempListing = listing;
+    return tempGallery.save();
   })
+  .then(() => res.json(tempListing))
   .catch(next);
 });
 
