@@ -78,3 +78,20 @@
       - Max: get .populate working for simple GET requests, collaborate on Listing routes/tests
       - Elizabeth: Listing tests
       - Claudia: Finish the rest of Photo routes/tests
+
+**10/12/2016, 10:00am**
+
+  - From yesterday:
+
+    - Elizabeth: Finished Listing Routes and Tests. Helped with merging and conflicts.
+    - Lee: Gallery Router Tests completed, adding more tests. Refactored routes for Listing and Gallery.  
+    - Max: Worked with Lee on Refactoring and Authorization. Worked on Populate for Listing and Gallery arrays. Handled token error for photo tests. Fixed POST requests for photos, working on DELETE.
+    - Claudia: Worked on photo tests and routes. Was having trouble getting help with routes and hit a few blocks.
+      - Block: photo route errors.
+
+  - Working on until 1-ish
+
+    - Lee: working on Gallery router tests and Listing router test. Adding validation to ensure that the same userID is the one in the test and making sure the router responds appropriately.
+    - Elizabeth: finish merge conflicts, go through coveralls to find missed lines.
+    - Max: finishing the Put and Delete tests for routes.
+    - Claudia: Working with the instructors on blocks.

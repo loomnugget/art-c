@@ -307,7 +307,12 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -336,7 +341,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {desc: 'bob'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -365,7 +374,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {category: 'bob'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -394,7 +407,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', category: 'bob2'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -423,7 +440,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', desc: 'bob2'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -452,7 +473,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {desc: 'bob', category: 'bob2'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -481,7 +506,11 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', desc: 'bob2', category: 'bob3'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -510,7 +539,11 @@ describe('testing listing-router', function(){
 
       it('should status 404 not found', done => {
         let updateData = {name: 'bob'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}bad`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}bad`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -528,7 +561,11 @@ describe('testing listing-router', function(){
 
       it('should status 401 unauthorized', done => {
         let updateData = {title: 'bob'};
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .send(updateData)
         .set({
           Authorization: 'Bearer ',
@@ -546,7 +583,11 @@ describe('testing listing-router', function(){
       // before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
+<<<<<<< HEAD
         request.put(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -562,7 +603,11 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should delete a listing', done => {
+<<<<<<< HEAD
         request.delete(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
@@ -580,7 +625,11 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should status 404 not found', done => {
+<<<<<<< HEAD
         request.delete(`${url}/api/listing/${this.tempListing._id}bad`)
+=======
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}bad`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
@@ -596,7 +645,11 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should status 401 unauthorized', done => {
+<<<<<<< HEAD
         request.delete(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .set({
           Authorization: 'Bearer ',
         })
@@ -613,7 +666,11 @@ describe('testing listing-router', function(){
       // before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
+<<<<<<< HEAD
         request.delete(`${url}/api/listing/${this.tempListing._id}`)
+=======
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+>>>>>>> 83debed752d2ea16f80ad8f0e6bc92a2987a2a47
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
