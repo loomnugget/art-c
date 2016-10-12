@@ -311,7 +311,6 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob'};
-
         request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({

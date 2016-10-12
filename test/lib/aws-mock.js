@@ -23,3 +23,16 @@ AWSMock.mock('S3', 'upload', function(params, callback){
     return callback(new Error('requires body'));
   callback(null, exports.uploadMock);
 });
+// 
+// exports.deleteMock = {
+//   DeleteMarker: 'true',
+//   VersionId: ' ', //returned from aws
+// };
+//
+// AWSMock.mock('S3', 'deleteObject', function(params, callback){
+//   if(params.Bucket !== 'artc-staging-assets')
+//     return callback(new Error('Bucket must be artc-staging-assets'));
+//   if(!params.Key)
+//     return callback(new Error('requres Key'));
+//   callback(null, exports.deleteMock);
+// });

@@ -2,15 +2,35 @@
 
 const debug = require('debug')('artc:photo-mock');
 
+const awsMocks = require('./aws-mock.js');
+//const artistMock = require('./artist-mock.js');
+const galleryMock = require('./gallery-mock.js');
+// const listingMock = require('./listing-mock.js');
+
 const Photo = require('../../model/photo.js');
-//const artistMock = require('./user-mock.js');
 
 module.exports = function(done){
   debug('creating mock photo');
+
   let examplePhotoData = {
     name: 'example name',
     alt: 'useful photo',
     imageURI: awsMocks.uploadMock.Location,
-    Key: awsMocks.uploadMock.Key,
+    objectKey: awsMocks.uploadMock.Key,
   };
+
+  galleryMock.call(this, err => {
+    if (err) return done(err);
+    examplePhotoData.username = this.tempUser.username;
+    examplePhotoData.userID = this.tempUser._id.toString();
+    examplePhotoData.galleryID = this.tempGallery._id.toString();
+    new Photo(examplePhotoData).save()
+    .then( photo => {
+      this.tempPhoto = photo;
+      done();
+    })
+    .catch(done);
+  });
+
+
 };
