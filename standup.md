@@ -95,3 +95,26 @@
     - Elizabeth: finish merge conflicts, go through coveralls to find missed lines.
     - Max: finishing the Put and Delete tests for routes.
     - Claudia: Working with the instructors on blocks.
+
+  **10/12/2016, 2:00pm**
+
+    - From earlier today:
+
+      - Elizabeth: handled merge conflicts and made notes from coverall on code that said where we weren't running lines.
+      - Lee: Worked with
+      - Max: Added photo routes and tests. fixed bearer-middleware and handled all the tests that were affected by that.
+      - Claudia: researched stripe and updated README.md so that we know how the app works and what the commands and links will be.
+
+    - Working on until 5-ish:
+
+Listing-Delete method needs to delete it's reference from the corresponding gallery model.
+Gallery-Delete method needs to delete it's reference from the corresponding artist model.
+When we delete a Gallery we need to delete all associated listings at the same time.
+When we delete an Artist, we need to delete all associated galleries and listings at the same time.
+Write README.md file so that we have an introduction, instructions for setup and user instructions.
+Devnotes need to be updated with current paths and versions.
+
+      - Lee and Max: DELETE routes
+      - Claudia: photo POST routes
+      - Elizabeth: Devnotes and README.md
+      

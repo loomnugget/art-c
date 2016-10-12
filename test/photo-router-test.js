@@ -27,11 +27,8 @@ const examplePhoto = {
 
 describe('testing photo router', function() {
 
-  //start server before tests
   before(done => serverControl.serverUp(server, done));
-  //stop server after tests
   after(done => serverControl.serverDown(server, done));
-  //clean database after each test
   afterEach(done => cleanDB(done));
 
   describe('testing POST routes - /api/artist/:artistID/photo', function() {
@@ -113,7 +110,7 @@ describe('testing photo router', function() {
     describe('with valid token and data', function() {
 
       before(done => photoMock.call(this, done));
-      
+
       it ('should return a photo', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
         .set({Authorization: `Bearer ${this.tempToken}`})
