@@ -240,8 +240,34 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
   });
 });
 
-
-
-// /api/gallery/:galleryID/photo/:photoID - PUT and DELETE
-
-// api/listing/:listingID/photo/:photoID - PUT and DELETE
+photoRouter.delete('/api/listing/:listingID/photo/:photoID', bearerAuth, function(req, res, next){
+  debug('hit DELETE /api/listing/:listingID/photo/:photoID');
+  let tempPhoto;
+ // check if photo exists
+  Photo.findById(req.params.photoID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( photo => {
+    // make sure the user id matches the photo.user id
+    if(photo.userID.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'User not authorized to delete this photo'));
+    tempPhoto = photo;
+    return Listing.findById(req.params.listingID);
+  })
+  .catch( err => err.status? Promise.reject(err) : Promise.reject(createError(404, err.message)))
+  .then( listing => {
+    listing.photoID = null;
+    return listing.save();
+  })
+  .then( () => {
+    let params = {
+      Bucket: 'artc-staging-assets',
+      Key: tempPhoto.objectKey,
+    };
+    return s3.deleteObject(params).promise();
+  })
+  .then( () => {
+    return Photo.findByIdAndRemove(req.params.photoID);
+  })
+  .then(() => res.sendStatus(204))
+  .catch(next);
+});

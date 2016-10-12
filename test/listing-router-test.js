@@ -49,7 +49,6 @@ describe('testing listing-router', function(){
         })
         .end((err, res) => {
           if(err) return done(err);
-          // console.log('res.body', res.body);
           expect(res.status).to.equal(200);
           expect(res.body.title).to.equal(exampleListing.title);
           expect(res.body.desc).to.equal(exampleListing.desc);

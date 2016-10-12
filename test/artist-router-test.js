@@ -830,7 +830,6 @@ describe('testing artist-router', function() {
 
         it('should return status 400 bad request', done => {
           let updateData = {firstname: ''};
-          console.log(updateData);
           request.put(`${url}/api/artist/${this.tempArtist._id}`)
           .send(updateData)
           .set({
