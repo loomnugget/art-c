@@ -38,9 +38,7 @@ const exampleArtist = {
 describe('testing artist-router', function() {
 
   before( done => serverCtrl.serverUp(server, done));
-
   after( done => serverCtrl.serverDown(server, done));
-
   afterEach( done => cleanDB(done));
 
   describe('testing POST /api/artist', function() {
@@ -50,7 +48,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should return an artist profile and a status 200', (done) => {
-
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .set({
@@ -74,7 +71,6 @@ describe('testing artist-router', function() {
         });
       });
 
-
     });
 
     describe('with no firstname', function() {
@@ -82,7 +78,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 400 bad request', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           lastname: exampleArtist.lastname,
@@ -101,6 +96,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with no lastname', function() {
@@ -108,7 +104,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 400 bad request', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           firstname: exampleArtist.firstname,
@@ -127,6 +122,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with no username', function() {
@@ -160,7 +156,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should return an artist profile and a status 400', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           firstname: exampleArtist.firstname,
@@ -179,6 +174,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with no city', function() {
@@ -186,7 +182,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should return an artist profile and a status 400', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           firstname: exampleArtist.firstname,
@@ -205,6 +200,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with no zip', function() {
@@ -212,7 +208,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should return an artist profile and a status 400', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           firstname: exampleArtist.firstname,
@@ -231,6 +226,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with invalid date--string', function() {
@@ -238,7 +234,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should return an artist profile and a status 400', (done) => {
-
         request.post(`${url}/api/artist`)
         .send({
           firstname: exampleArtist.firstname,
@@ -259,6 +254,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with an invalid body', function() {
@@ -266,7 +262,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should a status 400 bad request', (done) => {
-
         request.post(`${url}/api/artist`)
         .send('badbody')
         .set({
@@ -277,6 +272,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with a bad authorization header', function() {
@@ -284,7 +280,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', (done) => {
-
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .set({
@@ -295,6 +290,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with no authorization header', function() {
@@ -302,7 +298,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', (done) => {
-
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .end((err, res) => {
@@ -310,6 +305,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with bearer header with no token', function() {
@@ -317,7 +313,6 @@ describe('testing artist-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', (done) => {
-
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .set({
@@ -328,6 +323,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with already-existing username', function() {
@@ -335,7 +331,6 @@ describe('testing artist-router', function() {
       before( done => mockArtist.call(this, done));
 
       it('should return a status 409', (done) => {
-
         request.post(`${url}/api/artist`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -356,6 +351,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with already-existing email', function() {
@@ -363,7 +359,6 @@ describe('testing artist-router', function() {
       before( done => mockArtist.call(this, done));
 
       it('should return a status 409', (done) => {
-
         request.post(`${url}/api/artist`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -384,6 +379,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+
     });
 
     describe('with already-existing phone number', function() {
@@ -391,7 +387,6 @@ describe('testing artist-router', function() {
       before( done => mockArtist.call(this, done));
 
       it('should return a status 409', (done) => {
-
         request.post(`${url}/api/artist`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -412,6 +407,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
+      
     });
 
   });
