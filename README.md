@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=galleries-more-tests)](https://coveralls.io/github/loomnugget/art-c?branch=galleries-more-tests)
+[![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=staging)](https://coveralls.io/github/loomnugget/art-c?branch=staging)
 
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
