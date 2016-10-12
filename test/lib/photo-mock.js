@@ -4,8 +4,8 @@ const debug = require('debug')('artc:photo-mock');
 
 const awsMocks = require('./aws-mock.js');
 //const artistMock = require('./artist-mock.js');
-const galleryMock = require('./gallery-mock.js');
-// const listingMock = require('./listing-mock.js');
+// const galleryMock = require('./gallery-mock.js');
+const listingMock = require('./listing-mock.js');
 
 const Photo = require('../../model/photo.js');
 
@@ -19,10 +19,11 @@ module.exports = function(done){
     objectKey: awsMocks.uploadMock.Key,
   };
 
-  galleryMock.call(this, err => {
+  listingMock.call(this, err => {
     if (err) return done(err);
     examplePhotoData.username = this.tempUser.username;
     examplePhotoData.userID = this.tempUser._id.toString();
+    examplePhotoData.artistID = this.tempArtist._id.toString();
     examplePhotoData.galleryID = this.tempGallery._id.toString();
     new Photo(examplePhotoData).save()
     .then( photo => {
@@ -31,6 +32,4 @@ module.exports = function(done){
     })
     .catch(done);
   });
-
-
 };
