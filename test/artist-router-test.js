@@ -279,14 +279,14 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .set({
           Authorization: 'bad request',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -297,11 +297,11 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -312,14 +312,14 @@ describe('testing artist-router', function() {
 
       before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
         request.post(`${url}/api/artist`)
         .send(exampleArtist)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -407,7 +407,7 @@ describe('testing artist-router', function() {
           done();
         });
       });
-      
+
     });
 
   });
@@ -465,13 +465,13 @@ describe('testing artist-router', function() {
 
       before(done => mockMultipleGalleries.call(this, 10, done));
 
-      it('should return an artist with populated gallery array', done => {
+      it('should return a 400 error for bad request', done => {
         request.get(`${url}/api/artist/${this.tempArtist._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -530,27 +530,27 @@ describe('testing artist-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 for bad request', done => {
         request.get(`${url}/api/artist/${this.tempArtist._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with no auth header', function(){
 
       before(done => mockArtist.call(this, done));
       before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should status 400 bad request', done => {
         request.get(`${url}/api/artist/${this.tempArtist._id}`)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -810,7 +810,7 @@ describe('testing artist-router', function() {
 
         before(done => mockArtist.call(this, done));
 
-        it('should status 404 not found', done => {
+        it('should return status 404 not found', done => {
           let updateData = {firstName: 'bob'};
           request.put(`${url}/api/artist/${this.tempArtist._id}bad`)
           .send(updateData)
@@ -828,9 +828,8 @@ describe('testing artist-router', function() {
 
         before(done => mockArtist.call(this, done));
 
-        it('should status 400 bad request', done => {
+        it('should return status 400 bad request', done => {
           let updateData = {firstname: ''};
-          console.log(updateData);
           request.put(`${url}/api/artist/${this.tempArtist._id}`)
           .send(updateData)
           .set({
@@ -843,11 +842,11 @@ describe('testing artist-router', function() {
         });
       });
 
-      describe('with invalid token and valid id', function(){
+      describe('with bad token request and valid id', function(){
 
         before(done => mockArtist.call(this, done));
 
-        it('should status 401 unauthorized', done => {
+        it('should return status 400 bad request', done => {
           let updateData = {firstName: 'bob'};
           request.put(`${url}/api/artist/${this.tempArtist._id}`)
           .send(updateData)
@@ -855,21 +854,20 @@ describe('testing artist-router', function() {
             Authorization: 'Bearer ',
           })
           .end((err, res) => {
-            expect(res.status).to.equal(401);
+            expect(res.status).to.equal(400);
             done();
           });
         });
       });
 
-      describe('with wrong user', function(){
+      describe('with no auth header', function(){
 
         before(done => mockArtist.call(this, done));
-        before(done => mockUser.call(this, done));
 
-        it('should status 401 unauthorized', done => {
+        it('should status 400 bad request', done => {
           request.put(`${url}/api/artist/${this.tempArtist._id}`)
           .end((err, res) => {
-            expect(res.status).to.equal(401);
+            expect(res.status).to.equal(400);
             done();
           });
         });
@@ -901,7 +899,7 @@ describe('testing artist-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 404 not found', done => {
+      it('should return status 404 not found', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}bad`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -913,31 +911,30 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', function() {
+    describe('with bad token request and valid id', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with no auth header', function(){
 
       before(done => mockArtist.call(this, done));
-      before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 for bad request', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}`)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
