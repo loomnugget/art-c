@@ -53,7 +53,6 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
   });
 });
 
-//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
   //if artistID !== the req.params.artistID, reject error
   debug('hit route PUT /api/gallery/:galleryID');

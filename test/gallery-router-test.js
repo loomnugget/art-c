@@ -37,9 +37,9 @@ describe('testing gallery-router', function() {
 
   afterEach( done => cleanDB(done));
 
-  describe('testing POST /api/artist/:artistID/gallery', function() {
+  describe('testing POST /api/artist/:artistID/gallery', () => {
 
-    describe('with a valid body', function() {
+    describe('with a valid body', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -68,7 +68,7 @@ describe('testing gallery-router', function() {
 
     });
 
-    describe('with no name', function() {
+    describe('with no name', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -90,7 +90,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with no desc', function() {
+    describe('with no desc', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -112,7 +112,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with no category', function() {
+    describe('with no category', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -134,7 +134,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid date--string', function() {
+    describe('with invalid date--string', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -158,7 +158,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with an invalid body', function() {
+    describe('with an invalid body', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -176,7 +176,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with a bad authorization header', function() {
+    describe('with a bad authorization header', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -194,7 +194,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with no authorization header', function() {
+    describe('with no authorization header', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -209,7 +209,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with bearer header with no token', function() {
+    describe('with bearer header with no token', () => {
 
       before(done => mockArtist.call(this, done));
 
@@ -230,7 +230,7 @@ describe('testing gallery-router', function() {
 
   describe('testing GET to /api/gallery/:galleryID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', () =>{
 
       before(done => mockGallery.call(this, done));
 
@@ -255,7 +255,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('testing populate gallery listings', function(){
+    describe('testing populate gallery listings', () => {
 
       before(done => mockMultipleListings.call(this, 10, done));
 
@@ -273,7 +273,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -289,7 +289,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -305,7 +305,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockGallery.call(this, done));
       before(done => mockUser.call(this, done));
@@ -322,7 +322,7 @@ describe('testing gallery-router', function() {
 
   describe('testing PUT to /api/gallery/:galleryID', () => {
 
-    describe('updating name property with valid token and id, ', function(){
+    describe('updating name property with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -350,7 +350,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating desc property with valid token and id, ', function(){
+    describe('updating desc property with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -378,7 +378,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating category property with valid token and id, ', function(){
+    describe('updating category property with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -406,7 +406,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating name and category properties with valid token and id, ', function(){
+    describe('updating name and category properties with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -434,7 +434,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating name and desc properties with valid token and id, ', function(){
+    describe('updating name and desc properties with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -462,7 +462,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating desc and category properties with valid token and id, ', function(){
+    describe('updating desc and category properties with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -490,7 +490,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('updating name, desc and category properties with valid token and id, ', function(){
+    describe('updating name, desc and category properties with valid token and id, ', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -518,7 +518,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -536,7 +536,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -554,7 +554,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockGallery.call(this, done));
       before(done => mockUser.call(this, done));
@@ -571,7 +571,7 @@ describe('testing gallery-router', function() {
 
   describe('testing DELETE to /api/artist/:artistID/gallery/:galleryID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', () => {
 
       before(done => mockGallery.call(this, done));
       it('should delete a gallery', done => {
@@ -588,7 +588,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -604,7 +604,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -620,7 +620,7 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockGallery.call(this, done));
       before(done => mockUser.call(this, done));
