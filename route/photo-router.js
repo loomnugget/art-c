@@ -150,6 +150,7 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       galleryID: tempGallery._id,
+      artistID: tempGallery.artistID,
       userID: req.user._id,
     };
     return new Photo(photoData).save();
@@ -225,6 +226,8 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       listingID: tempListing._id,
+      artistID: tempListing.artistID,
+      galleryID: tempListing.galleryID,
       userID: req.user._id,
     };
     return new Photo(photoData).save();
