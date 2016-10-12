@@ -64,8 +64,6 @@ describe('testing gallery-router', function() {
           done();
         });
       });
-
-
     });
 
     describe('with no name', () => {
@@ -312,6 +310,9 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -561,6 +562,9 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', done => {
         request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -627,6 +631,9 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -634,5 +641,4 @@ describe('testing gallery-router', function() {
       });
     });
   });
-
 });
