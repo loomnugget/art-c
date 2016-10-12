@@ -116,4 +116,5 @@ Devnotes need to be updated with current paths and versions.
 
       - Lee and Max: DELETE routes
       - Claudia: photo POST routes
-      - Elizabeth: Devnotes
+      - Elizabeth: Devnotes and README.md
+      
