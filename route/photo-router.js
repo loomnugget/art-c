@@ -110,51 +110,50 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 //   .catch(next);
 // });
 //
-// photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
-//   debug('hit POST /api/gallery/:galleryID/photo');
-//
-//   if (!req.file)
-//     return next(createError(400, 'no file found'));
-//   if (!req.file.path)
-//     return next(createError(500, 'file not saved'));
-//   let ext = path.extname(req.file.originalname);
-//
-//   let params = {
-//     ACL: 'public-read',
-//     Bucket: 'artc-staging-assets',
-//     Key: `${req.file.filename}${ext}`,
-//     Body: fs.createReadStream(req.file.path),
-//   };
-//   // console.log(AWS.config);
-//
-//   let tempGallery = null;
-//
-//   Gallery.findById(req.params.galleryID)
-//   .catch(err => Promise.reject(createError(404, err.message)))
-//   .then(gallery => {
-//     tempGallery = gallery;
-//     return s3UploadPromise(params); //if fails 500
-//   })
-//   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-//   .then(s3data => {
-//     del([`${dataDir}/*`]);
-//     let photoData = {
-//       name: req.body.name,
-//       username: req.body.username,
-//       alt: req.body.alt,
-//       objectKey: s3data.Key,
-//       imageURI: s3data.Location,
-//       galleryID: tempGallery._id,
-//       userID: req.user._id,
-//     };
-//     return new Photo(photoData).save();
-//   })
-//   .then(photo => res.json(photo))
-//   .catch(err => {
-//     del([`${dataDir}/*`]);
-//     next(err);
-//   });
-// });
+photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+  debug('hit POST /api/gallery/:galleryID/photo');
+
+  if (!req.file)
+    return next(createError(400, 'no file found'));
+  if (!req.file.path)
+    return next(createError(500, 'file not saved'));
+  let ext = path.extname(req.file.originalname);
+
+  let params = {
+    ACL: 'public-read',
+    Bucket: 'artc-staging-assets',
+    Key: `${req.file.filename}${ext}`,
+    Body: fs.createReadStream(req.file.path),
+  };
+
+  let tempGallery = null;
+
+  Gallery.findById(req.params.galleryID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then(gallery => {
+    tempGallery = gallery;
+    return s3UploadPromise(params); //if fails 500
+  })
+  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+  .then(s3data => {
+    del([`${dataDir}/*`]);
+    let photoData = {
+      name: req.body.name,
+      username: req.user.username,
+      alt: req.body.alt,
+      objectKey: s3data.Key,
+      imageURI: s3data.Location,
+      galleryID: tempGallery._id,
+      userID: req.user._id,
+    };
+    return new Photo(photoData).save();
+  })
+  .then(photo => res.json(photo))
+  .catch(err => {
+    del([`${dataDir}/*`]);
+    next(err);
+  });
+});
 //
 // photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
 //   debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
@@ -193,8 +192,6 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     return next(createError(500, 'file not saved'));
   let ext = path.extname(req.file.originalname);
 
-  console.log(req.file, '*&*&&*&*&*&*&*&*&*');
-
   let params = {
     ACL: 'public-read',
     Bucket: 'artc-staging-assets',
@@ -215,7 +212,7 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     del([`${dataDir}/*`]);
     let photoData = {
       name: req.body.name,
-      username: req.body.username,
+      username: req.user.username,
       alt: req.body.alt,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
