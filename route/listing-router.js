@@ -49,3 +49,20 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
     next(createError(404, err.message));
   });
 });
+
+listingRouter.put('/api/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/listing/:listingID');
+  Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true})
+  .then(listing => res.json(listing))
+  .catch(err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
+
+listingRouter.delete('/api/listing/:listingID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/listing/:listingID');
+  Listing.findByIdAndRemove(req.params.listingID)
+  .then( () => res.sendStatus(204))
+  .catch( err => next(createError(404, err.message)));
+});
