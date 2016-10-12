@@ -42,6 +42,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
+    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {
@@ -80,6 +81,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   });
 });
 
+
 // photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
 //   debug('hit DELETE /api/artist/:artistID/photo/:photoID');
 //  // check if photo exists
@@ -110,6 +112,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 //   .catch(next);
 // });
 //
+
 photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
   debug('hit POST /api/gallery/:galleryID/photo');
 
@@ -117,6 +120,7 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
+    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {
@@ -130,11 +134,13 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
 
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
+  // ^ 1 line currently not covered
   .then(gallery => {
     tempGallery = gallery;
     return s3UploadPromise(params); //if fails 500
   })
   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+  // ^ 1 line currently not covered
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
@@ -152,6 +158,7 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);
+    // ^ 2 lines currently not covered
   });
 });
 //
@@ -190,6 +197,7 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
+    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {

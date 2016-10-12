@@ -19,6 +19,7 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
   let tempGallery, tempListing;
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
+  // ^ 1 line currently not covered
   .then ((gallery) => {
     req.body.galleryID = gallery._id;
     req.body.artistID = gallery.artistID;
@@ -70,6 +71,7 @@ listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, f
   .then( listing => {
     if(listing.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));
+      // ^ 1 line currently not covered
     res.sendStatus(204);
   })
   .catch( err => next(createError(404, err.message)));
