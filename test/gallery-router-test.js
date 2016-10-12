@@ -257,7 +257,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockMultipleListings.call(this, 10, done));
 
-      it('should return an artist with populated gallery array', done => {
+      it('should return a gallery with populated listing array', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -266,6 +266,55 @@ describe('testing gallery-router', function() {
           if (err) return done(err);
           expect(res.status).to.equal(200);
           expect(res.body.listings.length).to.equal(10);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate gallery listings with valid id and invalid token', function(){
+
+      before(done => mockMultipleListings.call(this, 10, done));
+
+      it('should return a gallery with populated listings array', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate gallery listings with invalid id and valid token', function(){
+
+      before(done => mockMultipleListings.call(this, 10, done));
+
+      it('should return an gallery with populated gallery array', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate gallery listings with wrong user', function(){
+
+      before(done => mockMultipleListings.call(this, 10, done));
+      before(done => mockUser.call(this, done));
+
+      it('should return an gallery with populated gallery array', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
       });

@@ -447,7 +447,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('testing populate artist galleries', function(){
+    describe('testing populate artist galleries with valid id and token', function(){
 
       before(done => mockMultipleGalleries.call(this, 10, done));
 
@@ -460,6 +460,55 @@ describe('testing artist-router', function() {
           if (err) return done(err);
           expect(res.status).to.equal(200);
           expect(res.body.galleries.length).to.equal(10);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate artist galleries with valid id and invalid token', function(){
+
+      before(done => mockMultipleGalleries.call(this, 10, done));
+
+      it('should return an artist with populated gallery array', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate artist galleries with invalid id and valid token', function(){
+
+      before(done => mockMultipleGalleries.call(this, 10, done));
+
+      it('should return an artist with populated gallery array', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}bad`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('testing populate artist galleries with wrong user', function(){
+
+      before(done => mockMultipleGalleries.call(this, 10, done));
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist with populated gallery array', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
       });
