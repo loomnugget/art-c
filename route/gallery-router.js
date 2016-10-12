@@ -72,10 +72,16 @@ galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonPa
 //TODO: Delete the reference of gallery to its associated artist
 galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/gallery/:galleryID');
-  Gallery.findByIdAndRemove(req.params.galleryID)
+
+  Gallery.findById(req.params.galleryID)
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
+    return next(createError(401, 'invalid userid'));
+  })
+  .then( gallery => {
+    gallery.remove({});
+  })
+  .then( () => {
     res.sendStatus(204);
   })
   .catch( err => next(createError(404, err.message)));
