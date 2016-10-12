@@ -14,7 +14,7 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 // module constants
 const galleryRouter = module.exports = Router();
 
-//TODO: Populate artists and listings
+//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
   let tempArtist;
@@ -37,6 +37,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   .catch(next);
 });
 
+//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
@@ -52,7 +53,9 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
   });
 });
 
-galleryRouter.put('/api/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
+//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
+galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
+  //if artistID !== the req.params.artistID, reject error
   debug('hit route PUT /api/gallery/:galleryID');
   Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true})
   .then( gallery => res.json(gallery))
@@ -63,7 +66,7 @@ galleryRouter.put('/api/gallery/:galleryID', bearerAuth, jsonParser, function(re
 });
 
 //TODO: Delete the reference of gallery to its associated artist
-galleryRouter.delete('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
+galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/gallery/:galleryID');
   Gallery.findByIdAndRemove(req.params.galleryID)
   .then( () => res.sendStatus(204))
