@@ -560,6 +560,24 @@ describe('testing listing-router', function(){
         });
       });
     });
+
+    describe('updated with empty name', function(){
+
+      before(done => mockListing.call(this, done));
+
+      it('should status 400 bad request', done => {
+        let updateData = {title: ''};
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
   });
 
   describe('testing DELETE to /api/listing/:listingID', () => {
