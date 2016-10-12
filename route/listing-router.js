@@ -53,7 +53,11 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
   Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true})
-  .then(listing => res.json(listing))
+  .then( listing => {
+    if(listing.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid userid'));
+    res.json(listing);
+  })
   .catch(err => {
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
@@ -63,6 +67,10 @@ listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, json
 listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/gallery/:galleryID/listing/:listingID');
   Listing.findByIdAndRemove(req.params.listingID)
-  .then( () => res.sendStatus(204))
+  .then( listing => {
+    if(listing.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid userid'));
+    res.sendStatus(204);
+  })
   .catch( err => next(createError(404, err.message)));
 });

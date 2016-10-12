@@ -14,6 +14,7 @@ const serverCtrl = require('./lib/server-control.js');
 const cleanDB = require('./lib/clean-db.js');
 const mockGallery = require('./lib/gallery-mock.js');
 const mockListing = require('./lib/listing-mock.js');
+const mockUser = require('./lib/user-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -33,9 +34,9 @@ describe('testing listing-router', function(){
   after(done => serverCtrl.serverDown(server, done));
   afterEach(done => cleanDB(done));
 
-  describe('testing POST /api/signup', function(){
+  describe('testing POST /api/signup', () => {
 
-    describe('with a valid body', function(){
+    describe('with a valid body', () =>{
 
       before(done => mockGallery.call(this, done));
 
@@ -63,7 +64,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with no title', function() {
+    describe('with no title', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -85,7 +86,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with no desc', function() {
+    describe('with no desc', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -107,7 +108,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with no category', function() {
+    describe('with no category', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -129,7 +130,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid date--string', function() {
+    describe('with invalid date--string', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -153,7 +154,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with an invalid body', function() {
+    describe('with an invalid body', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -171,7 +172,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with a bad authorization header', function() {
+    describe('with a bad authorization header', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -189,7 +190,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with no authorization header', function() {
+    describe('with no authorization header', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -204,7 +205,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with bearer header with no token', function() {
+    describe('with bearer header with no token', () => {
 
       before(done => mockGallery.call(this, done));
 
@@ -226,7 +227,7 @@ describe('testing listing-router', function(){
 
   describe('testing GET to /api/listing/:listingID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -251,7 +252,7 @@ describe('testing listing-router', function(){
         });
       });
     });
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -267,7 +268,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -283,13 +284,16 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockListing.call(this, done));
-      // before(done => mockUser.call(this, done));
+      before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
         request.get(`${url}/api/listing/${this.tempListing._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -301,7 +305,7 @@ describe('testing listing-router', function(){
 
   describe('testing PUT to /api/listing/:listingID', () => {
 
-    describe('updating title property with valid token and id, ', function(){
+    describe('updating title property with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -331,7 +335,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating desc property with valid token and id, ', function(){
+    describe('updating desc property with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -360,7 +364,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating category property with valid token and id, ', function(){
+    describe('updating category property with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -389,7 +393,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating title and category properties with valid token and id, ', function(){
+    describe('updating title and category properties with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -418,7 +422,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating title and desc properties with valid token and id, ', function(){
+    describe('updating title and desc properties with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -447,7 +451,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating desc and category properties with valid token and id, ', function(){
+    describe('updating desc and category properties with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -476,7 +480,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('updating title, desc and category properties with valid token and id, ', function(){
+    describe('updating title, desc and category properties with valid token and id, ', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -505,7 +509,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -523,7 +527,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -541,13 +545,16 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockListing.call(this, done));
-      // before(done => mockUser.call(this, done));
+      before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
         request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -558,7 +565,7 @@ describe('testing listing-router', function(){
 
   describe('testing DELETE to /api/listing/:listingID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -576,7 +583,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -592,7 +599,7 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', () => {
 
       before(done => mockListing.call(this, done));
 
@@ -608,13 +615,16 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with wrong user', function(){
+    describe('with wrong user', () => {
 
       before(done => mockListing.call(this, done));
-      // before(done => mockUser.call(this, done));
+      before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+        .set({
+          Authorization: 'Bearer ',
+        })
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -622,5 +632,4 @@ describe('testing listing-router', function(){
       });
     });
   });
-
 });
