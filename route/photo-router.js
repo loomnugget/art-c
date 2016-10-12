@@ -161,34 +161,38 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
     // ^ 2 lines currently not covered
   });
 });
-//
-// photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
-//   debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
-//  // check if photo exists
-//   Photo.findById(req.params.photoID)
-// //  .catch(err => Promise.reject(createError(404, err.message)))
-//   .then( photo => {
-//     if(photo.galleryID.toString() !== req.params.galleryID)
-//       return Promise.reject(createError(400, 'Bad request - wrong gallery'));
-//     // make sure the user id matches the photo.user id
-//
-//     if(photo.userID.toString() !== req.user._id.toString())
-//       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
-//
-//     let params = {
-//       Bucket: 'artc-staging-assets',
-//       Key: photo.objectKey,
-//     };
-//
-//     return s3.deleteObject(params).promise();
-//   })
-//   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-//   .then( () => {
-//     return Photo.findByIdAndRemove(req.params.photoID);
-//   })
-//   .then(() => res.sendStatus(204))
-//   .catch(next);
-// });
+
+photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
+  debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
+  let tempPhoto;
+ // check if photo exists
+  Photo.findById(req.params.photoID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( photo => {
+    // make sure the user id matches the photo.user id
+    if(photo.userID.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'User not authorized to delete this photo'));
+    tempPhoto = photo;
+    return Gallery.findById(req.params.galleryID);
+  })
+  .catch( err => err.status? Promise.reject(err) : Promise.reject(createError(404, err.message)))
+  .then( gallery => {
+    gallery.photoID = null;
+    return gallery.save();
+  })
+  .then( () => {
+    let params = {
+      Bucket: 'artc-staging-assets',
+      Key: tempPhoto.objectKey,
+    };
+    return s3.deleteObject(params).promise();
+  })
+  .then( () => {
+    return Photo.findByIdAndRemove(req.params.photoID);
+  })
+  .then(() => res.sendStatus(204))
+  .catch(next);
+});
 
 photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('image'), function(req, res, next){
   debug('hit POST /api/listing/:listingID/photo');
