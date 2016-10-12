@@ -18,6 +18,7 @@ const galleryRouter = module.exports = Router();
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
   let tempArtist;
+  let tempGallery;
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ((artist) => {
@@ -28,10 +29,11 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
     return new Gallery(req.body).save();
   })
   .then( gallery => {
+    tempGallery = gallery;
     tempArtist.galleries.push(gallery._id);
-    tempArtist.save();
-    res.json(gallery);
+    return tempArtist.save();
   })
+  .then(() => res.json(tempGallery))
   .catch(next);
 });
 
@@ -47,4 +49,22 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
   });
+});
+
+galleryRouter.put('/api/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/gallery/:galleryID');
+  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true})
+  .then( gallery => res.json(gallery))
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
+
+//TODO: Delete the reference of gallery to its associated artist
+galleryRouter.delete('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/gallery/:galleryID');
+  Gallery.findByIdAndRemove(req.params.galleryID)
+  .then( () => res.sendStatus(204))
+  .catch( err => next(createError(404, err.message)));
 });

@@ -49,7 +49,6 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     Key: `${req.file.filename}${ext}`,
     Body: fs.createReadStream(req.file.path),
   };
-  // console.log(AWS.config);
 
   let tempArtist = null;
 

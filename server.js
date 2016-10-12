@@ -14,9 +14,10 @@ const dotenv = require('dotenv');
 const authRouter = require('./route/auth-router.js');
 const artistRouter = require('./route/artist-router.js');
 const galleryRouter = require('./route/gallery-router.js');
-const errorMiddleware = require('./lib/error-middleware.js');
-
+const listingRouter = require('./route/listing-router.js');
 const photoRouter = require('./route/photo-router.js');
+
+const errorMiddleware = require('./lib/error-middleware.js');
 // load env variables
 dotenv.load();
 
@@ -36,8 +37,9 @@ app.use(morgan('dev'));
 app.use(authRouter);
 app.use(artistRouter);
 app.use(galleryRouter);
-app.use(errorMiddleware);
+app.use(listingRouter);
 app.use(photoRouter);
+app.use(errorMiddleware);
 
 // start server
 const server = module.exports = app.listen(PORT, function() {

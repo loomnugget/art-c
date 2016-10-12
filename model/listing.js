@@ -6,8 +6,8 @@ const listingSchema = mongoose.Schema({
   title: {type: String, required: true},
   desc: {type: String, required: true},
   // query-sortable properties
-  category: {type: String, required: true}, // validated string
   username: {type: String, required: true},
+  category: {type: String, required: true}, // validated string
   created: {type: Date, required: true, default: Date.now},
   // path params
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},

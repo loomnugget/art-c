@@ -9,7 +9,6 @@ module.exports = function(done){
   let exampleArtist = {
     firstname: 'george',
     lastname: 'bush',
-    email: 'george_bush@gmail.com',
     city: 'houston',
     zip: '85749',
     about: 'former president of the united states of america, avid painter',
@@ -20,6 +19,7 @@ module.exports = function(done){
       return done(err);
     exampleArtist.userID = this.tempUser._id.toString();
     exampleArtist.username = this.tempUser.username;
+    exampleArtist.email = this.tempUser.email;
     new Artist(exampleArtist).save()
     .then( artist => {
       this.tempArtist = artist;

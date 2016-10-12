@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "DEBUG=art* ./node_modules/mocha/bin/mocha",
     "start": "node server.js",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test": "DEBUG=art* ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
     "lint": "./node_modules/eslint/bin/eslint.js"
   },
   "repository": {
@@ -24,6 +25,7 @@
   "devDependencies": {
     "aws-sdk": "^2.6.7",
     "chai": "^3.5.0",
+    "coveralls": "^2.11.14",
     "del": "^2.2.2",
     "eslint": "^3.7.1",
     "gulp": "^3.9.1",
@@ -44,6 +46,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "http-errors": "^1.5.0",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "^7.1.9",
     "lorem-ipsum": "^1.0.3",
     "mongoose": "^4.6.3",
