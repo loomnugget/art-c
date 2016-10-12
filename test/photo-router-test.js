@@ -9,7 +9,7 @@ const request = require('superagent');
 
 // APP MODULES
 const artistMock = require('./lib/artist-mock.js');
-// const photoMock = require('./lib/photo-mock.js');
+const photoMock = require('./lib/photo-mock.js');
 const galleryMock = require('./lib/gallery-mock.js');
 const listingMock = require('./lib/listing-mock.js');
 const cleanDB = require('./lib/clean-db.js');
@@ -61,7 +61,7 @@ describe('testing photo router', function() {
     describe('with no image', function() {
 
       before(done => artistMock.call(this, done));
-      
+
       it('should respond with status 400', done => {
         request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
         .set({Authorization: `Bearer ${this.tempToken}`})
@@ -109,84 +109,73 @@ describe('testing photo router', function() {
     });
 
   }); //end describe POST routes
-  //
-  // describe('testing DELETE routes - /api/artist/:artistID/photo/:photoID', function() {
-  //   describe('with valid token and data', function() {
-  //     before(done => photoMock.call(this, done));
-  //     it ('should return a photo', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
-  //       .set({Authorization: `Bearer: ${this.tempToken}`})
-  //       .end((err, res) => {
-  //         if (err)
-  //           return done(err);
-  //         expect(res.status).to.equal(204);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //
-  //   describe('with invalid token', function() {
-  //     before(done => photoMock.call(this, done));
-  //     it ('should respond with 401 UnauthorizedError', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
-  //       .set({Authorization: 'Bearer: '})
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(401);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('no auth header', function(){
-  //     before(done => photoMock.call(this, done));
-  //     it('should respond with status 400', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         expect(res.text).to.equal('BadRequestError');
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with no bearer auth', function(){
-  //     before(done => photoMock.call(this, done));
-  //     it('should respond with status 400', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
-  //       .set({Authorization: 'nothing here'})
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         expect(res.text).to.equal('BadRequestError');
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with invalid artistID', function() {
-  //     before(done => photoMock.call(this, done));
-  //     it ('should return not found', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}bad/photo/${this.tempPhoto._id}`)
-  //       .set({Authorization: `Bearer: ${this.tempToken}`})
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(404);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //   describe('with invalid photoID', function() {
-  //     before(done => photoMock.call(this, done));
-  //     it ('should return not found', done => {
-  //       request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}bad`)
-  //       .set({Authorization: `Bearer: ${this.tempToken}`})
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(404);
-  //         done();
-  //       });
-  //     });
-  //   });
-  // });
-  //
+
+  describe('testing DELETE routes - /api/artist/:artistID/photo/:photoID', function() {
+    describe('with valid token and data', function() {
+      before(done => photoMock.call(this, done));
+      console.log(this.tempPhoto);
+      it ('should return a photo', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          if (err) return done(err);
+          console.log(this.tempArtist, 'DELETEING????');
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
+
+
+    describe('with invalid token/no bearer auth', function() {
+      before(done => photoMock.call(this, done));
+      it ('should respond with 401 UnauthorizedError', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .set({Authorization: 'Bearer bad'})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('no auth header', function(){
+      before(done => photoMock.call(this, done));
+      it('should respond with status 401', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.text).to.equal('UnauthorizedError');
+          done();
+        });
+      });
+    });
+
+    describe('with invalid artistID', function() {
+      before(done => photoMock.call(this, done));
+      it ('should return not found', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}bad/photo/${this.tempPhoto._id}`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+    
+    describe('with invalid photoID', function() {
+      before(done => photoMock.call(this, done));
+      it ('should return not found', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}bad`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+  });
+
   describe('/api/gallery/:galleryID/photo', function() {
     describe('with valid token and data', function() {
 
