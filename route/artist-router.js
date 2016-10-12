@@ -41,7 +41,6 @@ artistRouter.put('/api/artist/:artistID', bearerAuth, jsonParser, function(req, 
   debug('hit route PUT /api/artist/:artistID');
   Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true, runValidators: true})
   .then( artist => {
-    console.log(artist);
     res.json(artist);
   })
   .catch( err => {
