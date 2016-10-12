@@ -64,7 +64,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     del([`${dataDir}/*`]);
     let photoData = {
       name: req.body.name,
-      username: req.body.username,
+      username: req.user.username,
       alt: req.body.alt,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
@@ -80,107 +80,109 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   });
 });
 
-photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
-  debug('hit DELETE /api/artist/:artistID/photo/:photoID');
- // check if photo exists
-  Photo.findById(req.params.photoID)
-  .catch(err => Promise.reject(createError(404, err.message)))
-  .then( photo => {
-    if(photo.artistID.toString() !== req.params.artistID)
-      return Promise.reject(createError(400, 'Bad request - wrong artist'));
-    // make sure the user id matches the photo.user id
-
-    if(photo.userID.toString() !== req.user._id.toString())
-      return Promise.reject(createError(401, 'User not authorized to delete this photo'));
-
-    let params = {
-      Bucket: 'artc-staging-assets',
-      Key: photo.key,
-    };
-
-    return s3.deleteObject(params).promise();
-  })
-  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-  .then( () => {
-    return Photo.findByIdAndRemove(req.params.photoID);
-  })
-  .then(() => res.sendStatus(204))
-  .catch(next);
-});
-
-photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
-  debug('hit POST /api/gallery/:galleryID/photo');
-
-  if (!req.file)
-    return next(createError(400, 'no file found'));
-  if (!req.file.path)
-    return next(createError(500, 'file not saved'));
-  let ext = path.extname(req.file.originalname);
-
-  let params = {
-    ACL: 'public-read',
-    Bucket: 'artc-staging-assets',
-    Key: `${req.file.filename}${ext}`,
-    Body: fs.createReadStream(req.file.path),
-  };
-  // console.log(AWS.config);
-
-  let tempGallery = null;
-
-  Gallery.findById(req.params.galleryID)
-  .catch(err => Promise.reject(createError(404, err.message)))
-  .then(gallery => {
-    tempGallery = gallery;
-    return s3UploadPromise(params); //if fails 500
-  })
-  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-  .then(s3data => {
-    del([`${dataDir}/*`]);
-    let photoData = {
-      name: req.body.name,
-      username: req.body.username,
-      alt: req.body.alt,
-      objectKey: s3data.Key,
-      imageURI: s3data.Location,
-      galleryID: tempGallery._id,
-      userID: req.user._id,
-    };
-    return new Photo(photoData).save();
-  })
-  .then(photo => res.json(photo))
-  .catch(err => {
-    del([`${dataDir}/*`]);
-    next(err);
-  });
-});
-
-photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
-  debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
- // check if photo exists
-  Photo.findById(req.params.photoID)
-//  .catch(err => Promise.reject(createError(404, err.message)))
-  .then( photo => {
-    if(photo.galleryID.toString() !== req.params.galleryID)
-      return Promise.reject(createError(400, 'Bad request - wrong gallery'));
-    // make sure the user id matches the photo.user id
-
-    if(photo.userID.toString() !== req.user._id.toString())
-      return Promise.reject(createError(401, 'User not authorized to delete this photo'));
-
-    let params = {
-      Bucket: 'artc-staging-assets',
-      Key: photo.objectKey,
-    };
-
-    return s3.deleteObject(params).promise();
-  })
-  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-  .then( () => {
-    return Photo.findByIdAndRemove(req.params.photoID);
-  })
-  .then(() => res.sendStatus(204))
-  .catch(next);
-});
+// photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
+//   debug('hit DELETE /api/artist/:artistID/photo/:photoID');
+//  // check if photo exists
+//   Photo.findById(req.params.photoID)
+//   .catch(err => Promise.reject(createError(404, err.message)))
+//   .then( photo => {
+//     if(photo.artistID.toString() !== req.params.artistID)
+//       return Promise.reject(createError(400, 'Bad request - wrong artist'));
+//     // make sure the user id matches the photo.user id
+//
+//     if(photo.userID.toString() !== req.user._id.toString())
+//       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
+//
+//     let params = {
+//       ACL: 'public-read',
+//       Bucket: 'artc-staging-assets',
+//       Key: photo.key,
+//       Body:
+//     };
+//
+//     return s3.deleteObject(params).promise();
+//   })
+//   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+//   .then( () => {
+//     return Photo.findByIdAndRemove(req.params.photoID);
+//   })
+//   .then(() => res.sendStatus(204))
+//   .catch(next);
+// });
+//
+// photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+//   debug('hit POST /api/gallery/:galleryID/photo');
+//
+//   if (!req.file)
+//     return next(createError(400, 'no file found'));
+//   if (!req.file.path)
+//     return next(createError(500, 'file not saved'));
+//   let ext = path.extname(req.file.originalname);
+//
+//   let params = {
+//     ACL: 'public-read',
+//     Bucket: 'artc-staging-assets',
+//     Key: `${req.file.filename}${ext}`,
+//     Body: fs.createReadStream(req.file.path),
+//   };
+//   // console.log(AWS.config);
+//
+//   let tempGallery = null;
+//
+//   Gallery.findById(req.params.galleryID)
+//   .catch(err => Promise.reject(createError(404, err.message)))
+//   .then(gallery => {
+//     tempGallery = gallery;
+//     return s3UploadPromise(params); //if fails 500
+//   })
+//   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+//   .then(s3data => {
+//     del([`${dataDir}/*`]);
+//     let photoData = {
+//       name: req.body.name,
+//       username: req.body.username,
+//       alt: req.body.alt,
+//       objectKey: s3data.Key,
+//       imageURI: s3data.Location,
+//       galleryID: tempGallery._id,
+//       userID: req.user._id,
+//     };
+//     return new Photo(photoData).save();
+//   })
+//   .then(photo => res.json(photo))
+//   .catch(err => {
+//     del([`${dataDir}/*`]);
+//     next(err);
+//   });
+// });
+//
+// photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
+//   debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
+//  // check if photo exists
+//   Photo.findById(req.params.photoID)
+// //  .catch(err => Promise.reject(createError(404, err.message)))
+//   .then( photo => {
+//     if(photo.galleryID.toString() !== req.params.galleryID)
+//       return Promise.reject(createError(400, 'Bad request - wrong gallery'));
+//     // make sure the user id matches the photo.user id
+//
+//     if(photo.userID.toString() !== req.user._id.toString())
+//       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
+//
+//     let params = {
+//       Bucket: 'artc-staging-assets',
+//       Key: photo.objectKey,
+//     };
+//
+//     return s3.deleteObject(params).promise();
+//   })
+//   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+//   .then( () => {
+//     return Photo.findByIdAndRemove(req.params.photoID);
+//   })
+//   .then(() => res.sendStatus(204))
+//   .catch(next);
+// });
 
 photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('image'), function(req, res, next){
   debug('hit POST /api/listing/:listingID/photo');
@@ -190,6 +192,8 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
   let ext = path.extname(req.file.originalname);
+
+  console.log(req.file, '*&*&&*&*&*&*&*&*&*');
 
   let params = {
     ACL: 'public-read',
