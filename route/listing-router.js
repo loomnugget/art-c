@@ -50,8 +50,8 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
   });
 });
 
-listingRouter.put('/api/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
-  debug('hit route PUT /api/listing/:listingID');
+listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
   Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true})
   .then(listing => res.json(listing))
   .catch(err => {
@@ -60,8 +60,8 @@ listingRouter.put('/api/listing/:listingID', bearerAuth, jsonParser, function(re
   });
 });
 
-listingRouter.delete('/api/listing/:listingID', bearerAuth, function(req, res, next) {
-  debug('hit route DELETE /api/listing/:listingID');
+listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/gallery/:galleryID/listing/:listingID');
   Listing.findByIdAndRemove(req.params.listingID)
   .then( () => res.sendStatus(204))
   .catch( err => next(createError(404, err.message)));

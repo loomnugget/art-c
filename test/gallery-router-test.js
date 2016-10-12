@@ -328,7 +328,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {name: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -356,7 +356,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {desc: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -384,7 +384,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {category: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -412,7 +412,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {name: 'bob', category: 'bob2'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -440,7 +440,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {name: 'bob', desc: 'bob2'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -468,7 +468,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {desc: 'bob', category: 'bob2'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -496,7 +496,7 @@ describe('testing gallery-router', function() {
 
       it('should return a gallery', done => {
         let updateData = {name: 'bob', desc: 'bob2', category: 'bob3'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -524,7 +524,7 @@ describe('testing gallery-router', function() {
 
       it('should status 404 not found', done => {
         let updateData = {name: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}bad`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}bad`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -542,7 +542,7 @@ describe('testing gallery-router', function() {
 
       it('should status 401 unauthorized', done => {
         let updateData = {name: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
         .set({
           Authorization: 'Bearer ',
@@ -560,7 +560,7 @@ describe('testing gallery-router', function() {
       before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
-        request.put(`${url}/api/artist/${this.tempArtist._ID}/gallery/${this.tempGallery._id}`)
+        request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
