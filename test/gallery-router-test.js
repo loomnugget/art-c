@@ -2,6 +2,7 @@
 
 // bringing in test environment
 require('./lib/test-env.js');
+require('./lib/aws-mock.js');
 
 // npm modules
 const expect = require('chai').expect;
@@ -70,7 +71,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 400 bad request', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send({
@@ -178,7 +179,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
@@ -186,7 +187,7 @@ describe('testing gallery-router', function() {
           Authorization: 'bad request',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -196,12 +197,12 @@ describe('testing gallery-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -211,7 +212,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
         .send(exampleGallery)
@@ -219,7 +220,7 @@ describe('testing gallery-router', function() {
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -271,17 +272,17 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('testing populate gallery listings with valid id and invalid token', function(){
+    describe('testing populate gallery listings with valid id and bad token request', function(){
 
       before(done => mockMultipleListings.call(this, 10, done));
 
-      it('should return a gallery with populated listings array', done => {
+      it('should return a 400 error bad request', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -291,7 +292,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockMultipleListings.call(this, 10, done));
 
-      it('should return an gallery with populated gallery array', done => {
+      it('should return a 404 error for invalid id', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}bad`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -308,7 +309,7 @@ describe('testing gallery-router', function() {
       before(done => mockMultipleListings.call(this, 10, done));
       before(done => mockUser.call(this, done));
 
-      it('should return an gallery with populated gallery array', done => {
+      it('should return a 401 error for unauthorized access', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -324,7 +325,7 @@ describe('testing gallery-router', function() {
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 404 not found', done => {
+      it('should return status 404 not found', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}bad`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -336,17 +337,17 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bad token request and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         request.get(`${url}/api/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -586,11 +587,11 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bad token request and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         let updateData = {name: 'bob'};
         request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .send(updateData)
@@ -598,7 +599,7 @@ describe('testing gallery-router', function() {
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -622,7 +623,7 @@ describe('testing gallery-router', function() {
     });
   });
 
-  describe('updated with empty name', function(){
+  describe('updated with empty name', () => {
 
     before(done => mockGallery.call(this, done));
 
@@ -675,17 +676,17 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bad token request and valid id', () => {
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should status 400 bad request', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
