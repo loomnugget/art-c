@@ -21,6 +21,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   let tempGallery;
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
+  // ^ 1 line currently not covered
   .then ((artist) => {
     tempArtist = artist;
     req.body.artistID = artist._id;
@@ -56,7 +57,7 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
   //if artistID !== the req.params.artistID, reject error
   debug('hit route PUT /api/gallery/:galleryID');
-  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true})
+  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true, runValidators: true})
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));
