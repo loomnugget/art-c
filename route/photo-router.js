@@ -64,8 +64,9 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     del([`${dataDir}/*`]);
     let photoData = {
       name: req.body.name,
+      username: req.body.username,
       alt: req.body.alt,
-      key: s3data.Key,
+      objectKey: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
       userID: req.user._id,
@@ -81,12 +82,14 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 
 photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
   debug('hit DELETE /api/artist/:artistID/photo/:photoID');
-
+ // check if photo exists
   Photo.findById(req.params.photoID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( photo => {
     if(photo.artistID.toString() !== req.params.artistID)
       return Promise.reject(createError(400, 'Bad request - wrong artist'));
+    // make sure the user id matches the photo.user id
+
     if(photo.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
 
@@ -128,15 +131,16 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   .catch(err => Promise.reject(createError(404, err.message)))
   .then(gallery => {
     tempGallery = gallery;
-    return s3UploadPromise(params);
+    return s3UploadPromise(params); //if fails 500
   })
   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
       name: req.body.name,
+      username: req.body.username,
       alt: req.body.alt,
-      key: s3data.Key,
+      objectKey: s3data.Key,
       imageURI: s3data.Location,
       galleryID: tempGallery._id,
       userID: req.user._id,
@@ -148,6 +152,34 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
     del([`${dataDir}/*`]);
     next(err);
   });
+});
+
+photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
+  debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
+ // check if photo exists
+  Photo.findById(req.params.photoID)
+//  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( photo => {
+    if(photo.galleryID.toString() !== req.params.galleryID)
+      return Promise.reject(createError(400, 'Bad request - wrong gallery'));
+    // make sure the user id matches the photo.user id
+
+    if(photo.userID.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'User not authorized to delete this photo'));
+
+    let params = {
+      Bucket: 'artc-staging-assets',
+      Key: photo.objectKey,
+    };
+
+    return s3.deleteObject(params).promise();
+  })
+  .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
+  .then( () => {
+    return Photo.findByIdAndRemove(req.params.photoID);
+  })
+  .then(() => res.sendStatus(204))
+  .catch(next);
 });
 
 photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('image'), function(req, res, next){
@@ -179,8 +211,9 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     del([`${dataDir}/*`]);
     let photoData = {
       name: req.body.name,
+      username: req.body.username,
       alt: req.body.alt,
-      key: s3data.Key,
+      objectKey: s3data.Key,
       imageURI: s3data.Location,
       listingID: tempListing._id,
       userID: req.user._id,
