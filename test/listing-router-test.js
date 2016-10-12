@@ -177,7 +177,7 @@ describe('testing listing-router', function(){
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/gallery/${this.tempGallery._id}/listing`)
         .send(exampleListing)
@@ -185,7 +185,7 @@ describe('testing listing-router', function(){
           Authorization: 'bad request',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -195,12 +195,12 @@ describe('testing listing-router', function(){
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should status 400 bad request', (done) => {
 
         request.post(`${url}/api/gallery/${this.tempGallery._id}/listing`)
         .send(exampleListing)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -210,7 +210,7 @@ describe('testing listing-router', function(){
 
       before(done => mockGallery.call(this, done));
 
-      it('should status 401 unauthorized', (done) => {
+      it('should return status 400 bad request', (done) => {
 
         request.post(`${url}/api/gallery/${this.tempGallery._id}/listing`)
         .send(exampleListing)
@@ -218,7 +218,7 @@ describe('testing listing-router', function(){
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -269,17 +269,17 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bearer header with no token', () => {
 
       before(done => mockListing.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         request.get(`${url}/api/listing/${this.tempListing._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -527,11 +527,11 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bearer header and no token', () => {
 
       before(done => mockListing.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         let updateData = {title: 'bob'};
         request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
@@ -539,7 +539,7 @@ describe('testing listing-router', function(){
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -617,17 +617,17 @@ describe('testing listing-router', function(){
       });
     });
 
-    describe('with invalid token and valid id', () => {
+    describe('with bearer header and no token', () => {
 
       before(done => mockListing.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 400 bad request', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .set({
           Authorization: 'Bearer ',
         })
         .end((err, res) => {
-          expect(res.status).to.equal(401);
+          expect(res.status).to.equal(400);
           done();
         });
       });
@@ -638,10 +638,10 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
       before(done => mockUser.call(this, done));
 
-      it('should status 401 unauthorized', done => {
+      it('should return status 401 unauthorized', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .set({
-          Authorization: 'Bearer ',
+          Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
           expect(res.status).to.equal(401);

@@ -47,7 +47,6 @@ describe('testing photo router', function() {
         .attach('image', examplePhoto.image)
         .end((err, res) => {
           if (err) return done(err);
-          console.log(res.body, 'TEST BODY');
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal(examplePhoto.name);
           expect(res.body.alt).to.equal(examplePhoto.alt);
@@ -139,11 +138,11 @@ describe('testing photo router', function() {
 
     describe('no auth header', function(){
       before(done => photoMock.call(this, done));
-      it('should respond with status 401', done => {
+      it('should respond with status 400 bad request', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
         .end((err, res) => {
-          expect(res.status).to.equal(401);
-          expect(res.text).to.equal('UnauthorizedError');
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
           done();
         });
       });
@@ -250,7 +249,9 @@ describe('testing photo router', function() {
 
   describe('testing DELETE routes - /api/gallery/:galleryID/photo/:photoID', function() {
     describe('with valid token and data', function() {
+
       before(done => photoMock.call(this, done));
+
       it ('should return a photo', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/photo/${this.tempPhoto._id}`)
         .set({Authorization: `Bearer ${this.tempToken}`})
@@ -264,7 +265,9 @@ describe('testing photo router', function() {
 
 
     describe('with invalid token/no bearer auth', function() {
+
       before(done => photoMock.call(this, done));
+
       it ('should respond with 401 UnauthorizedError', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/photo/${this.tempPhoto._id}`)
         .set({Authorization: 'Bearer bad'})
@@ -276,7 +279,9 @@ describe('testing photo router', function() {
     });
 
     describe('with no auth header', function(){
+
       before(done => photoMock.call(this, done));
+
       it('should respond with status 400 bad request', done => {
         request.delete(`${url}/api/gallery/${this.tempGallery._id}/photo/${this.tempPhoto._id}`)
         .end((err, res) => {
@@ -288,9 +293,11 @@ describe('testing photo router', function() {
     });
 
     describe('with invalid artistID', function() {
+
       before(done => photoMock.call(this, done));
+
       it ('should return not found', done => {
-        request.delete(`${url}/api/artist/${this.tempArtist._id}bad/photo/${this.tempPhoto._id}`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}bad/photo/${this.tempPhoto._id}`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           expect(res.status).to.equal(404);
@@ -300,9 +307,11 @@ describe('testing photo router', function() {
     });
 
     describe('with invalid photoID', function() {
+
       before(done => photoMock.call(this, done));
+
       it ('should return not found', done => {
-        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}bad`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/photo/${this.tempPhoto._id}bad`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           expect(res.status).to.equal(404);
