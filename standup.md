@@ -100,10 +100,10 @@
 
     - From earlier today:
 
-      - Elizabeth:
-      - Lee:
-      - Max:
-      - Claudia:
+      - Elizabeth: handled merge conflicts and made notes from coverall on code that said where we weren't running lines.
+      - Lee: Worked with
+      - Max: Added photo routes and tests. fixed bearer-middleware and handled all the tests that were affected by that.
+      - Claudia: researched stripe and updated README.md so that we know how the app works and what the commands and links will be.
 
     - Working on until 5-ish:
 
@@ -114,7 +114,6 @@ When we delete an Artist, we need to delete all associated galleries and listing
 Write README.md file so that we have an introduction, instructions for setup and user instructions.
 Devnotes need to be updated with current paths and versions.
 
-      -
-      -
-      -
-      -
+      - Lee and Max: DELETE routes
+      - Claudia: photo POST routes
+      - Elizabeth: Devnotes
