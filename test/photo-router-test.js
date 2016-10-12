@@ -113,13 +113,11 @@ describe('testing photo router', function() {
   describe('testing DELETE routes - /api/artist/:artistID/photo/:photoID', function() {
     describe('with valid token and data', function() {
       before(done => photoMock.call(this, done));
-      console.log(this.tempPhoto);
       it ('should return a photo', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
         .set({Authorization: `Bearer ${this.tempToken}`})
         .end((err, res) => {
           if (err) return done(err);
-          console.log(this.tempArtist, 'DELETEING????');
           expect(res.status).to.equal(204);
           done();
         });
@@ -162,7 +160,7 @@ describe('testing photo router', function() {
         });
       });
     });
-    
+
     describe('with invalid photoID', function() {
       before(done => photoMock.call(this, done));
       it ('should return not found', done => {

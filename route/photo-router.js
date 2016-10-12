@@ -103,7 +103,6 @@ photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(
       Bucket: 'artc-staging-assets',
       Key: tempPhoto.objectKey,
     };
-    console.log(tempPhoto, 'PHOTO HERE');
     return s3.deleteObject(params).promise();
   })
   .then( () => {
