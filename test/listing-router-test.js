@@ -307,7 +307,8 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -336,7 +337,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {desc: 'bob'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -365,7 +366,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {category: 'bob'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -394,7 +395,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', category: 'bob2'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -423,7 +424,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', desc: 'bob2'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -452,7 +453,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {desc: 'bob', category: 'bob2'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -481,7 +482,7 @@ describe('testing listing-router', function(){
 
       it('should return a listing', done => {
         let updateData = {title: 'bob', desc: 'bob2', category: 'bob3'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -510,7 +511,7 @@ describe('testing listing-router', function(){
 
       it('should status 404 not found', done => {
         let updateData = {name: 'bob'};
-        request.put(`${url}/api/listing/${this.tempListing._id}bad`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}bad`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -528,7 +529,7 @@ describe('testing listing-router', function(){
 
       it('should status 401 unauthorized', done => {
         let updateData = {title: 'bob'};
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .send(updateData)
         .set({
           Authorization: 'Bearer ',
@@ -546,7 +547,7 @@ describe('testing listing-router', function(){
       // before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
-        request.put(`${url}/api/listing/${this.tempListing._id}`)
+        request.put(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -562,7 +563,7 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should delete a listing', done => {
-        request.delete(`${url}/api/listing/${this.tempListing._id}`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
@@ -580,7 +581,7 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should status 404 not found', done => {
-        request.delete(`${url}/api/listing/${this.tempListing._id}bad`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}bad`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
@@ -596,7 +597,7 @@ describe('testing listing-router', function(){
       before(done => mockListing.call(this, done));
 
       it('should status 401 unauthorized', done => {
-        request.delete(`${url}/api/listing/${this.tempListing._id}`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .set({
           Authorization: 'Bearer ',
         })
@@ -613,7 +614,7 @@ describe('testing listing-router', function(){
       // before(done => mockUser.call(this, done));
 
       it('should status 401 unauthorized', done => {
-        request.delete(`${url}/api/listing/${this.tempListing._id}`)
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
