@@ -40,6 +40,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
 galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
+  .populate({path: 'listings'})
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));
