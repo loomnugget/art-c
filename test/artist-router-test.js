@@ -514,11 +514,11 @@ describe('testing artist-router', function() {
 
   describe('testing PUT to /api/artist/:artistID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', function() {
 
       before(done => mockArtist.call(this, done));
 
-      it('should return a artist', done => {
+      it('updating only the firstname, should return an artist', done => {
         let updateData = {firstname: 'bob'};
         request.put(`${url}/api/artist/${this.tempArtist._id}`)
         .send(updateData)
@@ -545,72 +545,289 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and id', function(){
 
       before(done => mockArtist.call(this, done));
 
-      it('should status 404 not found', done => {
-        let updateData = {firstName: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._id}bad`)
+      it('updating only the lastname, should return an artist', done => {
+        let updateData = {lastname: 'bob'};
+        request.put(`${url}/api/artist/${this.tempArtist._id}`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
-          expect(res.status).to.equal(404);
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+          expect(res.body.lastname).to.equal(updateData.lastname);
+          expect(res.body.username).to.equal(this.tempArtist.username);
+          expect(res.body.email).to.equal(this.tempArtist.email);
+          expect(res.body.city).to.equal(this.tempArtist.city);
+          expect(res.body.zip).to.equal(this.tempArtist.zip);
+          expect(res.body.about).to.equal(this.tempArtist.about);
+          expect(res.body.phone).to.equal(this.tempArtist.phone);
+          expect(res.body.userID).to.equal(this.tempUser._id.toString());
+          let date = new Date(res.body.created).toString();
+          expect(date).to.not.equal('Invalid Date');
           done();
         });
       });
-    });
 
-    //TODO: Set object propery to empty so it gives me 400 errors?
+      describe('with valid token and id', function(){
 
-    // describe('updated with empty firstname', function(){
-    //
-    //   before(done => mockArtist.call(this, done));
-    //
-    //   it('should status 400 bad request', done => {
-    //     let updateData = {firstname: false};
-    //     request.put(`${url}/api/artist/${this.tempArtist._id}`)
-    //     .send(updateData)
-    //     .set({
-    //       Authorization: `Bearer ${this.tempToken}`,
-    //     })
-    //     .end((err, res) => {
-    //       expect(res.status).to.equal(400);
-    //       done();
-    //     });
-    //   });
-    // });
+        before(done => mockArtist.call(this, done));
 
-    describe('with invalid token and valid id', function(){
-
-      before(done => mockArtist.call(this, done));
-
-      it('should status 401 unauthorized', done => {
-        let updateData = {firstName: 'bob'};
-        request.put(`${url}/api/artist/${this.tempArtist._id}`)
-        .send(updateData)
-        .set({
-          Authorization: 'Bearer ',
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
+        it('updating only the email, should return an artist', done => {
+          let updateData = {email: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(updateData.email);
+            expect(res.body.city).to.equal(this.tempArtist.city);
+            expect(res.body.zip).to.equal(this.tempArtist.zip);
+            expect(res.body.about).to.equal(this.tempArtist.about);
+            expect(res.body.phone).to.equal(this.tempArtist.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
         });
       });
-    });
 
-    describe('with wrong user', function(){
+      describe('with valid token and id', function() {
 
-      before(done => mockArtist.call(this, done));
-      before(done => mockUser.call(this, done));
+        before(done => mockArtist.call(this, done));
 
-      it('should status 401 unauthorized', done => {
-        request.put(`${url}/api/artist/${this.tempArtist._id}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
+        it('updating only the city, should return an artist', done => {
+          let updateData = {city: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(this.tempArtist.email);
+            expect(res.body.city).to.equal(updateData.city);
+            expect(res.body.zip).to.equal(this.tempArtist.zip);
+            expect(res.body.about).to.equal(this.tempArtist.about);
+            expect(res.body.phone).to.equal(this.tempArtist.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
+        });
+      });
+
+      describe('with valid token and id', function() {
+
+        before(done => mockArtist.call(this, done));
+
+        it('updating only the zip, should return an artist', done => {
+          let updateData = {zip: '99999'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(this.tempArtist.email);
+            expect(res.body.city).to.equal(this.tempArtist.city);
+            expect(res.body.zip).to.equal(updateData.zip);
+            expect(res.body.about).to.equal(this.tempArtist.about);
+            expect(res.body.phone).to.equal(this.tempArtist.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
+        });
+      });
+
+      describe('with valid token and id', function() {
+
+        before(done => mockArtist.call(this, done));
+
+        it('updating only the about, should return an artist', done => {
+          let updateData = {about: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(this.tempArtist.email);
+            expect(res.body.city).to.equal(this.tempArtist.city);
+            expect(res.body.zip).to.equal(this.tempArtist.zip);
+            expect(res.body.about).to.equal(updateData.about);
+            expect(res.body.phone).to.equal(this.tempArtist.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
+        });
+      });
+
+      describe('with valid token and id', function() {
+
+        before(done => mockArtist.call(this, done));
+
+        it('updating only the phone, should return an artist', done => {
+          let updateData = {phone: '(555)595-5959'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(this.tempArtist.email);
+            expect(res.body.city).to.equal(this.tempArtist.city);
+            expect(res.body.zip).to.equal(this.tempArtist.zip);
+            expect(res.body.about).to.equal(this.tempArtist.about);
+            expect(res.body.phone).to.equal(updateData.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
+        });
+      });
+
+      describe('with valid token and id', function() {
+
+        before(done => mockArtist.call(this, done));
+
+        it('updating only the phone, should return an artist', done => {
+          let updateData = {phone: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err)
+              return done(err);
+            expect(res.status).to.equal(200);
+            expect(res.body.firstname).to.equal(this.tempArtist.firstname);
+            expect(res.body.lastname).to.equal(this.tempArtist.lastname);
+            expect(res.body.username).to.equal(this.tempArtist.username);
+            expect(res.body.email).to.equal(this.tempArtist.email);
+            expect(res.body.city).to.equal(this.tempArtist.city);
+            expect(res.body.zip).to.equal(this.tempArtist.zip);
+            expect(res.body.about).to.equal(this.tempArtist.about);
+            expect(res.body.phone).to.equal(updateData.phone);
+            expect(res.body.userID).to.equal(this.tempUser._id.toString());
+            let date = new Date(res.body.created).toString();
+            expect(date).to.not.equal('Invalid Date');
+            done();
+          });
+        });
+      });
+
+      describe('with valid token and invalid id', function() {
+
+        before(done => mockArtist.call(this, done));
+
+        it('should status 404 not found', done => {
+          let updateData = {firstName: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}bad`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            done();
+          });
+        });
+      });
+
+  //TODO: Set object propery to empty so it gives me 400 errors?
+
+  // describe('updated with empty firstname', function(){
+  //
+  //   before(done => mockArtist.call(this, done));
+  //
+  //   it('should status 400 bad request', done => {
+  //     let updateData = {firstname: false};
+  //     request.put(`${url}/api/artist/${this.tempArtist._id}`)
+  //     .send(updateData)
+  //     .set({
+  //       Authorization: `Bearer ${this.tempToken}`,
+  //     })
+  //     .end((err, res) => {
+  //       expect(res.status).to.equal(400);
+  //       done();
+  //     });
+  //   });
+  // });
+
+      describe('with invalid token and valid id', function(){
+
+        before(done => mockArtist.call(this, done));
+
+        it('should status 401 unauthorized', done => {
+          let updateData = {firstName: 'bob'};
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: 'Bearer ',
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
+        });
+      });
+
+      describe('with wrong user', function(){
+
+        before(done => mockArtist.call(this, done));
+        before(done => mockUser.call(this, done));
+
+        it('should status 401 unauthorized', done => {
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
         });
       });
     });
@@ -618,7 +835,7 @@ describe('testing artist-router', function() {
 
   describe('testing DELETE to /api/artist/:artistID', () => {
 
-    describe('with valid token and id', function(){
+    describe('with valid token and id', function() {
 
       before(done => mockArtist.call(this, done));
 
@@ -636,7 +853,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function(){
+    describe('with valid token and invalid id', function() {
 
       before(done => mockArtist.call(this, done));
 
@@ -652,7 +869,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with invalid token and valid id', function(){
+    describe('with invalid token and valid id', function() {
 
       before(done => mockArtist.call(this, done));
 
@@ -682,5 +899,4 @@ describe('testing artist-router', function() {
       });
     });
   });
-
 });
