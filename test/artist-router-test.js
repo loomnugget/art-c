@@ -828,25 +828,24 @@ describe('testing artist-router', function() {
         });
       });
 
-  //TODO: Set object propery to empty so it gives me 400 errors?
+      describe('updated with empty firstname', function(){
 
-  // describe('updated with empty firstname', function(){
-  //
-  //   before(done => mockArtist.call(this, done));
-  //
-  //   it('should status 400 bad request', done => {
-  //     let updateData = {firstname: false};
-  //     request.put(`${url}/api/artist/${this.tempArtist._id}`)
-  //     .send(updateData)
-  //     .set({
-  //       Authorization: `Bearer ${this.tempToken}`,
-  //     })
-  //     .end((err, res) => {
-  //       expect(res.status).to.equal(400);
-  //       done();
-  //     });
-  //   });
-  // });
+        before(done => mockArtist.call(this, done));
+
+        it('should status 400 bad request', done => {
+          let updateData = {firstname: ''};
+          console.log(updateData);
+          request.put(`${url}/api/artist/${this.tempArtist._id}`)
+          .send(updateData)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(400);
+            done();
+          });
+        });
+      });
 
       describe('with invalid token and valid id', function(){
 

@@ -53,7 +53,7 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
 
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
-  Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true})
+  Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true, runValidators: true})
   .then( listing => {
     if(listing.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));

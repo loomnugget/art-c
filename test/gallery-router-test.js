@@ -622,6 +622,24 @@ describe('testing gallery-router', function() {
     });
   });
 
+  describe('updated with empty name', function(){
+
+    before(done => mockGallery.call(this, done));
+
+    it('should status 400 bad request', done => {
+      let updateData = {name: ''};
+      request.put(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
+      .send(updateData)
+      .set({
+        Authorization: `Bearer ${this.tempToken}`,
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        done();
+      });
+    });
+  });
+
   describe('testing DELETE to /api/artist/:artistID/gallery/:galleryID', () => {
 
     describe('with valid token and id', () => {

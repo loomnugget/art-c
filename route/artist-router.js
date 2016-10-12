@@ -39,8 +39,11 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
 
 artistRouter.put('/api/artist/:artistID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/artist/:artistID');
-  Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true})
-  .then( artist => res.json(artist))
+  Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true, runValidators: true})
+  .then( artist => {
+    console.log(artist);
+    res.json(artist);
+  })
   .catch( err => {
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
