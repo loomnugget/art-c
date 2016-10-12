@@ -550,7 +550,7 @@ describe('testing gallery-router', function() {
     });
   });
 
-  describe('testing DELETE to /api/gallery/:galleryID', () => {
+  describe('testing DELETE to /api/artist/:artistID/gallery/:galleryID', () => {
 
     describe('with valid token and id', function(){
 
