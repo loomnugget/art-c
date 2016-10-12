@@ -68,7 +68,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
       key: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
-    //  userID: req.user._id,
+      userID: req.user._id,
     };
     return new Photo(photoData).save();
   })
@@ -89,7 +89,7 @@ photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(
       return Promise.reject(createError(400, 'Bad request - wrong artist'));
     if(photo.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
-    debug('photo.userID', photo.userID);
+
     let params = {
       Bucket: 'artc-staging-assets',
       Key: photo.key,
@@ -165,7 +165,6 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     Key: `${req.file.filename}${ext}`,
     Body: fs.createReadStream(req.file.path),
   };
-  // console.log(AWS.config);
 
   let tempListing = null;
 

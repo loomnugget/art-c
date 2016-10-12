@@ -19,6 +19,7 @@ module.exports = function(done){
   artistMock.call(this, err => {
     if (err)
       return done(err);
+    examplePhotoData.userID = this.tempUser._id.toString();
     examplePhotoData.artistID = this.tempArtist._id.toString();
     new Photo(examplePhotoData).save()
     .then( photo => {
