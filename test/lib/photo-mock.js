@@ -13,14 +13,14 @@ module.exports = function(done){
     name: 'example name',
     alt: 'useful photo',
     imageURI: awsMocks.uploadMock.Location,
-    Key: awsMocks.uploadMock.Key,
+    key: awsMocks.uploadMock.Key,
   };
 
   artistMock.call(this, err => {
     if (err)
       return done(err);
-    examplePhotoData.userID = this.tempUser._id.toString();
     examplePhotoData.artistID = this.tempArtist._id.toString();
+    examplePhotoData.userID = this.tempUser._id.toString();
     new Photo(examplePhotoData).save()
     .then( photo => {
       this.tempPhoto = photo;

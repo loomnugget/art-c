@@ -14,8 +14,6 @@ const createError = require('http-errors');
 //APP MODULES
 const Photo = require('../model/photo.js');
 const Artist = require('../model/artist.js');
-const Gallery = require('../model/gallery.js');
-const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 AWS.config.setPromisesDependency(require('bluebird'));
@@ -96,6 +94,7 @@ photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(
       Bucket: 'artc-staging-assets',
       Key: photo.key,
     };
+
     return s3.deleteObject(params).promise();
   })
   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))

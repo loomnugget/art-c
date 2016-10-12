@@ -1,7 +1,7 @@
 'use strict';
 
 require('./lib/test-env.js');
-const awsMocks = require('./lib/aws-mock.js');
+//const awsMocks = require('./lib/aws-mock.js');
 
 // NPM MODULES
 const expect = require('chai').expect;
@@ -48,29 +48,29 @@ describe('testing photo router', function() {
           expect(res.status).to.equal(200);
           expect(res.body.name).to.equal(examplePhoto.name);
           expect(res.body.alt).to.equal(examplePhoto.alt);
-          expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
-          expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
+        //  expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
+        //  expect(res.body.key).to.equal(awsMocks.uploadMock.Key);
           done();
         });
       }); // end it block
     });
 
-    // describe('with no name', function() {
-    //
-    //   before(done => artistMock.call(this, done));
-    //
-    //   it('should respond with status 400', done => {
-    //     request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
-    //     .set({Authorization: `Bearer ${this.tempToken}`})
-    //     .field('alt', examplePhoto.alt)
-    //     .attach('image', examplePhoto.image)
-    //     .end((err, res) => {
-    //       expect(res.status).to.equal(400);
-    //       done();
-    //     });
-    //   });
-    //
-    // });
+    describe('with no name', function() {
+
+      before(done => artistMock.call(this, done));
+
+      it('should respond with status 400', done => {
+        request.post(`${url}/api/artist/${this.tempArtist._id}/photo`)
+        .set({Authorization: `Bearer ${this.tempToken}`})
+        .field('alt', examplePhoto.alt)
+        .attach('image', examplePhoto.image)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
 
     describe('with no image', function() {
       before(done => artistMock.call(this, done));
@@ -129,11 +129,49 @@ describe('testing photo router', function() {
         .end((err, res) => {
           if (err)
             return done(err);
+          console.log(res.body);
           expect(res.status).to.equal(204);
           done();
         });
       }); // end it block
     }); //end 'with valid token'
+
+    describe('with invalid token', function() {
+      before(done => photoMock.call(this, done));
+      it ('should respond with 401 UnauthorizedError', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .set({Authorization: 'Bearer: '})
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('no auth header', function(){
+      before(done => photoMock.call(this, done));
+      it('should respond with status 400', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
+
+    describe('with no bearer auth', function(){
+      before(done => photoMock.call(this, done));
+      it('should respond with status 400', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/photo/${this.tempPhoto._id}`)
+        .set({Authorization: 'nothing here'})
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('BadRequestError');
+          done();
+        });
+      });
+    });
   });
   //
   // describe('/api/gallery/:galleryID/photo', function() {
