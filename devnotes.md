@@ -1,37 +1,38 @@
 ## MODELS ##
 _______________________________________________________________
 
-# User Model v. 0.0.1
-- Creates a user
-- Username
-- Email
-- Password
-- findHash
+## User Model v. 0.0.1
+**Creates a user**
+- Username (required, unique)
+- Email (required, unique)
+- Password (required)
+- findHash (unique, made for the user)
 
-# Photo Model v. 0.0.2
-- Creates a photo with reference to AWS Bucket
-- Image URI
-- Key
-- Alt
-- Artist ID
-- User ID
+## Photo Model v. 0.0.2
+**Creates a photo with reference to AWS Bucket**
+- Image URI ()
+- Key ()
+- Alt ()
+- Artist ID ()
+- User ID ()
 
-# Artist Model v. 0.0.3
-- Creates an artist profile given user id and password
-- User ID
+## Artist Model v. 0.0.3
+**Creates an artist profile given user id and password**
+- Username (required)
 - First name
 - Last name
 - Email
 - City
 - Phone
 - Zip
-- Photo ID
 - About
 - Date Joined
-- Galleries (array)
+- Galleries [array]
+- User ID
+- Photo ID
 
-# Gallery Model v. 0.0.1
-- Creates a gallery for specified artist
+## Gallery Model v. 0.0.1
+**Creates a gallery for specified artist**
 - Gallery Name
 - Description
 - Date Created
@@ -40,8 +41,8 @@ _______________________________________________________________
 - Profile ID
 - Listings (array)
 
-# Listing Model v. 0.0.2
-- Creates a listing for in specified gallery
+## Listing Model v. 0.0.2
+**Creates a listing for in specified gallery**
 - Title
 - Description
 - Category
@@ -52,6 +53,8 @@ _______________________________________________________________
 
 
 # Auth Routes v. 0.0.1
+
+
 - Signup - POST request - creates a new user
 
 - Login - GET request - takes input of a user name and password, and finds a user
