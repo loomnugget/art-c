@@ -20,7 +20,6 @@ module.exports = function(done){
     if (err)
       return done(err);
     examplePhotoData.artistID = this.tempArtist._id.toString();
-    examplePhotoData.userID = this.tempUser._id.toString();
     new Photo(examplePhotoData).save()
     .then( photo => {
       this.tempPhoto = photo;

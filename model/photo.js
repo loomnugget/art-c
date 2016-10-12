@@ -8,7 +8,9 @@ const photoSchema = mongoose.Schema({
   key: {type: String, required: true, unique:true},
   imageURI: {type: String, required: true, unique:true},
   // path params
-  artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
+  artistID: {type: mongoose.Schema.Types.ObjectId},
+  galleryID: {type: mongoose.Schema.Types.ObjectId},
+  listingID: {type: mongoose.Schema.Types.ObjectId},
 });
 
 module.exports = mongoose.model('photo', photoSchema);
