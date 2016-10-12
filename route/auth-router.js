@@ -5,6 +5,7 @@ const debug = require('debug')('artc:auth-router');
 const jsonParser = require('body-parser').json();
 const basicAuth = require('../lib/basic-auth-middleware.js');
 const createError = require('http-errors');
+const bearerAuth = require('../lib/bearer-auth-middleware');
 
 const User = require('../model/user.js');
 

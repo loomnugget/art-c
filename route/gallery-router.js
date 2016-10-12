@@ -9,6 +9,8 @@ const createError = require('http-errors');
 // app modules
 const Artist = require('../model/artist.js');
 const Gallery = require('../model/gallery.js');
+const Photo = require('../model/photo.js');
+const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
 // module constants
@@ -69,20 +71,28 @@ galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonPa
   });
 });
 
-//TODO: Delete the reference of gallery to its associated artist
 galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/gallery/:galleryID');
 
   Gallery.findById(req.params.galleryID)
-  .then( gallery => {
-    if (gallery.userID.toString() !== req.user._id.toString())
-    return next(createError(401, 'invalid userid'));
+  .catch(err => {
+    return Promise.reject(createError(404, err.message));
   })
   .then( gallery => {
-    gallery.remove({});
+    if (gallery.userID.toString() !== req.user._id.toString())
+      return Promise.reject(createError(401, 'unauthorized'));
+  })
+  .then( () => {
+    return Gallery.findByIdAndRemove(req.params.id);
+  })
+  .then( () => {
+    Listing.remove({ galleryID: req.params.galleryID});
+  })
+  .then( () => {
+    Photo.remove({ galleryID: req.params.galleryID});
   })
   .then( () => {
     res.sendStatus(204);
   })
-  .catch( err => next(createError(404, err.message)));
+  .catch(next);
 });
