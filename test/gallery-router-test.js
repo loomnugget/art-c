@@ -15,6 +15,7 @@ const cleanDB = require('./lib/clean-db');
 const mockArtist = require('./lib/artist-mock');
 const mockGallery = require('./lib/gallery-mock');
 const mockUser = require('./lib/user-mock');
+const mockMultipleListings = require('./lib/populate-gallery-listings-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -249,6 +250,24 @@ describe('testing gallery-router', function() {
           expect(res.body.artistID).to.equal(this.tempArtist._id.toString());
           let date = new Date(res.body.created).toString();
           expect(date).to.not.equal('Invalid Date');
+          done();
+        });
+      });
+    });
+
+    describe('testing populate gallery listings', function(){
+
+      before(done => mockMultipleListings.call(this, 10, done));
+
+      it('should return an artist with populated gallery array', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.listings.length).to.equal(10);
           done();
         });
       });
