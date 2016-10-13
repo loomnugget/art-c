@@ -28,7 +28,9 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
   // ^ 1 line currently not covered
-  .then ((artist) => {
+  .then ( artist => {
+    if (artist.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid user'));
     tempArtist = artist;
     req.body.artistID = artist._id;
     req.body.userID = req.user._id;
@@ -44,14 +46,11 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   .catch(next);
 });
 
-//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
   .populate({path: 'listings'})
   .then( gallery => {
-    if (gallery.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
     res.json(gallery);
   })
   .catch( err => {
@@ -61,18 +60,18 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
 });
 
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
-  //if artistID !== the req.params.artistID, reject error
   debug('hit route PUT /api/gallery/:galleryID');
-  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true, runValidators: true})
+  Gallery.findById(req.params.galleryID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));
+    return Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true, runValidators: true});
+  })
+  .then(gallery => {
     res.json(gallery);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, function(req, res, next) {
@@ -88,22 +87,26 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   .catch( err => Promise.reject(err))
   .then( () => Listing.remove({ galleryID: req.params.galleryID}))
   .then( () => Photo.find({galleryID: req.params.galleryID}))
-  .then (photos => {
-    if(photos) {
-      console.log('PHOTOS', photos);
-      photos.forEach((photo) => {
-        s3.deleteObject({
-          Bucket: 'artc-staging-assets',
-          Key: photo.objectKey,
-        }).promise();
-      });
+  .then( photos => {
+    console.log('PHOTOS', photos);
+    let s3DeletePhotoArray = [];
+    for(var i=0; i<photos.length; i++){
+      s3DeletePhotoArray.push(s3.deleteObject({
+        Bucket: 'artc-staging-assets',
+        Key: photos[i].objectKey,
+      }));
     }
+    console.log(s3DeletePhotoArray, 'ARRAY****************');
+    return Promise.all(s3DeletePhotoArray);
   })
   .then( () => Photo.remove({galleryID: req.params.galleryID}))
   .then( () => {
     Artist.findById(req.params.artistID)
     .then( artist => {
-      artist.galleries.splice(req.params.galleryID, 1);
+      artist.galleries.forEach( gallery => {
+        if(artist.galleries[gallery] === req.params.galleryID)
+          artist.galleries.splice(artist.galleries.indexOf[gallery], 1);
+      });
       return artist.save();
     });
   })
