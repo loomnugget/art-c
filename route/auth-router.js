@@ -65,3 +65,15 @@ authRouter.put('/api/:userID/updateEmail', bearerAuth, function(req, res, next) 
     next(createError(404, err.message));
   });
 });
+
+authRouter.put('/api/:userID/updateUsername', bearerAuth, function(req, res, next) {
+  debug('hit route PUT /api/updateUsername');
+  User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+  .then( user => {
+    res.json(user);
+  })
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
