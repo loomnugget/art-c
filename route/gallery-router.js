@@ -94,9 +94,8 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
       s3DeletePhotoArray.push(s3.deleteObject({
         Bucket: 'artc-staging-assets',
         Key: photos[i].objectKey,
-      }));
+      }).promise());
     }
-    console.log(s3DeletePhotoArray, 'ARRAY****************');
     return Promise.all(s3DeletePhotoArray);
   })
   .then( () => Photo.remove({galleryID: req.params.galleryID}))
