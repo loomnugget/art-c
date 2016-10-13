@@ -254,7 +254,8 @@
 ```
 - DELETE request
 - Removes Artist object located by artistID
-- Removes all associated Galleries and Listings by artistID
+- Removes all associated Gallery and Listing objects by artistID
+- Removes all associated Photo objects by artistID
 
 ## Gallery Routes v. 0.0.5
 ### **Add Gallery**
@@ -285,12 +286,39 @@
 ```
 - DELETE request
 - Removes Gallery object located by galleryID
-- Removes all associated Listings by galleryID
+- Removes all associated Listing objects by galleryID
+- Removes all associated Photo objects by galleryID
 - Removes Gallery reference from associated Artist object
 
 ## Listing Routes v. 0.0.5
 
 ### **Add Listing**
 ```
-/api/gallery/:galleryID/
+/api/gallery/:galleryID/listing
 ```
+- POST request
+- Creates a Listing object
+- Adds Listing reference to associated Gallery and Artist objects
+
+### **Find Listing**
+```
+/api/gallery/:galleryID/listing/:listingID
+```
+- GET request
+- Finds Listing object by listingID
+
+### **Update Listing**
+```
+/api/gallery/:galleryID/listing/:listingID
+```
+- PUT request
+- Updates Listing object located by listingID
+
+### **Remove Listing**
+```
+/api/gallery/:galleryID/listing/:listingID
+```
+- DELETE request
+- Removes Listing object located by listingID
+- Removes all associated Photo objects by listingID
+- Removes Listing reference from associated Gallery and Artist objects
