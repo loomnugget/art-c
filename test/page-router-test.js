@@ -47,7 +47,7 @@ describe('testing page-router', function(){
   describe('testing /api/listing', function() {
     describe('with pagenation' , function() {
       before(done => mockManyListings.call(this, 100, done));
-      it('should return 50 galleries', done => {
+      it('should return 50 listings', done => {
         request.get(`${url}/api/listing`)
         .end((err, res) => {
           if (err) return done(err);
@@ -57,7 +57,27 @@ describe('testing page-router', function(){
         });
       });
     });
-  });
+
+    describe('with /api/listing?page=5' , function() {
+      before(done => mockManyListings.call(this, 100, done));
+      it('should return 50 listings', done => {
+        request.get(`${url}/api/listing?page=5`)
+        .end((err, res) => {
+          if (err) return done(err);
+          for (let i=0; i< res.body.length; i++){
+            expect(res.body.listings[i]._id.toString()).to.equal(this.tempListings[i + 10 ]._id.toString());
+            expect(res.body.listings[i].artistID.toString()).to.equal(this.tempListings[i + 10 ].artistID.toString());
+            expect(res.body.listings[i].galleryID.toString()).to.equal(this.tempListings[i + 10 ].galleryID.toString());
+            expect(res.body.listings[i].category).to.equal(this.tempListings[i + 10].category);
+            expect(res.body.listings[i].name).to.equal(this.tempListings[i + 10].name);
+            expect(res.body.listings[i].desc).to.equal(this.tempListings[i + 10].desc);
+          }
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
+  }); //end testing listing pagenation
 
   describe('testing /api/gallery', function() {
     describe('with pagenation' , function() {
@@ -86,7 +106,7 @@ describe('testing page-router', function(){
     //       expect(res.body.desc).to.equal(exampleGallery.desc);
     //       expect(res.body.userID).to.equal(this.tempUser._id.toString());
     //       expect(Array.isArray(res.body.listings)).to.equal(true);
-    //       expect(res.body.pics.length).to.equal(10);
+    //       expect(res.body.listings.length).to.equal(10);
     //       let date = new Date(res.body.created).toString();
     //       expect(date).to.equal(this.tempGallery.created.toString());
     //       // iterate though listings array on gallery
@@ -113,7 +133,7 @@ describe('testing page-router', function(){
     //      expect(res.body.desc).to.equal(exampleGallery.desc);
     //      expect(res.body.userID).to.equal(this.tempUser._id.toString());
     //      expect(Array.isArray(res.body.listings)).to.equal(true);
-    //      expect(res.body.pics.length).to.equal(10);
+    //      expect(res.body.listings.length).to.equal(10);
     //      let date = new Date(res.body.created).toString();
     //      expect(date).to.equal(this.tempGallery.created.toString());
     //      // iterate though listings array on gallery
