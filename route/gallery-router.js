@@ -26,7 +26,6 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   let tempGallery;
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // ^ 1 line currently not covered
   .then ( artist => {
     if (artist.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid user'));
@@ -87,15 +86,13 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   .then( () => Listing.remove({ galleryID: req.params.galleryID}))
   .then( () => Photo.find({galleryID: req.params.galleryID}))
   .then( photos => {
-    console.log('PHOTOS', photos);
     let s3DeletePhotoArray = [];
     for(var i=0; i<photos.length; i++){
       s3DeletePhotoArray.push(s3.deleteObject({
         Bucket: 'artc-staging-assets',
         Key: photos[i].objectKey,
-      }));
+      }).promise());
     }
-    console.log(s3DeletePhotoArray, 'ARRAY****************');
     return Promise.all(s3DeletePhotoArray);
   })
   .then( () => Photo.remove({galleryID: req.params.galleryID}))
@@ -104,7 +101,7 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
     .then( artist => {
       artist.galleries.forEach( gallery => {
         if(artist.galleries[gallery] === req.params.galleryID)
-          artist.galleries.splice(artist.galleries.indexOf[gallery], 1);
+          artist.galleries.splice(artist.galleries.indexOf(gallery), 1);
       });
       return artist.save();
     });
