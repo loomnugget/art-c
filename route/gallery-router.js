@@ -105,7 +105,7 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
     .then( artist => {
       artist.galleries.forEach( gallery => {
         if(artist.galleries[gallery] === req.params.galleryID)
-          artist.galleries.splice(artist.galleries.indexOf[gallery], 1);
+          artist.galleries.splice(artist.galleries.indexOf(gallery), 1);
       });
       return artist.save();
     });

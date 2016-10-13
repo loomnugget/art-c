@@ -80,7 +80,7 @@ listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, f
   .then( gallery => {
     gallery.listings.forEach( listing => {
       if(gallery.listings[listing] === req.params.listingID)
-        gallery.listings.splice(gallery.listings.indexOf[listing], 1);
+        gallery.listings.splice(gallery.listings.indexOf(listing), 1);
     });
     return gallery.save();
   })
