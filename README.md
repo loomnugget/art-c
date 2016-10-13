@@ -1,14 +1,199 @@
 [![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=staging)](https://coveralls.io/github/loomnugget/art-c?branch=staging)
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
-## DOCUMENTATION
-# Art-C
-- “Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.”
+---
+# ART-C
 
-## ROUTE DOCUMENTATION
+##### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
-## authRouter
-`/api/signup` - POST
+This REST API allows a developer to set up a site where users can create accounts to view, or display items.
+(REST API that returns JSON)
+
+---
+
+## **Setup**
+
+---
+
+This is how you get setup
+
+---
+
+## **Use**
+---
+
+### **User Account**
+
+##### This is the basic
+
+  ##### Adding a User Account
+Creates a new User Object.
+
+  ```
+  #/api/setup
+  ```
+  ##### Finding a User Account
+  ```
+  #/api/login
+  ```
+  ##### Updating a User Account
+  - Updating email
+    ```
+    #/api/:userID/updateEmail
+    ```
+  - Updating username
+    ```
+    #/api/:userID/updateUsername
+    ```
+  - Updating password
+    ```
+    #/api/:userID/updatePassword
+    ```
+  ##### Removing a User Account
+  ```
+  #/api/:userID/deleteAccount
+  ```
+
+---
+
+### **Artist Profile**
+
+  #### Adding an Artist Profile
+  ```
+  #/api/artist
+  ```
+  #### Finding an Artist Profile
+  ```
+  #/api/artist/:artistID
+  ```
+  #### Updating an Artist Profile
+  ```
+  #/api/artist/:artistID
+  ```
+  #### Removing an Artist Profile
+  ```
+  #/api/artist/:artistID
+  ```
+  #### Adding an Image to Artist Profile
+  ```
+  #/api/artist/:artistID/photo
+  ```
+  #### Removing an Image from Artist Profile
+  ```
+  #/api/artist/:artistID/photo/:photoID
+  ```
+
+---
+
+### **Gallery**
+
+  #### Adding a Gallery
+  ```
+  #/api/artist/:artistID/gallery
+  ```
+  #### Finding a Gallery
+  ```
+  #/api/artist/:artistID/gallery/:galleryID
+  ```
+  #### Updating a Gallery
+  ```
+  #/api/artist/:artistID/gallery/:galleryID
+  ```
+  #### Removing a Gallery
+  ```
+  #/api/artist/:artistID/gallery/:galleryID
+  ```
+  #### Adding an Image to Gallery
+  ```
+  #/api/gallery/:galleryID/photo
+  ```
+  #### Removing an Image from Gallery
+  ```
+  #/api/gallery/:galleryID/photo/:photoID
+  ```
+
+---
+
+### **Listing**
+
+  #### Adding a Listing
+  ```
+  #/api/gallery/:galleryID/listing
+  ```
+  #### Finding a Listing
+  ```
+  #/api/gallery/:galleryID/listing/:listingID
+  ```
+  #### Updating a Listing
+  ```
+  #/api/gallery/:galleryID/listing/:listingID
+  ```
+  #### Removing a Listing
+  ```
+  #/api/gallery/:galleryID/listing/:listingID
+  ```
+  #### Adding an Image to Listing
+  ```
+  #/api/listing/:listingID/photo
+  ```
+  #### Removing an Image from Listing
+  ```
+  #/api/listing/:listingID/photo/:photoID
+  ```
+
+---
+
+### **Image**
+
+  #### Adding an Image to Artist Profile
+  ```
+  #/api/artist/:artistID/photo
+  ```
+  #### Removing an Image from Artist Profile
+  ```
+  #/api/artist/:artistID/photo/:photoID
+  ```
+  #### Adding an Image to Gallery
+  ```
+  #/api/gallery/:galleryID/photo
+  ```
+  #### Removing an Image from Gallery
+  ```
+  #/api/gallery/:galleryID/photo/:photoID
+  ```
+  #### Adding an Image to Listing
+  ```
+  #/api/listing/:listingID/photo
+  ```
+  #### Removing an Image from Listing
+  ```
+  #/api/listing/:listingID/photo/:photoID
+  ```
+---
+
+```
+#/api/login
+```
+- Expected Headers
+  - blah
+  - blah
+- Expected body
+  ```json
+  {
+    "name": "dunc",
+    "email": "dunc@dunc.com",
+    "blah"
+  }
+  ```
+contributer's guide (look at atom's readme on github) contributing.md
+
+Code of Conduct (... for tech Code of Conduct, holding people who try to contribute to this to be nice to others)
+
+
+
+
+<!-- ## authRouter
+  `/api/signup` - POST
 - Requires a user name and password and generates a new user.
 `/api/login` - GET
 - Requires a valid existing user name and password and returns an existing user.
@@ -55,4 +240,4 @@
 `/api/listing/:listingID/photo` - POST
 - Requires a listing id and returns a new photo attached to the matching listing.
 `/api/listing/:listingID/photo/:photoID` - DELETE
-- Requires valid photo id and deletes photo attached to the corresponding listing.
+- Requires valid photo id and deletes photo attached to the corresponding listing. -->
