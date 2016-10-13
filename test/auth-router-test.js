@@ -15,6 +15,7 @@ const validator = require('validator');
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db.js');
 const mockUser = require('./lib/user-mock.js');
+const mockManyPhotos = require('./lib/mock-many-photos.js');
 
 mongoose.Promise = Promise;
 
@@ -394,6 +395,91 @@ describe('testing auth-router', function() {
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
+        });
+      });
+    });
+
+    describe('testing DELETE to /api/artist/:artistID', () => {
+
+      describe('with valid token', () => {
+
+        before( done => mockManyPhotos.call(this, 5, done));
+
+        it('should delete an artist and all associated galleries, listings and photos', done => {
+          request.delete(`${url}/api/user/deleteAccount`)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err) return done(err);
+            expect(res.status).to.equal(204);
+            done();
+          });
+        });
+      });
+
+      describe('with valid token only ONLY user account w/ no gall, list, etc.', () => {
+
+        before(done => mockUser.call(this, done));
+
+        it('should delete an artist and all associated galleries, listings and photos', done => {
+          request.delete(`${url}/api/user/deleteAccount`)
+          .set({
+            Authorization: `Bearer ${this.tempToken}`,
+          })
+          .end((err, res) => {
+            if (err) return done(err);
+            expect(res.status).to.equal(204);
+            done();
+          });
+        });
+      });
+
+      describe('with bad token request.', () => {
+
+        before(done => mockUser.call(this, done));
+
+        it('should delete an artist and all associated galleries, listings and photos', done => {
+          request.delete(`${url}/api/user/deleteAccount`)
+          .set({
+            Authorization: 'Bearer ',
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(400);
+            done();
+          });
+        });
+      });
+
+      describe('with wrong token and many photos', function() {
+        let tempSecondUser = {};
+        before( done => mockManyPhotos.call(this, 5, done));
+        before(done => mockUser.call(tempSecondUser, done));
+
+        it('should return status 401 unauthorized', done => {
+          request.delete(`${url}/api/user/deleteAccount`)
+          .set({
+            Authorization: `Bearer ${this.tempUser.tempToken}`,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
+        });
+      });
+
+      describe('with bad token and many photos', function() {
+        before( done => mockManyPhotos.call(this, 5, done));
+
+        it('should return status 401 unauthorized', done => {
+          request.delete(`${url}/api/user/deleteAccount`)
+          .set({
+            Authorization: `Bearer ${this.tempUser.tempToken}`,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
         });
       });
     });
