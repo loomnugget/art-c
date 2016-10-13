@@ -43,7 +43,22 @@ describe('testing page-router', function(){
   after(done => serverCtrl.serverDown(server, done));
   afterEach(done => cleanDB(done));
 
- // test for page queries for many listings in a gallery with a given ID
+
+  describe('testing /api/gallery', function() {
+    describe('with pagenation' , function() {
+      before(done => mockManyGalleries.call(this, 100, done));
+      it('should return 50 galleries', done => {
+        request.get(`${url}/api/gallery`)
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(50);
+          done();
+        });
+      });
+    });
+  });
+
   describe('testing /api/gallery', function() {
     describe('with pagenation' , function() {
       before(done => mockManyGalleries.call(this, 100, done));

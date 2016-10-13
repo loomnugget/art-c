@@ -16,6 +16,7 @@ const cleanDB = require('./lib/clean-db.js');
 const mockGallery = require('./lib/gallery-mock.js');
 const mockListing = require('./lib/listing-mock.js');
 const mockUser = require('./lib/user-mock.js');
+const mockManyPhotos = require('./lib/mock-many-photos.js');
 
 mongoose.Promise = Promise;
 
@@ -283,24 +284,6 @@ describe('testing listing-router', function(){
         });
       });
     });
-
-    describe('with wrong user', () => {
-
-      before(done => mockListing.call(this, done));
-      before(done => mockUser.call(this, done));
-
-      it('should status 401 unauthorized', done => {
-        request.get(`${url}/api/listing/${this.tempListing._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      });
-    });
-
   });
 
   describe('testing PUT to /api/listing/:listingID', () => {
@@ -644,6 +627,23 @@ describe('testing listing-router', function(){
         })
         .end((err, res) => {
           expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and id', () => {
+
+      before( done => mockManyPhotos.call(this, 5, done));
+
+      it('should delete a listing and all associated photos and references', done => {
+        request.delete(`${url}/api/gallery/${this.tempGallery._id}/listing/${this.tempListing._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
           done();
         });
       });

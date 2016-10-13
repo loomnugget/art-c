@@ -13,7 +13,6 @@ const bearerAuth = require('../lib/bearer-auth-middleware.js');
 // module constants
 const artistRouter = module.exports = Router();
 
-//TODO: Populate galleries
 artistRouter.post('/api/artist', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/artist');
   req.body.userID = req.user._id;
@@ -27,8 +26,6 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
   Artist.findById(req.params.artistID)
   .populate({path: 'galleries'})
   .then( artist => {
-    if (artist.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
     res.json(artist);
   })
   .catch( err => {
@@ -39,19 +36,28 @@ artistRouter.get('/api/artist/:artistID', bearerAuth, function(req, res, next) {
 
 artistRouter.put('/api/artist/:artistID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/artist/:artistID');
-  Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true, runValidators: true})
+  Artist.findById(req.params.artistID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( artist => {
+    if (artist.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid userid'));
+    return Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true, runValidators: true});
+  })
+  .then(artist => {
     res.json(artist);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 artistRouter.delete('/api/artist/:artistID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/artist/:artistID');
-  Artist.findByIdAndRemove(req.params.artistID)
+  Artist.findById(req.params.artistID)
+  .catch(err => Promise.reject(createError(404, err.message)))
+  .then( artist => {
+    if (artist.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'unauthorized'));
+    return Artist.findByIdAndRemove(req.params.artistID);
+  })
   .then( () => res.sendStatus(204))
-  .catch( err => next(createError(404, err.message)));
+  .catch(next);
 });

@@ -14,11 +14,12 @@ const mongoose = require('mongoose');
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
 // const photoMock = require('./lib/photo-mock.js');
-// const mockManyPhotos = require('./lib/mock-many-photos');
+const mockManyPhotos = require('./lib/mock-many-photos');
 const mockArtist = require('./lib/artist-mock');
 const mockGallery = require('./lib/gallery-mock');
 const mockUser = require('./lib/user-mock');
 const mockMultipleListings = require('./lib/populate-gallery-listings-mock.js');
+// const mockMultipleGalleries = require('./lib/populate-artist-galleries-mock.js');
 
 
 mongoose.Promise = Promise;
@@ -307,23 +308,6 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('testing populate gallery listings with wrong user', function(){
-
-      before(done => mockMultipleListings.call(this, 10, done));
-      before(done => mockUser.call(this, done));
-
-      it('should return a 401 error for unauthorized access', done => {
-        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      });
-    });
-
     describe('with valid token and invalid id', () => {
 
       before(done => mockGallery.call(this, done));
@@ -351,23 +335,6 @@ describe('testing gallery-router', function() {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          done();
-        });
-      });
-    });
-
-    describe('with wrong user', () => {
-
-      before(done => mockGallery.call(this, done));
-      before(done => mockUser.call(this, done));
-
-      it('should status 401 unauthorized', done => {
-        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
           done();
         });
       });
@@ -712,22 +679,21 @@ describe('testing gallery-router', function() {
       });
     });
 
-    // describe('with valid token and id', () => {
-    //
-    //   before( done => mockManyPhotos.call(this, 5, done));
-    //
-    //   it('should delete a gallery', done => {
-    //     request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
-    //     .set({
-    //       Authorization: `Bearer ${this.tempToken}`,
-    //     })
-    //     .end((err, res) => {
-    //       if (err)
-    //         return done(err);
-    //       expect(res.status).to.equal(204);
-    //       done();
-    //     });
-    //   });
-    // });
+    describe('with valid token and id', () => {
+
+      before( done => mockManyPhotos.call(this, 5, done));
+
+      it('should delete a gallery and all associated listings and photos', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
   });
 });

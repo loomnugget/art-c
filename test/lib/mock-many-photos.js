@@ -9,15 +9,21 @@ module.exports = function(count, done){
   debug('mock multiple photos');
   listingMock.call(this, err => {
     if (err) return done(err);
-    // let photosMock = [];
+    let photoMocks = [];
     let userID = this.tempUser._id.toString();
     let artistID = this.tempArtist._id.toString();
     let galleryID = this.tempGallery._id.toString();
     let listingID = this.tempListing._id.toString();
     let username = this.tempUser.username;
     for(var i=0; i<count; i++){
-      mockPic(userID, artistID, galleryID, listingID, username);
+      photoMocks.push(mockPic(userID, artistID, galleryID, listingID, username));
     }
+    return Promise.all(photoMocks)
+    .then( photos => {
+      this.tempPhotos = photos;
+      done();
+    })
+    .catch(done);
   });
 };
 

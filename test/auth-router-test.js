@@ -163,10 +163,9 @@ describe('testing auth-router', function() {
         });
       });
     });
-
   });
 
-  describe('testing GET /api/signup', function() {
+  describe('testing GET /api/login', function() {
 
     describe('with valid authorization', function() {
 
@@ -216,15 +215,15 @@ describe('testing auth-router', function() {
     });
   });
 
-  describe('testing PUT /api/:userID/updateEmail', function() {
+  describe('testing PUT /api/user/updateEmail', function() {
 
-    describe('with valid token and id', function() {
+    describe('with valid token', function() {
 
       before( done => mockUser.call(this, done));
 
       it('should return a user with a new email', done => {
         let updateData = {email: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        request.put(`${url}/api/user/updateEmail`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -238,31 +237,13 @@ describe('testing auth-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function() {
-
-      before( done => mockUser.call(this, done));
-
-      it('should return a status 404', done => {
-        let updateData = {email: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}bad/updateEmail`)
-        .send(updateData)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          done();
-        });
-      });
-    });
-
-    describe('with invalid token and valid id', function() {
+    describe('with invalid token', function() {
 
       before( done => mockUser.call(this, done));
 
       it('should return a status 400', done => {
         let updateData = {email: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        request.put(`${url}/api/user/updateEmail`)
         .send(updateData)
         .set({
           Authorization: 'Bearer ',
@@ -274,46 +255,27 @@ describe('testing auth-router', function() {
       });
     });
 
-    describe('is actually an email', function(){
-
+    describe('with wrong token', function() {
+      let tempSecondUser = {};
       before( done => mockUser.call(this, done));
+      before( done => mockUser.call(tempSecondUser, done));
 
-      it('should return a status 400', done => {
-        let updateData = {email: 'bob@bob.com'};
-        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+      it('should return a user with a new email', done => {
+        let updateData = {email: 'bob@bob.bob'};
+        request.put(`${url}/api/user/updateEmail`)
         .send(updateData)
         .set({
-          Authorization: `Bearer ${this.tempToken}`,
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
         })
         .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(validator.isEmail(updateData.email)).to.equal(true);
-          done();
-        });
-      });
-    });
-
-    describe('is not an email', function(){
-
-      before( done => mockUser.call(this, done));
-
-      it('should return a status 400', done => {
-        let updateData = {email: 'bob.bob.com'};
-        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
-        .send(updateData)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(validator.isEmail(updateData.email)).to.equal(false);
+          expect(res.status).to.equal(401);
           done();
         });
       });
     });
   });
 
-  describe('testing PUT /api/:userID/updateUsername', function() {
+  describe('testing PUT /api/user/updateUsername', function() {
 
     describe('with valid token and id', function() {
 
@@ -321,7 +283,7 @@ describe('testing auth-router', function() {
 
       it('should return a user with a new username', done => {
         let updateData = {username: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}/updateUsername`)
+        request.put(`${url}/api/user/updateUsername`)
         .send(updateData)
         .set({
           Authorization: `Bearer ${this.tempToken}`,
@@ -335,31 +297,33 @@ describe('testing auth-router', function() {
       });
     });
 
-    describe('with valid token and invalid id', function() {
+    describe('with wrong token', function() {
 
+      let tempSecondUser = {};
       before( done => mockUser.call(this, done));
+      before( done => mockUser.call(tempSecondUser, done));
 
       it('should return a status 404', done => {
-        let updateData = {username: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}bad/updateUsername`)
+        let updateData = {username: 'bob'};
+        request.put(`${url}/api/user/updateUsername`)
         .send(updateData)
         .set({
-          Authorization: `Bearer ${this.tempToken}`,
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
         })
         .end((err, res) => {
-          expect(res.status).to.equal(404);
+          expect(res.status).to.equal(401);
           done();
         });
       });
     });
 
-    describe('with invalid token and valid id', function() {
+    describe('with invalid token', function() {
 
       before( done => mockUser.call(this, done));
 
       it('should return a status 400', done => {
-        let updateData = {username: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}/updateUsername`)
+        let updateData = {username: 'bob'};
+        request.put(`${url}/api/user/updateUsername`)
         .send(updateData)
         .set({
           Authorization: 'Bearer ',
@@ -372,64 +336,63 @@ describe('testing auth-router', function() {
     });
   });
 
-  describe('testing PUT /api/:userID/updatePassword', function() {
+  describe('testing PUT /api/user/updatePassword', function() {
 
-    describe('with valid token and id', function() {
+    describe('with valid token', function() {
 
       before( done => mockUser.call(this, done));
+
+      it('should return a user with a new email', done => {
+        let updateData = {password: 'password'};
+        request.put(`${url}/api/user/updatePassword`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 400', done => {
+        let updateData = {password: 'password'};
+        request.put(`${url}/api/user/updatePassword`)
+        .send(updateData)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong token', function() {
+      let tempSecondUser = {};
+      before( done => mockUser.call(this, done));
+      before( done => mockUser.call(tempSecondUser, done));
 
       it('should return a user with a new password', done => {
-        let updateData = {password: 'bob@bob.bob'};
-        request.put(`${url}/api/${this.tempUser._id}/updatePassword`)
+        let updateData = {password: 'password'};
+        request.put(`${url}/api/user/updatePassword`)
         .send(updateData)
         .set({
-          Authorization: `Bearer ${this.tempToken}`,
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
         })
         .end((err, res) => {
-          if (err)
-            return done(err);
-          expect(res.status).to.equal(200);
-          done();
-        });
-      });
-    });
-
-    describe('with valid token and invalid id', function() {
-
-      before( done => mockUser.call(this, done));
-
-      it('should return a status 404', done => {
-        let updateData = {password: 'bigbobbig'};
-        request.put(`${url}/api/${this.tempUser._id}bad/updatePassword`)
-        .send(updateData)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(404);
-          done();
-        });
-      });
-    });
-
-    describe('with invalid token and valid id', function() {
-
-      before( done => mockUser.call(this, done));
-
-      it('should return a status 400', done => {
-        let updateData = {password: 'bigbobbig'};
-        request.put(`${url}/api/${this.tempUser._id}/updatePassword`)
-        .send(updateData)
-        .set({
-          Authorization: 'Bearer ',
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
+          expect(res.status).to.equal(401);
           done();
         });
       });
     });
   });
-
-
 });

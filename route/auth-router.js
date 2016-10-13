@@ -43,20 +43,21 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   .catch(next);
 });
 
-authRouter.delete('/api/:userID/deleteAccount', bearerAuth, function(req, res, next) {
-  debug('hit route DELETE /api/deleteAccount');
-  User.findByIdAndRemove(req.params.userID)
-  .then( user => {
-    if (user.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
+authRouter.delete('/api/user/deleteAccount', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/user/deleteAccount');
+  User.findByIdAndRemove(req.params._id)
+  .then( () => {
     res.sendStatus(204);
   })
-  .catch( err => next(createError(404, err.message)));
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
 });
 
-authRouter.put('/api/:userID/updateEmail', bearerAuth, function(req, res, next) {
-  debug('hit route PUT /api/:userID/updateEmail');
-  User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+authRouter.put('/api/user/updateEmail', bearerAuth, function(req, res, next) {
+  debug('hit route PUT /api/user/updateEmail');
+  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
@@ -66,9 +67,9 @@ authRouter.put('/api/:userID/updateEmail', bearerAuth, function(req, res, next) 
   });
 });
 
-authRouter.put('/api/:userID/updateUsername', bearerAuth, function(req, res, next) {
-  debug('hit route PUT /api/updateUsername');
-  User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+authRouter.put('/api/user/updateUsername', bearerAuth, function(req, res, next) {
+  debug('hit route PUT /api/user/updateUsername');
+  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
@@ -78,9 +79,9 @@ authRouter.put('/api/:userID/updateUsername', bearerAuth, function(req, res, nex
   });
 });
 
-authRouter.put('/api/:userID/updatePassword', bearerAuth, function(req, res, next) {
-  debug('hit route PUT /api/:userID/updatePassword');
-  User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) {
+  debug('hit route PUT /api/user/updatePassword');
+  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
