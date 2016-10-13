@@ -232,6 +232,7 @@ describe('testing auth-router', function() {
           if (err)
             return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.email).to.equal(updateData.email);
           done();
         });
       });
@@ -282,7 +283,7 @@ describe('testing auth-router', function() {
       before( done => mockUser.call(this, done));
 
       it('should return a user with a new username', done => {
-        let updateData = {username: 'bob@bob.bob'};
+        let updateData = {username: 'bobbob'};
         request.put(`${url}/api/user/updateUsername`)
         .send(updateData)
         .set({
@@ -292,6 +293,7 @@ describe('testing auth-router', function() {
           if (err)
             return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.username).to.equal(updateData.username);
           done();
         });
       });
@@ -353,6 +355,7 @@ describe('testing auth-router', function() {
           if (err)
             return done(err);
           expect(res.status).to.equal(200);
+          expect(res.body.password).to.equal(updateData.password);
           done();
         });
       });
