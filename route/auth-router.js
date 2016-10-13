@@ -34,8 +34,6 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   debug('hit route GET /api/login');
 
   User.findOne({username: req.auth.username})
-  .catch( err => Promise.reject(createError(401, err.message)))
-  // ^ 1 line currently not covered
   .then( user => user.comparePasswordHash(req.auth.password))
   .catch(err => Promise.reject(createError(401, err.message)))
   .then( user => user.generateToken())
@@ -61,10 +59,7 @@ authRouter.put('/api/user/updateEmail', bearerAuth, function(req, res, next) {
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 authRouter.put('/api/user/updateUsername', bearerAuth, function(req, res, next) {
@@ -73,10 +68,7 @@ authRouter.put('/api/user/updateUsername', bearerAuth, function(req, res, next) 
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) {
@@ -85,8 +77,5 @@ authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) 
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
