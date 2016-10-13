@@ -53,23 +53,22 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
 authRouter.delete('/api/user/deleteAccount', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/user/deleteAccount');
   User.findByIdAndRemove(req.user._id)
-    .catch( err => Promise.reject(err, err.message))
-    .then( () => Listing.remove({ userID: req.user._id}))
-    .then( () => Gallery.remove({ userID: req.user._id}))
-    .then( () => Artist.remove({ userID: req.user._id}))
-    .then( () => Photo.find({ userID: req.user._id}))
-    .then( photos => {
-      let s3DeletePhotoArray = [];
-      for(var i=0; i<photos.length; i++){
-        s3DeletePhotoArray.push(s3.deleteObject({
-          Bucket: 'artc-staging-assets',
-          Key: photos[i].objectKey,
-        }).promise());
-      }
-      return Promise.all(s3DeletePhotoArray);
-    })
-    .then( () => Photo.remove({ userID: req.user._id}))
-
+  .catch( err => Promise.reject(err, err.message))
+  .then( () => Listing.remove({ userID: req.user._id}))
+  .then( () => Gallery.remove({ userID: req.user._id}))
+  .then( () => Artist.remove({ userID: req.user._id}))
+  .then( () => Photo.find({ userID: req.user._id}))
+  .then( photos => {
+    let s3DeletePhotoArray = [];
+    for(var i=0; i<photos.length; i++){
+      s3DeletePhotoArray.push(s3.deleteObject({
+        Bucket: 'artc-staging-assets',
+        Key: photos[i].objectKey,
+      }).promise());
+    }
+    return Promise.all(s3DeletePhotoArray);
+  })
+  .then( () => Photo.remove({ userID: req.user._id}))
   .then( () => res.sendStatus(204))
   .catch(next);
 });
