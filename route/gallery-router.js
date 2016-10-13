@@ -87,22 +87,26 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   .catch( err => Promise.reject(err))
   .then( () => Listing.remove({ galleryID: req.params.galleryID}))
   .then( () => Photo.find({galleryID: req.params.galleryID}))
-  .then (photos => {
-    if(photos) {
-      console.log('PHOTOS', photos);
-      photos.forEach((photo) => {
-        s3.deleteObject({
-          Bucket: 'artc-staging-assets',
-          Key: photo.objectKey,
-        }).promise();
-      });
+  .then( photos => {
+    console.log('PHOTOS', photos);
+    let s3DeletePhotoArray = [];
+    for(var i=0; i<photos.length; i++){
+      s3DeletePhotoArray.push(s3.deleteObject({
+        Bucket: 'artc-staging-assets',
+        Key: photos[i].objectKey,
+      }));
     }
+    console.log(s3DeletePhotoArray, 'ARRAY****************');
+    return Promise.all(s3DeletePhotoArray);
   })
   .then( () => Photo.remove({galleryID: req.params.galleryID}))
   .then( () => {
     Artist.findById(req.params.artistID)
     .then( artist => {
-      artist.galleries.splice(req.params.galleryID, 1);
+      artist.galleries.forEach( gallery => {
+        if(artist.galleries[gallery] === req.params.galleryID)
+          artist.galleries.splice(artist.galleries.indexOf[gallery], 1);
+      });
       return artist.save();
     });
   })
