@@ -21,6 +21,8 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
   .catch(err => Promise.reject(createError(404, err.message)))
   // ^ 1 line currently not covered
   .then ((gallery) => {
+    if (gallery.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid user'));
     req.body.galleryID = gallery._id;
     req.body.artistID = gallery.artistID;
     req.body.userID = req.user._id;

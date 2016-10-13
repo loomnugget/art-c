@@ -307,23 +307,6 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('testing populate gallery listings with wrong user', function(){
-
-      before(done => mockMultipleListings.call(this, 10, done));
-      before(done => mockUser.call(this, done));
-
-      it('should return a 401 error for unauthorized access', done => {
-        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      });
-    });
-
     describe('with valid token and invalid id', () => {
 
       before(done => mockGallery.call(this, done));
@@ -351,23 +334,6 @@ describe('testing gallery-router', function() {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          done();
-        });
-      });
-    });
-
-    describe('with wrong user', () => {
-
-      before(done => mockGallery.call(this, done));
-      before(done => mockUser.call(this, done));
-
-      it('should status 401 unauthorized', done => {
-        request.get(`${url}/api/gallery/${this.tempGallery._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
           done();
         });
       });
