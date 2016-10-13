@@ -90,6 +90,7 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   .then( () => Photo.find({galleryID: req.params.galleryID}))
   .then (photos => {
     if(photos) {
+      console.log('PHOTOS', photos);
       photos.forEach((photo) => {
         s3.deleteObject({
           Bucket: 'artc-staging-assets',

@@ -13,7 +13,8 @@ const mongoose = require('mongoose');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
-const photoMock = require('./lib/photo-mock.js');
+// const photoMock = require('./lib/photo-mock.js');
+// const mockManyPhotos = require('./lib/mock-many-photos');
 const mockArtist = require('./lib/artist-mock');
 const mockGallery = require('./lib/gallery-mock');
 const mockUser = require('./lib/user-mock');
@@ -711,23 +712,22 @@ describe('testing gallery-router', function() {
       });
     });
 
-    describe('with valid token and id', () => {
-
-      before(done => photoMock.call(this, done));
-      // before(done => mockMultipleListings.call(this, 5, done));
-
-      it('should delete a gallery', done => {
-        request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          if (err)
-            return done(err);
-          expect(res.status).to.equal(204);
-          done();
-        });
-      });
-    });
+    // describe('with valid token and id', () => {
+    //
+    //   before( done => mockManyPhotos.call(this, 5, done));
+    //
+    //   it('should delete a gallery', done => {
+    //     request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
+    //     .set({
+    //       Authorization: `Bearer ${this.tempToken}`,
+    //     })
+    //     .end((err, res) => {
+    //       if (err)
+    //         return done(err);
+    //       expect(res.status).to.equal(204);
+    //       done();
+    //     });
+    //   });
+    // });
   });
 });
