@@ -188,7 +188,7 @@ describe('testing auth-router', function() {
 
       before( done => mockUser.call(this, done));
 
-      it('should return a status 401, bad request', (done) => {
+      it('should return a status 401, unauthorized', (done) => {
         request.get(`${url}/api/login`)
         .auth('notgood', this.tempPassword)
         .end((err, res) => {
@@ -203,7 +203,7 @@ describe('testing auth-router', function() {
 
       before( done => mockUser.call(this, done));
 
-      it('should return a status 401, bad request', (done) => {
+      it('should return a status 401, unauthorized', (done) => {
         request.get(`${url}/api/login`)
         .auth(this.tempUser.username, 'badpassword')
         .end((err, res) => {
