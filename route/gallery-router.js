@@ -28,7 +28,9 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
   // ^ 1 line currently not covered
-  .then ((artist) => {
+  .then ( artist => {
+    if (artist.userID.toString() !== req.user._id.toString())
+      return next(createError(401, 'invalid user'));
     tempArtist = artist;
     req.body.artistID = artist._id;
     req.body.userID = req.user._id;
@@ -61,18 +63,18 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
 });
 
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
-  //if artistID !== the req.params.artistID, reject error
   debug('hit route PUT /api/gallery/:galleryID');
-  Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true, runValidators: true})
+  Gallery.findById(req.params.galleryID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid userid'));
+    return Gallery.findByIdAndUpdate(req.params.galleryID, req.body, {new: true, runValidators: true});
+  })
+  .then(gallery => {
     res.json(gallery);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, function(req, res, next) {
