@@ -9,6 +9,7 @@ const expect = require('chai').expect;
 const request = require('superagent');
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 // app modules
 const serverCtrl = require('./lib/server-control');
@@ -48,6 +49,7 @@ describe('testing auth-router', function() {
             return done(err);
           expect(res.status).to.equal(200);
           expect(!!res.text).to.equal(true);
+          expect(validator.isEmail(exampleUser.email)).to.equal(true);
           done();
         });
       });
@@ -204,7 +206,7 @@ describe('testing auth-router', function() {
 
       it('should return a status 401, bad request', (done) => {
         request.get(`${url}/api/login`)
-        .auth(this.tempUser.username, 'baddpassword')
+        .auth(this.tempUser.username, 'badpassword')
         .end((err, res) => {
           expect(res.status).to.equal(401);
           expect(res.text).to.equal('UnauthorizedError');
@@ -271,6 +273,44 @@ describe('testing auth-router', function() {
         });
       });
     });
+
+    describe('is actually an email', function(){
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 400', done => {
+        let updateData = {email: 'bob@bob.com'};
+        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(validator.isEmail(updateData.email)).to.equal(true);
+          done();
+        });
+      });
+    });
+
+    describe('is not an email', function(){
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 400', done => {
+        let updateData = {email: 'bob.bob.com'};
+        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(validator.isEmail(updateData.email)).to.equal(false);
+          done();
+        });
+      });
+    });
   });
 
   describe('testing PUT /api/:userID/updateUsername', function() {
@@ -331,4 +371,65 @@ describe('testing auth-router', function() {
       });
     });
   });
+
+  describe('testing PUT /api/:userID/updatePassword', function() {
+
+    describe('with valid token and id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a user with a new password', done => {
+        let updateData = {password: 'bob@bob.bob'};
+        request.put(`${url}/api/${this.tempUser._id}/updatePassword`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and invalid id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 404', done => {
+        let updateData = {password: 'bigbobbig'};
+        request.put(`${url}/api/${this.tempUser._id}bad/updatePassword`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token and valid id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 400', done => {
+        let updateData = {password: 'bigbobbig'};
+        request.put(`${url}/api/${this.tempUser._id}/updatePassword`)
+        .send(updateData)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+  });
+
+
 });

@@ -55,7 +55,7 @@ authRouter.delete('/api/:userID/deleteAccount', bearerAuth, function(req, res, n
 });
 
 authRouter.put('/api/:userID/updateEmail', bearerAuth, function(req, res, next) {
-  debug('hit route PUT /api/updateEmail');
+  debug('hit route PUT /api/:userID/updateEmail');
   User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
@@ -68,6 +68,18 @@ authRouter.put('/api/:userID/updateEmail', bearerAuth, function(req, res, next) 
 
 authRouter.put('/api/:userID/updateUsername', bearerAuth, function(req, res, next) {
   debug('hit route PUT /api/updateUsername');
+  User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+  .then( user => {
+    res.json(user);
+  })
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
+});
+
+authRouter.put('/api/:userID/updatePassword', bearerAuth, function(req, res, next) {
+  debug('hit route PUT /api/:userID/updatePassword');
   User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
