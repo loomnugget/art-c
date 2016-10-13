@@ -88,7 +88,6 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   .then( () => Listing.remove({ galleryID: req.params.galleryID}))
   .then( () => Photo.find({galleryID: req.params.galleryID}))
   .then( photos => {
-    console.log('PHOTOS', photos);
     let s3DeletePhotoArray = [];
     for(var i=0; i<photos.length; i++){
       s3DeletePhotoArray.push(s3.deleteObject({

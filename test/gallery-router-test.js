@@ -695,27 +695,5 @@ describe('testing gallery-router', function() {
         });
       });
     });
-
-    // describe('with valid token and id', () => {
-    //
-    //   before( done => mockGallery.call(this, done));
-    //   before( done => {
-    //     this.tempArtist.galleries.push(this.tempGallery._id);
-    //     done();
-    //   });
-    //
-    //   it('should delete a gallery', done => {
-    //     request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
-    //     .set({
-    //       Authorization: `Bearer ${this.tempToken}`,
-    //     })
-    //     .end((err, res) => {
-    //       if (err) return done(err);
-    //       console.log(this.tempGallery);
-    //       expect(res.status).to.equal(204);
-    //       done();
-    //     });
-    //   });
-    // });
   });
 });
