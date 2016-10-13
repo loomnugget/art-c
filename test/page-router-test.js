@@ -17,7 +17,7 @@ const cleanDB = require('./lib/clean-db');
 //const mockUser = require('./lib/user-mock');
 //const mockArtist = require('./lib/artist-mock');
 const mockManyGalleries = require('./lib/populate-artist-galleries-mock.js');
-//const mockManyListings = require('./lib/populate-gallery-listings-mock.js');
+const mockManyListings = require('./lib/populate-gallery-listings-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -44,11 +44,11 @@ describe('testing page-router', function(){
   afterEach(done => cleanDB(done));
 
 
-  describe('testing /api/gallery', function() {
+  describe('testing /api/listing', function() {
     describe('with pagenation' , function() {
-      before(done => mockManyGalleries.call(this, 100, done));
+      before(done => mockManyListings.call(this, 100, done));
       it('should return 50 galleries', done => {
-        request.get(`${url}/api/gallery`)
+        request.get(`${url}/api/listing`)
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);

@@ -11,7 +11,7 @@ const AWS = require('aws-sdk');
 const Artist = require('../model/artist.js');
 const Gallery = require('../model/gallery.js');
 //const Photo = require('../model/photo.js');
-//const Listing = require('../model/listing.js');
+const Listing = require('../model/listing.js');
 //const bearerAuth = require('../lib/bearer-auth-middleware.js');
 const pageMiddleware = require('../lib/page-query-middleware.js');
 
@@ -37,5 +37,15 @@ pageRouter.get('/api/gallery', pageMiddleware, function(req, res, next){
   let skip = offset + pageSize * page ;
   Gallery.find().skip(skip).limit(pageSize)
   .then( galleries => res.json(galleries))
+  .catch(next);
+});
+
+pageRouter.get('/api/listing', pageMiddleware, function(req, res, next){
+  debug('hit route GET /api/listing');
+  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+
+  let skip = offset + pageSize * page ;
+  Listing.find().skip(skip).limit(pageSize)
+  .then( listings => res.json(listings))
   .catch(next);
 });
