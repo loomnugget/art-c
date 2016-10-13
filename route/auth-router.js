@@ -87,5 +87,5 @@ authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) 
   .catch( err => {
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
-  });
+  }); 
 });
