@@ -323,7 +323,6 @@ describe('testing artist-router', function() {
           done();
         });
       });
-
     });
 
     describe('with already-existing username', function() {
@@ -351,7 +350,6 @@ describe('testing artist-router', function() {
           done();
         });
       });
-
     });
 
     describe('with already-existing email', function() {
@@ -407,9 +405,24 @@ describe('testing artist-router', function() {
           done();
         });
       });
-
     });
 
+    describe('with wrong token', function() {
+      let tempSecondUser = {};
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(tempSecondUser, done));
+
+      it('should return status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
   });
 
   describe('testing GET to /api/artist/:artistID', () => {
@@ -534,6 +547,23 @@ describe('testing artist-router', function() {
         request.get(`${url}/api/artist/${this.tempArtist._id}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with wrong token', function() {
+      let tempSecondUser = {};
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(tempSecondUser, done));
+
+      it('should return status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
       });
@@ -855,6 +885,23 @@ describe('testing artist-router', function() {
           });
         });
       });
+
+      describe('with wrong token', function() {
+        let tempSecondUser = {};
+        before(done => mockArtist.call(this, done));
+        before(done => mockUser.call(tempSecondUser, done));
+
+        it('should return status 401 unauthorized', done => {
+          request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+          .set({
+            Authorization: `Bearer ${this.tempUser.tempToken}`,
+          })
+          .end((err, res) => {
+            expect(res.status).to.equal(401);
+            done();
+          });
+        });
+      });
     });
   });
 
@@ -923,12 +970,12 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with valid token and id', function() {
+    describe('with wrong token', function() {
       let tempSecondUser = {};
       before(done => mockArtist.call(this, done));
       before(done => mockUser.call(tempSecondUser, done));
 
-      it('should delete a artist', done => {
+      it('should return status 401 unauthorized', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}`)
         .set({
           Authorization: `Bearer ${this.tempUser.tempToken}`,

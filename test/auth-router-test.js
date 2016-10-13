@@ -165,7 +165,7 @@ describe('testing auth-router', function() {
     });
   });
 
-  describe('testing GET /api/signup', function() {
+  describe('testing GET /api/login', function() {
 
     describe('with valid authorization', function() {
 
@@ -255,7 +255,7 @@ describe('testing auth-router', function() {
       });
     });
 
-    describe('with invalid token', function() {
+    describe('with wrong token', function() {
       let tempSecondUser = {};
       before( done => mockUser.call(this, done));
       before( done => mockUser.call(tempSecondUser, done));
@@ -297,7 +297,7 @@ describe('testing auth-router', function() {
       });
     });
 
-    describe('with invalid token', function() {
+    describe('with wrong token', function() {
 
       let tempSecondUser = {};
       before( done => mockUser.call(this, done));
