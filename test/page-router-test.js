@@ -3,7 +3,7 @@
 // testing for page queries on all relevant models
 
 require('./lib/test-env.js');
-require('./lib/aws-mocks.js');
+require('./lib/aws-mock.js');
 
 // npm modules
 const expect = require('chai').expect;
@@ -16,8 +16,8 @@ const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
 //const mockUser = require('./lib/user-mock');
 //const mockArtist = require('./lib/artist-mock');
-//const mockManyGalleries = require('./lib/populate-artist-galleries-mock.js');
-const mockManyListings = require('./lib/populate-gallery-listings-mock.js');
+const mockManyGalleries = require('./lib/populate-artist-galleries-mock.js');
+//const mockManyListings = require('./lib/populate-gallery-listings-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -46,7 +46,8 @@ describe('testing page-router', function(){
  // test for page queries for many listings in a gallery with a given ID
   describe('testing /api/gallery', function() {
     describe('with pagenation' , function() {
-      it('should return 50 galleriyes', done => {
+      before(done => mockManyGalleries.call(this, 100, done));
+      it('should return 50 galleries', done => {
         request.get(`${url}/api/gallery`)
         .end((err, res) => {
           if (err) return done(err);
