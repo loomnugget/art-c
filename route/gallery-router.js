@@ -28,7 +28,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   .catch(err => Promise.reject(createError(404, err.message)))
   .then ( artist => {
     if (artist.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid user'));
+      return Promise.reject(createError(401, 'invalid user'));
     tempArtist = artist;
     req.body.artistID = artist._id;
     req.body.userID = req.user._id;
