@@ -11,6 +11,7 @@ module.exports = function(done){
     desc: 'george does cat portraits',
     category: 'portraits',
   };
+
   galleryMock.call(this, err => {
     if (err)
       return done(err);
