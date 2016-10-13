@@ -117,4 +117,18 @@ Devnotes need to be updated with current paths and versions.
       - Lee and Max: DELETE routes
       - Claudia: photo POST routes
       - Elizabeth: Devnotes and README.md
-      
+
+
+  **10/13/2016, 10:00am**
+
+    - Yesterday:
+
+      - Lee and Max: worked on deleting multiple photos from AWS and photo IDs from mongoDB.
+      - Claudia: researched stripe API
+      - Liz: worked on code coverage and README.md and devnotes.md
+
+    - Working on for the rest of the day:
+
+      - Lee and Max: DELETE routes for many photos
+      - Claudia: filtering, sorting, fuzzy and search queries
+      - Elizabeth: Devnotes and README.md route documentation
