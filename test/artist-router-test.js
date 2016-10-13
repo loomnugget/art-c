@@ -9,7 +9,6 @@ const expect = require('chai').expect;
 const request = require('superagent');
 const Promise = require('bluebird');
 const mongoose = require('mongoose');
-// const AWS = require('aws-sdk-mock');
 
 // app modules
 const serverCtrl = require('./lib/server-control');
@@ -17,6 +16,7 @@ const cleanDB = require('./lib/clean-db');
 const mockUser = require('./lib/user-mock');
 const mockArtist = require('./lib/artist-mock');
 const mockMultipleGalleries = require('./lib/populate-artist-galleries-mock.js');
+const mockManyPhotos = require('./lib/mock-many-photos.js');
 
 mongoose.Promise = Promise;
 
@@ -982,6 +982,23 @@ describe('testing artist-router', function() {
         })
         .end((err, res) => {
           expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and id', () => {
+
+      before( done => mockManyPhotos.call(this, 5, done));
+
+      it('should delete an artist and all associated galleries, listings and photos', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err) return done(err);
+          expect(res.status).to.equal(204);
           done();
         });
       });
