@@ -166,7 +166,7 @@ describe('testing auth-router', function() {
 
   });
 
-  describe('testing GET /api/signup', function() {
+  describe('testing GET /api/login', function() {
 
     describe('with valid authorization', function() {
 
@@ -199,6 +199,21 @@ describe('testing auth-router', function() {
         });
       });
     });
+//TODO: Make the below test throw the catch block on auth-router on line 37
+    // describe('with a bad username', function() {
+    //
+    //   before( done => mockUser.call(this, done));
+    //
+    //   it('should return a status 401, bad request', (done) => {
+    //     request.get(`${url}/api/login`)
+    //     .auth('notgood', this.tempPassword)
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(401);
+    //       expect(res.text).to.equal('UnauthorizedError');
+    //       done();
+    //     });
+    //   });
+    // });
 
     describe('with a bad password', function() {
 
