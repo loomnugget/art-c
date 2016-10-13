@@ -283,24 +283,6 @@ describe('testing listing-router', function(){
         });
       });
     });
-
-    describe('with wrong user', () => {
-
-      before(done => mockListing.call(this, done));
-      before(done => mockUser.call(this, done));
-
-      it('should status 401 unauthorized', done => {
-        request.get(`${url}/api/listing/${this.tempListing._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      });
-    });
-
   });
 
   describe('testing PUT to /api/listing/:listingID', () => {

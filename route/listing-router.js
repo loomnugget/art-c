@@ -8,6 +8,7 @@ const createError = require('http-errors');
 
 // app modules
 const Gallery = require('../model/gallery.js');
+const Photo = require('../model/photo.js');
 const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
@@ -19,10 +20,9 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
   let tempGallery, tempListing;
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // ^ 1 line currently not covered
   .then ((gallery) => {
     if (gallery.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid user'));
+      return Promise.reject(createError(401, 'invalid user'));
     req.body.galleryID = gallery._id;
     req.body.artistID = gallery.artistID;
     req.body.userID = req.user._id;
@@ -43,8 +43,6 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
   debug('GET /api/listing/:listingID');
   Listing.findById(req.params.listingID)
   .then(listing => {
-    if(listing.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
     res.json(listing);
   })
   .catch(err => {
@@ -55,26 +53,41 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
 
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
-  Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true, runValidators: true})
+  Listing.findById(req.params.listingID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( listing => {
     if(listing.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
+      return Promise.reject(createError(401, 'invalid userid'));
+    return Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true, runValidators: true});
+  })
+  .then(listing => {
     res.json(listing);
   })
-  .catch(err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, function(req, res, next) {
   debug('hit route DELETE /api/gallery/:galleryID/listing/:listingID');
-  Listing.findByIdAndRemove(req.params.listingID)
+  Listing.findById(req.params.listingID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( listing => {
     if(listing.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
+      return Promise.reject(createError(401, 'invalid userid'));
       // ^ 1 line currently not covered
-    res.sendStatus(204);
+    return Gallery.findById(req.params.galleryID);
   })
-  .catch( err => next(createError(404, err.message)));
+  .catch( err => err.status? Promise.reject(err) : Promise.reject(createError(404, err.message)))
+  .then( gallery => {
+    gallery.listings.forEach( listing => {
+      if(gallery.listings[listing] === req.params.listingID)
+        gallery.listings.splice(listing, 1);
+    });
+    return gallery.save();
+  })
+  .then( () => Photo.remove({listingID: req.params.listingID}))
+  .then( () => {
+    return Listing.findByIdAndRemove(req.params.listingID);
+  })
+  .then( () => res.sendStatus(204))
+  .catch(next);
 });
