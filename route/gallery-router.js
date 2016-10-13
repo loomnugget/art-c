@@ -20,7 +20,6 @@ AWS.config.setPromisesDependency(require('bluebird'));
 const galleryRouter = module.exports = Router();
 const s3 = new AWS.S3();
 
-//TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/gallery');
   let tempArtist;
