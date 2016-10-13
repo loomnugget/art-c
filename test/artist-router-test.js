@@ -493,23 +493,6 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('testing populate artist galleries with wrong user', function(){
-
-      before(done => mockMultipleGalleries.call(this, 10, done));
-      before(done => mockUser.call(this, done));
-
-      it('should return an artist with populated gallery array', done => {
-        request.get(`${url}/api/artist/${this.tempArtist._id}`)
-        .set({
-          Authorization: `Bearer ${this.tempToken}`,
-        })
-        .end((err, res) => {
-          expect(res.status).to.equal(401);
-          done();
-        });
-      });
-    });
-
     describe('with valid token and invalid id', function(){
 
       before(done => mockArtist.call(this, done));
@@ -927,7 +910,7 @@ describe('testing artist-router', function() {
       });
     });
 
-    describe('with no auth header', function(){
+    describe('with no auth header', function() {
 
       before(done => mockArtist.call(this, done));
 
@@ -935,6 +918,23 @@ describe('testing artist-router', function() {
         request.delete(`${url}/api/artist/${this.tempArtist._id}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and id', function() {
+      let tempSecondUser = {};
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(tempSecondUser, done));
+
+      it('should delete a artist', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
           done();
         });
       });

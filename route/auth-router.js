@@ -43,15 +43,16 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   .catch(next);
 });
 
-authRouter.delete('/api/:userID/deleteAccount', bearerAuth, function(req, res, next) {
-  debug('hit route DELETE /api/deleteAccount');
-  User.findByIdAndRemove(req.params.userID)
-  .then( user => {
-    if (user.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
+authRouter.delete('/api/user/deleteAccount', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/user/deleteAccount');
+  User.findByIdAndRemove(req.params._id)
+  .then( () => {
     res.sendStatus(204);
   })
-  .catch( err => next(createError(404, err.message)));
+  .catch( err => {
+    if (err.name === 'ValidationError') return next(err);
+    next(createError(404, err.message));
+  });
 });
 
 authRouter.put('/api/user/updateEmail', bearerAuth, function(req, res, next) {
@@ -87,5 +88,5 @@ authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) 
   .catch( err => {
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
-  }); 
+  });
 });
