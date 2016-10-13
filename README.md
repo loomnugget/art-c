@@ -6,8 +6,20 @@
 
 ##### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
-This REST API allows a developer to set up a site where users can create accounts to view, or display items.
-(REST API that returns JSON)
+This REST API allows a developer to set up a site where users can create accounts to view, or display items. An artist can create a profile that allows them to make listings and galleries of listings so that others can view their work.
+
+
+### CURRENT VERSION `v0.0.5`
+
+The current version of this API allows:
+- For authorized Users to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
+- For authorized Users to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
+- For all Users to **GET** Artist's _Profile_ by **artistID**.
+  <!-- - _Profile_ **GET** requests can be refined by searching _Profile Properties_ such as **username**. -->
+- For all Users to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
+  <!-- - _Gallery_ **GET** requests can be refined by searching _Gallery Properties_ such as **name**. -->
+- For all Users to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
+  <!-- - _Listing_ **GET** requests can be refined by searching _Listing Properties_ such as **title**. -->
 
 ---
 
@@ -15,7 +27,7 @@ This REST API allows a developer to set up a site where users can create account
 
 ---
 
-This is how you get setup
+You want to pull this repo
 
 ---
 
@@ -24,122 +36,531 @@ This is how you get setup
 
 ### **User Account**
 
-##### This is the basic
-
-  ##### Adding a User Account
-Creates a new User Object.
+  ##### Create _User_
+Creates a new _User Object_.
 
   ```
   #/api/setup
   ```
-  ##### Finding a User Account
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "username": "",
+      "email": "",
+      "password": "",
+      "findHash": ""
+    }
+    ```
+
+  ##### Find _User_
+Finds and returns a _User Object_ with associated **username**/**email** and **password**.
+
   ```
   #/api/login
   ```
-  ##### Updating a User Account
-  - Updating email
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "username": "",
+      "email": "",
+      "password": "",
+      "findHash": ""
+    }
+    ```
+
+  ##### Update _User Account_
+Finds and updates a _User Object_ with associated
+
+  - Update **email**
     ```
     #/api/:userID/updateEmail
     ```
-  - Updating username
+    - Expected _Headers_
+
+    - Expected _Body_
+
+    - Expected _Response_
+      - status: ``
+      - body:
+      ```json
+      {
+        "username": "",
+        "email": "",
+        "password": "",
+        "findHash": ""
+      }
+      ```
+
+  - Update **username**
     ```
     #/api/:userID/updateUsername
     ```
-  - Updating password
+    - Expected _Headers_
+
+    - Expected _Body_
+
+    - Expected _Response_
+      - status: ``
+      - body:
+      ```json
+      {
+        "username": "",
+        "email": "",
+        "password": "",
+        "findHash": ""
+      }
+      ```
+
+  - Update **password**
     ```
     #/api/:userID/updatePassword
     ```
-  ##### Removing a User Account
+    - Expected _Headers_
+
+    - Expected _Body_
+
+    - Expected _Response_
+      - status: ``
+      - body:
+      ```json
+      {
+        "username": "",
+        "email": "",
+        "password": "",
+        "findHash": ""
+      }
+      ```
+
+  ##### Destroy _User Account_
   ```
   #/api/:userID/deleteAccount
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
 
 ---
 
 ### **Artist Profile**
 
-  #### Adding an Artist Profile
+  #### Add _Artist Profile_
   ```
   #/api/artist
   ```
-  #### Finding an Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "about": "",
+      "phone": "",
+      "email": "",
+      "username": "",
+      "created": "",
+      "firstname": "",
+      "lastname": "",
+      "city": "",
+      "zip": "",
+      "userID": "",
+      "galleries": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Create _Artist Profile_
   ```
   #/api/artist/:artistID
   ```
-  #### Updating an Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "about": "",
+      "phone": "",
+      "email": "",
+      "username": "",
+      "created": "",
+      "firstname": "",
+      "lastname": "",
+      "city": "",
+      "zip": "",
+      "userID": "",
+      "galleries": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Update _Artist Profile_
   ```
   #/api/artist/:artistID
   ```
-  #### Removing an Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "about": "",
+      "phone": "",
+      "email": "",
+      "username": "",
+      "created": "",
+      "firstname": "",
+      "lastname": "",
+      "city": "",
+      "zip": "",
+      "userID": "",
+      "galleries": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Destroy _Artist Profile_
   ```
   #/api/artist/:artistID
   ```
-  #### Adding an Image to Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
+  #### Adding _Image_ to _Artist Profile_
   ```
   #/api/artist/:artistID/photo
   ```
-  #### Removing an Image from Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove _Image_ from _Artist Profile_
   ```
   #/api/artist/:artistID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
 
 ---
 
 ### **Gallery**
 
-  #### Adding a Gallery
+  #### Adding _Gallery_
   ```
   #/api/artist/:artistID/gallery
   ```
-  #### Finding a Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "listings": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Finding _Gallery_
   ```
   #/api/artist/:artistID/gallery/:galleryID
   ```
-  #### Updating a Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "name": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "listings": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Updating _Gallery_
   ```
   #/api/artist/:artistID/gallery/:galleryID
   ```
-  #### Removing a Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "name": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "listings": "[]",
+      "photoID": ""
+    }
+    ```
+
+  #### Destroy _Gallery_
   ```
   #/api/artist/:artistID/gallery/:galleryID
   ```
-  #### Adding an Image to Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
+  #### Add _Image_ to _Gallery_
   ```
   #/api/gallery/:galleryID/photo
   ```
-  #### Removing an Image from Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove _Image_ from _Gallery_
   ```
   #/api/gallery/:galleryID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
 
 ---
 
 ### **Listing**
 
-  #### Adding a Listing
+  #### Create _Listing_
   ```
   #/api/gallery/:galleryID/listing
   ```
-  #### Finding a Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "title": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "photoID": "",
+    }
+    ```
+
+  #### Find _Listing_
   ```
   #/api/gallery/:galleryID/listing/:listingID
   ```
-  #### Updating a Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "title": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "photoID": "",
+    }
+    ```
+
+  #### Update _Listing_
   ```
   #/api/gallery/:galleryID/listing/:listingID
   ```
-  #### Removing a Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: ``
+    - body:
+    ```json
+    {
+      "title": "",
+      "desc": "",
+      "username": "",
+      "category": "",
+      "created": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "photoID": "",
+    }
+    ```
+
+  #### Destroy _Listing_
   ```
   #/api/gallery/:galleryID/listing/:listingID
   ```
-  #### Adding an Image to Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
+  #### Add _Image_ to _Listing_
   ```
   #/api/listing/:listingID/photo
   ```
-  #### Removing an Image from Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove _Image_ from _Listing_
   ```
   #/api/listing/:listingID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
 
 ---
 
@@ -149,26 +570,119 @@ Creates a new User Object.
   ```
   #/api/artist/:artistID/photo
   ```
-  #### Removing an Image from Artist Profile
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove an Image from Artist Profile
   ```
   #/api/artist/:artistID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
   #### Adding an Image to Gallery
   ```
   #/api/gallery/:galleryID/photo
   ```
-  #### Removing an Image from Gallery
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove an Image from Gallery
   ```
   #/api/gallery/:galleryID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
   #### Adding an Image to Listing
   ```
   #/api/listing/:listingID/photo
   ```
-  #### Removing an Image from Listing
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {
+      "name": "",
+      "alt": "",
+      "objectKey": "",
+      "imageURI": "",
+      "username": "",
+      "userID": "",
+      "artistID": "",
+      "galleryID": "",
+      "listingID": ""
+    }
+    ```
+
+  #### Remove an Image from Listing
   ```
   #/api/listing/:listingID/photo/:photoID
   ```
+  - Expected _Headers_
+
+  - Expected _Body_
+
+  - Expected _Response_
+    - status: `204`
+    - body:
+    <!-- ```json
+    ``` -->
+
 ---
 
 ```
