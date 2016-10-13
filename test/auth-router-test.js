@@ -213,4 +213,63 @@ describe('testing auth-router', function() {
       });
     });
   });
+
+  describe('testing PUT /api/:userID/updateEmail', function() {
+
+    describe('with valid token and id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a user with a new email', done => {
+        let updateData = {email: 'bob@bob.bob'};
+        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
+
+    describe('with valid token and invalid id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 404', done => {
+        let updateData = {email: 'bob@bob.bob'};
+        request.put(`${url}/api/${this.tempUser._id}bad/updateEmail`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
+    describe('with invalid token and valid id', function() {
+
+      before( done => mockUser.call(this, done));
+
+      it('should return a status 400', done => {
+        let updateData = {email: 'bob@bob.bob'};
+        request.put(`${url}/api/${this.tempUser._id}/updateEmail`)
+        .send(updateData)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+  });
 });

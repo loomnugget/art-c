@@ -5,6 +5,7 @@ const Router = require('express').Router;
 const jsonParser = require('body-parser').json();
 const debug = require('debug')('artc:gallery-route');
 const createError = require('http-errors');
+const AWS = require('aws-sdk');
 
 // app modules
 const Artist = require('../model/artist.js');
@@ -13,8 +14,11 @@ const Photo = require('../model/photo.js');
 const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
 
+AWS.config.setPromisesDependency(require('bluebird'));
+
 // module constants
 const galleryRouter = module.exports = Router();
+const s3 = new AWS.S3();
 
 //TODO: Refactor all routes to take in /api/artist/:artistID/gallery/:galleryID'
 galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, function(req, res, next) {
@@ -75,24 +79,33 @@ galleryRouter.delete('/api/artist/:artistID/gallery/:galleryID', bearerAuth, fun
   debug('hit route DELETE /api/gallery/:galleryID');
 
   Gallery.findById(req.params.galleryID)
-  .catch(err => {
-    return Promise.reject(createError(404, err.message));
-  })
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'unauthorized'));
+    return Gallery.findByIdAndRemove(req.params.galleryID);
   })
+  .catch( err => Promise.reject(err))
+  .then( () => Listing.remove({ galleryID: req.params.galleryID}))
+  .then( () => Photo.find({galleryID: req.params.galleryID}))
+  .then (photos => {
+    if(photos) {
+      photos.forEach((photo) => {
+        s3.deleteObject({
+          Bucket: 'artc-staging-assets',
+          Key: photo.objectKey,
+        }).promise();
+      });
+    }
+  })
+  .then( () => Photo.remove({galleryID: req.params.galleryID}))
   .then( () => {
-    return Gallery.findByIdAndRemove(req.params.id);
+    Artist.findById(req.params.artistID)
+    .then( artist => {
+      artist.galleries.splice(req.params.galleryID, 1);
+      return artist.save();
+    });
   })
-  .then( () => {
-    Listing.remove({ galleryID: req.params.galleryID});
-  })
-  .then( () => {
-    Photo.remove({ galleryID: req.params.galleryID});
-  })
-  .then( () => {
-    res.sendStatus(204);
-  })
+  .then( () => res.sendStatus(204))
   .catch(next);
 });
