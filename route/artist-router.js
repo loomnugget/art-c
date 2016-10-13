@@ -43,9 +43,7 @@ artistRouter.put('/api/artist/:artistID', bearerAuth, jsonParser, function(req, 
       return next(createError(401, 'invalid userid'));
     return Artist.findByIdAndUpdate(req.params.artistID, req.body, {new: true, runValidators: true});
   })
-  .then(artist => {
-    res.json(artist);
-  })
+  .then(artist => res.json(artist))
   .catch(next);
 });
 
