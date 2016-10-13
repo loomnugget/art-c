@@ -683,7 +683,7 @@ describe('testing gallery-router', function() {
 
       before( done => mockManyPhotos.call(this, 5, done));
 
-      it('should delete a gallery', done => {
+      it('should delete a gallery and all associated listings and photos', done => {
         request.delete(`${url}/api/artist/${this.tempArtist._id}/gallery/${this.tempGallery._id}`)
         .set({
           Authorization: `Bearer ${this.tempToken}`,

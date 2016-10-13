@@ -27,7 +27,6 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
   let tempGallery;
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // ^ 1 line currently not covered
   .then ( artist => {
     if (artist.userID.toString() !== req.user._id.toString())
       return next(createError(401, 'invalid user'));

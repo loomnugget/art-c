@@ -47,13 +47,11 @@ listingRouter.post('/api/gallery/:galleryID/listing', bearerAuth, jsonParser, fu
 listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next) {
   debug('GET /api/listing/:listingID');
   Listing.findById(req.params.listingID)
+  .catch(err => Promise.reject(createError(404, err.message)))
   .then(listing => {
     res.json(listing);
   })
-  .catch(err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
