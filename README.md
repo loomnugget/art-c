@@ -2,108 +2,171 @@
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
 ---
-# ART-C
+# **ART-C**
 
-##### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
+#### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
 This REST API allows a developer to set up a site where users can create accounts to view, or display items.
 
 An artist can create an _Artist Profile_ that allows them to make _Galleries_ of _Listings_ so that others can view their work.
 
-The Artists, Galleries, Listings and Images are stored in a Mongo Database for
 
-
-### CURRENT VERSION `v0.0.5`
+## CURRENT VERSION `v0.0.5`
 
 The current version of this API allows:
-- For authorized Users to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
-- For authorized Users to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
-- For all Users to **GET** Artist's _Profile_ by **artistID**.
-- For all Users to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
-- For all Users to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
+  - For **authorized Users** to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
+  - For **authorized Users** to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
+  - For **all Users** to **GET** Artist's _Profile_ by **artistID**.
+  - For **all Users** to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
+  - For **all Users** to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
 
 ---
 
-## **Setup**
+# **Contribution and Use**
 
+
+### **Issues** 
+
+- People who would like to let the developers know about an enhancement or bug concerning this API can create an Issue on the GitHub repo.
+  - **Bug** if something is broken or missing(but we say it is there), select the _Bug_ label when creating the Issue.
+  - **Enhancement** if there is something that you think will make our REST API that much better, submit an Issue with the _Enhancement_ label.
+          
+The development team will be notified when there is a new Issue on the Art-C repo.
+
+### **Code Use**
+
+In order to use this REST API on your own website, you will need to fork your own copy of this GitHub repo:
+## [GitHub](https://github.com/loomnugget/art-c)
+
+- You need to make sure that you have all the dependencies installed from the package.json file.
+  You can run `npm install` in your local verson of the repo to automatically download all of our listed dependencies.
+  
 ---
 
-In order to use this REST API on your own website, you will need all the files from the GitHub repo you can clone the files from:
-### [GitHub](https://github.com/loomnugget/art-c)
-- Then you should open your terminal in the repo folder and type the command
-```
-npm install
-```
-to install all dependencies and dev-dependencies required to run the included code.
-
-- To run the tests (in order to make sure you didn't break any of the functions) you can type the command
-```
-npm run test
-```
-  - if you want to target a specific test file, you can alter the command
-  ```
-  npm run test test/<your-test-file>.js
-  ```
-
-
-
+# **Models**
 ---
 
-## **Use**
+The Models for our _User Objects_ are:
+  - **_User_**  
+    - Account that allows individuals to **GET** other Artists' Profiles, Galleries and Listings.
+  - **_Artist_**
+    - Profile that allows users to **POST**, **PUT** and **DELETE** Galleries, Listings and Images associated with that Artist.
+    - Can have an attached _Profile Image_
+  - **_Gallery_**
+    - Object that contains currently available _Listings_. 
+    - Can have an attached _Gallery Image_.
+  - **_Listing_**
+    - Object that shows a currently listed item.
+    - Can have an attached _Listing Image_.
+  - **_Image_**
+    - Object that contains an image along with image properties.
+    - Can be attached to _Artist_, _Gallery_ or _Listing_.
+    
+The Model properties can have various conditions which determine how the user interacts with them:
+  - **[required]** | this property, if left off, will cause the object to not be created or affected.
+  - **[unique]** | this property cannot match the same property of another, similar object.
+  - **[input]** | this property is user-created.
+  - **[generated]** | this property is created automatically, either by being generated when the object is created or pulled from another associated object.
+  - **[validated]** | this property can be selected from a pre-made, validated list of options.
+    
 ---
 
-### **User Account**
+# **Routes**
+---
+The routes for this API essentially contain:
+  - **Headers**
+    - Bearer token provided on User Account creation.
+  - **Body**
+    - Contains user-input information.
+    - Changes or creates properties when specified.
+  - **Response**
+    - Contains new, found or changed object available to user.
+    - Shows properties on the object as-of the end of the request.
 
-  ##### Create _User_
-Creates a new _User Object_.
 
+## **User Account**
+
+The User Account is an object with the properties:
+  - **username** [required][unique][user-input]
+  - **email** [required][unique][user-input]
+  - **password** [required][user-input]
+  - **findHash** [generated]
+
+---
+### Create _User_
+Creates a new _User Object_ used to sign-in and affect other objects associated with that _User Object_.
+
+  **POST request**
   ```
   #/api/setup
   ```
   - Expected _Headers_
-    - `(Bearer <user token>)`
+  
+    `null`
+  
   - Expected _Body_
+  
   ```json
      {
        "username": "<username>",
+       "email": "<email>",
        "password": "<password>"
        }
   ```
+  
   - Expected _Response_
+  
     - status: `200`
+    
     - body:
     ```json
     {}
     ```
+---
 
-  ##### Find _User_
-Finds and returns a _User Object_ with associated **username**/**email** and **password**.
+### Find _User_
+Finds and makes active a _User Object_ with **username**/**email** and **password**.
 
   ```
   #/api/login
   ```
+  **GET request**
   - Expected _Headers_
-
+  
+    `Bearer <user-token>`
+  
   - Expected _Body_
-
+  
+    `null`
+  
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {}
     ```
+---
 
-  ##### Update _User Account_
-Finds and updates a _User Object_ with associated
+### Update _User_
+Updates current _User Object_ property with new property. 
 
   - Update **email**
     ```
     #/api/:userID/updateEmail
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer <user token>)`
+      
+      `Bearer <user token>`
+      
     - Expected _Body_
-
+      
+       ```json
+       {
+        "email": "<new-email>"
+       }
+       ```
+       
     - Expected _Response_
       - status: `200`
       - body:
@@ -115,14 +178,19 @@ Finds and updates a _User Object_ with associated
     ```
     #/api/:userID/updateUsername
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer <user token>)`
+    
+      `Bearer <user-token>`
+      
     - Expected _Body_
+    
       ```json
       {
-        "username": "<new username>"
+       "username": "<new username>"
       }
       ```
+      
     - Expected _Response_
       - status: `200`
       - body:
@@ -134,10 +202,19 @@ Finds and updates a _User Object_ with associated
     ```
     #/api/:userID/updatePassword
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer)`
+    
+      `Bearer <user-token>`
+    
     - Expected _Body_
-
+      
+      ```json
+      {
+       "password": "<new password>"
+      }
+      ```
+    
     - Expected _Response_
       - status: `200`
       - body:
@@ -145,13 +222,19 @@ Finds and updates a _User Object_ with associated
       {}
       ```
 
+---
   ##### Destroy _User Account_
   ```
   #/api/:userID/deleteAccount
   ```
+  **DELETE request**
   - Expected _Headers_
-    - `(Bearer <user bearer token>)`
+  
+    `Bearer <user bearer token>`
+    
   - Expected _Body_
+  
+    `null`
 
   - Expected _Response_
     - status: `204`
