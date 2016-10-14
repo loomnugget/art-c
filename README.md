@@ -13,20 +13,6 @@ An artist can create an _Artist Profile_ that allows them to make _Galleries_ of
 
 ## CURRENT VERSION `v0.0.5`
 
-Models:
-- **_User_**  
-  
-    Account that allows individuals to **GET** other Artists' Profiles, Galleries and Listings.
-- **_Artist_**
-  
-    Allows users to **POST**, **PUT** and **DELETE** Galleries, Listings and Images associated with that Artist
-- **_Gallery_**
-  
-    Contains currently available _Listings_. 
-- **_Listing_**
-  
-    Shows an available item for sale.
-
 The current version of this API allows:
   - For **authorized Users** to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
   - For **authorized Users** to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
@@ -57,14 +43,45 @@ In order to use this REST API on your own website, you will need to fork your ow
   
 ---
 
+# **Models**
+---
+
+The Models for our _User Objects_ are:
+  - **_User_**  
+    - Account that allows individuals to **GET** other Artists' Profiles, Galleries and Listings.
+  - **_Artist_**
+    - Profile that allows users to **POST**, **PUT** and **DELETE** Galleries, Listings and Images associated with that Artist.
+    - Can have an attached _Profile Image_
+  - **_Gallery_**
+    - Object that contains currently available _Listings_. 
+    - Can have an attached _Gallery Image_.
+  - **_Listing_**
+    - Object that shows a currently listed item.
+    - Can have an attached _Listing Image_.
+  - **_Image_**
+    - Object that contains an image along with image properties.
+    - Can be attached to _Artist_, _Gallery_ or _Listing_.
+    
+The Model properties can have various conditions which determine how the user interacts with them:
+  - **[required]** | this property, if left off, will cause the object to not be created or affected.
+  - **[unique]** | this property cannot match the same property of another, similar object.
+  - **[input]** | this property is user-created.
+  - **[generated]** | this property is created automatically, either by being generated when the object is created or pulled from another associated object.
+  - **[validated]** | this property can be selected from a pre-made, validated list of options.
+    
+---
+
 # **Routes**
 ---
 The routes for this API essentially contain:
-  - Headers
-    -
-  - Body
-  - Response
-
+  - **Headers**
+    - Bearer token provided on User Account creation.
+  - **Body**
+    - Contains user-input information.
+    - Changes or creates properties when specified.
+  - **Response**
+    - Contains new, found or changed object available to user.
+    - Shows properties on the object as-of the end of the request.
 
 
 ## **User Account**
