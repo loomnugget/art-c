@@ -68,6 +68,7 @@ The Model properties can have various conditions which determine how the user in
   - **[input]** | this property is user-created.
   - **[generated]** | this property is created automatically, either by being generated when the object is created or pulled from another associated object.
   - **[validated]** | this property can be selected from a pre-made, validated list of options.
+  - **[min-length #]** | this property has a minimum input-length of "#".
     
 ---
 
@@ -87,6 +88,7 @@ The routes for this API essentially contain:
 ## **User Account**
 
 The User Account is an object with the properties:
+  - **_id** [required][generated]
   - **username** [required][unique][user-input]
   - **email** [required][unique][user-input]
   - **password** [required][user-input]
@@ -122,6 +124,7 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
     ```json
     {}
     ```
+
 ---
 
 ### Find _User_
@@ -145,6 +148,7 @@ Finds and makes active a _User Object_ with **username**/**email** and **passwor
     ```json
     {}
     ```
+
 ---
 
 ### Update _User_
@@ -223,7 +227,7 @@ Updates current _User Object_ property with new property.
       ```
 
 ---
-  ##### Destroy _User Account_
+### Destroy _User_
   ```
   #/api/:userID/deleteAccount
   ```
@@ -245,9 +249,25 @@ Updates current _User Object_ property with new property.
 
 ---
 
-### **Artist Profile**
+## **Artist Profile**
 
-  #### Create _Artist Profile_
+The User Account is an object with the properties:
+  - **_id** [required][generated]
+  - **userID** [required][generated]
+  - **galleries** [generated]
+  - **photoID** [generated]
+  - **username** [required][generated]
+  - **created** [required][generated]
+  - **firstname** [required][user-input][min-length 3]
+  - **lastname** [required][user-input][min-length 3]
+  - **city** [required]
+  - **zip** [required]
+  - **about**
+  - **phone** [unique]
+
+---
+### Create _Artist_
+  
   ```
   #/api/artist/:artistID
   ```
@@ -260,19 +280,19 @@ Updates current _User Object_ property with new property.
     - body:
     ```json
     {
-      "_id": "5800040b82be13172f30ca4d",
-      "firstname": "Vindra",
-      "lastname": "Urywen",
-      "city": "Forest",
-      "zip": "92581",
-      "about": "I am Vindra, graceful elven bard.",
-      "phone": "4252255225",
-      "userID": "58001780a93d821dda8c46cb",
-      "username": "bard-tacular",
-      "email": "vindra.the.graceful@elvenbards.com",
+      "_id": "<generated-id>",
+      "firstname": "<first-name>",
+      "lastname": "<last-name>",
+      "city": "<city>",
+      "zip": "<zipcode>",
+      "about": "<about-artist>",
+      "phone": "<phone-number>",
+      "userID": "<pulled-user-id>",
+      "username": "<pulled-username>",
+      "email": "<pulled-email>",
       "__v": "0",
-      "galleries": "[]",
-      "created": "2016-10-13T22:00:43.999Z",
+      "galleries": "[]<empty-array-for-galleries>",
+      "created": "<generated-date>",
     }
     ```
 
