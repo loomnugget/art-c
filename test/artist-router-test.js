@@ -55,8 +55,6 @@ describe('testing artist-router', function() {
         })
         .end((err, res) => {
           if (err) return done(err);
-          console.log('status', res.status);
-          console.log('body', res.body);
           expect(res.status).to.equal(200);
           expect(res.body.firstname).to.equal(exampleArtist.firstname);
           expect(res.body.lastname).to.equal(exampleArtist.lastname);
@@ -75,342 +73,342 @@ describe('testing artist-router', function() {
 
     });
 
-  //   describe('with no firstname', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.username,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with no lastname', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         username: exampleArtist.username,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with no username', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should status 400 bad request', (done) => {
-  //
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //   });
-  //
-  //   describe('with no email', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return an artist profile and a status 400', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.username,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with no city', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return an artist profile and a status 400', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.username,
-  //         email: exampleArtist.email,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with no zip', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return an artist profile and a status 400', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.username,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with invalid date--string', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return an artist profile and a status 400', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.username,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //         created: 'striiiing',
-  //       })
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with an invalid body', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should a status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send('badbody')
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with a bad authorization header', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send(exampleArtist)
-  //       .set({
-  //         Authorization: 'bad request',
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with no authorization header', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send(exampleArtist)
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with bearer header with no token', function() {
-  //
-  //     before(done => mockUser.call(this, done));
-  //
-  //     it('should return status 400 bad request', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .send(exampleArtist)
-  //       .set({
-  //         Authorization: 'Bearer ',
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(400);
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with already-existing username', function() {
-  //
-  //     before( done => mockArtist.call(this, done));
-  //
-  //     it('should return a status 409', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: this.tempArtist.username,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: this.tempArtist.phone,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(409);
-  //         expect(res.text).to.equal('ConflictError');
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with already-existing email', function() {
-  //
-  //     before( done => mockArtist.call(this, done));
-  //
-  //     it('should return a status 409', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.phone,
-  //         email: this.tempArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: exampleArtist.phone,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(409);
-  //         expect(res.text).to.equal('ConflictError');
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
-  //
-  //   describe('with already-existing phone number', function() {
-  //
-  //     before( done => mockArtist.call(this, done));
-  //
-  //     it('should return a status 409', (done) => {
-  //       request.post(`${url}/api/artist`)
-  //       .set({
-  //         Authorization: `Bearer ${this.tempToken}`,
-  //       })
-  //       .send({
-  //         firstname: exampleArtist.firstname,
-  //         lastname: exampleArtist.lastname,
-  //         username: exampleArtist.phone,
-  //         email: exampleArtist.email,
-  //         city: exampleArtist.city,
-  //         zip: exampleArtist.zip,
-  //         about: exampleArtist.about,
-  //         phone: this.tempArtist.phone,
-  //       })
-  //       .end((err, res) => {
-  //         expect(res.status).to.equal(409);
-  //         expect(res.text).to.equal('ConflictError');
-  //         done();
-  //       });
-  //     });
-  //
-  //   });
+    describe('with no firstname', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with no lastname', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with no username', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should status 400 bad request', (done) => {
+
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+
+    describe('with no email', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 400', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with no city', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 400', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with no zip', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 400', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with invalid date--string', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return an artist profile and a status 400', (done) => {
+        request.post(`${url}/api/artist`)
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+          created: 'striiiing',
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with an invalid body', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should a status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send('badbody')
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with a bad authorization header', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .set({
+          Authorization: 'bad request',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with no authorization header', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with bearer header with no token', function() {
+
+      before(done => mockUser.call(this, done));
+
+      it('should return status 400 bad request', (done) => {
+        request.post(`${url}/api/artist`)
+        .send(exampleArtist)
+        .set({
+          Authorization: 'Bearer ',
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+      });
+
+    });
+
+    describe('with already-existing username', function() {
+
+      before( done => mockArtist.call(this, done));
+
+      it('should return a status 409', (done) => {
+        request.post(`${url}/api/artist`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: this.tempArtist.username,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: this.tempArtist.phone,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+
+    });
+
+    describe('with already-existing email', function() {
+
+      before( done => mockArtist.call(this, done));
+
+      it('should return a status 409', (done) => {
+        request.post(`${url}/api/artist`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.phone,
+          email: this.tempArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: exampleArtist.phone,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+
+    });
+
+    describe('with already-existing phone number', function() {
+
+      before( done => mockArtist.call(this, done));
+
+      it('should return a status 409', (done) => {
+        request.post(`${url}/api/artist`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .send({
+          firstname: exampleArtist.firstname,
+          lastname: exampleArtist.lastname,
+          username: exampleArtist.phone,
+          email: exampleArtist.email,
+          city: exampleArtist.city,
+          zip: exampleArtist.zip,
+          about: exampleArtist.about,
+          phone: this.tempArtist.phone,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.text).to.equal('ConflictError');
+          done();
+        });
+      });
+
+    });
 
   });
 

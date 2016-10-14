@@ -6,7 +6,11 @@
 
 ##### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
-This REST API allows a developer to set up a site where users can create accounts to view, or display items. An artist can create a profile that allows them to make listings and galleries of listings so that others can view their work.
+This REST API allows a developer to set up a site where users can create accounts to view, or display items.
+
+An artist can create an _Artist Profile_ that allows them to make _Galleries_ of _Listings_ so that others can view their work.
+
+The Artists, Galleries, Listings and Images are stored in a Mongo Database for
 
 
 ### CURRENT VERSION `v0.0.5`
@@ -15,11 +19,8 @@ The current version of this API allows:
 - For authorized Users to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
 - For authorized Users to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
 - For all Users to **GET** Artist's _Profile_ by **artistID**.
-  <!-- - _Profile_ **GET** requests can be refined by searching _Profile Properties_ such as **username**. -->
 - For all Users to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
-  <!-- - _Gallery_ **GET** requests can be refined by searching _Gallery Properties_ such as **name**. -->
 - For all Users to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
-  <!-- - _Listing_ **GET** requests can be refined by searching _Listing Properties_ such as **title**. -->
 
 ---
 
@@ -27,7 +28,24 @@ The current version of this API allows:
 
 ---
 
-You want to pull this repo
+In order to use this REST API on your own website, you will need all the files from the GitHub repo you can clone the files from:
+### [GitHub](https://github.com/loomnugget/art-c)
+- Then you should open your terminal in the repo folder and type the command
+```
+npm install
+```
+to install all dependencies and dev-dependencies required to run the included code.
+
+- To run the tests (in order to make sure you didn't break any of the functions) you can type the command
+```
+npm run test
+```
+  - if you want to target a specific test file, you can alter the command
+  ```
+  npm run test test/<your-test-file>.js
+  ```
+
+
 
 ---
 
@@ -43,19 +61,19 @@ Creates a new _User Object_.
   #/api/setup
   ```
   - Expected _Headers_
-
+    - `(Bearer <user token>)`
   - Expected _Body_
-
+  ```json
+     {
+       "username": "<username>",
+       "password": "<password>"
+       }
+  ```
   - Expected _Response_
     - status: `200`
     - body:
     ```json
-    {
-      "username": "",
-      "email": "",
-      "password": "",
-      "findHash": ""
-    }
+    {}
     ```
 
   ##### Find _User_
@@ -69,15 +87,10 @@ Finds and returns a _User Object_ with associated **username**/**email** and **p
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
-    {
-      "username": "",
-      "email": "",
-      "password": "",
-      "findHash": ""
-    }
+    {}
     ```
 
   ##### Update _User Account_
@@ -88,19 +101,14 @@ Finds and updates a _User Object_ with associated
     #/api/:userID/updateEmail
     ```
     - Expected _Headers_
-
+      - `(Bearer <user token>)`
     - Expected _Body_
 
     - Expected _Response_
-      - status: ``
+      - status: `200`
       - body:
       ```json
-      {
-        "username": "",
-        "email": "",
-        "password": "",
-        "findHash": ""
-      }
+      {}
       ```
 
   - Update **username**
@@ -108,39 +116,33 @@ Finds and updates a _User Object_ with associated
     #/api/:userID/updateUsername
     ```
     - Expected _Headers_
-
+      - `(Bearer <user token>)`
     - Expected _Body_
-
-    - Expected _Response_
-      - status: ``
-      - body:
       ```json
       {
-        "username": "",
-        "email": "",
-        "password": "",
-        "findHash": ""
+        "username": "<new username>"
       }
       ```
+    - Expected _Response_
+      - status: `200`
+      - body:
+        ```json
+        {}
+        ```
 
   - Update **password**
     ```
     #/api/:userID/updatePassword
     ```
     - Expected _Headers_
-
+      - `(Bearer)`
     - Expected _Body_
 
     - Expected _Response_
-      - status: ``
+      - status: `200`
       - body:
       ```json
-      {
-        "username": "",
-        "email": "",
-        "password": "",
-        "findHash": ""
-      }
+      {}
       ```
 
   ##### Destroy _User Account_
@@ -148,46 +150,19 @@ Finds and updates a _User Object_ with associated
   #/api/:userID/deleteAccount
   ```
   - Expected _Headers_
-
+    - `(Bearer <user bearer token>)`
   - Expected _Body_
 
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    null
+    ```
 
 ---
 
 ### **Artist Profile**
-
-  #### Add _Artist Profile_
-  ```
-  #/api/artist
-  ```
-  - Expected _Headers_
-
-  - Expected _Body_
-
-  - Expected _Response_
-    - status: `200`
-    - body:
-    ```json
-    {
-      "about": "",
-      "phone": "",
-      "email": "",
-      "username": "",
-      "created": "",
-      "firstname": "",
-      "lastname": "",
-      "city": "",
-      "zip": "",
-      "userID": "",
-      "galleries": "[]",
-      "photoID": ""
-    }
-    ```
 
   #### Create _Artist Profile_
   ```
@@ -198,22 +173,23 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
-      "about": "",
-      "phone": "",
-      "email": "",
-      "username": "",
-      "created": "",
-      "firstname": "",
-      "lastname": "",
-      "city": "",
-      "zip": "",
-      "userID": "",
+      "_id": "5800040b82be13172f30ca4d",
+      "firstname": "Vindra",
+      "lastname": "Urywen",
+      "city": "Forest",
+      "zip": "92581",
+      "about": "I am Vindra, graceful elven bard.",
+      "phone": "4252255225",
+      "userID": "58001780a93d821dda8c46cb",
+      "username": "bard-tacular",
+      "email": "vindra.the.graceful@elvenbards.com",
+      "__v": "0",
       "galleries": "[]",
-      "photoID": ""
+      "created": "2016-10-13T22:00:43.999Z",
     }
     ```
 
@@ -226,22 +202,23 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
-      "about": "",
-      "phone": "",
-      "email": "",
-      "username": "",
-      "created": "",
-      "firstname": "",
-      "lastname": "",
-      "city": "",
-      "zip": "",
-      "userID": "",
+      "_id": "5800040b82be13172f30ca4d",
+      "firstname": "Vindra",
+      "lastname": "Urywen",
+      "city": "Forest",
+      "zip": "92581",
+      "about": "I am Vindra, graceful elven bard.",
+      "phone": "2069900022",
+      "userID": "58001780a93d821dda8c46cb",
+      "username": "bard-tacular",
+      "email": "vindra.the.graceful@elvenbards.com",
+      "__v": "0",
       "galleries": "[]",
-      "photoID": ""
+      "created": "2016-10-13T22:00:43.999Z",
     }
     ```
 
@@ -256,8 +233,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
   #### Adding _Image_ to _Artist Profile_
   ```
@@ -272,15 +250,15 @@ Finds and updates a _User Object_ with associated
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
-      "galleryID": "",
-      "listingID": ""
+      "__v": "0",
+      "name": "my-beautiful-face",
+      "username": "bard-tacular",
+      "alt": "sparkly",
+      "objectKey": "03a7990e1adf9fa8944df58dfc81cc5b.jpg",
+      "imageURI": "https://images.s3.amazonaws.com/03a7990e1adf9fa8944df58dfc81cc5b.jpg",
+      "artistID": "58001780a93d821dda8c46cc",
+      "userID": "58001780a93d821dda8c46cb",
+      "_id": "58001781a93d821dda8c46cd"
     }
     ```
 
@@ -295,14 +273,15 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
 ---
 
 ### **Gallery**
 
-  #### Adding _Gallery_
+  #### Create _Gallery_
   ```
   #/api/artist/:artistID/gallery
   ```
@@ -315,19 +294,20 @@ Finds and updates a _User Object_ with associated
     - body:
     ```json
     {
-      "name": "",
-      "desc": "",
-      "username": "",
-      "category": "",
+      "__v": "0",
+      "name": "beautiful-lutes",
+      "desc": "instruments for a fine bard like me.",
+      "username": "bard-tacular",
+      "category": "instruments",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "listings": "[]",
       "photoID": ""
     }
     ```
 
-  #### Finding _Gallery_
+  #### Find _Gallery_
   ```
   #/api/artist/:artistID/gallery/:galleryID
   ```
@@ -336,17 +316,17 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
       "name": "",
       "desc": "",
-      "username": "",
+      "username": "bard-tacular",
       "category": "",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "listings": "[]",
       "photoID": ""
     }
@@ -361,17 +341,17 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
       "name": "",
       "desc": "",
-      "username": "",
+      "username": "bard-tacular",
       "category": "",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "listings": "[]",
       "photoID": ""
     }
@@ -388,8 +368,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
   #### Add _Image_ to _Gallery_
   ```
@@ -408,9 +389,9 @@ Finds and updates a _User Object_ with associated
       "alt": "",
       "objectKey": "",
       "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
+      "username": "bard-tacular",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "listingID": ""
     }
@@ -427,8 +408,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
 ---
 
@@ -449,11 +431,11 @@ Finds and updates a _User Object_ with associated
     {
       "title": "",
       "desc": "",
-      "username": "",
+      "username": "bard-tacular",
       "category": "",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "photoID": "",
     }
@@ -468,17 +450,17 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
       "title": "",
       "desc": "",
-      "username": "",
+      "username": "bard-tacular",
       "category": "",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "photoID": "",
     }
@@ -493,17 +475,17 @@ Finds and updates a _User Object_ with associated
   - Expected _Body_
 
   - Expected _Response_
-    - status: ``
+    - status: `200`
     - body:
     ```json
     {
       "title": "",
       "desc": "",
-      "username": "",
+      "username": "bard-tacular",
       "category": "",
       "created": "",
-      "userID": "",
-      "artistID": "",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "photoID": "",
     }
@@ -520,8 +502,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
   #### Add _Image_ to _Listing_
   ```
@@ -540,9 +523,9 @@ Finds and updates a _User Object_ with associated
       "alt": "",
       "objectKey": "",
       "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
+      "username": "bard-tacular",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "listingID": ""
     }
@@ -559,8 +542,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
 ---
 
@@ -583,9 +567,9 @@ Finds and updates a _User Object_ with associated
       "alt": "",
       "objectKey": "",
       "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
+      "username": "bard-tacular",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "listingID": ""
     }
@@ -602,8 +586,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
   #### Adding an Image to Gallery
   ```
@@ -622,9 +607,9 @@ Finds and updates a _User Object_ with associated
       "alt": "",
       "objectKey": "",
       "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
+      "username": "bard-tacular",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "listingID": ""
     }
@@ -641,8 +626,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
   #### Adding an Image to Listing
   ```
@@ -661,9 +647,9 @@ Finds and updates a _User Object_ with associated
       "alt": "",
       "objectKey": "",
       "imageURI": "",
-      "username": "",
-      "userID": "",
-      "artistID": "",
+      "username": "bard-tacular",
+      "userID": "58001780a93d821dda8c46cb",
+      "artistID": "58001780a93d821dda8c46cc",
       "galleryID": "",
       "listingID": ""
     }
@@ -680,8 +666,9 @@ Finds and updates a _User Object_ with associated
   - Expected _Response_
     - status: `204`
     - body:
-    <!-- ```json
-    ``` -->
+    ```json
+    {}
+    ```
 
 ---
 
