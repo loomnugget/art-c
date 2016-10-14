@@ -36,32 +36,25 @@ The current version of this API allows:
 
 ---
 
-# **Contribution**
+# **Contribution and Use**
 
----
 
-Issues - People who would like to let the developers know about an enhancement or bug concerning this API can create an Issue on the GitHub repo.
-          - 
+### **Issues** 
 
-In order to use this REST API on your own website, you will need all the files from the GitHub repo you can clone the files from:
+- People who would like to let the developers know about an enhancement or bug concerning this API can create an Issue on the GitHub repo.
+  - **Bug** if something is broken or missing(but we say it is there), select the _Bug_ label when creating the Issue.
+  - **Enhancement** if there is something that you think will make our REST API that much better, submit an Issue with the _Enhancement_ label.
+          
+The development team will be notified when there is a new Issue on the Art-C repo.
+
+### **Code Use**
+
+In order to use this REST API on your own website, you will need to fork your own copy of this GitHub repo:
 ## [GitHub](https://github.com/loomnugget/art-c)
-- Then you should open your terminal in the repo folder and type the command
-```
-npm install
-```
-to install all dependencies and dev-dependencies required to run the included code.
 
-- To run the tests (in order to make sure you didn't break any of the functions) you can type the command
-```
-npm run test
-```
-  - if you want to target a specific test file, you can alter the command
-  ```
-  npm run test test/<your-test-file>.js
-  ```
-
-
-
+- You need to make sure that you have all the dependencies installed from the package.json file.
+  You can run `npm install` in your local verson of the repo to automatically download all of our listed dependencies.
+  
 ---
 
 # **Routes**
