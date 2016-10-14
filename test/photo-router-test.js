@@ -51,7 +51,7 @@ describe('testing photo router', function() {
           expect(res.body.objectKey).to.equal(awsMocks.uploadMock.Key);
           done();
         });
-      }); // end it block
+      });
     });
 
     describe('with no image', function() {
@@ -103,8 +103,7 @@ describe('testing photo router', function() {
         });
       });
     });
-
-  }); //end describe POST routes
+  });
 
   describe('testing DELETE routes - /api/artist/:artistID/photo/:photoID', function() {
     describe('with valid token and data', function() {
@@ -199,7 +198,7 @@ describe('testing photo router', function() {
           expect(res.body.objectKey).to.equal(awsMocks.uploadMock.Key);
           done();
         });
-      }); // end it block
+      });
     });
 
     describe('with no image', function() {
@@ -251,7 +250,7 @@ describe('testing photo router', function() {
         });
       });
     });
-  }); //end /api/gallery/:galleryID/photo
+  });
 
   describe('testing DELETE routes - /api/gallery/:galleryID/photo/:photoID', function() {
     describe('with valid token and data', function() {
@@ -472,6 +471,4 @@ describe('testing photo router', function() {
       });
     });
   });
-
-
-}); //end first describe block
+});

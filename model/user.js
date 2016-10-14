@@ -53,7 +53,6 @@ userSchema.methods.generateFindHash = function() {
         if (tries > 3) return reject(err);
         tries++;
         _generateFindHash.call(this);
-        // ^ 3 lines currently not covered
       });
     }
   });
@@ -65,7 +64,6 @@ userSchema.methods.generateToken = function() {
     this.generateFindHash()
     .then( findHash => resolve(jwt.sign({token: findHash}, process.env.APP_SECRET)))
     .catch(err => reject(err));
-    // ^ 1 line currently not covered
   });
 };
 

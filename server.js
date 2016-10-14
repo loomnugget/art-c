@@ -10,7 +10,6 @@ const debug = require('debug')('artc:server');
 const dotenv = require('dotenv');
 
 // app modules
-// TODO: add routers and middleware
 const authRouter = require('./route/auth-router.js');
 const artistRouter = require('./route/artist-router.js');
 const galleryRouter = require('./route/gallery-router.js');
