@@ -503,23 +503,21 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "desc": "",
-      "username": "bard-tacular",
-      "category": "",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "listings": "[]",
-      "photoID": ""
+
     }
     ```
 
@@ -528,23 +526,21 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "desc": "",
-      "username": "bard-tacular",
-      "category": "",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "listings": "[]",
-      "photoID": ""
+
     }
     ```
 
@@ -553,8 +549,14 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -568,23 +570,21 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "bard-tacular",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "listingID": ""
+
     }
     ```
 
@@ -593,8 +593,14 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -612,23 +618,21 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "title": "",
-      "desc": "",
-      "username": "bard-tacular",
-      "category": "",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "photoID": "",
+
     }
     ```
 
@@ -637,23 +641,21 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "title": "",
-      "desc": "",
-      "username": "bard-tacular",
-      "category": "",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "photoID": "",
+
     }
     ```
 
@@ -662,23 +664,21 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "title": "",
-      "desc": "",
-      "username": "bard-tacular",
-      "category": "",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "photoID": "",
+    
     }
     ```
 
@@ -687,8 +687,14 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -702,24 +708,22 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "bard-tacular",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "listingID": ""
-    }
+      
+     }
     ```
 
   #### Remove _Image_ from _Listing_
@@ -727,8 +731,14 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -746,23 +756,21 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/photo
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "bard-tacular",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "listingID": ""
+
     }
     ```
 
@@ -771,8 +779,14 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -794,15 +808,7 @@ The Gallery is an object with the properties:
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "bard-tacular",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "listingID": ""
+    
     }
     ```
 
@@ -811,8 +817,14 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -826,23 +838,21 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "name": "",
-      "alt": "",
-      "objectKey": "",
-      "imageURI": "",
-      "username": "bard-tacular",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "galleryID": "",
-      "listingID": ""
+    
     }
     ```
 
@@ -851,8 +861,14 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+   `Bearer <user-token>`
+  
   - Expected _Body_
+  
+    ```json
+    
+    ```
 
   - Expected _Response_
     - status: `204`
@@ -861,75 +877,6 @@ The Gallery is an object with the properties:
     {}
     ```
 
----
+/* contributer's guide (look at atom's readme on github) contributing.md
 
-```
-#/api/login
-```
-- Expected Headers
-  - blah
-  - blah
-- Expected body
-  ```json
-  {
-    "name": "dunc",
-    "email": "dunc@dunc.com",
-    "blah"
-  }
-  ```
-contributer's guide (look at atom's readme on github) contributing.md
-
-Code of Conduct (... for tech Code of Conduct, holding people who try to contribute to this to be nice to others)
-
-
-
-
-<!-- ## authRouter
-  `/api/signup` - POST
-- Requires a user name and password and generates a new user.
-`/api/login` - GET
-- Requires a valid existing user name and password and returns an existing user.
-
-## artistRouter
-`/api/artist` - POST
-- Requires a valid user id and creates a new artist profle.
-`/api/artist/:artistID` - GET
-- Requires a valid artist id and responds with existing artist profile.
-`/api/artist/:artistID` - PUT
-- Requires a valid artist id and body and responds with updated artist profile.
-`/api/artist/:artistID` - DELETE
-- Requires a valid artist id and responds with empty object.
-
-## galleryRouter
-`/api/artist/:artistID/gallery` - POST
-- Requires a valid artist id and creates a new gallery. The gallery id is saved in an array of galleries attached to an artist profile.
-`/api/artist/:artistID/gallery/:galleryID` - GET
-- Requires a valid gallery id and responds with existing gallery.
-`/api/artist/:artistID/gallery/:galleryID` - PUT
-- Requires a valid gallery id and body and responds with updated gallery.
-`/api/artist/:artistID/gallery/:galleryID` - DELETE
-- Requires a valid gallery id and responds with empty object.
-
-## listingRouter
-`/api/gallery/:galleryID/listing` - POST
-- Requires a valid gallery id and creates a new listing. The listing id is saved in an array of listings attached to a gallery.
-`/api/listing/:listingID` - GET
-- Requires a valid listing id and responds with existing listing.
-`/api/gallery/:galleryID/listing/:listingID` - PUT
-- Requires a valid listing id and body and responds with updated listing.
-`/api/gallery/:galleryID/listing/:listingID` - DELETE
-- Requires a valid listing id and responds with empty object.
-
-## photoRouter
-`/api/artist/:artistID/photo` - POST
-- Requires an artist id and returns a new photo attached to the artist profile.
-`/api/artist/:artistID/photo/:photoID` - DELETE
-- Requires valid photo id and deletes photo attached to the corresponding artist profile.
-`/api/gallery/:galleryID/photo` - POST
-- Requires a gallery id and returns a new photo attached to the matching gallery.
-`/api/gallery/:galleryID/photo/:photoID` - DELETE
-- Requires valid photo id and deletes photo attached to the corresponding gallery.
-`/api/listing/:listingID/photo` - POST
-- Requires a listing id and returns a new photo attached to the matching listing.
-`/api/listing/:listingID/photo/:photoID` - DELETE
-- Requires valid photo id and deletes photo attached to the corresponding listing. -->
+Code of Conduct (... for tech Code of Conduct, holding people who try to contribute to this to be nice to others) /*
