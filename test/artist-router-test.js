@@ -1165,6 +1165,23 @@ describe('testing artist-router', function() {
       });
     });
 
+    describe('with wrong user and many photos', function() {
+      let tempSecondUser = {};
+      before( done => mockManyPhotos.call(this, 5, done));
+      before(done => mockUser.call(tempSecondUser, done));
+
+      it('should return status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
     describe('with valid token and id', () => {
 
       before( done => mockManyPhotos.call(this, 5, done));
@@ -1177,6 +1194,35 @@ describe('testing artist-router', function() {
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(204);
+          done();
+        });
+      });
+    });
+
+    describe('with bad token and many photos', () => {
+
+      before( done => mockManyPhotos.call(this, 5, done));
+
+      it('should delete an artist and all associated galleries, listings and photos', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}bad`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with no auth header and many photos', function() {
+
+      before( done => mockManyPhotos.call(this, 5, done));
+
+      it('should return status 400 for bad request', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
           done();
         });
       });
