@@ -2,34 +2,49 @@
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
 ---
-# ART-C
+# **ART-C**
 
-##### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
+#### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
 This REST API allows a developer to set up a site where users can create accounts to view, or display items.
 
 An artist can create an _Artist Profile_ that allows them to make _Galleries_ of _Listings_ so that others can view their work.
 
-The Artists, Galleries, Listings and Images are stored in a Mongo Database for
 
+## CURRENT VERSION `v0.0.5`
 
-### CURRENT VERSION `v0.0.5`
+Models:
+- **_User_**  
+  
+    Account that allows individuals to **GET** other Artists' Profiles, Galleries and Listings.
+- **_Artist_**
+  
+    Allows users to **POST**, **PUT** and **DELETE** Galleries, Listings and Images associated with that Artist
+- **_Gallery_**
+  
+    Contains currently available _Listings_. 
+- **_Listing_**
+  
+    Shows an available item for sale.
 
 The current version of this API allows:
-- For authorized Users to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
-- For authorized Users to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
-- For all Users to **GET** Artist's _Profile_ by **artistID**.
-- For all Users to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
-- For all Users to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
+  - For **authorized Users** to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
+  - For **authorized Users** to **POST**, **PUT** and **DELETE** Artist _Profiles_, _Galleries_ and _Listings_.
+  - For **all Users** to **GET** Artist's _Profile_ by **artistID**.
+  - For **all Users** to **GET** Artist's _Galleries_ by **artistID** or **galleryID**.
+  - For **all Users** to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
 
 ---
 
-## **Setup**
+# **Contribution**
 
 ---
+
+Issues - People who would like to let the developers know about an enhancement or bug concerning this API can create an Issue on the GitHub repo.
+          - 
 
 In order to use this REST API on your own website, you will need all the files from the GitHub repo you can clone the files from:
-### [GitHub](https://github.com/loomnugget/art-c)
+## [GitHub](https://github.com/loomnugget/art-c)
 - Then you should open your terminal in the repo folder and type the command
 ```
 npm install
@@ -49,28 +64,37 @@ npm run test
 
 ---
 
-## **Use**
+# **Routes**
 ---
 
-### **User Account**
+## **User Account**
 
-  ##### Create _User_
+### Create _User_
+
 Creates a new _User Object_.
 
   ```
   #/api/setup
   ```
+  
   - Expected _Headers_
-    - `(Bearer <user token>)`
+  
+    `Bearer <_User_ token>`
+  
   - Expected _Body_
+  
   ```json
      {
        "username": "<username>",
+       "email": "<email>",
        "password": "<password>"
        }
   ```
+  
   - Expected _Response_
+  
     - status: `200`
+    
     - body:
     ```json
     {}
@@ -83,9 +107,9 @@ Finds and returns a _User Object_ with associated **username**/**email** and **p
   #/api/login
   ```
   - Expected _Headers_
-
+    `Bearer <_User_ token>`
   - Expected _Body_
-
+    `null`
   - Expected _Response_
     - status: `200`
     - body:
