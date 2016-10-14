@@ -154,7 +154,7 @@ Finds and makes active a _User Object_ with **username**/**email** and **passwor
 ---
 
 ### Update _User_
-Updates current _User Object_ property with new property.
+Updates current associated _User Object_ property with new property.
 
   - Update **email**
     ```
@@ -269,6 +269,7 @@ The Artist Profile is an object with the properties:
 
 ---
 ### Create _Artist_
+Creates new _Artist Object_ with data from associated _User Object_.
 
   ```
   #/api/artist/:artistID
@@ -314,7 +315,7 @@ The Artist Profile is an object with the properties:
 ---
 
 ### Find _Artist_
-Finds _Artist Object_ using **artistID**.
+Finds _Artist Object_ using specified **artistID**.
 
   ```
   #/api/login
@@ -332,12 +333,27 @@ Finds _Artist Object_ using **artistID**.
     - status: `200`
     - body:
     ```json
-    {}
+    {
+      "_id": "<generated-id>",
+      "firstname": "<first-name>",
+      "lastname": "<last-name>",
+      "city": "<city>",
+      "zip": "<zipcode>",
+      "about": "<about-artist>",
+      "phone": "<phone-number>",
+      "userID": "<pulled-user-id>",
+      "username": "<pulled-username>",
+      "email": "<pulled-email>",
+      "__v": "0",
+      "galleries": "[]<empty-galleries-array>",
+      "created": "<generated-date>",
+    }
     ```
 
 ---
 
 ### Update _Artist_
+Finds _Artist Object_ with authorized user's **artistID** and updates object properties from request _Body_.
 
   ```
   #/api/artist/:artistID
@@ -383,6 +399,7 @@ Finds _Artist Object_ using **artistID**.
 
 ---    
 ### Destroy _Artist_
+
   ```
   #/api/artist/:artistID
   ```
