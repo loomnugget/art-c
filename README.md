@@ -102,7 +102,7 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
   ```
   - Expected _Headers_
   
-    `Bearer <user-token>`
+    `null`
   
   - Expected _Body_
   
@@ -125,16 +125,20 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
 ---
 
 ### Find _User_
-Finds a _User Object_ with **username**/**email** and **password**.
+Finds and makes active a _User Object_ with **username**/**email** and **password**.
 
   ```
   #/api/login
   ```
   **GET request**
   - Expected _Headers_
+  
     `Bearer <user-token>`
+  
   - Expected _Body_
+  
     `null`
+  
   - Expected _Response_
     - status: `200`
     - body:
@@ -143,17 +147,26 @@ Finds a _User Object_ with **username**/**email** and **password**.
     ```
 ---
 
-### Update _User Account_
-Finds and updates a _User Object_ with associated
+### Update _User_
+Updates current _User Object_ property with new property. 
 
   - Update **email**
     ```
     #/api/:userID/updateEmail
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer <user token>)`
+      
+      `Bearer <user token>`
+      
     - Expected _Body_
-
+      
+       ```json
+       {
+        "email": "<new-email>"
+       }
+       ```
+       
     - Expected _Response_
       - status: `200`
       - body:
@@ -165,14 +178,19 @@ Finds and updates a _User Object_ with associated
     ```
     #/api/:userID/updateUsername
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer <user token>)`
+    
+      - `Bearer <user-token>`
+      
     - Expected _Body_
+    
       ```json
       {
-        "username": "<new username>"
+       "username": "<new username>"
       }
       ```
+      
     - Expected _Response_
       - status: `200`
       - body:
@@ -184,10 +202,19 @@ Finds and updates a _User Object_ with associated
     ```
     #/api/:userID/updatePassword
     ```
+    **PUT request**
     - Expected _Headers_
-      - `(Bearer)`
+    
+      - `Bearer <user-token>`
+    
     - Expected _Body_
-
+      
+      ```json
+      {
+       "password": "<new password>"
+      }
+      ```
+    
     - Expected _Response_
       - status: `200`
       - body:
@@ -199,6 +226,7 @@ Finds and updates a _User Object_ with associated
   ```
   #/api/:userID/deleteAccount
   ```
+  **DELETE request**
   - Expected _Headers_
     - `(Bearer <user bearer token>)`
   - Expected _Body_
