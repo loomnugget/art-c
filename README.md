@@ -1,6 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=staging)](https://coveralls.io/github/loomnugget/art-c?branch=staging)
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
+####Contributors####
+Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt  
 ---
 # **ART-C**
 
@@ -876,7 +878,3 @@ The Gallery is an object with the properties:
     ```json
     {}
     ```
-
-/* contributer's guide (look at atom's readme on github) contributing.md
-
-Code of Conduct (... for tech Code of Conduct, holding people who try to contribute to this to be nice to others) /*
