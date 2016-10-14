@@ -123,6 +123,7 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
     {}
     ```
 ---
+
 ### Find _User_
 Finds and returns a _User Object_ with associated **username**/**email** and **password**.
 
