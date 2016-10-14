@@ -1,6 +1,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=staging)](https://coveralls.io/github/loomnugget/art-c?branch=staging)
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
 
+####Contributors####
+Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt  
 ---
 # **ART-C**
 
@@ -25,12 +27,12 @@ The current version of this API allows:
 # **Contribution and Use**
 
 
-### **Issues** 
+### **Issues**
 
 - People who would like to let the developers know about an enhancement or bug concerning this API can create an Issue on the GitHub repo.
   - **Bug** if something is broken or missing(but we say it is there), select the _Bug_ label when creating the Issue.
   - **Enhancement** if there is something that you think will make our REST API that much better, submit an Issue with the _Enhancement_ label.
-          
+
 The development team will be notified when there is a new Issue on the Art-C repo.
 
 ### **Code Use**
@@ -40,7 +42,7 @@ In order to use this REST API on your own website, you will need to fork your ow
 
 - You need to make sure that you have all the dependencies installed from the package.json file.
   You can run `npm install` in your local verson of the repo to automatically download all of our listed dependencies.
-  
+
 ---
 
 # **Models**
@@ -53,7 +55,7 @@ The Models for our _User Objects_ are:
     - Profile that allows users to **POST**, **PUT** and **DELETE** Galleries, Listings and Images associated with that Artist.
     - Can have an attached _Profile Image_
   - **_Gallery_**
-    - Object that contains currently available _Listings_. 
+    - Object that contains currently available _Listings_.
     - Can have an attached _Gallery Image_.
   - **_Listing_**
     - Object that shows a currently listed item.
@@ -61,7 +63,7 @@ The Models for our _User Objects_ are:
   - **_Image_**
     - Object that contains an image along with image properties.
     - Can be attached to _Artist_, _Gallery_ or _Listing_.
-    
+
 The Model properties can have various conditions which determine how the user interacts with them:
   - **[required]** | this property, if left off, will cause the object to not be created or affected.
   - **[unique]** | this property cannot match the same property of another, similar object.
@@ -69,7 +71,7 @@ The Model properties can have various conditions which determine how the user in
   - **[generated]** | this property is created automatically, either by being generated when the object is created or pulled from another associated object.
   - **[validated]** | this property can be selected from a pre-made, validated list of options.
   - **[min-length #]** | this property has a minimum input-length of "#".
-    
+
 ---
 
 # **Routes**
@@ -103,11 +105,11 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
   #/api/setup
   ```
   - Expected _Headers_
-  
+
     `null`
-  
+
   - Expected _Body_
-  
+
   ```json
      {
        "username": "<username>",
@@ -115,11 +117,11 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
        "password": "<password>"
        }
   ```
-  
+
   - Expected _Response_
-  
+
     - status: `200`
-    
+
     - body:
     ```json
     {}
@@ -135,13 +137,13 @@ Finds and makes active a _User Object_ with **username**/**email** and **passwor
   ```
   **GET request**
   - Expected _Headers_
-  
+
     `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     `null`
-  
+
   - Expected _Response_
     - status: `200`
     - body:
@@ -152,7 +154,7 @@ Finds and makes active a _User Object_ with **username**/**email** and **passwor
 ---
 
 ### Update _User_
-Updates current _User Object_ property with new property. 
+Updates current _User Object_ property with new property.
 
   - Update **email**
     ```
@@ -160,17 +162,17 @@ Updates current _User Object_ property with new property.
     ```
     **PUT request**
     - Expected _Headers_
-      
+
       `Bearer <user token>`
-      
+
     - Expected _Body_
-      
+
        ```json
        {
         "email": "<new-email>"
        }
        ```
-       
+
     - Expected _Response_
       - status: `200`
       - body:
@@ -184,17 +186,17 @@ Updates current _User Object_ property with new property.
     ```
     **PUT request**
     - Expected _Headers_
-    
+
       `Bearer <user-token>`
-      
+
     - Expected _Body_
-    
+
       ```json
       {
        "username": "<new username>"
       }
       ```
-      
+
     - Expected _Response_
       - status: `200`
       - body:
@@ -208,17 +210,17 @@ Updates current _User Object_ property with new property.
     ```
     **PUT request**
     - Expected _Headers_
-    
+
       `Bearer <user-token>`
-    
+
     - Expected _Body_
-      
+
       ```json
       {
        "password": "<new password>"
       }
       ```
-    
+
     - Expected _Response_
       - status: `200`
       - body:
@@ -233,11 +235,11 @@ Updates current _User Object_ property with new property.
   ```
   **DELETE request**
   - Expected _Headers_
-  
+
     `Bearer <user-token>`
-    
+
   - Expected _Body_
-  
+
     `null`
 
   - Expected _Response_
@@ -267,13 +269,13 @@ The Artist Profile is an object with the properties:
 
 ---
 ### Create _Artist_
-  
+
   ```
   #/api/artist/:artistID
   ```
   **POST request**
   - Expected _Headers_
-  
+
     `Bearer <user-token>`
 
   - Expected _Body_
@@ -319,13 +321,13 @@ Finds _Artist Object_ using **artistID**.
   ```
   **GET request**
   - Expected _Headers_
-  
+
     `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     `null`
-  
+
   - Expected _Response_
     - status: `200`
     - body:
@@ -342,9 +344,9 @@ Finds _Artist Object_ using **artistID**.
   ```
   **PUT request**
   - Expected _Headers_
-    
+
     `Bearer <user-token>`
-  
+
   - Expected _Body_
 
     ```json
@@ -390,7 +392,7 @@ Finds _Artist Object_ using **artistID**.
     `Bearer <user-token>`
 
   - Expected _Body_
-  
+
     `null`
 
   - Expected _Response_
@@ -405,7 +407,7 @@ Finds _Artist Object_ using **artistID**.
   #/api/artist/:artistID/photo
   ```
   - Expected _Headers_
-  
+
   `Bearer <user-token>`
 
   - Expected _Body_
@@ -432,11 +434,11 @@ Finds _Artist Object_ using **artistID**.
   #/api/artist/:artistID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
   `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
   `null`
 
   - Expected _Response_
@@ -471,7 +473,7 @@ The Gallery is an object with the properties:
     `Bearer <user-token>`
 
   - Expected _Body_
-  
+
   ```json
     {
       "name": "<gallery-name>",
@@ -503,13 +505,13 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -526,13 +528,13 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -549,13 +551,13 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/gallery/:galleryID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -570,13 +572,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -593,13 +595,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -618,13 +620,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -641,13 +643,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -664,13 +666,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -678,7 +680,7 @@ The Gallery is an object with the properties:
     - body:
     ```json
     {
-    
+
     }
     ```
 
@@ -687,13 +689,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/listing/:listingID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -708,13 +710,13 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -722,7 +724,7 @@ The Gallery is an object with the properties:
     - body:
     ```json
     {
-      
+
      }
     ```
 
@@ -731,13 +733,13 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -756,13 +758,13 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/photo
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -779,13 +781,13 @@ The Gallery is an object with the properties:
   #/api/artist/:artistID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -808,7 +810,7 @@ The Gallery is an object with the properties:
     - body:
     ```json
     {
-    
+
     }
     ```
 
@@ -817,13 +819,13 @@ The Gallery is an object with the properties:
   #/api/gallery/:galleryID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -838,13 +840,13 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -852,7 +854,7 @@ The Gallery is an object with the properties:
     - body:
     ```json
     {
-    
+
     }
     ```
 
@@ -861,13 +863,13 @@ The Gallery is an object with the properties:
   #/api/listing/:listingID/photo/:photoID
   ```
   - Expected _Headers_
-  
+
    `Bearer <user-token>`
-  
+
   - Expected _Body_
-  
+
     ```json
-    
+
     ```
 
   - Expected _Response_
@@ -876,7 +878,3 @@ The Gallery is an object with the properties:
     ```json
     {}
     ```
-
-/* contributer's guide (look at atom's readme on github) contributing.md
-
-Code of Conduct (... for tech Code of Conduct, holding people who try to contribute to this to be nice to others) /*
