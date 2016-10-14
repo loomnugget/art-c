@@ -3,13 +3,22 @@
 const Router = require('express').Router;
 const debug = require('debug')('artc:auth-router');
 const jsonParser = require('body-parser').json();
-const basicAuth = require('../lib/basic-auth-middleware.js');
 const createError = require('http-errors');
-const bearerAuth = require('../lib/bearer-auth-middleware');
+const AWS = require('aws-sdk');
 
+const Artist = require('../model/artist.js');
+const Gallery = require('../model/gallery.js');
+const Listing = require('../model/listing.js');
+const Photo = require('../model/photo.js');
 const User = require('../model/user.js');
 
+const basicAuth = require('../lib/basic-auth-middleware.js');
+const bearerAuth = require('../lib/bearer-auth-middleware');
+
+AWS.config.setPromisesDependency(require('bluebird'));
+
 const authRouter = module.exports = Router();
+const s3 = new AWS.S3();
 
 authRouter.post('/api/signup', jsonParser, function(req, res, next){
   debug('hit route POST /api/signup');
@@ -34,8 +43,6 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   debug('hit route GET /api/login');
 
   User.findOne({username: req.auth.username})
-  .catch( err => Promise.reject(createError(401, err.message)))
-  // ^ 1 line currently not covered
   .then( user => user.comparePasswordHash(req.auth.password))
   .catch(err => Promise.reject(createError(401, err.message)))
   .then( user => user.generateToken())
@@ -43,49 +50,53 @@ authRouter.get('/api/login', basicAuth, function(req, res, next){
   .catch(next);
 });
 
-authRouter.delete('/api/:userID/deleteAccount', bearerAuth, function(req, res, next) {
-  debug('hit route DELETE /api/deleteAccount');
-  User.findByIdAndRemove(req.params.userID)
-  .then( user => {
-    if (user.userID.toString() !== req.user._id.toString())
-      return next(createError(401, 'invalid userid'));
-    res.sendStatus(204);
+authRouter.delete('/api/user/deleteAccount', bearerAuth, function(req, res, next) {
+  debug('hit route DELETE /api/user/deleteAccount');
+  User.findByIdAndRemove(req.user._id)
+  .catch( err => Promise.reject(err, err.message))
+  .then( () => Listing.remove({ userID: req.user._id}))
+  .then( () => Gallery.remove({ userID: req.user._id}))
+  .then( () => Artist.remove({ userID: req.user._id}))
+  .then( () => Photo.find({ userID: req.user._id}))
+  .then( photos => {
+    let s3DeletePhotoArray = [];
+    for(var i=0; i<photos.length; i++){
+      s3DeletePhotoArray.push(s3.deleteObject({
+        Bucket: 'artc-staging-assets',
+        Key: photos[i].objectKey,
+      }).promise());
+    }
+    return Promise.all(s3DeletePhotoArray);
   })
-  .catch( err => next(createError(404, err.message)));
+  .then( () => Photo.remove({ userID: req.user._id}))
+  .then( () => res.sendStatus(204))
+  .catch(next);
 });
 
-authRouter.put('/api/user/updateEmail', bearerAuth, function(req, res, next) {
+authRouter.put('/api/user/updateEmail', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updateEmail');
-  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+  return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
-authRouter.put('/api/user/updateUsername', bearerAuth, function(req, res, next) {
+authRouter.put('/api/user/updateUsername', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updateUsername');
-  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+  return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });
 
-authRouter.put('/api/user/updatePassword', bearerAuth, function(req, res, next) {
+
+authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updatePassword');
-  return User.findByIdAndUpdate(req.params.userID, req.body, {new: true, runValidators: true})
+  return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
   .then( user => {
     res.json(user);
   })
-  .catch( err => {
-    if (err.name === 'ValidationError') return next(err);
-    next(createError(404, err.message));
-  });
+  .catch(next);
 });

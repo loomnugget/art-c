@@ -16,6 +16,7 @@ const artistRouter = require('./route/artist-router.js');
 const galleryRouter = require('./route/gallery-router.js');
 const listingRouter = require('./route/listing-router.js');
 const photoRouter = require('./route/photo-router.js');
+const pageRouter = require('./route/page-router.js');
 
 const errorMiddleware = require('./lib/error-middleware.js');
 // load env variables
@@ -39,6 +40,7 @@ app.use(artistRouter);
 app.use(galleryRouter);
 app.use(listingRouter);
 app.use(photoRouter);
+app.use(pageRouter);
 app.use(errorMiddleware);
 
 // start server
