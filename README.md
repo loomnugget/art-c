@@ -92,17 +92,17 @@ The User Account is an object with the properties:
   - **password** [required][user-input]
   - **findHash** [generated]
 
+---
 ### Create _User_
-
 Creates a new _User Object_ used to sign-in and affect other objects associated with that _User Object_.
 
+  **POST request**
   ```
   #/api/setup
   ```
-  
   - Expected _Headers_
   
-    `Bearer <_User_ token>`
+    `Bearer <user-token>`
   
   - Expected _Body_
   
@@ -122,15 +122,16 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
     ```json
     {}
     ```
-
-  ##### Find _User_
+---
+### Find _User_
 Finds and returns a _User Object_ with associated **username**/**email** and **password**.
 
   ```
   #/api/login
   ```
+  **GET request**
   - Expected _Headers_
-    `Bearer <_User_ token>`
+    `Bearer <user-token>`
   - Expected _Body_
     `null`
   - Expected _Response_
