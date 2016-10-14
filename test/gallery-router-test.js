@@ -71,6 +71,47 @@ describe('testing gallery-router', function() {
       });
     });
 
+    describe('with a bad user token', () => {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return a 401 error unauthorized user', (done) => {
+
+        request.post(`${url}/api/artist/${this.tempArtist._id}/gallery`)
+        .send(exampleGallery)
+        .set({
+          Authorization: `Bearer ${this.tempToken}bad`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
+
+    describe('with bad/invalid artist id', () => {
+
+      before(done => mockArtist.call(this, done));
+
+      it('should return status 404 for invalid id', (done) => {
+
+        request.post(`${url}/api/artist/${this.tempArtist._id}bad/gallery`)
+        .send({
+          name: exampleGallery.name,
+          username: this.tempArtist.username,
+          desc: exampleGallery.desc,
+          category: exampleGallery.category,
+        })
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+      });
+    });
+
     describe('with no name', () => {
 
       before(done => mockArtist.call(this, done));
