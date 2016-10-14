@@ -181,7 +181,7 @@ Updates current _User Object_ property with new property.
     **PUT request**
     - Expected _Headers_
     
-      - `Bearer <user-token>`
+      `Bearer <user-token>`
       
     - Expected _Body_
     
@@ -205,7 +205,7 @@ Updates current _User Object_ property with new property.
     **PUT request**
     - Expected _Headers_
     
-      - `Bearer <user-token>`
+      `Bearer <user-token>`
     
     - Expected _Body_
       
@@ -222,14 +222,19 @@ Updates current _User Object_ property with new property.
       {}
       ```
 
+---
   ##### Destroy _User Account_
   ```
   #/api/:userID/deleteAccount
   ```
   **DELETE request**
   - Expected _Headers_
-    - `(Bearer <user bearer token>)`
+  
+    `Bearer <user bearer token>`
+    
   - Expected _Body_
+  
+    `null`
 
   - Expected _Response_
     - status: `204`
