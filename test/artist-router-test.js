@@ -1227,5 +1227,22 @@ describe('testing artist-router', function() {
         });
       });
     });
+
+    describe('with wrong token', function() {
+      let tempSecondUser = {};
+      before(done => mockArtist.call(this, done));
+      before(done => mockUser.call(tempSecondUser, done));
+
+      it('should return status 401 unauthorized', done => {
+        request.delete(`${url}/api/artist/${this.tempArtist._id}`)
+        .set({
+          Authorization: `Bearer ${this.tempUser.tempToken}`,
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          done();
+        });
+      });
+    });
   });
 });

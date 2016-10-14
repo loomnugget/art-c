@@ -91,6 +91,7 @@ authRouter.put('/api/user/updateUsername', bearerAuth, jsonParser, function(req,
   .catch(next);
 });
 
+
 authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updatePassword');
   return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
