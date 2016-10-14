@@ -13,13 +13,11 @@ const mongoose = require('mongoose');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
-// const photoMock = require('./lib/photo-mock.js');
 const mockManyPhotos = require('./lib/mock-many-photos');
 const mockArtist = require('./lib/artist-mock');
 const mockGallery = require('./lib/gallery-mock');
 const mockUser = require('./lib/user-mock');
 const mockMultipleListings = require('./lib/populate-gallery-listings-mock.js');
-// const mockMultipleGalleries = require('./lib/populate-artist-galleries-mock.js');
 
 
 mongoose.Promise = Promise;

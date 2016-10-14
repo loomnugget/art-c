@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('mongoose'); // creates user Schema
+const mongoose = require('mongoose');
 
 const gallerySchema = mongoose.Schema({
   name: {type: String, required: true},
