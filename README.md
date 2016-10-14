@@ -59,12 +59,25 @@ In order to use this REST API on your own website, you will need to fork your ow
 
 # **Routes**
 ---
+The routes for this API essentially contain:
+  - Headers
+    -
+  - Body
+  - Response
+
+
 
 ## **User Account**
 
+The User Account is an object with the properties:
+  - **username** [required][unique][user-input]
+  - **email** [required][unique][user-input]
+  - **password** [required][user-input]
+  - **findHash** [generated]
+
 ### Create _User_
 
-Creates a new _User Object_.
+Creates a new _User Object_ used to sign-in and affect other objects associated with that _User Object_.
 
   ```
   #/api/setup
