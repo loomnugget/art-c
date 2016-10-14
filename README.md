@@ -251,7 +251,7 @@ Updates current _User Object_ property with new property.
 
 ## **Artist Profile**
 
-The User Account is an object with the properties:
+The Artist Profile is an object with the properties:
   - **_id** [required][generated]
   - **userID** [required][generated]
   - **galleries** [generated]
@@ -305,7 +305,7 @@ The User Account is an object with the properties:
       "username": "<pulled-username>",
       "email": "<pulled-email>",
       "__v": "0",
-      "galleries": "[]<empty-array-for-galleries>",
+      "galleries": "[]<empty-galleries-array>",
       "created": "<generated-date>",
     }
     ```
@@ -405,6 +405,8 @@ Finds _Artist Object_ using **artistID**.
   #/api/artist/:artistID/photo
   ```
   - Expected _Headers_
+  
+  `Bearer <user-token>`
 
   - Expected _Body_
 
@@ -430,8 +432,12 @@ Finds _Artist Object_ using **artistID**.
   #/api/artist/:artistID/photo/:photoID
   ```
   - Expected _Headers_
-
+  
+  `Bearer <user-token>`
+  
   - Expected _Body_
+  
+  `null`
 
   - Expected _Response_
     - status: `204`
@@ -444,13 +450,35 @@ Finds _Artist Object_ using **artistID**.
 
 ### **Gallery**
 
+The Gallery is an object with the properties:
+  - **_id** [required][generated]
+  - **userID** [required][generated]
+  - **artistID** [required][generated]
+  - **listings** [generated]
+  - **photoID** [generated]
+  - **username** [required][unique][user-input]
+  - **created** [required][generated]
+  - **category** [required][input]
+  - **name** [required][input]
+  - **desc** [required][input]
+
   #### Create _Gallery_
   ```
   #/api/artist/:artistID/gallery
   ```
   - Expected _Headers_
 
+    `Bearer <user-token>`
+
   - Expected _Body_
+  
+  ```json
+    {
+      "name": "<gallery-name>",
+      "desc": "<description>",
+      "category": "<category>"
+    }
+    ```
 
   - Expected _Response_
     - status: `200`
@@ -458,15 +486,15 @@ Finds _Artist Object_ using **artistID**.
     ```json
     {
       "__v": "0",
-      "name": "beautiful-lutes",
-      "desc": "instruments for a fine bard like me.",
-      "username": "bard-tacular",
-      "category": "instruments",
-      "created": "",
-      "userID": "58001780a93d821dda8c46cb",
-      "artistID": "58001780a93d821dda8c46cc",
-      "listings": "[]",
-      "photoID": ""
+      "name": "<gallery-name>",
+      "desc": "<description>",
+      "username": "<pulled-username>",
+      "category": "<category>",
+      "created": "<date>",
+      "userID": "<pulled-userID>",
+      "artistID": "<pulled-artistID>",
+      "listings": "[]<array-for-listings>",
+      "photoID": "<space-for-photoID>"
     }
     ```
 
