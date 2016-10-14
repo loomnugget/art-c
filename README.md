@@ -234,7 +234,7 @@ Updates current _User Object_ property with new property.
   **DELETE request**
   - Expected _Headers_
   
-    `Bearer <user bearer token>`
+    `Bearer <user-token>`
     
   - Expected _Body_
   
@@ -271,9 +271,23 @@ The User Account is an object with the properties:
   ```
   #/api/artist/:artistID
   ```
+  **POST request**
   - Expected _Headers_
+  
+    `Bearer <user-token>`
 
   - Expected _Body_
+
+    ```json
+    {
+      "firstname": "<first-name>",
+      "lastname": "<last-name>",
+      "city": "<city>",
+      "zip": "<zipcode>",
+      "about": "<about-artist>",
+      "phone": "<phone-number>"
+    }
+    ```
 
   - Expected _Response_
     - status: `200`
@@ -295,43 +309,89 @@ The User Account is an object with the properties:
       "created": "<generated-date>",
     }
     ```
+---
 
-  #### Update _Artist Profile_
+### Find _Artist_
+Finds _Artist Object_ using **artistID**.
+
+  ```
+  #/api/login
+  ```
+  **GET request**
+  - Expected _Headers_
+  
+    `Bearer <user-token>`
+  
+  - Expected _Body_
+  
+    `null`
+  
+  - Expected _Response_
+    - status: `200`
+    - body:
+    ```json
+    {}
+    ```
+
+---
+
+### Update _Artist_
+
   ```
   #/api/artist/:artistID
   ```
+  **PUT request**
   - Expected _Headers_
-
+    
+    `Bearer <user-token>`
+  
   - Expected _Body_
+
+    ```json
+    {
+      "firstname": "<new-first-name>",
+      "lastname": "<new-last-name>",
+      "city": "<new-city>",
+      "zip": "<new-zipcode>",
+      "about": "<new-about-artist>",
+      "phone": "<new-phone-number>"
+    }
+    ```
 
   - Expected _Response_
     - status: `200`
     - body:
     ```json
     {
-      "_id": "5800040b82be13172f30ca4d",
-      "firstname": "Vindra",
-      "lastname": "Urywen",
-      "city": "Forest",
-      "zip": "92581",
-      "about": "I am Vindra, graceful elven bard.",
-      "phone": "2069900022",
-      "userID": "58001780a93d821dda8c46cb",
-      "username": "bard-tacular",
-      "email": "vindra.the.graceful@elvenbards.com",
+      "_id": "<generated-id>",
+      "firstname": "<new-first-name>",
+      "lastname": "<new-last-name>",
+      "city": "<new-city>",
+      "zip": "<new-zipcode>",
+      "about": "<new-about-artist>",
+      "phone": "<new-phone-number>",
+      "userID": "<pulled-user-id>",
+      "username": "<pulled-username>",
+      "email": "<pulled-email>",
       "__v": "0",
-      "galleries": "[]",
-      "created": "2016-10-13T22:00:43.999Z",
+      "galleries": "[]<empty-array-for-galleries>",
+      "created": "<generated-date>",
     }
     ```
 
-  #### Destroy _Artist Profile_
+---    
+### Destroy _Artist_
   ```
   #/api/artist/:artistID
   ```
+  **DELETE request**
   - Expected _Headers_
 
+    `Bearer <user-token>`
+
   - Expected _Body_
+  
+    `null`
 
   - Expected _Response_
     - status: `204`
@@ -340,7 +400,7 @@ The User Account is an object with the properties:
     {}
     ```
 
-  #### Adding _Image_ to _Artist Profile_
+  #### Adding _Image_ to _Artist_
   ```
   #/api/artist/:artistID/photo
   ```
