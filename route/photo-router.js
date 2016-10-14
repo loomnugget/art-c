@@ -2,12 +2,12 @@
 
 // NODE MODULES
 const fs = require('fs');
-const path = require('path'); //has ext paramater to get extension name of file
+const path = require('path');
 
 // NPM MODULES
 const del = require('del');
 const AWS = require('aws-sdk');
-const multer = require('multer'); //body parser
+const multer = require('multer');
 const debug = require('debug')('artc:photo-router');
 const createError = require('http-errors');
 
@@ -42,7 +42,6 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
-    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {
@@ -84,11 +83,9 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
 photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(req, res, next){
   debug('hit DELETE /api/artist/:artistID/photo/:photoID');
   let tempPhoto;
- // check if photo exists
   Photo.findById(req.params.photoID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( photo => {
-    // make sure the user id matches the photo.user id
     if(photo.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
     tempPhoto = photo;
@@ -120,7 +117,6 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
-    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {
@@ -134,13 +130,11 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
 
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
-  // ^ 1 line currently not covered
   .then(gallery => {
     tempGallery = gallery;
-    return s3UploadPromise(params); //if fails 500
+    return s3UploadPromise(params);
   })
   .catch(err => err.status ? Promise.reject(err) : Promise.reject(createError(500, err.message)))
-  // ^ 1 line currently not covered
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
@@ -159,18 +153,15 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);
-    // ^ 2 lines currently not covered
   });
 });
 
 photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, function(req, res, next){
   debug('hit DELETE /api/gallery/:galleryID/photo/:photoID');
   let tempPhoto;
- // check if photo exists
   Photo.findById(req.params.photoID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( photo => {
-    // make sure the user id matches the photo.user id
     if(photo.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
     tempPhoto = photo;
@@ -202,7 +193,6 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     return next(createError(400, 'no file found'));
   if (!req.file.path)
     return next(createError(500, 'file not saved'));
-    // ^ 1 line currently not covered
   let ext = path.extname(req.file.originalname);
 
   let params = {
@@ -246,11 +236,9 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
 photoRouter.delete('/api/listing/:listingID/photo/:photoID', bearerAuth, function(req, res, next){
   debug('hit DELETE /api/listing/:listingID/photo/:photoID');
   let tempPhoto;
- // check if photo exists
   Photo.findById(req.params.photoID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( photo => {
-    // make sure the user id matches the photo.user id
     if(photo.userID.toString() !== req.user._id.toString())
       return Promise.reject(createError(401, 'User not authorized to delete this photo'));
     tempPhoto = photo;

@@ -29,6 +29,5 @@ AWSMock.mock('S3', 'deleteObject', function(params, callback){
     return callback(new Error('Bucket must be artc-staging-assets'));
   if(!params.Key)
     return callback(new Error('requires Key'));
-  // callback('erlekrjelkjr')
-  callback(null , {hello: 'sups'});
+  callback(null , {hello: 'sup'});
 });
