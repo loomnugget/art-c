@@ -125,7 +125,7 @@ Creates a new _User Object_ used to sign-in and affect other objects associated 
 ---
 
 ### Find _User_
-Finds and returns a _User Object_ with associated **username**/**email** and **password**.
+Finds a _User Object_ with **username**/**email** and **password**.
 
   ```
   #/api/login
@@ -141,8 +141,9 @@ Finds and returns a _User Object_ with associated **username**/**email** and **p
     ```json
     {}
     ```
+---
 
-  ##### Update _User Account_
+### Update _User Account_
 Finds and updates a _User Object_ with associated
 
   - Update **email**
