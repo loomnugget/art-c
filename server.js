@@ -32,9 +32,7 @@ const app = express();
 
 // app middleware
 app.use(cors());
-let production = process.env.NODE_ENV === 'production';
-let morganFormat = production ? 'common' : 'dev';
-app.use(morgan(morganFormat));
+app.use(morgan('dev'));
 
 // app routes
 app.use(express.static(`${__dirname}/build`));
