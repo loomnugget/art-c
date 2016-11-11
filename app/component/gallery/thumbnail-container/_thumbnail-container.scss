@@ -1,0 +1,28 @@
+@import "theme";
+@import "vendor";
+
+.thumbnail-container {
+  width: 90%;
+  margin: 0 5%;
+  padding: 3%;
+  margin-bottom: 3%;
+  background-color: $app-primary;
+
+  h2 {
+    color: $app-black;
+    margin: 3%;
+    padding: 1% 0;
+  }
+
+  input,
+  select {
+    width: 80%;
+    font-size: 100%;
+    border: 1.5px solid $app-secondary;
+    border-radius: 10px;
+    margin: 3% 10%;
+    padding: 1% 2%;
+    color: $app-black;
+  }
+
+}

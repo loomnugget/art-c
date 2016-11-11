@@ -1,0 +1,49 @@
+@import "theme";
+
+.home {
+    width: 100%;
+    margin: 0 auto;
+
+    .searchbar-container {
+      width: 100%;
+      background-color: $app-black;
+
+      h2 {
+        font-size: 80%;
+        text-align: center;
+        padding: 5%;
+        color: $app-white;
+      }
+      .searchbar {
+        input {
+          width: 60%;
+          border: 1.5px solid $app-secondary;
+          margin: 3%;
+          padding: 1% 0;
+          border-radius: 10px;
+          color: $app-black;
+        }
+        button {
+          width: 30%;
+        }
+      }
+
+      ul {
+        padding: 0;
+      }
+
+      li{
+        float: left;
+        padding: 1%;
+      }
+
+    }
+
+    ul {
+      padding: 0px;
+    }
+    li {
+      list-style: none;
+    }
+
+}

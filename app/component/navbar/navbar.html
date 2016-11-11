@@ -1,0 +1,22 @@
+
+<nav class="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
+     <!--navbarCtrl.appTitle comes from bindings (@)-->
+
+    <div ng-hide="navbarCtrl.hideButtons">
+      <button
+        ng-click="navbarCtrl.logout()"
+        class="btn btn-logout">
+        Logout
+      </button>
+
+      <div class="mobile-nav-icon">
+        <button id="btn-append-to-body" type="button">
+          <span class="fa fa-bars"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,22 @@
+<section class="signup">
+  <!-- calls signup controller when submit is clicked-->
+  <!-- Signup component only has the form inputs, the other things are in home/landing -->
+  <!-- Could be put elsewhere if you wanted to -->
+  <form
+    ng-submit="signupCtrl.signup(signupCtrl.user)"
+    novalidate>
+
+    <input class="form-control"
+    ng-minlength="6" required
+    type="text" placeholder="Username" ng-model="signupCtrl.user.username">
+
+    <input class="form-control"
+    required type="email" placeholder="Email" ng-model="signupCtrl.user.email">
+
+    <input class="form-control"
+    required type="password" ng-minlength="8"
+    placeholder="Password" ng-model="signupCtrl.user.password">
+
+    <input type="submit" class="btn" value="Sign Up">
+  </form>
+</section>

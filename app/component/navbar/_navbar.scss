@@ -1,0 +1,48 @@
+@import "theme";
+@import "vendor";
+
+.navbar {
+  background-color: transparent;
+  border:none;
+  height: 60px;
+
+  .btn-logout {
+    display: none;
+    float: right;
+    font-size: 100%;
+    padding: .75% 1.25%;
+    margin: 1.5% 2%;
+    @media (min-width: 500px){
+      display: inline-block;
+    }
+  }
+
+  .navbar-brand {
+    color: $app-secondary;
+    float: left;
+    margin: 1.5% 2%;
+    font-size: 170%;
+    text-decoration: none;
+  }
+
+  .mobile-nav-icon {
+    padding: .75% 1.25%;
+    margin: 1.5% 2%;
+    display: none;
+    float: right;
+    background-color: transparent;
+    color: $app-black;
+    transition: 1s;
+
+    @media (max-width: 500px){
+      display: inline-block;
+    }
+  }
+
+
+  .mobile-nav-icon:hover {
+    color: $app-white;
+  }
+
+
+}

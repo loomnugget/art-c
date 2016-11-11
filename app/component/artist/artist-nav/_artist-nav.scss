@@ -1,0 +1,15 @@
+@import "theme";
+
+.artist-navbar {
+  background-color: $app-black;
+  color: $app-white;
+
+  .artist-nav-btn {
+    background-color: transparent;
+    margin: 2%;
+  }
+
+  .artist-nav-btn:hover {
+    color: $app-white;
+  }
+}

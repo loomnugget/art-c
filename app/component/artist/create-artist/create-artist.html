@@ -1,0 +1,77 @@
+<section class="create-artist-container artist">
+
+  <h2>Create your artist profile</h2>
+
+<div class="row">
+
+  <div class="col span-1-of-3">
+    <profile-pic artist="createArtistCtrl.artist">  </profile-pic>
+  </div>
+
+  <div class="col span-2-of-3  artist-form">
+    <form name="artistForm"
+      class="form-inline"
+      novalidate
+      ng-submit="createArtistCtrl.createArtist()">
+
+          <div class="form-group">
+            <input name="firstname"
+              class="form-control"
+              type="text"
+              placeholder="First name"
+              ng-model="createArtistCtrl.artist.firstname"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="lastname"
+              class="form-control"
+              type="text"
+              placeholder="Last name"
+              ng-model="createArtistCtrl.artist.lastname"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="phone"
+              class="form-control"
+              type="text"
+              placeholder="Phone"
+              ng-model="createArtistCtrl.artist.phone"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="city"
+              class="form-control"
+              type="text"
+              placeholder="City"
+              ng-model="createArtistCtrl.artist.city"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="zip"
+              class="form-control"
+              type="text"
+              placeholder="Zip"
+              ng-model="createArtistCtrl.artist.zip"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="about"
+              class="form-control"
+              type="text"
+              placeholder="About"
+              ng-model="createArtistCtrl.artist.about"
+              required>
+          </div>
+        </div>
+      </div>
+
+
+    <button class="btn" type="submit"> Submit </button>
+
+  </form>
+</section>

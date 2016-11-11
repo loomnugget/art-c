@@ -1,0 +1,44 @@
+@import "theme";
+@import "vendor";
+
+.upload-pic{
+
+  h2 {
+    text-align: center;
+  }
+  form {
+    width: 80%;
+    margin: 2% 10%;
+  }
+
+  .btn {
+    background-color: $app-secondary;
+    border: 1px solid $app-primary;
+    color: $app-black;
+    margin: 3%;
+  }
+
+  .btn:hover {
+    background-color: $app-white;
+  }
+
+  input,
+  select {
+    width: 90%;
+    margin: 0 5%;
+    font-size: 100%;
+    border:none;
+    border: 1.5px solid $app-secondary;
+    margin: 3%;
+    padding: 1% 0;
+    color: $app-black;
+  }
+  .has-error {
+    background-color: $app-warn;
+    color: $app-white;
+  }
+  .btn-success {
+    background-color: $app-success;
+  }
+
+}

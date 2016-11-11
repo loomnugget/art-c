@@ -1,0 +1,10 @@
+  <!-- need to use ng-src for image uri or it won't work -->
+  <!-- pic is set using one way data binding in the component -->
+  <!-- creates a thumbnail for every single pic in the pics array -->
+
+<div class = "thumbnail">
+
+  <span ng-click="thumbnailCtrl.deletePic()" class="fa fa-trash"> </span>
+  <img class='thumbnail-image' ng-src="{{thumbnailCtrl.pic.imageURI}}" alt="{{thumbnailCtrl.pic.desc}}"> </img>
+
+</div>

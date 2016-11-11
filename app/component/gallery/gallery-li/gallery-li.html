@@ -1,0 +1,18 @@
+
+<li class="gallery-li">
+
+  <div class ="row">
+    <h2>{{ galleryLICtrl.gallery.name }} </h2>
+    <p> {{ galleryLICtrl.gallery.desc }} </p>
+  </div>
+
+  <div class ="row">
+    <span ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery" class="fa fa-pencil fa-2x" > </span>
+    <span ng-click="galleryLICtrl.deleteGallery()" class="fa fa-trash-o fa-2x" > </span>
+  </div>
+
+  <div class ="row">
+    <edit-gallery ng-if="galleryLICtrl.showEditGallery" gallery="galleryLICtrl.gallery"> </edit-gallery>
+  </div>
+
+</li>

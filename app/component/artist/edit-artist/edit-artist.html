@@ -1,0 +1,71 @@
+<section class="edit-artist-container">
+
+<div class="row">
+
+  <div class="artist-form">
+    <form name="artistForm"
+      class="form-inline"
+      novalidate
+      ng-submit="editArtistCtrl.updateArtist()">
+
+          <div class="form-group">
+            <input name="firstname"
+              class="form-control"
+              type="text"
+              placeholder="First name"
+              ng-model="editArtistCtrl.artist.firstname"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="lastname"
+              class="form-control"
+              type="text"
+              placeholder="Last name"
+              ng-model="editArtistCtrl.artist.lastname"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="phone"
+              class="form-control"
+              type="text"
+              placeholder="Phone"
+              ng-model="editArtistCtrl.artist.phone"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="city"
+              class="form-control"
+              type="text"
+              placeholder="City"
+              ng-model="editArtistCtrl.artist.city"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="zip"
+              class="form-control"
+              type="text"
+              placeholder="Zip"
+              ng-model="editArtistCtrl.artist.zip"
+              required>
+          </div>
+
+          <div class="form-group">
+            <input name="about"
+              class="form-control"
+              type="text"
+              placeholder="About"
+              ng-model="editArtistCtrl.artist.about"
+              required>
+          </div>
+        </div>
+      </div>
+
+
+    <button class="btn" type="submit"> Update </button>
+
+  </form>
+</section>

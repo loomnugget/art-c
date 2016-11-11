@@ -1,0 +1,26 @@
+<div class="upload-pic">
+
+  <form
+    ng-submit="uploadPicCtrl.uploadPic()"
+    novalidate>
+
+    <div class="row">
+      <div class="col span-1-of-2">
+        <input class="form-control" type="text" ng-model="uploadPicCtrl.pic.name" placeholder="Name">
+      </div>
+      <div class="col span-1-of-2">
+        <input class="form-control" type="text" ng-model="uploadPicCtrl.pic.desc" placeholder="Description">
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-upload"
+        ngf-select
+        ng-model="uploadPicCtrl.pic.file">
+        Select Image
+      </button>
+
+      <button class="btn btn-upload"> Upload Image </button>
+    </div>
+  </form>
+</div>

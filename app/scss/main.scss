@@ -1,0 +1,156 @@
+@import "theme";
+@import "vendor";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Lato', sans-serif;
+}
+
+body {
+    background:
+    linear-gradient(
+      rgba(85,26,139, 0.9),
+      rgba(0, 36, 99, 0.5)
+    ),
+    url(http://i65.tinypic.com/j183uc.jpg) no-repeat center center fixed;
+    //url(http://i67.tinypic.com/x45c1g.jpg); - fruits background
+    background-size: cover;
+}
+
+.has-error {
+  color: $app-error;
+}
+.has-success {
+  color: $app-success;
+}
+
+
+/*------------- BUTTONS ---------------*/
+
+/* General Button Styles  */
+.btn {
+  background-color: rgba(255,255,255,.3);
+  border: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 1.5% 2%;
+  margin-top: 3%;
+  display: inline-block;
+  outline: none;
+  transition: all 0.3s;
+  color: $app-secondary;
+}
+.btn:hover {
+  background:rgba(255,255,255,1);
+  color: $app-black;
+}
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	transition: all 0.3s;
+}
+
+/*  SECTIONS  ============================================================================= */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* --------- Clearfix ------------ */
+.clearfix {zoom: 1;}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/*makes every element include the margin and padding you add to it */
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+/*  GROUPING  ============================================================================= */
+
+.row {
+  max-width: 1140px;
+  margin: 0 auto;
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.row:before,
+.row:after {
+  content:"";
+  display:table;
+}
+.row:after {
+  clear:both;
+}
+
+/*  GRID COLUMN SETUP   ==================================================================== */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
+
+
+/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {
+		/*margin: 1% 0 1% 0%;*/
+      margin: 0;
+	}
+}
+
+
+/*  GRID OF TWO   ============================================================================= */
+.span-2-of-2 {
+	width: 100%;
+}
+.span-1-of-2 {
+	width: 49.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.span-2-of-2 {
+		width: 100%;
+	}
+	.span-1-of-2 {
+		width: 100%;
+	}
+}
+
+
+/*  GRID OF THREE   ============================================================================= */
+.span-3-of-3 {
+	width: 100%;
+}
+.span-2-of-3 {
+	width: 66.13%;
+}
+.span-1-of-3 {
+	width: 32.26%;
+}
+
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.span-3-of-3 {
+		width: 100%;
+	}
+	.span-2-of-3 {
+		width: 100%;
+	}
+	.span-1-of-3 {
+		width: 100%;
+	}
+}

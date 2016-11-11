@@ -1,0 +1,24 @@
+<section class ="edit-gallery-container">
+  
+  <div>
+    <form
+      class="edit-gallery"
+      name="editGallery"
+      ng-submit="editGalleryCtrl.updateGallery()"
+      novalidate>
+
+      <div class="form-group">
+        <label for="name"> Name: </label>
+        <input name="name" class="form-control" ng-model="editGalleryCtrl.gallery.name">
+      </div>
+
+      <div class="form-group">
+        <label for="desc"> Description: </label>
+        <input name="desc" class="form-control" ng-model="editGalleryCtrl.gallery.desc">
+      </div>
+
+      <button class="btn" ng-click="thumbnailCtrl.updatePic()"> Update </button>
+    </form>
+
+  </div>
+</section>

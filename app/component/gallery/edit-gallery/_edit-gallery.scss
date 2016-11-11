@@ -1,0 +1,21 @@
+@import "theme";
+.edit-gallery-container {
+  margin-bottom: 3%;
+
+  .btn {
+    color: $app-black;
+  }
+
+    input,
+    select {
+      width: 90%;
+      margin: 0 5%;
+      font-size: 100%;
+      border:none;
+      border: 1.5px solid $app-secondary;
+      margin: 3%;
+      padding: 1% 0;
+      color: $app-black;
+    }
+
+}

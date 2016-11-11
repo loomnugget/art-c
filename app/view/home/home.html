@@ -1,0 +1,43 @@
+<main class="home" ng-style="{'background-color': 'white'}">
+
+    <artist-nav></artist-nav>
+  <!--
+    - ng-repeat shows each gallery created
+    - delete-done - callback with & - galleryData is mapped to the
+      galleryData property on the object set in the js file.
+    - if there was another object property set in the js, there
+      would be a second argument passed into galleryDeleteDone
+    - Gallery passed in via 1 way databinding
+    - Gallery passed into upload pic
+  -->
+  <profile-container></profile-container>
+
+  <div class="row searchbar-container"> <ul>
+    <li><h2>Search Galleries:</h2></li>
+    <li><searchbar search-term="homeCtrl.name"></searchbar></li>
+    <li><searchbar search-term="homeCtrl.desc"></searchbar></li>
+  </ul> </div>
+
+  <div class="row">
+    <nav class="gallery-list-container">
+      <ul>
+        <gallery-li ng-repeat="item in homeCtrl.galleries | gallerySearch:homeCtrl.name:homeCtrl.desc"
+          gallery="item"
+          delete-done="homeCtrl.galleryDeleteDone(galleryData)"
+          ng-click="homeCtrl.currentGallery=item">
+        </gallery-li>
+    </ul>
+    </nav>
+  </div>
+
+  <div class="row">
+    <div class="col span-1-of-2">
+      <create-gallery> </create-gallery>
+    </div>
+    <div class="col span-1-of-2">
+      <thumbnail-container ng-if="homeCtrl.currentGallery" gallery="homeCtrl.currentGallery"> </thumbnail-container>
+    </div>
+  </div>
+
+
+</main>

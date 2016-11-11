@@ -1,0 +1,75 @@
+@import "theme";
+
+.create-artist-container {
+
+  .artist-form {
+    background-color: $app-white;
+      input,
+      select {
+        width: 80%;
+        font-size: 100%;
+        background-color: transparent;
+        text-transform: uppercase;
+        border:none;
+        border-bottom: 1.5px solid $app-primary;
+        margin: 3%;
+        padding: 1% 0;
+        color: $app-white;
+      }
+
+      input:focus{
+        outline: none;
+      }
+      /*---- Changes Placeholder Color -----*/
+      input::-webkit-input-placeholder,
+      textarea::-webkit-input-placeholder {
+        color: $app-primary;
+      }
+
+
+      /* General Button Styles  */
+      .btn {
+        background-color: rgba(255,255,255,.3);
+        border: none;
+        text-transform: uppercase;
+        border-radius: 3px;
+        font-size: 120%;
+        padding: 1.5% 2%;
+        margin-top: 3%;
+        width: 25%;
+        transition: all 0.3s;
+        color: $app-secondary;
+      }
+
+      .btn:hover {
+        background:rgba(255,255,255,1);
+        color: $app-black;
+      }
+
+      p {
+        padding: 2%;
+        display: inline-block;
+        color: $app-white;
+      }
+
+      a {
+        display: inline-block;
+        font-size: 1.2em;
+        text-decoration: none;
+      }
+
+      @media (min-width: 400px) {
+        width: 90%;
+      }
+
+      @media (min-width: 600px) {
+        width: 65%;
+      }
+
+      @media (min-width: 1000px) {
+        width: 50%;
+      }
+    }
+
+
+}

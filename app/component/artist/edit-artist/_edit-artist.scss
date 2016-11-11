@@ -1,0 +1,33 @@
+@import "theme";
+
+.edit-artist-container {
+  color: $app-black;
+  background-color: $app-secondary;
+  padding: 3%;
+
+  .artist-form {
+    /*--------- Input Styles --------*/
+    input,
+    select {
+      width: 100%;
+      font-size: 90%;
+      background-color: transparent;
+      text-transform: uppercase;
+      border:none;
+      border-bottom: 1.5px solid $app-primary;
+      margin: 1%;
+      padding: 1% 0;
+      color: $app-black;
+    }
+
+    input:focus{
+      outline: none;
+    }
+    /*---- Changes Placeholder Color -----*/
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+      color: $app-primary;
+    }
+
+  }
+}

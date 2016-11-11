@@ -1,0 +1,25 @@
+@import "theme";
+@import "vendor";
+
+.gallery-li {
+  margin: 1.6%;
+  padding: 2%;
+  width: 30%;
+  float: right;
+  background-color: $app-secondary;
+
+  p {
+    margin: 2%;
+  }
+ span {
+   float: left;
+   margin: 2%;
+ }
+  .fa {
+    color: $app-primary;
+    transition: 1s;
+  }
+  .fa:hover {
+    color: $app-white;
+  }
+}
