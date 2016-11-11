@@ -1,6 +1,7 @@
 #Other
 db
-.env
+.client.env
+.server.env
 coverage
 html-report
 

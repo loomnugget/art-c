@@ -17,7 +17,9 @@
     "angular": "true",
     "window": false,
     "__API_URL__": false,
-    "__DEBUG__": false
+    "__DEBUG__": false,
+    "__TITLE__": false,
+
   },
   "ecmaFeatures": {
     "modules": true,
