@@ -2,3 +2,4 @@
 **/vendor/*
 **/*.min.js
 **/coverage/*
+**/build/*
