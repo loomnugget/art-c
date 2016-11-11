@@ -434,15 +434,7 @@ Finds _Artist Object_ with authorized user's **artistID** and updates object pro
     - body:
     ```json
     {
-      "__v": "0",
-      "name": "my-beautiful-face",
-      "username": "bard-tacular",
-      "alt": "sparkly",
-      "objectKey": "03a7990e1adf9fa8944df58dfc81cc5b.jpg",
-      "imageURI": "https://images.s3.amazonaws.com/03a7990e1adf9fa8944df58dfc81cc5b.jpg",
-      "artistID": "58001780a93d821dda8c46cc",
-      "userID": "58001780a93d821dda8c46cb",
-      "_id": "58001781a93d821dda8c46cd"
+
     }
     ```
 
