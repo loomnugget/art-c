@@ -1,7 +1,3 @@
-// post route to create a profile when you signup
-// get route that gets an artist's profile by id
-// put route that updates an artist's profile
-// delete route that deletes a an artist profile
 'use strict';
 
 module.exports = ['$q', '$log', '$http', 'authService', artistService];

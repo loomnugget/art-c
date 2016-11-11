@@ -4,7 +4,6 @@ module.exports = ['$q', '$log', '$http', '$window', authService];
 
 function authService($q, $log, $http, $window){
   $log.debug('init authService');
-  // create service
   let service = {};
   service.token = null;
 
@@ -47,7 +46,6 @@ function authService($q, $log, $http, $window){
     return $http.post(url, user, config)
     .then( res => {
       $log.log('success', res.data);
-      // res.data is the response body aka the service.token
       return service.setToken(res.data);
     })
     .catch(err => {
@@ -59,7 +57,6 @@ function authService($q, $log, $http, $window){
   service.login = function(user){
     $log.debug('authService.login()');
     let url = `${__API_URL__}/api/login`;
-    // base64 encoded 'username:password'
     let base64 = $window.btoa(`${user.username}:${user.password}`);
 
     let config = {

@@ -1,45 +1,36 @@
 'use strict';
 
-// Build sass - gets custom bootstrap and theme
 require('./scss/main.scss');
 
 // Require node modules
 const path = require('path');
 
 // Require npm modules
-const angular = require('angular'); //create angular module
+const angular = require('angular');
 const camelcase = require('camelcase');
 const pascalcase = require('pascalcase');
 
 // Require angular modules
-// Injected in modules to do routing and bootstrap
-const ngTouch = require('angular-touch'); // Dependency of bootstrap
-const ngAnimate = require('angular-animate'); // Dependency of bootstrap
+const ngTouch = require('angular-touch');
+const ngAnimate = require('angular-animate');
 const uiRouter = require('angular-ui-router');
-//const uiBootstrap = require('angular-ui-bootstrap'); // Need touch and animate to use
+const uiBootstrap = require('angular-ui-bootstrap');
 const ngFileUpload = require('ng-file-upload');
 
 // Create angular module
-// Add everything we need to module
-const app = angular.module('app', [ngTouch, ngAnimate, uiRouter, ngFileUpload]);
+const app = angular.module('app', [ngTouch, uiBootstrap, ngAnimate, uiRouter, ngFileUpload]);
 
 // LOAD CONFIG
 let context = require.context('./config/', true, /.js$/);
-// Goes through config and finds files that end .js
-context.keys().forEach( path => { // Gets array of paths -  path is the name returned
-  app.config(context(path)); // Gives us the object (module that is exported)
+context.keys().forEach( path => {
+  app.config(context(path));
 });
 
 // LOAD VIEW CONTROLLERS
 context = require.context('./view/', true, /.js$/);
-// Looks in view for directories ending in js
 context.keys().forEach( key => {
-  // For every key, take path, and get the base name(home-controller)
-  // Pascalcase turns it into HomeController
   let name = pascalcase(path.basename(key, '.js'));
-  // Name controller based on file name
-  // Pass in path into context -returns what was exported
-  let module = context(key); // value of module.exports
+  let module = context(key);
   app.controller(name, module);
 });
 
