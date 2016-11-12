@@ -17,7 +17,8 @@
       "start": "node server.js",
       "start-debug": "DEBUG='art-c*' npm start",
       "start-watch": "DEBUG='art-c*' ./node_modules/nodemon/bin/nodemon.js server.js",
-      "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+      "backend-test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+      "test": "npm run frontend-test && npm run backend-test",
       "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
       "lint": "./node_modules/eslint/bin/eslint.js .",
       "test-debug": "DEBUG='art-c*' ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
