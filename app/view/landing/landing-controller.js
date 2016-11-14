@@ -4,7 +4,7 @@ require('./_landing.scss');
 
 module.exports = ['$log', '$location', '$window', '$rootScope', 'authService', LandingController];
 
-function LandingController($log, $window, $location, $rootScope, authService){
+function LandingController($log, $location, $window, $rootScope, authService){
   $log.debug('init landingCtrl');
 
   let url = $location.url();

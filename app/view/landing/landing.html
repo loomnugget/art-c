@@ -5,12 +5,10 @@
     <div class="join-inner-container">
       <signup></signup>
       <p> Already a member? </p>
-      <div ng-hide="navbarCtrl.hideLoginSignupButtons">
         <a href="/#/join#login"
           ng-click="landingCtrl.showSignup=false">
           Login
-        </a>
-      </div>
+        </a
       <button class="btn landing-btn"><a ng-href="{{homeCtrl.googleAuthURL}}"> Login with Google</a></button>
     </div>
   </div>
@@ -20,12 +18,10 @@
     <div class="join-inner-container">
       <login> </login>
       <p> Not a member yet? </p>
-      <div ng-hide="navbarCtrl.hideLoginSignupButtons">
         <a href="/#/join#signup"
           ng-click="landingCtrl.showSignup=true">
           Signup
         </a>
-      </div>
       <button class="btn landing-btn"><a ng-href="{{homeCtrl.googleAuthURL}}"> Signup with Google</a></button>
     </div>
   </div>

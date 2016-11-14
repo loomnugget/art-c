@@ -22,8 +22,8 @@ function NavbarController($log, $location, $rootScope, authService) {
 
       authService.getToken()
       .then(() => {
-        $location.url('/home');
         this.hideLoginSignupButtons = true;
+        $location.url('/home');
       });
     }
 
@@ -53,11 +53,13 @@ function NavbarController($log, $location, $rootScope, authService) {
 
   this.signup = function(){
     $log.log('navbarCtrl.signup()');
+    this.hideLoginSignupButtons = true;
     // bring up modal
   };
 
   this.login = function(){
-    $log.log('navbarCtrl.logint()');
+    $log.log('navbarCtrl.login()');
+    this.hideLoginSignupButtons = true;
     // bring up modal
   };
 
