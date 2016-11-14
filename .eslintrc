@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "no-console": "off",
+    "indent": [ "error", 2 ],
+    "semi": ["error", "always"],
+    "linebreak-style": [ "error", "unix" ],
+    "comma-dangle": ["error", "always-multiline"],
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }]
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true,
+    "jasmine": true
+  },
+  "globals": {
+    "angular": "true",
+    "window": false,
+    "__API_URL__": false,
+    "__DEBUG__": false,
+    "__TITLE__": false,
+    "__GOOGLE_CLIENT_ID__": false,
+
+  },
+  "ecmaFeatures": {
+    "modules": true,
+    "experimentalObjectRestSpread": true,
+    "impliedStrict": true
+  },
+  "extends": "eslint:recommended"
+}
