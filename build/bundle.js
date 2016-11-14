@@ -194,9 +194,9 @@
 
 /***/ },
 /* 32 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/landing/landing-controller.js\n// module id = 32\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/landing/landing-controller.js?");
+	eval("'use strict';\n\n__webpack_require__(56);\n\nmodule.exports = ['$log', '$location', '$rootScope', 'authService', LandingController];\n\nfunction LandingController($log, $location, $rootScope, authService) {\n  $log.debug('init landingCtrl');\n\n  var url = $location.url();\n  this.showSignup = url === '/join#signup' || url === '/join';\n\n  var query = $location.search();\n\n  if (query.token) {\n    authService.setToken(query.token).then(function () {\n      $location.path('/#/home');\n    });\n  }\n  $rootScope.$on('locationChangeSuccess', function () {\n    var query = $location.search();\n    if (query.token) {\n      authService.setToken(query.token).then(function () {\n        $location.path('/#/home');\n      });\n    }\n  });\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/landing/landing-controller.js\n// module id = 32\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/landing/landing-controller.js?");
 
 /***/ },
 /* 33 */
@@ -325,6 +325,12 @@
 /***/ function(module, exports) {
 
 	eval("'use strict';\n\nmodule.exports = function () {\n  return function (galleries, searchTermName, searchTermDesc) {\n\n    var fuzzyRegexName = generateFuzzyRegex(searchTermName);\n    var fuzzyRegexDesc = generateFuzzyRegex(searchTermDesc);\n\n    var filteredArray = galleries.filter(function (gallery) {\n      return fuzzyRegexName.test(gallery.name.toUpperCase());\n    });\n\n    filteredArray = filteredArray.filter(function (gallery) {\n      return fuzzyRegexDesc.test(gallery.desc.toUpperCase());\n    });\n\n    return filteredArray;\n  };\n};\n\nfunction generateFuzzyRegex(input) {\n  if (!input) return (/.*/\n  );\n  var fuzzyString = '.*' + input.toUpperCase().split('').join('.*') + '.*';\n  return new RegExp(fuzzyString);\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/filter/gallery-search.js\n// module id = 55\n// module chunks = 0\n//# sourceURL=webpack:///./app/filter/gallery-search.js?");
+
+/***/ },
+/* 56 */
+/***/ function(module, exports) {
+
+	eval("// removed by extract-text-webpack-plugin\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/landing/_landing.scss\n// module id = 56\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/landing/_landing.scss?");
 
 /***/ }
 /******/ ]);
