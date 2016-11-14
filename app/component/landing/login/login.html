@@ -3,10 +3,6 @@
     name="loginForm"
     ng-submit="loginCtrl.login()" novalidate>
     <div
-      ng-class="{
-        'has-error': loginForm.username.$invalid,
-        'has-success': loginForm.username.$valid,
-      }"
       class="form-group">
       <input type="text"
         name="username"
@@ -17,10 +13,6 @@
     </div>
 
     <div
-      ng-class="{
-        'has-error': loginForm.password.$invalid && loginForm.$submitted,
-        'has-success': loginForm.password.$valid,
-      }"
       class="form-group">
       <input type="password" name="password"
         ng-disabled="loginForm.username.$invalid"
