@@ -166,13 +166,13 @@
 /* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nmodule.exports = ['$stateProvider', '$urlRouterProvider', routerConfig];\n\nfunction routerConfig($stateProvider, $urlRouterProvider) {\n  $urlRouterProvider.when('', '/join#signup');\n  $urlRouterProvider.when('/', '/join#signup');\n  $urlRouterProvider.when('/signup', '/join#signup');\n  $urlRouterProvider.when('/login', '/join#login');\n\n  var states = [{\n    name: 'home',\n    url: '/home',\n    controllerAs: 'homeCtrl',\n    controller: 'HomeController',\n    template: __webpack_require__(28)\n  }, {\n    name: 'welcome',\n    url: '/join',\n    controllerAs: 'landingCtrl',\n    controller: 'LandingController',\n    template: __webpack_require__(29)\n  }];\n\n  states.forEach(function (state) {\n    $stateProvider.state(state);\n  });\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/config/router-config.js\n// module id = 27\n// module chunks = 0\n//# sourceURL=webpack:///./app/config/router-config.js?");
+	eval("'use strict';\n\nmodule.exports = ['$stateProvider', '$urlRouterProvider', routerConfig];\n\nfunction routerConfig($stateProvider, $urlRouterProvider) {\n  // $urlRouterProvider.when('' , '/landing#signup');\n  // $urlRouterProvider.when('/' , '/landing#signup');\n  // $urlRouterProvider.when('/signup' , '/landing#signup');\n  // $urlRouterProvider.when('/login' , '/landing#login');\n\n  var states = [{\n    name: 'home',\n    url: '/home',\n    controllerAs: 'homeCtrl',\n    controller: 'HomeController',\n    template: __webpack_require__(28)\n  }, {\n    name: 'welcome',\n    url: '/landing',\n    controllerAs: 'landingCtrl',\n    controller: 'LandingController',\n    template: __webpack_require__(29)\n  }];\n\n  states.forEach(function (state) {\n    $stateProvider.state(state);\n  });\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/config/router-config.js\n// module id = 27\n// module chunks = 0\n//# sourceURL=webpack:///./app/config/router-config.js?");
 
 /***/ },
 /* 28 */
 /***/ function(module, exports) {
 
-	eval("module.exports = \"<main class=\\\"home\\\">\\n\\n</main>\\n\";\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/home/home.html\n// module id = 28\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/home/home.html?");
+	eval("module.exports = \"<main class=\\\"home\\\">\\n\\n  <a ng-href=\\\"{{homeCtrl.facebookAuthURL}}\\\">CLICK ME</a>\\n\\n</main>\\n\";\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/home/home.html\n// module id = 28\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/home/home.html?");
 
 /***/ },
 /* 29 */
@@ -188,9 +188,9 @@
 
 /***/ },
 /* 31 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/home/home-controller.js\n// module id = 31\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/home/home-controller.js?");
+	eval("'use strict';\n\nmodule.exports = ['$log', '$rootScope', '$window', '$location', 'authService', HomeController];\n\nfunction HomeController($log, $rootScope, $window, $location, authService) {\n  $log.debug('init homeCtrl');\n\n  function pageLoadHandler() {\n    authService.getToken().then(function (token) {\n      console.log('token', token);\n      $location.url('/home');\n    }).catch(function () {\n      var query = $location.search();\n      if (query.token) {\n        console.log('Got token', query.token);\n        authService.setToken(query.token).then(function () {\n          $location.url('/home');\n        });\n      }\n    });\n  }\n\n  $window.onload = pageLoadHandler;\n\n  $rootScope.$on('locationChangeSuccess', pageLoadHandler);\n\n  this.facebookAuthURL = '';\n\n  var facebookAuthBase = 'https://www.facebook.com/v2.8/dialog/oauth';\n  var facebookClientID = 'client_id=' + (\"718122165003062\");\n  var facebookRedirectURI = 'redirect_uri=' + (\"http://localhost:3000\") + '/api/auth/facebook_oauth_callback';\n  var facebookResponseType = 'response_type=code';\n  var facebookAuthScope = 'scope=public_profile%20email';\n\n  this.facebookAuthURL = facebookAuthBase + '?' + facebookClientID + '&' + facebookRedirectURI + '&' + facebookResponseType + '&' + facebookAuthScope;\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/view/home/home-controller.js\n// module id = 31\n// module chunks = 0\n//# sourceURL=webpack:///./app/view/home/home-controller.js?");
 
 /***/ },
 /* 32 */

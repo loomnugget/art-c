@@ -3,10 +3,10 @@
 module.exports = ['$stateProvider', '$urlRouterProvider', routerConfig];
 
 function routerConfig($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.when('' , '/landing#signup');
-  $urlRouterProvider.when('/' , '/landing#signup');
-  $urlRouterProvider.when('/signup' , '/landing#signup');
-  $urlRouterProvider.when('/login' , '/landing#login');
+  // $urlRouterProvider.when('' , '/landing#signup');
+  // $urlRouterProvider.when('/' , '/landing#signup');
+  // $urlRouterProvider.when('/signup' , '/landing#signup');
+  // $urlRouterProvider.when('/login' , '/landing#login');
 
   let states = [
     {

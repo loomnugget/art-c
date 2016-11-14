@@ -102,6 +102,15 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
   .catch(next);
 });
 
+// Facebook OAuth route
+authRouter.get('/api/auth/facebook_oauth_callback', function(req, res) {
+  debug('hit route GET /api/auth/oauth_callback');
+  console.log('REQ', req);
+  res.send('stuff');
+
+
+});
+
 // Google OAuth route
 authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
   debug('hit route GET /api/auth/oauth_callback');
