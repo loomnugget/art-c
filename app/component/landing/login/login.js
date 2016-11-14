@@ -8,8 +8,10 @@ module.exports = {
 
 function LoginController($log, $location, authService){
   $log.debug('init loginCtrl');
+
   this.login = function(){
     $log.log('loginCtrl.login()');
+    
     authService.login(this.user)
     .then(() => {
       $location.url('/home');

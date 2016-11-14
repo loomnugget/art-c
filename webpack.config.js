@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load({path: `${__dirname}/.client.env`});
+require('dotenv').load({path: `${__dirname}/.env`});
 if (process.env.NODE_ENV === 'testing') {
   require('./test/lib/test-env');
 }
