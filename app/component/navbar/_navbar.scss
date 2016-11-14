@@ -5,18 +5,18 @@
   background-color: transparent;
   border:none;
   height: 60px;
+  margin-right: 2%;
 
   .btn-nav {
     display: none;
     float: right;
     font-size: 100%;
     padding: .75% 1.25%;
-    margin: 1.5%;
+    margin: 1%;
     @media (min-width: 500px){
       display: inline-block;
     }
   }
-
   .navbar-brand {
     color: $app-secondary;
     float: left;

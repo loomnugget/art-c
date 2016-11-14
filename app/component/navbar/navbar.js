@@ -22,17 +22,21 @@ function NavbarController($log, $location, $rootScope, authService) {
 
       authService.getToken()
       .then(() => {
-        this.hideLoginSignupButtons = true;
         $location.url('/home');
       });
     }
 
     if (path !== '/join'){
       this.hideLogoutButton = false;
+
       authService.getToken()
       .catch(() => {
         $location.url('/join#login');
       });
+    }
+
+    if (path === '/home') {
+      this.hideLoginSignupButtons = true;
     }
   };
 
