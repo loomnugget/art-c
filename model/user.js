@@ -14,8 +14,15 @@ const Schema = mongoose.Schema;
 const userSchema = Schema({
   username: {type: String, required: true, unique: true, minlength: 3},
   email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
+  password: {type: String},
   findHash: {type: String, unique: true},
+  google: {
+    googleID: {type: String},
+    refreshToken: {type: String},
+    accessToken: {type: String},
+    tokenTimeStamp: {type: Date},
+    tokenTTL: {type: Number},
+  },
 });
 
 userSchema.methods.generatePasswordHash = function(password) {
