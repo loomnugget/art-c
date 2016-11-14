@@ -18,14 +18,15 @@ const photoRouter = require('./route/photo-router.js');
 const pageRouter = require('./route/page-router.js');
 
 const errorMiddleware = require('./lib/error-middleware.js');
-// load env variables
-dotenv.load();
 
-// connect to mongo database
+// Load server environment variables
+dotenv.load({path: `${__dirname}/.env`});
+
+// Connect to mongo database
 mongoose.Promise = Promise;
 mongoose.connect(process.env.MONGODB_URI);
 
-// module constants
+// Module constants
 const PORT = process.env.PORT;
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // app routes
+app.use(express.static(`${__dirname}/build`));
 app.use(authRouter);
 app.use(artistRouter);
 app.use(galleryRouter);
@@ -45,6 +47,7 @@ app.use(errorMiddleware);
 // start server
 const server = module.exports = app.listen(PORT, function() {
   debug('server started');
+  console.log('server up');
 });
 
 server.isRunning = true;
