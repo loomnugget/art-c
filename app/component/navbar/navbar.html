@@ -1,4 +1,31 @@
-
 <nav class="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
 
+    <div ng-hide="navbarCtrl.hideLogoutButton">
+      <button
+        ng-click="navbarCtrl.logout()"
+        class="btn btn-nav">
+        Logout
+      </button>
+    </div>
+
+    <div ng-hide="navbarCtrl.hideLoginSignupButtons">
+      <button
+        ng-click="navbarCtrl.login()"
+        class="btn btn-nav">
+        Login
+      </button>
+    </div>
+
+    <div ng-hide="navbarCtrl.hideLoginSignupButtons">
+      <button
+        ng-click="navbarCtrl.signup()"
+        class="btn btn-nav">
+        Signup
+      </button>
+    </div>
+
+    </div>
+  </div>
 </nav>
