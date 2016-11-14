@@ -12,8 +12,9 @@ const Listing = require('../model/listing.js');
 const Photo = require('../model/photo.js');
 const User = require('../model/user.js');
 
-const basicAuth = require('../lib/basic-auth-middleware.js');
+const basicAuth = require('../lib/basic-auth-middleware');
 const bearerAuth = require('../lib/bearer-auth-middleware');
+const googleOAUTH = require('../lib/google-oauth-middleware');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -99,4 +100,47 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
     res.json(user);
   })
   .catch(next);
+});
+
+// Google OAuth route
+authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
+  debug('hit route GET /api/auth/oauth_callback');
+
+  if (req.googleError) {
+    return res.redirect('/');
+  }
+
+  User.findOne({ email: req.googleOAUTH.email})
+  .then( user => {
+    if (!user) return Promise.reject(new Error('User not found.'));
+    return user;
+  })
+  .catch( err => {
+    if (err.message === 'user not found') {
+      let userData = {
+        username: req.googleOAUTH.email,
+        email: req.googleOAUTH.email,
+        google: {
+          googleID: req.googleOAUTH.googleID,
+          accessToken: req.googleOAUTH.accessToken,
+          refreshToken: req.googleOAUTH.refreshToken,
+          tokenTTL: req.googleOAUTH.tokenTTL,
+          tokenTimeStamp: Date.now(),
+        },
+      };
+      return new User(userData).save();
+    }
+    return Promise.reject(err);
+  })
+  .then ( user => {
+    user.generateToken();
+  })
+  .then( token => {
+    res.redirect(`/?token=${token}`);
+  })
+  .catch( err => {
+    console.error(err);
+    console.log('User not found.');
+    res.redirect('/');
+  });
 });
