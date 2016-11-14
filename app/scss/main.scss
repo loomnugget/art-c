@@ -20,10 +20,12 @@ html, body {
   transition: all 0.3s;
   color: $app-secondary;
 }
+
 .btn:hover {
   background:rgba(255,255,255,0.8);
   color: $app-black;
 }
+
 .btn:after {
 	content: '';
 	position: absolute;
