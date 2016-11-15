@@ -13,6 +13,7 @@ const Gallery = require('../model/gallery.js');
 const Photo = require('../model/photo.js');
 const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
+const pageMiddleware = require('../lib/page-query-middleware.js');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -55,6 +56,15 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
     if (err.name === 'ValidationError') return next(err);
     next(createError(404, err.message));
   });
+});
+
+galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, pageMiddleware, function(req, res, next){
+  debug('GET /api/artist/:artistID/gallery');
+  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  let skip = offset + pageSize * page;
+  Gallery.find({artistID: req.params.artistID}).skip(skip).limit(pageSize)
+  .then(galleries => res.json(galleries))
+  .catch(next);
 });
 
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
