@@ -17,7 +17,8 @@ function NavbarController($log, $location, $rootScope, authService) {
   this.checkPath = function(){
     let path = $location.path();
     if (path === '/join'){
-      this.hideButtons = true;
+      this.hideLogoutButton = true;
+      this.hideLoginSignupButtons = false;
 
       authService.getToken()
       .then(() => {
@@ -26,11 +27,16 @@ function NavbarController($log, $location, $rootScope, authService) {
     }
 
     if (path !== '/join'){
-      this.hideButtons = false;
+      this.hideLogoutButton = false;
+
       authService.getToken()
       .catch(() => {
         $location.url('/join#login');
       });
+    }
+
+    if (path === '/home') {
+      this.hideLoginSignupButtons = true;
     }
   };
 
@@ -42,10 +48,23 @@ function NavbarController($log, $location, $rootScope, authService) {
 
   this.logout = function(){
     $log.log('navbarCtrl.logout()');
-    this.hideButtons = true;
+    this.hideLogoutButton = true;
     authService.logout()
     .then(() => {
       $location.url('/');
     });
   };
+
+  this.signup = function(){
+    $log.log('navbarCtrl.signup()');
+    this.hideLoginSignupButtons = true;
+    // bring up modal
+  };
+
+  this.login = function(){
+    $log.log('navbarCtrl.login()');
+    this.hideLoginSignupButtons = true;
+    // bring up modal
+  };
+
 }

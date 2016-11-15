@@ -1,3 +1,30 @@
 <main class="landing">
 
+  <button class="btn btn-facebook" ng-href="{{landingCtrl.facebookAuthURL}}">
+  </button>
+
+  <div class="join-container"
+    ng-if="landingCtrl.showSignup">
+    <div class="join-inner-container">
+      <signup></signup>
+      <p> Already a member? </p>
+        <a href="/#/landing#login"
+          ng-click="landingCtrl.showSignup=false">
+          Login
+        </a>
+    </div>
+  </div>
+
+  <div class="join-container"
+    ng-if="!landingCtrl.showSignup">
+    <div class="join-inner-container">
+      <login> </login>
+      <p> Not a member yet? </p>
+        <a href="/#/landing#signup"
+          ng-click="landingCtrl.showSignup=true">
+          Signup
+        </a>
+    </div>
+  </div>
+
 </main>
