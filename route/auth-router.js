@@ -105,7 +105,8 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
 
 // Facebook OAuth route
 authRouter.get('/api/auth/facebook_oauth_callback', facebookOAUTH, function(req, res) {
-  debug('hit route GET /api/auth/oauth_callback');
+  debug('hit route GET /api/auth/facebook_oauth_callback');
+  console.log('DID I HIT');
   if (req.facebookError) return res.redirect('/');
   console.log('HELLO I AM THING', req.facebookOAUTH);
 
@@ -173,14 +174,13 @@ authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
     return Promise.reject(err);
   })
   .then( user => {
-    user.generateToken();
+    return user.generateToken();
   })
   .then( token => {
     res.redirect(`/#/home?token=${token}`);
   })
   .catch( err => {
     console.error(err);
-    console.log('User not found.');
     res.redirect('/');
   });
 });
