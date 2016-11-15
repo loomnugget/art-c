@@ -27,7 +27,6 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
       this.hideLogoutButton = false;
     }
 
-    console.log("search should happend")
     authService.getToken()
       .then(token => {
         console.log('token', token);
@@ -71,9 +70,8 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
   this.googleAuthURL = `${googleAuthBase}?${googleAuthResponseType}&${googleAuthClientID}&${googleAuthScope}&${googleAuthRedirectURI}&${googleAuthAccessType}&prompt=consent`;
 
   if (!__DEBUG__) {
-    console.log('prompt on')
-    this.googleAuthURL += '&prompt=consent'
-  };
+    this.googleAuthURL += '&prompt=consent';
+  }
 
   this.facebookAuthURL = '';
 
