@@ -157,3 +157,9 @@ Devnotes need to be updated with current paths and versions.
       - Max and Lee: finish Facebook OAuth integration, maybe Auth Router unit tests
       - Elizabeth: front-end testing
       - Claudia: modal, slider
+
+  **11/14/2016, 10:00am**
+    - Plan for the morning:
+      - Max/Liz: working on login/signup and logout functionality
+      - Lee/Claudia: pair programming to work on carousel, modal, and home view components
+      
