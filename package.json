@@ -13,7 +13,7 @@
       "build": "./node_modules/webpack/bin/webpack.js",
       "build-watch": "./node_modules/webpack/bin/webpack.js -w",
       "frontend-test": "./node_modules/karma/bin/karma start --single-run",
-      "test-watch": "./node_modules/karma/bin/karma start",
+      "frontend-test-watch": "./node_modules/karma/bin/karma start",
       "start": "node server.js",
       "start-debug": "DEBUG='art-c*' npm start",
       "start-watch": "DEBUG='art-c*' ./node_modules/nodemon/bin/nodemon.js server.js",
