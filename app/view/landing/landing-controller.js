@@ -2,53 +2,10 @@
 
 require('./_landing.scss');
 
-module.exports = ['$log', '$location', '$window', '$rootScope', 'authService', LandingController];
+module.exports = ['$log', LandingController];
 
-function LandingController($log, $location, $window, $rootScope, authService){
+function LandingController($log) {
   $log.debug('init landingCtrl');
-
-  let url = $location.url();
-  this.showSignup = url === '/landing#signup' || url === '/landing';
-
-  let query = $location.search();
-
-  if(query.token){
-    authService.setToken(query.token)
-    .then(() => {
-      $location.path('/#/home');
-    });
-  }
-  $rootScope.$on('locationChangeSuccess', () => {
-    let query = $location.search();
-    if(query.token){
-      authService.setToken(query.token)
-      .then(() => {
-        $location.path('/#/home');
-      });
-    }
-  });
-
-  function pageLoadHandler() {
-    authService.getToken()
-    .then( token => {
-      console.log('token', token);
-      $location.url('/home');
-    })
-    .catch( () => {
-      let query = $location.search();
-      if (query.token) {
-        console.log('Got token', query.token);
-        authService.setToken(query.token)
-        .then( () => {
-          $location.url('/home');
-        });
-      }
-    });
-  }
-
-  $window.onload = pageLoadHandler;
-
-  $rootScope.$on('locationChangeSuccess', pageLoadHandler);
 
   let googleAuthBase = 'https://accounts.google.com/o/oauth2/v2/auth';
   let googleAuthResponseType = 'response_type=code';
@@ -59,7 +16,7 @@ function LandingController($log, $location, $window, $rootScope, authService){
 
   this.googleAuthURL = `${googleAuthBase}?${googleAuthResponseType}&${googleAuthClientID}&${googleAuthScope}&${googleAuthRedirectURI}&${googleAuthAccessType}`;
 
-  if(!__DEBUG__) this.googleAuthURL += '&prompt=consent';
+  if (!__DEBUG__) this.googleAuthURL += '&prompt=consent';
 
   let facebookAuthBase = 'https://www.facebook.com/v2.8/dialog/oauth';
   let facebookClientID = `client_id=${__FACEBOOK_CLIENT_ID__}`;
