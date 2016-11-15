@@ -244,7 +244,7 @@
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("var map = {\n\t\"./gallery/create-gallery/create-gallery.js\": 46,\n\t\"./gallery/edit-gallery/edit-gallery.js\": 47,\n\t\"./gallery/gallery-li/gallery-li.js\": 48,\n\t\"./landing/login/login.js\": 49,\n\t\"./landing/signup/signup.js\": 51,\n\t\"./navbar/navbar.js\": 53,\n\t\"./searchbar/searchbar.js\": 57\n};\nfunction webpackContext(req) {\n\treturn __webpack_require__(webpackContextResolve(req));\n};\nfunction webpackContextResolve(req) {\n\treturn map[req] || (function() { throw new Error(\"Cannot find module '\" + req + \"'.\") }());\n};\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = 45;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/component .js$\n// module id = 45\n// module chunks = 0\n//# sourceURL=webpack:///./app/component_.js$?");
+	eval("var map = {\n\t\"./gallery/create-gallery/create-gallery.js\": 46,\n\t\"./gallery/edit-gallery/edit-gallery.js\": 47,\n\t\"./gallery/gallery-li/gallery-li.js\": 48,\n\t\"./landing/carousel/carousel.js\": 63,\n\t\"./landing/login/login.js\": 49,\n\t\"./landing/signup/signup.js\": 51,\n\t\"./navbar/navbar.js\": 53,\n\t\"./searchbar/searchbar.js\": 57\n};\nfunction webpackContext(req) {\n\treturn __webpack_require__(webpackContextResolve(req));\n};\nfunction webpackContextResolve(req) {\n\treturn map[req] || (function() { throw new Error(\"Cannot find module '\" + req + \"'.\") }());\n};\nwebpackContext.keys = function webpackContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackContext.resolve = webpackContextResolve;\nmodule.exports = webpackContext;\nwebpackContext.id = 45;\n\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/component .js$\n// module id = 45\n// module chunks = 0\n//# sourceURL=webpack:///./app/component_.js$?");
 
 /***/ },
 /* 46 */
@@ -337,6 +337,18 @@
 /***/ function(module, exports) {
 
 	eval("'use strict';\n\nmodule.exports = function () {\n  return function (galleries, searchTermName, searchTermDesc) {\n\n    var fuzzyRegexName = generateFuzzyRegex(searchTermName);\n    var fuzzyRegexDesc = generateFuzzyRegex(searchTermDesc);\n\n    var filteredArray = galleries.filter(function (gallery) {\n      return fuzzyRegexName.test(gallery.name.toUpperCase());\n    });\n\n    filteredArray = filteredArray.filter(function (gallery) {\n      return fuzzyRegexDesc.test(gallery.desc.toUpperCase());\n    });\n\n    return filteredArray;\n  };\n};\n\nfunction generateFuzzyRegex(input) {\n  if (!input) return (/.*/\n  );\n  var fuzzyString = '.*' + input.toUpperCase().split('').join('.*') + '.*';\n  return new RegExp(fuzzyString);\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/filter/gallery-search.js\n// module id = 62\n// module chunks = 0\n//# sourceURL=webpack:///./app/filter/gallery-search.js?");
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("'use strict';\n\nmodule.exports = {\n  template: __webpack_require__(64),\n  controller: ['$log', CarouselController],\n  controllerAs: 'carouselCtrl'\n};\n\nfunction CarouselController($log) {\n  $log.debug('init carouselCtrl');\n  this.interval = 3000;\n  this.slides = [{\n    image: 'http://lorempixel.com/400/200/'\n  }, {\n    image: 'http://lorempixel.com/400/200/food'\n  }, {\n    image: 'http://lorempixel.com/400/200/sports'\n  }, {\n    image: 'http://lorempixel.com/400/200/people'\n  }];\n}\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/component/landing/carousel/carousel.js\n// module id = 63\n// module chunks = 0\n//# sourceURL=webpack:///./app/component/landing/carousel/carousel.js?");
+
+/***/ },
+/* 64 */
+/***/ function(module, exports) {
+
+	eval("module.exports = \"<main class=\\\"landing-carousel\\\">\\n  <div>\\n    <carousel interval=\\\"carouselCtrl.interval\\\">\\n      <slide ng-repeat=\\\"item in carouselCtrl.slides\\\" active=\\\"item.active\\\">\\n        <img ng-src=\\\"{{item.image}}\\\">\\n        <div class=\\\"carousel-caption\\\">\\n          <h4>Slide {{$index+1}}</h4>\\n        </div>\\n      </slide>\\n    </carousel>\\n  </div>\\n</div>\\n\";\n\n//////////////////\n// WEBPACK FOOTER\n// ./app/component/landing/carousel/carousel.html\n// module id = 64\n// module chunks = 0\n//# sourceURL=webpack:///./app/component/landing/carousel/carousel.html?");
 
 /***/ }
 /******/ ]);

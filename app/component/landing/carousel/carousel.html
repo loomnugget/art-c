@@ -1,0 +1,12 @@
+<main class="landing-carousel">
+  <div>
+    <carousel interval="carouselCtrl.interval">
+      <slide ng-repeat="item in carouselCtrl.slides" active="item.active">
+        <img ng-src="{{item.image}}">
+        <div class="carousel-caption">
+          <h4>Slide {{$index+1}}</h4>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
