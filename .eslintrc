@@ -20,6 +20,7 @@
     "__DEBUG__": false,
     "__TITLE__": false,
     "__GOOGLE_CLIENT_ID__": false,
+    "__FACEBOOK_CLIENT_ID__": false,
 
   },
   "ecmaFeatures": {
