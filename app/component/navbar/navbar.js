@@ -4,16 +4,16 @@ require('./_navbar.scss');
 
 module.exports = {
   template: require('./navbar.html'),
-  controller: ['$log', '$location', '$rootScope', '$window', 'authService', NavbarController],
+  controller: ['$log', '$location', '$rootScope', '$window', '$uibModal', 'authService', NavbarController],
   controllerAs: 'navbarCtrl',
   bindings: {
     appTitle: '@',
+    resolve: '<',
   },
 };
 
-function NavbarController($log, $location, $rootScope, $window, authService) {
+function NavbarController($log, $location, $rootScope, $window, $uibModal, authService) {
   $log.debug('init navbarCtrl');
-  console.log('sgtuffwhatoefioweaf');
 
   function pageLoadHandler() {
     let path = $location.path();
@@ -82,17 +82,25 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
   let facebookAuthScope = 'scope=public_profile%20email';
 
   this.facebookAuthURL = `${facebookAuthBase}?${facebookClientID}&${facebookRedirectURI}&${facebookResponseType}&${facebookAuthScope}`;
-  //
-  // this.signup = function() {
-  //   $log.log('navbarCtrl.signup()');
-  //   this.hideLoginSignupButtons = true;
-  //   // bring up modal
-  // };
-  //
-  // this.login = function() {
-  //   $log.log('navbarCtrl.login()');
-  //   this.hideLoginSignupButtons = true;
-  //   // bring up modal
-  // };
+
+  this.open = function() {
+    let modalInstance = $uibModal.open({
+      templateUrl: '../landing/modal/modal.html',
+      component: 'modal',
+    });
+    return modalInstance;
+  };
+
+  this.signup = function() {
+    $log.log('navbarCtrl.signup()');
+    this.hideLoginSignupButtons = true;
+    // bring up modal
+  };
+
+  this.login = function() {
+    $log.log('navbarCtrl.login()');
+    this.hideLoginSignupButtons = true;
+    // bring up modal
+  };
 
 }
