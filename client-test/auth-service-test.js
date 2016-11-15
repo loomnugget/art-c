@@ -1,6 +1,8 @@
 'use strict';
 
-describe('testing authservice', function() {
+describe('testing authService', function() {
+
+  let url = 'http://localhost:3000/api';
 
   beforeEach(() => {
     angular.mock.module('app');
@@ -43,6 +45,30 @@ describe('testing authservice', function() {
       });
 
       this.$rootScope.$apply();
+    });
+  });
+
+  describe('#signup(user)', () => {
+    it('should return a token', () => {
+
+      let user = {
+        username: 'Harold',
+        email: 'harold@herald.com',
+        password: '123456',
+      };
+
+      this.$httpBackend.expectPOST(`${url}/signup`, user)
+      .respond(200, 'responseToken');
+
+      this.authService.signup(user)
+      .then(token => {
+        expect(token).toBe('responseToken');
+      })
+      .catch(err => {
+        expect(err).toBe(null);
+      });
+
+      this.$httpBackend.flush();
     });
   });
 
