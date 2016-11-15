@@ -58,11 +58,11 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
   });
 });
 
-galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, pageMiddleware, function(req, res, next){
+galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res, next){
   debug('GET /api/artist/:artistID/gallery');
-  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  let skip = offset + pageSize * page;
-  Gallery.find({artistID: req.params.artistID}).skip(skip).limit(pageSize)
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page;
+  Gallery.find({artistID: req.params.artistID})
   .then(galleries => res.json(galleries))
   .catch(next);
 });
