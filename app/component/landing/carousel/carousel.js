@@ -11,16 +11,16 @@ function CarouselController($log){
   this.interval = 3000;
   this.slides = [
     {
-      image: 'http://lorempixel.com/400/200/',
+      image: 'http://i68.tinypic.com/2wbt6if.jpg',
     },
     {
-      image: 'http://lorempixel.com/400/200/food',
+      image: 'http://i67.tinypic.com/20qxv9l.jpg',
     },
     {
-      image: 'http://lorempixel.com/400/200/sports',
+      image: 'http://i66.tinypic.com/oqetlk.jpg',
     },
     {
-      image: 'http://lorempixel.com/400/200/people',
+      image: 'http://i66.tinypic.com/oqetlk.jpg',
     },
   ];
 }
