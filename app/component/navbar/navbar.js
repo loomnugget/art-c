@@ -4,48 +4,68 @@ require('./_navbar.scss');
 
 module.exports = {
   template: require('./navbar.html'),
-  controller: ['$log', '$location', '$rootScope', 'authService', NavbarController],
+  controller: ['$log', '$location', '$rootScope', '$window', 'authService', NavbarController],
   controllerAs: 'navbarCtrl',
   bindings: {
     appTitle: '@',
   },
 };
 
-function NavbarController($log, $location, $rootScope, authService) {
+function NavbarController($log, $location, $rootScope, $window, authService) {
   $log.debug('init navbarCtrl');
+  console.log('sgtuffwhatoefioweaf');
 
-  this.checkPath = function(){
+  function pageLoadHandler() {
     let path = $location.path();
-    if (path === '/join'){
-      this.hideButtons = true;
-
-      authService.getToken()
-      .then(() => {
-        $location.url('/home');
-      });
+    if (path === '/landing') {
+      this.hideLogoutButton = true;
+      this.hideLoginSignupButtons = false;
     }
 
-    if (path !== '/join'){
-      this.hideButtons = false;
-      authService.getToken()
+    if (path !== '/landing') {
+      this.hideLoginSignupButtons = true;
+      this.hideLogoutButton = false;
+    }
+
+    authService.getToken()
+      .then(token => {
+        console.log('token', token);
+        $location.url('/ho');
+      })
       .catch(() => {
-        $location.url('/join#login');
+        let query = $location.search();
+        if (query.token) {
+          console.log('Got token', query.token);
+          authService.setToken(query.token)
+            .then(() => {
+              $location.url('/home');
+            });
+        }
       });
-    }
-  };
+  }
 
-  this.checkPath();
+  $window.onload = pageLoadHandler;
+  $rootScope.$on('locationChangeSuccess', pageLoadHandler);
 
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.checkPath();
-  });
-
-  this.logout = function(){
+  this.logout = function() {
     $log.log('navbarCtrl.logout()');
-    this.hideButtons = true;
+    this.hideLogoutButton = true;
     authService.logout()
-    .then(() => {
-      $location.url('/');
-    });
+      .then(() => {
+        $location.url('/');
+      });
   };
+  //
+  // this.signup = function() {
+  //   $log.log('navbarCtrl.signup()');
+  //   this.hideLoginSignupButtons = true;
+  //   // bring up modal
+  // };
+  //
+  // this.login = function() {
+  //   $log.log('navbarCtrl.login()');
+  //   this.hideLoginSignupButtons = true;
+  //   // bring up modal
+  // };
+
 }

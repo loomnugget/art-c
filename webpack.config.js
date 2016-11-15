@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').load({path: `${__dirname}/.client.env`});
+require('dotenv').load({path: `${__dirname}/.env`});
 if (process.env.NODE_ENV === 'testing') {
   require('./test/lib/test-env');
 }
@@ -22,6 +22,7 @@ let plugins = [
   new webpack.DefinePlugin({
     __API_URL__: JSON.stringify(process.env.API_URL),
     __GOOGLE_CLIENT_ID__: JSON.stringify(process.env.GOOGLE_CLIENT_ID),
+    __FACEBOOK_CLIENT_ID__: JSON.stringify(process.env.FACEBOOK_CLIENT_ID),
     __TITLE__: JSON.stringify(process.env.TITLE),
     __DEBUG__: JSON.stringify(!production),
   }),

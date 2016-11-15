@@ -4,25 +4,25 @@
   "description": "Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike",
   "main": "server.js",
   "engines": {
-  "node": "4.4.7"
+    "node": "4.4.7"
   },
   "directories": {
     "test": "test"
   },
   "scripts": {
-      "build": "./node_modules/webpack/bin/webpack.js",
-      "build-watch": "./node_modules/webpack/bin/webpack.js -w",
-      "frontend-test": "./node_modules/karma/bin/karma start --single-run",
-      "test-watch": "./node_modules/karma/bin/karma start",
-      "start": "node server.js",
-      "start-debug": "DEBUG='art-c*' npm start",
-      "start-watch": "DEBUG='art-c*' ./node_modules/nodemon/bin/nodemon.js server.js",
-      "backend-test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
-      "test": "npm run frontend-test && npm run backend-test",
-      "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-      "lint": "./node_modules/eslint/bin/eslint.js .",
-      "test-debug": "DEBUG='art-c*' ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
-    },
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "build-watch": "./node_modules/webpack/bin/webpack.js -w",
+    "frontend-test": "./node_modules/karma/bin/karma start --single-run",
+    "test-watch": "./node_modules/karma/bin/karma start",
+    "start": "node server.js",
+    "start-debug": "DEBUG='art-c*' npm start",
+    "start-watch": "DEBUG='art-c*' ./node_modules/nodemon/bin/nodemon.js server.js",
+    "backend-test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "test": "npm run frontend-test && npm run backend-test",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "lint": "./node_modules/eslint/bin/eslint.js .",
+    "test-debug": "DEBUG='art-c*' ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/loomnugget/art-c.git"
@@ -49,11 +49,12 @@
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "bootstrap-sass": "^3.3.7",
+    "bootstrap-social": "^5.0.0",
     "camelcase": "^3.0.0",
     "clean-webpack-plugin": "^0.1.13",
     "cors": "^2.8.1",
-    "css-loader": "^0.25.0",
     "crypto": "0.0.3",
+    "css-loader": "^0.25.0",
     "debug": "^2.2.0",
     "del": "^2.2.2",
     "dotenv": "^2.0.0",
@@ -92,17 +93,15 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-webpack": "^1.8.0",
     "lorem-ipsum": "^1.0.3",
-    "mocha": "^3.1.0",
+    "mocha": "^3.1.1",
     "ng-file-upload": "^12.2.13",
     "nodemon": "^1.11.0",
     "webpack-dev-server": "^1.16.2",
     "aws-sdk": "^2.6.7",
     "del": "^2.2.2",
-    "eslint": "^3.7.1",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-mocha": "^3.0.1",
-    "mocha": "^3.1.1",
     "multer": "^1.2.0",
     "superagent": "^2.3.0",
     "validator": "^6.0.0"
