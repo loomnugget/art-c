@@ -23,6 +23,12 @@ const userSchema = Schema({
     tokenTimeStamp: {type: Date},
     tokenTTL: {type: Number},
   },
+  facebook: {
+    facebookID: {type: String},
+    accessToken: {type: String},
+    tokenTTL: {type: Number},
+    tokenTimeStamp: {type: Date},
+  },
 });
 
 userSchema.methods.generatePasswordHash = function(password) {

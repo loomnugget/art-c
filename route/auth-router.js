@@ -15,6 +15,7 @@ const User = require('../model/user.js');
 const basicAuth = require('../lib/basic-auth-middleware');
 const bearerAuth = require('../lib/bearer-auth-middleware');
 const googleOAUTH = require('../lib/google-oauth-middleware');
+const facebookOAUTH = require('../lib/facebook-oauth-middleware');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -102,13 +103,52 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
   .catch(next);
 });
 
+// Facebook OAuth route
+authRouter.get('/api/auth/facebook_oauth_callback', facebookOAUTH, function(req, res) {
+  debug('hit route GET /api/auth/oauth_callback');
+  if (req.facebookError) return res.redirect('/');
+  console.log('HELLO I AM THING', req.facebookOAUTH);
+
+  User.findOne({ email: req.facebookOAUTH.email})
+  .then( user => {
+    if (!user) return Promise.reject(new Error('User not found.'));
+    return user;
+  })
+  .catch( err => {
+    if (err.message === 'User not found.') {
+      let userData = {
+        username: req.facebookOAUTH.email,
+        email: req.facebookOAUTH.email,
+        facebook: {
+          facebookID: req.facebookOAUTH.facebookID,
+          accessToken: req.facebookOAUTH.accessToken,
+          tokenTTL: req.facebookOAUTH.tokenTTL,
+          tokenTimeStamp: Date.now(),
+        },
+      };
+      return new User(userData).save();
+    }
+    return Promise.reject(err);
+  })
+  .then( user => {
+    return user.generateToken();
+  })
+  .then( token => {
+    console.log('TOKEN', token);
+    res.redirect(`/#/home?token=${token}`);
+  })
+  .catch( err => {
+    console.error(err);
+    console.log('User not found.');
+    res.redirect('/');
+  });
+});
+
 // Google OAuth route
 authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
   debug('hit route GET /api/auth/oauth_callback');
 
-  if (req.googleError) {
-    return res.redirect('/');
-  }
+  if (req.googleError) return res.redirect('/');
 
   User.findOne({ email: req.googleOAUTH.email})
   .then( user => {
@@ -116,7 +156,7 @@ authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
     return user;
   })
   .catch( err => {
-    if (err.message === 'user not found') {
+    if (err.message === 'User not found.') {
       let userData = {
         username: req.googleOAUTH.email,
         email: req.googleOAUTH.email,
@@ -132,11 +172,11 @@ authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
     }
     return Promise.reject(err);
   })
-  .then ( user => {
+  .then( user => {
     user.generateToken();
   })
   .then( token => {
-    res.redirect(`/?token=${token}`);
+    res.redirect(`/#/home?token=${token}`);
   })
   .catch( err => {
     console.error(err);
