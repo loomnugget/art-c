@@ -12,6 +12,7 @@ const Gallery = require('../model/gallery.js');
 const Photo = require('../model/photo.js');
 const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
+const pageMiddleware = require('../lib/page-query-middleware.js');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -51,6 +52,15 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
   .then(listing => {
     res.json(listing);
   })
+  .catch(next);
+});
+
+listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, pageMiddleware, function(req, res, next){
+  debug('GET /api/gallery/:galleryID/listing');
+  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  let skip = offset + pageSize * page;
+  Listing.find({galleryID: req.params.galleryID}).skip(skip).limit(pageSize)
+  .then(listings => res.json(listings))
   .catch(next);
 });
 
