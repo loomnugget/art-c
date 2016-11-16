@@ -65,6 +65,30 @@ function galleryService($q, $log, $http, authService){
     });
   };
 
+  service.fetchArtistGalleries = function(artistID){
+    $log.debug('galleryService.fetchArtistGalleries()');
+    return authService.getToken()
+    .then( token => {
+      let url = `${__API_URL__}/api/artist/${artistID}/gallery`;
+      let config = {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return $http.get(url, config);
+    })
+    .then( res => {
+      $log.log('successful fetch user galleries');
+      service.galleries = res.data;
+      return service.galleries;
+    })
+    .catch(err => {
+      $log.error(err.message);
+      return $q.reject(err);
+    });
+  };
+
   service.fetchGalleries = function(){
     $log.debug('galleryService.fetchGalleries()');
     return authService.getToken()

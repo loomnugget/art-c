@@ -1,0 +1,18 @@
+<div class="profile-pic">
+
+  <form
+    ng-submit="profilePicCtrl.uploadArtistPic()"
+    novalidate>
+    <img src="http://placehold.it/250x250">
+
+    <div class="row">
+      <button class="btn btn-upload"
+        ngf-select
+        ng-model="profilePicCtrl.pic.file">
+        Select Image
+      </button>
+
+      <button class="btn btn-upload"> Upload Image </button>
+    </div>
+  </form>
+</div>

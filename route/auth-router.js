@@ -84,6 +84,16 @@ authRouter.put('/api/user/updateEmail', bearerAuth, jsonParser, function(req, re
   .catch(next);
 });
 
+// Become artist
+authRouter.put('/api/user/becomeArtist', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/user/becomeArtist');
+  return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
+  .then( user => {
+    res.json(user);
+  })
+  .catch(next);
+});
+
 authRouter.put('/api/user/updateUsername', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updateUsername');
   return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})

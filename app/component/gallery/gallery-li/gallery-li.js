@@ -18,4 +18,5 @@ function GalleryLIController($log, galleryService){
     galleryService.fetchGalleries();
     console.log('Galleries fetched');
   };
+
 }

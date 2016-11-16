@@ -17,6 +17,11 @@ nav {
       display: inline-block;
     }
   }
+  .btn-right {
+    float: right;
+    margin-right: 2%;
+  }
+
   .navbar-brand {
     float: left;
     margin: 2%;
@@ -27,4 +32,9 @@ nav {
       color: $app-secondary;
     }
   }
+}
+
+.navbar-pic {
+  width: 75px;
+  height: 75px;
 }
