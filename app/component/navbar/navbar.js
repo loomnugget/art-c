@@ -16,20 +16,25 @@ module.exports = {
 function NavbarController($log, $location, $rootScope, $window, $uibModal, authService) {
   $log.debug('init navbarCtrl');
 
+  this.isActive = function(viewLocation) {
+    return viewLocation === $location.path();
+  };
+
+
   function pageLoadHandler() {
-    let path = $location.path();
-    if (path === '/landing') {
-      this.hideLogoutButton = true;
-      this.hideLoginSignupButtons = false;
-    }
-
-    if (path !== '/landing') {
-      this.hideLogoutButton = false;
-    }
-
-    if (path === '/home') {
-      this.hideLoginSignupButtons = true;
-    }
+    //let path = $location.path();
+    // if (path === '/landing') {
+    //   this.hideLogoutButton = true;
+    //   this.hideLoginSignupButtons = false;
+    // }
+    //
+    // if (path !== '/landing') {
+    //   this.hideLogoutButton = false;
+    // }
+    //
+    // if (path === '/home') {
+    //   this.hideLoginSignupButtons = true;
+    // }
 
     authService.getToken()
       .then(token => {
@@ -52,7 +57,7 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
   this.logout = function() {
     $log.log('navbarCtrl.logout()');
-    this.hideLogoutButton = true;
+  //  this.hideLogoutButton = true;
     authService.logout()
       .then(() => {
         $location.url('/');
