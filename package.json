@@ -41,7 +41,7 @@
     "angular-ui-bootstrap": "^2.2.0",
     "angular-ui-router": "^0.3.1",
     "aws-sdk": "^2.6.6",
-    "aws-sdk-mock": "^1.5.0",
+    "aws-sdk-mock": "1.5.0",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.16.0",
