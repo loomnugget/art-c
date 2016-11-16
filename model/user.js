@@ -16,6 +16,7 @@ const userSchema = Schema({
   email: {type: String, required: true, unique: true},
   password: {type: String},
   findHash: {type: String, unique: true},
+  isArtist: {type: Boolean, default: false},
   google: {
     googleID: {type: String},
     refreshToken: {type: String},
