@@ -50,6 +50,11 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
   $window.onload = pageLoadHandler.bind(this);
   $rootScope.$on('locationChangeSuccess', pageLoadHandler.bind(this));
 
+  this.artistSignup = function(){
+    $log.log('navbarCtrl.artistSignup()');
+    $location.url('/artist');
+  };
+
   this.logout = function() {
     $log.log('navbarCtrl.logout()');
     this.hideLogoutButton = true;

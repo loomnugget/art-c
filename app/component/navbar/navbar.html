@@ -10,6 +10,14 @@
       </button>
     </div>
 
+    <div ng-hide="navbarCtrl.hideArtistButton">
+      <button
+        ng-click="navbarCtrl.artistSignup()"
+        class="btn btn-nav">
+        Become an Artist!
+      </button>
+    </div>
+
     <div ng-hide="navbarCtrl.hideLoginSignupButtons">
       <button
         ng-click="navbarCtrl.open(true)"
