@@ -18,7 +18,7 @@ const mockArtist = require('./lib/artist-mock');
 const mockGallery = require('./lib/gallery-mock');
 const mockUser = require('./lib/user-mock');
 const mockMultipleListings = require('./lib/populate-gallery-listings-mock.js');
-
+const mockMultipleGalleries = require('./lib/populate-artist-galleries-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -374,6 +374,30 @@ describe('testing gallery-router', function() {
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('testing GET to /api/artist/:artistID/gallery', () => {
+
+    describe('with valid token and id', () => {
+
+      before(done => mockMultipleGalleries.call(this, 10, done));
+
+      it('should status 200 and return galleries', done => {
+        request.get(`${url}/api/artist/${this.tempArtist._id}/gallery`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(10);
+          for(let i = 0; i < res.body.length; i++){
+            expect(res.body[i].artistID.toString()).to.equal(this.tempArtist._id.toString());
+          }
           done();
         });
       });
