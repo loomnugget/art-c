@@ -2,9 +2,9 @@
 
 require('./_artist.scss');
 
-module.exports = ['$log', '$rootScope', 'galleryService', 'artistService', ArtistController];
+module.exports = ['$log', '$rootScope', 'galleryService', ArtistController];
 
-function ArtistController($log, $rootScope, galleryService, artistService){
+function ArtistController($log, $rootScope, galleryService){
   $log.log('init artistCtrl');
 
   this.galleries = [];
