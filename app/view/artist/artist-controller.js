@@ -6,4 +6,5 @@ module.exports = ['$log', '$rootScope', 'galleryService', 'artistService', Artis
 
 function ArtistController($log, $rootScope, galleryService, artistService){
   $log.log('init artistCtrl');
+  
 }
