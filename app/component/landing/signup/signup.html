@@ -15,7 +15,9 @@
     placeholder="Password" ng-model="signupCtrl.user.password">
 
     <input type="submit" class="btn" value="Sign Up">
-    <a ng-href="{{navbarCtrl.facebookAuthURL}}"> Facebook Sign-in </a>
-    <a ng-href="{{navbarCtrl.googleAuthURL}}"> Google Sign-in </a>
+
+    <a class="btn btn-block btn-social btn-facebook" ng-href="{{navbarCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
+
+    <a class="btn btn-block btn-social btn-google" ng-href="{{navbarCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
   </form>
 </section>
