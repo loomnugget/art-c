@@ -22,7 +22,8 @@
         ng-model="loginCtrl.user.password">
     </div>
     <button class="btn"> Login </button>
-    <a ng-href="{{loginCtrl.facebookAuthURL}}"> Facebook Login </a>
-    <a ng-href="{{loginCtrl.googleAuthURL}}"> Google Signin </a>
+    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
+
+    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
   </form>
 </section>
