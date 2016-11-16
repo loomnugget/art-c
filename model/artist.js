@@ -5,9 +5,9 @@ const mongoose = require('mongoose');
 const artistSchema = mongoose.Schema({
   about: {type: String},
   phone: {type: String, unique: true},
-  email: {type: String, unique: true},
+  email: {type: String, required: true, unique: true},
   // query-sortable properties
-  username: {type: String, unique: true},
+  username: {type: String, required: true, unique: true},
   created: {type: Date, required: true, default: Date.now},
   firstname: {type: String, required: true, minlength: 3},
   lastname: {type: String, required: true, minlength: 3},
