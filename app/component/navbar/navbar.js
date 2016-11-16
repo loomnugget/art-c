@@ -4,16 +4,17 @@ require('./_navbar.scss');
 
 module.exports = {
   template: require('./navbar.html'),
-  controller: ['$log', '$location', '$rootScope', '$window', 'authService', NavbarController],
+  controller: ['$log', '$location', '$rootScope', '$window', '$uibModal', 'authService', NavbarController],
   controllerAs: 'navbarCtrl',
   bindings: {
     appTitle: '@',
+    resolve: '<',
+    loginToggle: '<',
   },
 };
 
-function NavbarController($log, $location, $rootScope, $window, authService) {
+function NavbarController($log, $location, $rootScope, $window, $uibModal, authService) {
   $log.debug('init navbarCtrl');
-  console.log('sgtuffwhatoefioweaf');
 
   function pageLoadHandler() {
     let path = $location.path();
@@ -23,8 +24,11 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
     }
 
     if (path !== '/landing') {
-      this.hideLoginSignupButtons = true;
       this.hideLogoutButton = false;
+    }
+
+    if (path === '/home') {
+      this.hideLoginSignupButtons = true;
     }
 
     authService.getToken()
@@ -34,9 +38,7 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
       })
       .catch(() => {
         let query = $location.search();
-        console.log('lulwat query', query);
         if (query.token) {
-          console.log('Got token', query.token);
           authService.setToken(query.token)
             .then(() => {
               $location.url('/home');
@@ -82,17 +84,19 @@ function NavbarController($log, $location, $rootScope, $window, authService) {
   let facebookAuthScope = 'scope=public_profile%20email';
 
   this.facebookAuthURL = `${facebookAuthBase}?${facebookClientID}&${facebookRedirectURI}&${facebookResponseType}&${facebookAuthScope}`;
-  //
-  // this.signup = function() {
-  //   $log.log('navbarCtrl.signup()');
-  //   this.hideLoginSignupButtons = true;
-  //   // bring up modal
-  // };
-  //
-  // this.login = function() {
-  //   $log.log('navbarCtrl.login()');
-  //   this.hideLoginSignupButtons = true;
-  //   // bring up modal
-  // };
+
+  this.open = function(toggleLogin) {
+    let modalInstance = $uibModal.open({
+      component: 'modal',
+      resolve: {
+        loginToggle: function(){
+          return toggleLogin;
+        },
+      },
+    });
+
+    return modalInstance;
+  };
+
 
 }
