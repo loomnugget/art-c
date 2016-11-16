@@ -24,8 +24,11 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
     }
 
     if (path !== '/landing') {
-      this.hideLoginSignupButtons = true;
       this.hideLogoutButton = false;
+    }
+
+    if (path === '/home') {
+      this.hideLoginSignupButtons = true;
     }
 
     authService.getToken()
@@ -49,10 +52,10 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
   this.logout = function() {
     $log.log('navbarCtrl.logout()');
+    this.hideLogoutButton = true;
     authService.logout()
       .then(() => {
         $location.url('/');
-        this.hideLogoutButton = true;
       });
   };
 
