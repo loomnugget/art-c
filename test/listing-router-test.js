@@ -16,6 +16,7 @@ const mockGallery = require('./lib/gallery-mock.js');
 const mockListing = require('./lib/listing-mock.js');
 const mockUser = require('./lib/user-mock.js');
 const mockManyPhotos = require('./lib/mock-many-photos.js');
+const mockMultipleListings = require('./lib/populate-gallery-listings-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -279,6 +280,30 @@ describe('testing listing-router', function(){
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('testing GET to /api/gallery/:galleryID/listing', () => {
+
+    describe('with valid token and id', () => {
+
+      before(done => mockMultipleListings.call(this, 10, done));
+
+      it('should status 200 and return listings', done => {
+        request.get(`${url}/api/gallery/${this.tempGallery._id}/listing`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.length).to.equal(10);
+          for(let i = 0; i < res.body.length; i++){
+            expect(res.body[i].galleryID.toString()).to.equal(this.tempGallery._id.toString());
+          }
           done();
         });
       });
