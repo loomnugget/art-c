@@ -3,7 +3,7 @@
 
       <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
 
-      <div ng-show="navbarCtrl.isActive('/home')">
+      <div ng-show="navbarCtrl.isActive('/home || /profile')">
         <button
           ng-click="navbarCtrl.logout()"
           class="btn btn-nav">
