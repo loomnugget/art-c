@@ -69,36 +69,3 @@ function mockUser() {
   })
   .catch(console.error);
 }
-
-// function mockArtist(userID, username, userEmail){
-//   let firstname = lorem({count:2, units: 'word'});
-//   let lastname = lorem({count:2, units: 'word'});
-//   let city = lorem({count:2, units: 'word'});
-//   let zip = lorem({count:2, units: 'word'});
-//   let about = lorem({count:2, units: 'sentence'});
-//   let phone = lorem({count:2, units: 'word'});
-//   let exampleArtist = {
-//     firstname,
-//     lastname,
-//     city,
-//     zip,
-//     about,
-//     phone,
-//     userID,
-//     username,
-//     userEmail,
-//   };
-//   return new Artist(exampleArtist).save();
-// }
-
-// function mockUser(){
-//   let username = lorem({count: 2, units: 'word'}).split(' ').join('-');
-//   let password = lorem({count: 2, units: 'word'}).split(' ').join('-');
-//   let email = lorem({count: 2, units: 'word'}).split(' ').join('-');
-//   let exampleUser = {
-//     username,
-//     password,
-//     email: `${email}@art.fancyartist`,
-//   };
-//   return new User(exampleUser).save();
-// }
