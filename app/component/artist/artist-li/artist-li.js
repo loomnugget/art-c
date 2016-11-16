@@ -16,6 +16,6 @@ function ArtistLIController($log, artistService){
 
   this.showArtists = function(){
     artistService.fetchArtists();
-    console.log('Artists fetched');
+    $log.log('Artists fetched');
   };
 }
