@@ -16,11 +16,11 @@ AWS.config.setPromisesDependency(require('bluebird'));
 // module constants
 const pageRouter = module.exports = Router();
 
-pageRouter.get('/api/artist', pageMiddleware, function(req, res, next){
+pageRouter.get('/api/artist', function(req, res, next){
   debug('hit route GET /api/artist');
-  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  let skip = offset + pageSize * page ;
-  Artist.find().skip(skip).limit(pageSize)
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page ;
+  Artist.find()
   .then(artists => res.json(artists))
   .catch(next);
 });
