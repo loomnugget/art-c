@@ -1,11 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Oswald|Raleway|Roboto');
+
 $app-primary: #b55bff;
 $app-secondary: #2a2a2a;
 $app-tertiary: #361b4c;
+
 $app-disabled: #a2a2a2;
 $app-active: #fa7fa7;
-$app-success: #a7ff7a;
+
+$app-success: #00b500;
 $app-error: #b50000;
-$app-warn: #ffa77a;
-$app-info: #7aa7ff;
+
+$app-warn: #b55555;
+$app-info: #55b555;
+
 $app-white: #ddd1e7;
 $app-black: #2a2a2a;
+
+$app-title: 'Raleway', sans-serif;
+$app-name: 'Architects Daughter', cursive;
+$app-block: 'Roboto', sans-serif;
+$app-accent: 'Oswald', sans-serif;
