@@ -2,9 +2,6 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
 
-    <a ng-href="{{navbarCtrl.facebookAuthURL}}"> Facebook Sign-in </a>
-    <a ng-href="{{navbarCtrl.googleAuthURL}}"> Google Sign-in </a>
-
     <div ng-hide="navbarCtrl.hideLogoutButton">
       <button
         ng-click="navbarCtrl.logout()"
@@ -15,7 +12,7 @@
 
     <div ng-hide="navbarCtrl.hideLoginSignupButtons">
       <button
-        ng-click="navbarCtrl.login()"
+        ng-click="navbarCtrl.open(true)"
         class="btn btn-nav">
         Login
       </button>
@@ -23,7 +20,7 @@
 
     <div ng-hide="navbarCtrl.hideLoginSignupButtons">
       <button
-        ng-click="navbarCtrl.signup()"
+        ng-click="navbarCtrl.open(false)"
         class="btn btn-nav">
         Signup
       </button>

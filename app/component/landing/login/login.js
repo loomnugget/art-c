@@ -4,6 +4,9 @@ module.exports = {
   template: require('./login.html'),
   controller: ['$log', '$location', 'authService', LoginController],
   controllerAs: 'loginCtrl',
+  bindings: {
+    loginSuccess: '&',
+  },
 };
 
 function LoginController($log, $location, authService){
@@ -11,10 +14,11 @@ function LoginController($log, $location, authService){
 
   this.login = function(){
     $log.log('loginCtrl.login()');
-    
+
     authService.login(this.user)
     .then(() => {
       $location.url('/home');
+      this.loginSuccess();
     });
   };
 }
