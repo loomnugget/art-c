@@ -6,5 +6,14 @@ module.exports = ['$log', '$rootScope', 'galleryService', 'artistService', Artis
 
 function ArtistController($log, $rootScope, galleryService, artistService){
   $log.log('init artistCtrl');
-  
+
+  this.galleries = [];
+  this.listings = [];
+
+  this.fetchArtistGalleries = function(){
+    galleryService.fetchArtistGalleries(this.artist._id)
+    .then( galleries => {
+      this.galleries = galleries;
+    });
+  };
 }

@@ -26,4 +26,8 @@ function CreateArtistController($log, artistService){
     });
   };
 
+  this.fetchArtistData = function(){
+    artistService.fetchArtist(this.artist._id);
+  };
+
 }
