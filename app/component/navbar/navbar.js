@@ -9,6 +9,7 @@ module.exports = {
   bindings: {
     appTitle: '@',
     resolve: '<',
+    loginToggle: '<',
   },
 };
 
@@ -34,9 +35,7 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
       })
       .catch(() => {
         let query = $location.search();
-        console.log('lulwat query', query);
         if (query.token) {
-          console.log('Got token', query.token);
           authService.setToken(query.token)
             .then(() => {
               $location.url('/home');
@@ -50,10 +49,10 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
   this.logout = function() {
     $log.log('navbarCtrl.logout()');
-    this.hideLogoutButton = true;
     authService.logout()
       .then(() => {
         $location.url('/');
+        this.hideLogoutButton = true;
       });
   };
 
@@ -83,24 +82,18 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
   this.facebookAuthURL = `${facebookAuthBase}?${facebookClientID}&${facebookRedirectURI}&${facebookResponseType}&${facebookAuthScope}`;
 
-  this.open = function() {
+  this.open = function(toggleLogin) {
     let modalInstance = $uibModal.open({
-      templateUrl: '../landing/modal/modal.html',
       component: 'modal',
+      resolve: {
+        loginToggle: function(){
+          return toggleLogin;
+        },
+      },
     });
+
     return modalInstance;
   };
 
-  this.signup = function() {
-    $log.log('navbarCtrl.signup()');
-    this.hideLoginSignupButtons = true;
-    // bring up modal
-  };
-
-  this.login = function() {
-    $log.log('navbarCtrl.login()');
-    this.hideLoginSignupButtons = true;
-    // bring up modal
-  };
 
 }

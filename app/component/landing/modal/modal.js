@@ -14,7 +14,11 @@ module.exports = {
 
 function ModalController($log){
   $log.debug('init modalCtrl');
-  this.modalData = this.resolve.modalData;
+  // this.modalData = this.resolve.modalData;
+
+  this.$onInit = function(){
+    this.loginToggle = this.resolve.loginToggle;
+  };
 
   this.handleClose = function() {
     this.modalInstance.close();

@@ -4,8 +4,8 @@
   </div>
 
   <div class="modal-body" id="modal-body">
-    <login></login>
-    <signup></signup>
+    <login login-success="modalCtrl.handleClose()" ng-if="modalCtrl.loginToggle"></login>
+    <signup login-success="modalCtrl.handleClose()" ng-if="!modalCtrl.loginToggle"></signup>
   </div>
 
   <div class="modal-footer">

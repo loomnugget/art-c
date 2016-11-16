@@ -4,6 +4,9 @@ module.exports = {
   template: require('./signup.html'),
   controller: ['$log', '$location', 'authService', SignupController],
   controllerAs: 'signupCtrl',
+  bindings: {
+    loginSuccess: '&',
+  },
 };
 
 function SignupController($log, $location, authService){
@@ -12,6 +15,7 @@ function SignupController($log, $location, authService){
     authService.signup(user)
     .then(() => {
       $location.path('/home');
+      this.loginSuccess();
     })
     .catch(() => {
       console.log('Signup Failed');
