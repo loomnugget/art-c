@@ -1,38 +1,49 @@
 <nav class="navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
 
-    <div ng-hide="navbarCtrl.hideLogoutButton">
-      <button
+  <div ng-hide="navbarCtrl.hideLogoutButton">
+            <!-- <button
         ng-click="navbarCtrl.logout()"
         class="btn btn-nav">
         Logout
+      </button> -->
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn btn-primary pull-right" uib-dropdown-toggle ng-disabled="disabled">
+        <img src="../../scss/images/default-profile.jpg" class="navbar-pic"></img>
+        <span class="caret"></span>
       </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a href="/home">Home</a></li>
+          <li role="menuitem"><a href="/artist">Profile</a></li>
+          <li role="menuitem"><a href="/galleries">Galleries</a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#" ng-click="navbarCtrl.logout()">Logout</a></li>
+        </ul>
+      </div>
     </div>
 
-    <div ng-hide="navbarCtrl.hideArtistButton">
-      <button
-        ng-click="navbarCtrl.artistSignup()"
-        class="btn btn-nav">
-        Become an Artist!
-      </button>
-    </div>
+      <div ng-hide="navbarCtrl.hideArtistButton">
+        <button
+          ng-click="navbarCtrl.artistSignup()"
+          class="btn btn-nav">
+          Become an Artist!
+        </button>
+      </div>
 
-    <div ng-hide="navbarCtrl.hideLoginSignupButtons">
-      <button
-        ng-click="navbarCtrl.open(true)"
-        class="btn btn-nav">
-        Login
-      </button>
-    </div>
+      <div ng-hide="navbarCtrl.hideLoginSignupButtons">
+        <button
+          ng-click="navbarCtrl.open(true)"
+          class="btn btn-nav">
+            Login
+        </button>
+      </div>
 
-    <div ng-hide="navbarCtrl.hideLoginSignupButtons">
-      <button
-        ng-click="navbarCtrl.open(false)"
-        class="btn btn-nav">
-        Signup
-      </button>
-    </div>
+      <div ng-hide="navbarCtrl.hideLoginSignupButtons">
+        <button ng-click="navbarCtrl.open(false)" class="btn btn-nav">
+          Signup
+        </button>
+      </div>
 
     </div>
   </div>

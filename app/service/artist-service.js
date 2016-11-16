@@ -11,8 +11,11 @@ function artistService($q, $log, $http, authService){
   service.createArtist = function(artist){
     $log.debug('artistService.createArtist()');
 
+    let currentToken;
+
     return authService.getToken()
     .then( token => {
+      currentToken = token;
       let url = `${__API_URL__}/api/artist`;
       let config = {
         headers: {
@@ -30,7 +33,18 @@ function artistService($q, $log, $http, authService){
       service.artists.unshift(artist);
       return artist;
     })
+    .then( artist => {
 
+      let config = {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${currentToken}`,
+        },
+      };
+      $http.put(`${__API_URL__}/api/user/becomeArtist`, {isArtist: true}, config);
+      return artist;
+    })
     .catch( err => {
       $log.error(err.message);
       return $q.reject(err);
