@@ -57,9 +57,9 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
 
 listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, pageMiddleware, function(req, res, next){
   debug('GET /api/gallery/:galleryID/listing');
-  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  let skip = offset + pageSize * page;
-  Listing.find({galleryID: req.params.galleryID}).skip(skip).limit(pageSize)
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page;
+  Listing.find({galleryID: req.params.galleryID})
   .then(listings => res.json(listings))
   .catch(next);
 });
