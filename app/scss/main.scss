@@ -69,6 +69,13 @@ textarea::-webkit-input-placeholder {
 	transition: all 0.3s;
 }
 
+.has-error {
+  border: 1px solid $app-warn;
+}
+.has-success {
+  border: 1px solid $app-info;
+}
+
 
 /*  SECTIONS  ============================================================================= */
 .section {
@@ -171,11 +178,4 @@ textarea::-webkit-input-placeholder {
 	.span-1-of-3 {
 		width: 100%;
 	}
-}
-
-.has-error {
-  background-color: $app-warn;
-}
-.has-success {
-  background-color: $app-info;
 }

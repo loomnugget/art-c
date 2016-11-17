@@ -4,6 +4,11 @@
 .navbar {
   background-color: #212121;
   height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
 
   .nav-container{
     padding: 0 10px;
@@ -20,7 +25,9 @@
 
     .btn-right {
       float: right;
-      margin-right: 100px;
+      margin-right: 0px;
+      margin-top: 1px;
+
     }
 
     .btn-left {
@@ -36,13 +43,15 @@
       display:inline-block;
       text-decoration: none;
       color: $app-secondary;
-
+    }
+    .navbar-brand:hover {
+      color: $app-white;
     }
 
-
     .navbar-pic {
-      width: 55px;
-      height: 55px;
+      width: 53px;
+      height: 53px;
+
     }
   }
 }
