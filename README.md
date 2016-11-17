@@ -1,5 +1,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/loomnugget/art-c/badge.svg?branch=staging)](https://coveralls.io/github/loomnugget/art-c?branch=staging)
 [![Build Status](https://travis-ci.org/loomnugget/art-c.svg?branch=staging)](https://travis-ci.org/loomnugget/art-c)
+[![Stories in Backlog](https://badge.waffle.io/loomnugget/art-c.png?label=backlog&title=Backlog)](http://waffle.io/loomnugget/art-c)
+[![Stories in Ready](https://badge.waffle.io/loomnugget/art-c.svg?label=ready&title=Ready)](http://waffle.io/loomnugget/art-c)
+[![Stories in Progress](https://badge.waffle.io/loomnugget/art-c.png?label=in%20progress&title=In%20Progress)](http://waffle.io/loomnugget/art-c)
+[![Stories in Review](https://badge.waffle.io/loomnugget/art-c.svg?label=needs%20review&title=Needs%20Review)](http://waffle.io/loomnugget/art-c)
+[![Stories in Done](https://badge.waffle.io/loomnugget/art-c.svg?label=done&title=Done)](http://waffle.io/loomnugget/art-c)
 
 ####Contributors####
 Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt  
