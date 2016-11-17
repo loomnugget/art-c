@@ -18,12 +18,14 @@
   </div>
 
   <div class="row">
-    <nav class="artist-gallery-container">
+    <create-gallery artist="artistCtrl.artist"></create-gallery>
+    <div class="artist-gallery-container">
       <ul>
-        <gallery-li ng-repeat="gallery in artistCtrl.galleries">
+        <gallery-li gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
         </gallery-li>
       </ul>
-    </nav>
+    </div>
+    <edit-gallery></edit-gallery>
   </div>
 
 </main>
