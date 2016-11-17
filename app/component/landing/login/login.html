@@ -2,10 +2,10 @@
 
   <form
     name="loginForm"
-    ng-submit="loginCtrl.login()" 
+    ng-submit="loginCtrl.login()"
     novalidate>
 
-    <label for="username"> Username </label>
+    <label for="username" ng-if="isNameFocused"> Username </label>
     <input
       required
       type="text"
@@ -20,9 +20,11 @@
         'has-error': loginForm.username.$invalid,
         'has-success': loginForm.username.$valid,
       }"
-      ng-model="loginCtrl.user.username">
+      ng-model="loginCtrl.user.username"
+      onfocus="this.placeholder=''" onblur="this.placeholder='Username'"
+      ng-focus="isNameFocused = true" ng-blur="isNameFocused = false">
 
-    <label for="password"> Password </label>
+    <label for="password" ng-if="isFocused"> Password </label>
     <input
       required
       type="password"
@@ -37,7 +39,9 @@
         'has-error': loginForm.password.$invalid,
         'has-success': loginForm.password.$valid,
       }"
-      ng-model="loginCtrl.user.password">
+      ng-model="loginCtrl.user.password"
+      onfocus="this.placeholder=''" onblur="this.placeholder='Password'"
+      ng-focus="isFocused = true" ng-blur="isFocused = false">
 
     <button class="btn"> Login </button>
 
