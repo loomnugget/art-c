@@ -6,6 +6,9 @@ module.exports = {
   template: require('./create-artist.html'),
   controller: ['$log', 'artistService', CreateArtistController],
   controllerAs: 'createArtistCtrl',
+  bindings: {
+    submission: '&',
+  },
 };
 
 function CreateArtistController($log, artistService){
@@ -22,6 +25,9 @@ function CreateArtistController($log, artistService){
     artistService.createArtist(this.artist)
     .then( artist => {
       this.artist = artist;
+      this.submission({
+        artistData: this.artist,
+      });
     });
   };
 

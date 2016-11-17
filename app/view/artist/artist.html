@@ -1,7 +1,7 @@
 <navbar></navbar>
 <main>
   <h1> On Artist Page </h1>
-  <create-artist ng-if="!artistCtrl.artist"></create-artist>
+  <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
 
   <artist-info artist="artistCtrl.artist"></artist-info>
 

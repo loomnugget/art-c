@@ -11,7 +11,7 @@ function authService($q, $log, $http, $window){
     $log.debug('authService.service.setToken()');
     if (! _token)
       return $q.reject(new Error('no service.token'));
-    $window.localStorage.setItem('service.token', _token);
+    $window.localStorage.setItem('token', _token);
     service.token = _token;
     return $q.resolve(service.token);
   };
@@ -19,14 +19,14 @@ function authService($q, $log, $http, $window){
   service.getToken = function(){
     $log.debug('authService.getToken');
     if (service.token) return $q.resolve(service.token);
-    service.token = $window.localStorage.getItem('service.token');
+    service.token = $window.localStorage.getItem('token');
     if (service.token) return $q.resolve(service.token);
-    return $q.reject(new Error('service.token not found'));
+    return $q.reject(new Error('token not found'));
   };
 
   service.logout = function(){
     $log.debug('authService.logout()');
-    $window.localStorage.removeItem('service.token');
+    $window.localStorage.removeItem('token');
     service.token = null;
     return $q.resolve();
   };

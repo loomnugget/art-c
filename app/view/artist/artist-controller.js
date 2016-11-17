@@ -7,13 +7,6 @@ module.exports = ['$log', '$location', '$rootScope', 'galleryService', 'artistSe
 function ArtistController($log, $location, $rootScope, galleryService, artistService){
   $log.log('init artistCtrl');
 
-  function pageLoadHandler() {
-    let path = $location.path();
-    if (path === '/artist') {
-      this.checkArtistStatus();
-    }
-  }
-
   this.galleries = [];
   this.listings = [];
   this.artist;
@@ -29,14 +22,25 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
     $log.log('init checkartiststatus');
     artistService.checkArtist()
     .then( artist => {
+      console.log(artist, 'ARTIST');
       this.artist = artist;
     })
     .catch( () => {
       this.artist = null;
     });
   };
-// may not need the bind
-  $rootScope.$on('locationChangeSuccess', pageLoadHandler.bind(this));
+
+  this.artistFormSubmission = function(){
+    $log.debug('artistCtrl.artistFormSubmission');
+    this.checkArtistStatus();
+    // if(this.artist.firstname === artist.firstname){
+    //   this.checkArtistStatus();
+    // }
+  };
+
+  $rootScope.$on('$locationChangeSuccess', () => {
+    this.checkArtistStatus();
+  });
 
   this.checkArtistStatus();
 }
