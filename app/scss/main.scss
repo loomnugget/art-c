@@ -9,6 +9,10 @@ html, body {
   color: $app-white;
 }
 
+body {
+  margin-top: 60px;
+}
+
 input,
 select {
   width: 100%;
