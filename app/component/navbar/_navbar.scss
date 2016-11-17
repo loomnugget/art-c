@@ -20,7 +20,7 @@
 
     .btn-right {
       float: right;
-      margin-right: 100px;
+      margin-right: 0px;
     }
 
     .btn-left {
@@ -36,9 +36,10 @@
       display:inline-block;
       text-decoration: none;
       color: $app-secondary;
-
     }
-
+    .navbar-brand:hover {
+      color: $app-white;
+    }
 
     .navbar-pic {
       width: 55px;

@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="nav-container">
-      <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
+      <a class="navbar-brand" href="#/home">{{ navbarCtrl.appTitle }}</a>
 
       <div ng-show="navbarCtrl.isActive('/landing')">
         <button
@@ -24,9 +24,9 @@
         <img src="../../scss/images/default-profile.jpg" class="navbar-pic"></img>
         <span class="caret"></span>
       </button>
-        <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a href="/#home">Home</a></li>
-          <li role="menuitem"><a ng-click="navbarCtrl.artistSignup()">My Profile</a></li>
+          <li role="menuitem"><a href="/#profile" ng-click="navbarCtrl.artistSignup()">My Profile</a></li>
           <li class="divider"></li>
           <li role="menuitem"><a href="#" ng-click="navbarCtrl.logout()">Logout</a></li>
         </ul>
