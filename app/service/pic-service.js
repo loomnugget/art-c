@@ -39,9 +39,9 @@ function picService($q, $log, $http, Upload, authService) {
 
   service.uploadArtistPic = function(artistData, picData) {
     $log.debug('picService.uploadArtistPic()');
+    console.log(artistData, 'ARTISTDATA');
 
     return authService.getToken()
-
     .then( token => {
       let url = `${__API_URL__}/api/artist/${artistData._id}/photo`;
       let headers = {
@@ -53,8 +53,6 @@ function picService($q, $log, $http, Upload, authService) {
         headers,
         method: 'POST',
         data: {
-          name: picData.name,
-          alt: picData.alt,
           file: picData.file,
         },
       });

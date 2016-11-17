@@ -48,9 +48,9 @@ function artistService($q, $log, $http, authService){
       };
       return $http.get(url, config);
     })
-    .then( artist => {
+    .then( res => {
       $log.log('found artist profile');
-      return artist;
+      return res.data;
     })
     .catch( err => {
       $log.log('no artist profile');
