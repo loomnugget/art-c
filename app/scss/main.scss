@@ -4,13 +4,9 @@
 html, body {
   width: 100%;
   height: 100%;
-  font-family: 'Lato', sans-serif;
+  font-family: $app-font;
   background-color: $app-black;
   color: $app-white;
-}
-
-h1 {
-  font-family: $app-title;
 }
 
 .btn {
@@ -24,7 +20,7 @@ h1 {
   outline: none;
   transition: all 0.3s;
   color: $app-secondary;
-  font-family: $app-button;
+  font-family: $app-font;
 }
 
 .btn:hover {
