@@ -18,7 +18,6 @@ function CreateArtistController($log, artistService){
     this.isVisible = true;
   };
 
-
   this.createArtist = function(){
     artistService.createArtist(this.artist)
     .then( artist => {
