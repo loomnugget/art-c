@@ -2,14 +2,19 @@
 
   <form
     name="loginForm"
-    ng-submit="loginCtrl.login()" novalidate>
+    ng-submit="loginCtrl.login()" 
+    novalidate>
 
+    <label for="username"> Username </label>
     <input
       required
       type="text"
       name="username"
       class="form-control"
       placeholder="Username"
+      uib-tooltip="Username Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'"
       ng-minlength="6"
       ng-class="{
         'has-error': loginForm.username.$invalid,
@@ -17,12 +22,16 @@
       }"
       ng-model="loginCtrl.user.username">
 
+    <label for="password"> Password </label>
     <input
       required
       type="password"
       name="password"
       class="form-control"
       placeholder="Password"
+      uib-tooltip="Password Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'"
       ng-minlength="8"
       ng-class="{
         'has-error': loginForm.password.$invalid,

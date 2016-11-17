@@ -4,38 +4,49 @@
     ng-submit="signupCtrl.signup(signupCtrl.user)"
     novalidate>
 
+    <label for="username"> Username </label>
     <input
       required
       type="text"
       name="username"
       class="form-control"
       placeholder="Username"
+      uib-tooltip="Username Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'"
       ng-minlength="6"
       ng-class="{
         'has-error': signupForm.username.$invalid,
         'has-success': signupForm.username.$valid,
       }"
-      required
       ng-model="signupCtrl.user.username">
 
+    <label for="email"> Email </label>
     <input
       required
       type="email"
       name="email"
       class="form-control"
       placeholder="Email"
+      uib-tooltip="Email Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'"
       ng-class="{
         'has-error': signupForm.email.$invalid,
         'has-success': signupForm.email.$valid,
       }"
       ng-model="signupCtrl.user.email">
 
+    <label for="password"> Password </label>
     <input
       required
       type="password"
       name="password"
       class="form-control"
       placeholder="Password"
+      uib-tooltip="Password Required"
+      tooltip-placement="bottom-right"
+      tooltip-trigger="'focus'"
       ng-minlength="8"
       ng-class="{
         'has-error': signupForm.password.$invalid,
