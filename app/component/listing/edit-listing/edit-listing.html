@@ -1,0 +1,32 @@
+<section class ="edit-listing-container">
+
+  <form class="edit-listing"
+    name="editListingForm"
+    ng-submit="editListingCtrl.updateListing()"
+    novalidate>
+
+    <div class="form-group">
+      <label for="title"> Title: </label>
+      <input title="title"
+        class="form-control"
+        ng-model="editListingCtrl.listing.name">
+    </div>
+
+    <div class="form-group">
+      <label for="desc"> Description: </label>
+      <input name="desc"
+        class="form-control"
+        ng-model="editListingCtrl.listing.desc">
+    </div>
+
+    <div class="form-group">
+      <label for="category"> Category: </label>
+      <input name="category"
+        class="form-control"
+        ng-model="editListingCtrl.listing.category">
+    </div>
+
+    <button class="btn btn-primary"> Update </button>
+
+  </form>
+</section>
