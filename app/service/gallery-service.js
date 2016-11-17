@@ -8,12 +8,12 @@ function galleryService($q, $log, $http, authService){
 
   service.galleries = [];
 
-  service.createGallery = function(gallery){
+  service.createGallery = function(artistID, gallery){
     $log.debug('galleryService.createGallery()');
 
     return authService.getToken()
     .then( token => {
-      let url = `${__API_URL__}/api/gallery`;
+      let url = `${__API_URL__}/api/artist/${artistID}/gallery`;
       let config = {
         headers: {
           Accept: 'application/json',

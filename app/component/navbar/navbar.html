@@ -21,7 +21,7 @@
 
     <div class="btn-right" uib-dropdown is-open="status.isopen" ng-hide="navbarCtrl.isActive('/landing')">
       <button id="single-button" type="button" uib-dropdown-toggle ng-disabled="disabled">
-        <img src="../../scss/images/default-profile.jpg" class="navbar-pic"></img>
+        <img ng-src="{{ navbarCtrl.artist.photoID.imageURI || navbarCtrl.defaultPic }}" class="navbar-pic"></img>
       </button>
         <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
           <li role="menuitem"><a href="/#/home">Home</a></li>

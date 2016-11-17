@@ -9,8 +9,21 @@ function HomeController($log, $rootScope, galleryService, artistService){
 
   this.title = 'You are logged in';
 
+  this.loggedArtist;
   this.galleries = [];
   this.artists =[];
+
+  this.checkArtistStatus = function() {
+    $log.log('init checkartiststatus');
+    artistService.checkArtist()
+    .then( artist => {
+      console.log(artist, 'ARTIST');
+      this.loggedArtist = artist;
+    })
+    .catch( () => {
+      this.artist = null;
+    });
+  };
 
   this.fetchGalleries = function(){
     galleryService.fetchGalleries()
@@ -32,11 +45,13 @@ function HomeController($log, $rootScope, galleryService, artistService){
   // When page is loaded (controller gets created), call fetchGalleries and fetchArtists
   this.fetchGalleries();
   this.fetchArtists();
+  this.checkArtistStatus();
 
   // Any time url changes (locationChangeSuccess), call fetchGalleries and fetchArtists
   $rootScope.$on('$locationChangeSuccess', () => {
     this.fetchGalleries();
     this.fetchArtists();
+    this.checkArtistStatus();
   });
 
 }
