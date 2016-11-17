@@ -84,7 +84,6 @@ authRouter.put('/api/user/updateEmail', bearerAuth, jsonParser, function(req, re
   .catch(next);
 });
 
-// Become artist
 authRouter.put('/api/user/becomeArtist', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/becomeArtist');
   return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
@@ -115,9 +114,8 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
 // Facebook OAuth route
 authRouter.get('/api/auth/facebook_oauth_callback', facebookOAUTH, function(req, res) {
   debug('hit route GET /api/auth/facebook_oauth_callback');
-  console.log('DID I HIT');
+
   if (req.facebookError) return res.redirect('/');
-  console.log('HELLO I AM THING', req.facebookOAUTH);
 
   User.findOne({ email: req.facebookOAUTH.email})
   .then( user => {
@@ -144,12 +142,10 @@ authRouter.get('/api/auth/facebook_oauth_callback', facebookOAUTH, function(req,
     return user.generateToken();
   })
   .then( token => {
-    console.log('TOKEN', token);
     res.redirect(`/#/home?token=${token}`);
   })
   .catch( err => {
     console.error(err);
-    console.log('User not found.');
     res.redirect('/');
   });
 });
