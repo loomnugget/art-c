@@ -63,9 +63,9 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
-      name: req.body.name,
-      username: req.user.username,
-      alt: req.body.alt,
+      name: tempArtist.firstname,
+      username: tempArtist.username,
+      alt: tempArtist.username,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
