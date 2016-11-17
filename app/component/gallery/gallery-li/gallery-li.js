@@ -14,9 +14,10 @@ module.exports = {
 function GalleryLIController($log, galleryService){
   $log.debug('init galleryLICtrl');
 
-  this.showGalleries = function(){
-    galleryService.fetchGalleries();
-    console.log('Galleries fetched');
+  this.showEditGallery = false;
+
+  this.deleteGallery = function(){
+    galleryService.deleteGallery(this.gallery._id);
   };
 
 }
