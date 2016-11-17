@@ -29,8 +29,13 @@ The current version of this API allows:
 
 ---
 
-# **Contribution and Use**
+### **Code Use**
 
+In order to use this REST API on your own website, you will need to fork your own copy of this GitHub repo:
+## [GitHub](https://github.com/loomnugget/art-c)
+
+- You need to make sure that you have all the dependencies installed from the package.json file.
+  You can run `npm install` in your local verson of the repo to automatically download all of our listed dependencies.
 
 ### **Issues**
 
