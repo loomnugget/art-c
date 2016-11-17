@@ -1,28 +1,36 @@
 @import "theme";
 @import "vendor";
 
-.navbar {
-  background-color: transparent;
-  border:none;
-  height: 60px;
-  margin-right: 2%;
+nav {
+  .navbar {
+    border:none;
+    margin-bottom: 0 !important;
+  }
 
   .btn-nav {
     display: none;
     float: right;
-    font-size: 100%;
-    padding: .75% 1.25%;
-    margin: 1%;
+    font-size: 120%;
+    padding: 1% 1.25%;
+    margin: 2%;
     @media (min-width: 500px){
       display: inline-block;
     }
   }
+  .btn-right {
+    float: right;
+    margin-right: 2%;
+  }
+
   .navbar-brand {
-    color: $app-secondary;
     float: left;
-    margin: 1.25% 2%;
+    margin: 2%;
     font-size: 170%;
     text-decoration: none;
+
+    a {
+      color: $app-secondary;
+    }
   }
 }
 

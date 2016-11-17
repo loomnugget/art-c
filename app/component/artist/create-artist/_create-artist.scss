@@ -1,18 +1,16 @@
 @import "theme";
 
 .create-artist-container {
-
+  
   .artist-form {
-    background-color: $app-white;
+    background-color: $app-black;
       input,
       select {
         width: 80%;
         font-size: 100%;
-        background-color: transparent;
         border:none;
-        border-bottom: 1.5px solid $app-primary;
         margin: 3%;
-        padding: 1% 0;
+        padding: 1%;
         color: $app-black;
       }
 
@@ -55,18 +53,6 @@
         display: inline-block;
         font-size: 1.2em;
         text-decoration: none;
-      }
-
-      @media (min-width: 400px) {
-        width: 90%;
-      }
-
-      @media (min-width: 600px) {
-        width: 65%;
-      }
-
-      @media (min-width: 1000px) {
-        width: 50%;
       }
     }
 
