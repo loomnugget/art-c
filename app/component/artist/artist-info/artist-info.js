@@ -7,7 +7,7 @@ module.exports = {
   controllerAs: 'artistInfoCtrl',
   controller: ['$log', ArtistInfoController],
   bindings: {
-    artist: '=',
+    artist: '<',
   },
 };
 
