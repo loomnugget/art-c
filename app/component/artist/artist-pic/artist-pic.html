@@ -1,21 +1,21 @@
 <div class="artist-pic">
 
   <form
-    ng-submit="artistPicCtrl.uploadArtistPic()"
     novalidate>
 
     <div class="img-container">
-      <img src="../../../scss/images/default-profile.jpg">
+      <img ng-src="{{artistPicCtrl.artist.photoID.imageURI || artistPicCtrl.defaultPic}}">
+
     </div>
 
-    <div class="row">
+    <div ng-if="!artistPicCtrl.artist.photoID.imageURI" class="row">
       <button class="btn btn-upload"
         ngf-select
         ng-model="artistPicCtrl.pic.file">
         Select Image
       </button>
 
-      <button type="submit" class="btn btn-upload"> Upload Image </button>
+      <button ng-click="artistPicCtrl.uploadArtistPic()" class="btn btn-upload"> Upload Image </button>
     </div>
 
   </form>

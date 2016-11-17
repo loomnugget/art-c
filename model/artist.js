@@ -16,7 +16,7 @@ const artistSchema = mongoose.Schema({
   // path params
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   galleries: [{type: mongoose.Schema.Types.ObjectId, ref: 'gallery'}],
-  photoID: {type: mongoose.Schema.Types.ObjectId},
+  photoID: {type: mongoose.Schema.Types.ObjectId, ref: 'photo'},
 });
 
 module.exports = mongoose.model('artist', artistSchema);

@@ -39,9 +39,6 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
   this.artistFormSubmission = function(){
     $log.debug('artistCtrl.artistFormSubmission');
     this.checkArtistStatus();
-    // if(this.artist.firstname === artist.firstname){
-    //   this.checkArtistStatus();
-    // }
   };
 
   $rootScope.$on('$locationChangeSuccess', () => {
