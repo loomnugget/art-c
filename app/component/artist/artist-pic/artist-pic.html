@@ -1,9 +1,12 @@
-<div class="profile-pic">
+<div class="artist-pic">
 
   <form
-    ng-submit="profilePicCtrl.uploadArtistPic()"
+    ng-submit="artistPicCtrl.uploadArtistPic()"
     novalidate>
-    <img src="../../../scss/images/default-profile.jpg">
+
+    <div class="img-container">
+      <img src="../../../scss/images/default-profile.jpg">
+    </div>
 
     <div class="row">
       <button class="btn btn-upload"
@@ -12,7 +15,8 @@
         Select Image
       </button>
 
-      <button class="btn btn-upload"> Upload Image </button>
+      <button type="submit" class="btn btn-upload"> Upload Image </button>
     </div>
+
   </form>
 </div>
