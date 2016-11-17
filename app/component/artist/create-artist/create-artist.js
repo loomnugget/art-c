@@ -15,8 +15,9 @@ function CreateArtistController($log, artistService){
   $log.debug('init createArtistCtrl');
 
   this.artist = {};
-  
+
   this.createArtist = function(){
+    $log.log('this.createArtist');
     artistService.createArtist(this.artist)
     .then( artist => {
       this.artist = artist;

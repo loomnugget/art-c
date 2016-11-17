@@ -3,14 +3,13 @@
 .create-artist-container {
   width: 80%;
   margin: 2% 10%;
-  .artist-form {
+  form {
     padding: 3% 5%;
     background-color: $app-black;
       input,
       select {
         width: 100%;
         font-size: 100%;
-        border:none;
         border-radius: 3px;
         margin: 1%;
         padding: 1%;
@@ -36,7 +35,7 @@
         font-size: 120%;
         padding: 1.5% 2%;
         margin-top: 3%;
-        width: 25%;
+        // width: 25%;
         transition: all 0.3s;
         color: $app-secondary;
       }
