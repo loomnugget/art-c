@@ -3,10 +3,8 @@
 module.exports = ['$stateProvider', '$urlRouterProvider', routerConfig];
 
 function routerConfig($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.when('' , '/join#signup');
-  $urlRouterProvider.when('/' , '/join#signup');
-  $urlRouterProvider.when('/signup' , '/join#signup');
-  $urlRouterProvider.when('/login' , '/join#login');
+  $urlRouterProvider.when('' , '/landing');
+  $urlRouterProvider.when('/' , '/landing');
 
   let states = [
     {
@@ -19,10 +17,17 @@ function routerConfig($stateProvider, $urlRouterProvider){
 
     {
       name: 'welcome',
-      url: '/join',
+      url: '/landing',
       controllerAs: 'landingCtrl',
       controller: 'LandingController',
       template: require('../view/landing/landing.html'),
+    },
+    {
+      name: 'artist profile',
+      url: '/artist',
+      controllerAs: 'artistCtrl',
+      controller: 'ArtistController',
+      template: require('../view/artist/artist.html'),
     },
   ];
 

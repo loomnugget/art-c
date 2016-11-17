@@ -20,7 +20,7 @@ const pageRouter = require('./route/page-router.js');
 const errorMiddleware = require('./lib/error-middleware.js');
 
 // Load server environment variables
-dotenv.load({path: `${__dirname}/.server.env`});
+dotenv.load({path: `${__dirname}/.env`});
 
 // Connect to mongo database
 mongoose.Promise = Promise;

@@ -4,48 +4,69 @@ require('./_navbar.scss');
 
 module.exports = {
   template: require('./navbar.html'),
-  controller: ['$log', '$location', '$rootScope', 'authService', NavbarController],
+  controller: ['$log', '$location', '$rootScope', '$window', '$uibModal', 'authService', NavbarController],
   controllerAs: 'navbarCtrl',
   bindings: {
     appTitle: '@',
+    resolve: '<',
+    loginToggle: '<',
   },
 };
 
-function NavbarController($log, $location, $rootScope, authService) {
+function NavbarController($log, $location, $rootScope, $window, $uibModal, authService) {
   $log.debug('init navbarCtrl');
 
-  this.checkPath = function(){
-    let path = $location.path();
-    if (path === '/join'){
-      this.hideButtons = true;
+  this.isActive = function(viewLocation) {
+    return viewLocation === $location.path();
+  };
 
-      authService.getToken()
-      .then(() => {
+
+  function pageLoadHandler() {
+
+    authService.getToken()
+      .then(token => {
+        console.log('token', token);
         $location.url('/home');
-      });
-    }
-
-    if (path !== '/join'){
-      this.hideButtons = false;
-      authService.getToken()
+      })
       .catch(() => {
-        $location.url('/join#login');
+        let query = $location.search();
+        if (query.token) {
+          authService.setToken(query.token)
+            .then(() => {
+              $location.url('/home');
+            });
+        }
       });
-    }
+  }
+
+  $window.onload = pageLoadHandler.bind(this);
+  $rootScope.$on('locationChangeSuccess', pageLoadHandler.bind(this));
+
+  this.artistSignup = function(){
+    $log.log('navbarCtrl.artistSignup()');
+    $location.url('/artist');
   };
 
-  this.checkPath();
-
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.checkPath();
-  });
-
-  this.logout = function(){
+  this.logout = function() {
     $log.log('navbarCtrl.logout()');
-    this.hideButtons = true;
     authService.logout()
-    .then(() => {
-      $location.url('/');
-    });
+      .then(() => {
+        $location.url('/');
+      });
   };
+
+  this.open = function(toggleLogin) {
+    let modalInstance = $uibModal.open({
+      component: 'modal',
+      resolve: {
+        loginToggle: function(){
+          return toggleLogin;
+        },
+      },
+    });
+
+    return modalInstance;
+  };
+
+
 }

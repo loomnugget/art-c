@@ -15,6 +15,7 @@ const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db.js');
 const mockUser = require('./lib/user-mock.js');
 const mockManyPhotos = require('./lib/mock-many-photos.js');
+const mockArtist = require('./lib/artist-mock.js');
 
 mongoose.Promise = Promise;
 
@@ -479,6 +480,30 @@ describe('testing auth-router', function() {
             expect(res.status).to.equal(401);
             done();
           });
+        });
+      });
+    });
+  });
+
+  describe('testing PUT /api/user/becomeArtist', function() {
+
+    describe('with valid token and id', () => {
+
+      before( done => mockArtist.call(this, done));
+
+      it('should return a user with an isArtist property set to true', done => {
+        let updateData = {isArtist: true};
+        request.put(`${url}/api/user/becomeArtist`)
+        .send(updateData)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if (err)
+            return done(err);
+          expect(res.status).to.equal(200);
+          expect(res.body.isArtist).to.equal(true);
+          done();
         });
       });
     });

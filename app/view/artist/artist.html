@@ -1,0 +1,14 @@
+<navbar app-title="[art-c]"></navbar>
+<main class="artist-container">
+  
+  <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
+
+  <artist-info artist="artistCtrl.artist"></artist-info>
+
+  <nav class="artist-gallery-container">
+    <ul>
+      <gallery-li ng-repeat="gallery in artistCtrl.galleries">
+      </gallery-li>
+    </ul>
+  </nav>
+</main>

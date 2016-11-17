@@ -6,6 +6,7 @@ const debug = require('debug')('artc:gallery-route');
 const AWS = require('aws-sdk');
 
 // app modules
+const Artist = require('../model/artist.js');
 const Gallery = require('../model/gallery.js');
 const Listing = require('../model/listing.js');
 const pageMiddleware = require('../lib/page-query-middleware.js');
@@ -14,6 +15,15 @@ AWS.config.setPromisesDependency(require('bluebird'));
 
 // module constants
 const pageRouter = module.exports = Router();
+
+pageRouter.get('/api/artist', function(req, res, next){
+  debug('hit route GET /api/artist');
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page ;
+  Artist.find()
+  .then(artists => res.json(artists))
+  .catch(next);
+});
 
 pageRouter.get('/api/gallery', pageMiddleware, function(req, res, next){
   debug('hit route GET /api/gallery');

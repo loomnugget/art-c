@@ -1,4 +1,49 @@
-
 <nav class="navbar">
+  <div class="nav-container">
+      <a class="navbar-brand" href="#">{{ navbarCtrl.appTitle }}</a>
+
+      <div ng-show="navbarCtrl.isActive('/landing')">
+        <button
+          ng-click="navbarCtrl.open(true)"
+          class="btn btn-nav">
+          Login
+        </button>
+      </div>
+
+      <div ng-show="navbarCtrl.isActive('/landing')">
+        <button
+          ng-click="navbarCtrl.open(false)"
+          class="btn btn-nav">
+          Signup
+        </button>
+      </div>
+
+
+    <div class="btn-right" uib-dropdown is-open="status.isopen" ng-show="navbarCtrl.isActive('/home')">
+      <button id="single-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
+        <img src="../../scss/images/default-profile.jpg" class="navbar-pic"></img>
+        <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a href="/#home">Home</a></li>
+          <li role="menuitem"><button class="btn btn-dark" ng-click="navbarCtrl.artistSignup()">Become an Artist</button></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#" ng-click="navbarCtrl.logout()">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="btn-right" uib-dropdown is-open="status.isopen" ng-show="navbarCtrl.isActive('/artist')">
+      <button id="single-button" type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">
+        <img src="../../scss/images/default-profile.jpg" class="navbar-pic"></img>
+        <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+          <li role="menuitem"><a href="/#/home">Home</a></li>
+          <li role="menuitem"><a href="/#/artist">My Profile</a></li>
+          <li class="divider"></li>
+          <li role="menuitem"><a href="#" ng-click="navbarCtrl.logout()">Logout</a></li>
+        </ul>
+    </div>
+  </div>
 
 </nav>

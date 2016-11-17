@@ -11,6 +11,7 @@ function artistService($q, $log, $http, authService){
   service.createArtist = function(artist){
     $log.debug('artistService.createArtist()');
 
+
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/artist`;
@@ -30,9 +31,29 @@ function artistService($q, $log, $http, authService){
       service.artists.unshift(artist);
       return artist;
     })
-
     .catch( err => {
       $log.error(err.message);
+      return $q.reject(err);
+    });
+  };
+
+  service.checkArtist = function() {
+    return authService.getToken()
+    .then( token => {
+      let url = `${__API_URL__}/api/artist/me`;
+      let config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      return $http.get(url, config);
+    })
+    .then( artist => {
+      $log.log('found artist profile');
+      return artist;
+    })
+    .catch( err => {
+      $log.log('no artist profile');
       return $q.reject(err);
     });
   };

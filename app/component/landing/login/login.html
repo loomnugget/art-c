@@ -3,10 +3,6 @@
     name="loginForm"
     ng-submit="loginCtrl.login()" novalidate>
     <div
-      ng-class="{
-        'has-error': loginForm.username.$invalid,
-        'has-success': loginForm.username.$valid,
-      }"
       class="form-group">
       <input type="text"
         name="username"
@@ -17,10 +13,6 @@
     </div>
 
     <div
-      ng-class="{
-        'has-error': loginForm.password.$invalid && loginForm.$submitted,
-        'has-success': loginForm.password.$valid,
-      }"
       class="form-group">
       <input type="password" name="password"
         ng-disabled="loginForm.username.$invalid"
@@ -30,5 +22,8 @@
         ng-model="loginCtrl.user.password">
     </div>
     <button class="btn"> Login </button>
+    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
+
+    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
   </form>
 </section>
