@@ -1,8 +1,7 @@
 <section class="create-artist-container">
 
-<div class="artist-form">
   <form name="artistForm"
-    class="form-inline"
+    class="artist-form"
     novalidate
     ng-hide="artistForm.$submitted"
     ng-submit="createArtistCtrl.createArtist()">
@@ -55,9 +54,8 @@
         </div>
 
     <button class="btn" type="submit" ng-click="createArtistCtrl.showEditArtist()"> Submit </button>
-
   </form>
-</div>
+
   <artist-pic ng-show="createArtistCtrl.isVisible"></artist-pic>
   <artist-info artist="createArtistCtrl.artist" ng-show="createArtistCtrl.isVisible"></artist-info>
 </section>

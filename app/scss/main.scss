@@ -22,6 +22,19 @@ html, body {
   color: $app-secondary;
 }
 
+.btn-dark {
+  background-color: $app-black;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 1.5% 2%;
+  margin-top: 3%;
+  display: inline-block;
+  outline: none;
+  transition: all 0.3s;
+  color: $app-secondary;
+}
+
 .btn:hover {
   background:rgba(255,255,255,0.8);
   color: $app-black;
