@@ -1,14 +1,29 @@
 <navbar app-title="[art-c]"></navbar>
 <main class="artist-container">
-  
-  <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
 
-  <artist-info artist="artistCtrl.artist"></artist-info>
+  <!-- if there is no artist, show create artist form-->
+  <div class="row">
+    <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
+  </div>
 
-  <nav class="artist-gallery-container">
-    <ul>
-      <gallery-li ng-repeat="gallery in artistCtrl.galleries">
-      </gallery-li>
-    </ul>
-  </nav>
+  <div class="row profile-container">
+    <div class="col span-1-of-3">
+      <artist-pic artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-pic>
+    </div>
+
+    <!-- if there is an artist created, show artist info-->
+    <div class="col span-2-of-3">
+      <artist-info artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-info>
+    </div>
+  </div>
+
+  <div class="row">
+    <nav class="artist-gallery-container">
+      <ul>
+        <gallery-li ng-repeat="gallery in artistCtrl.galleries">
+        </gallery-li>
+      </ul>
+    </nav>
+  </div>
+
 </main>

@@ -11,6 +11,12 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
   this.listings = [];
   this.artist;
 
+  this.isVisible = false;
+
+  this.showArtistInfo = function() {
+    this.isVisible = true;
+  };
+
   this.fetchArtistGalleries = function() {
     galleryService.fetchArtistGalleries(this.artist._id)
     .then( galleries => {
