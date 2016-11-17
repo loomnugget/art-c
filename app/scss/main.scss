@@ -9,6 +9,28 @@ html, body {
   color: $app-white;
 }
 
+input,
+select {
+  width: 100%;
+  font-size: 100%;
+  border:none;
+  border-radius: 3px;
+  margin: 1%;
+  padding: 1%;
+  color: $app-black;
+}
+
+input:focus{
+  outline: $app-secondary;
+  background-color: $app-white;
+}
+/*---- Changes Placeholder Color -----*/
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: $app-primary;
+}
+
+
 .btn {
   background-color: rgba(255,255,255,.3);
   border: none;
@@ -45,4 +67,108 @@ html, body {
 	position: absolute;
 	z-index: -1;
 	transition: all 0.3s;
+}
+
+
+/*  SECTIONS  ============================================================================= */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* --------- Clearfix ------------ */
+.clearfix {zoom: 1;}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/*makes every element include the margin and padding you add to it */
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+/*  GROUPING  ============================================================================= */
+
+.row {
+  max-width: 1140px;
+  margin: 0 auto;
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.row:before,
+.row:after {
+  content:"";
+  display:table;
+}
+.row:after {
+  clear:both;
+}
+
+/*  GRID COLUMN SETUP   ==================================================================== */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
+
+
+/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {
+		/*margin: 1% 0 1% 0%;*/
+      margin: 0;
+	}
+}
+
+
+/*  GRID OF TWO   ============================================================================= */
+.span-2-of-2 {
+	width: 100%;
+}
+.span-1-of-2 {
+	width: 49.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.span-2-of-2 {
+		width: 100%;
+	}
+	.span-1-of-2 {
+		width: 100%;
+	}
+}
+
+
+/*  GRID OF THREE   ============================================================================= */
+.span-3-of-3 {
+	width: 100%;
+}
+.span-2-of-3 {
+	width: 66.13%;
+}
+.span-1-of-3 {
+	width: 32.26%;
+}
+
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.span-3-of-3 {
+		width: 100%;
+	}
+	.span-2-of-3 {
+		width: 100%;
+	}
+	.span-1-of-3 {
+		width: 100%;
+	}
 }
