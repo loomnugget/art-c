@@ -37,6 +37,7 @@ artistRouter.post('/api/artist', bearerAuth, jsonParser, function(req, res, next
 artistRouter.get('/api/artist/me', bearerAuth, function(req, res, next) {
   debug('GET /api/artist/me');
   Artist.findOne({userID: req.user._id})
+  .populate('photoID')
   .then( artist => {
     if(!artist) return Promise.reject(createError(404, 'artist not found'));
     res.json(artist);
