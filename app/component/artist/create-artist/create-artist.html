@@ -1,12 +1,10 @@
 <section class="create-artist-container">
 
-
   <form
     novalidate
     name="artistForm"
-    class="artist-form"
     ng-hide="artistForm.$submitted"
-    ng-submit="createArtistCtrl.createArtist()">
+    ng-submit="artistForm.$valid && createArtistCtrl.createArtist()">
 
       <h2>Create your artist profile</h2>
 
@@ -95,6 +93,6 @@
           }"
           ng-model="createArtistCtrl.artist.zip">
 
-    <button class="btn" type="submit"> Submit </button>
+    <button class="btn"> Create Profile </button>
   </form>
 </section>
