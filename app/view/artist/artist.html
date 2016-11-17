@@ -1,6 +1,6 @@
-<navbar></navbar>
-<main>
-  <h1> On Artist Page </h1>
+<navbar app-title="[art-c]"></navbar>
+<main class="artist-container">
+  
   <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
 
   <artist-info artist="artistCtrl.artist"></artist-info>
