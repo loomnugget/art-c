@@ -18,8 +18,10 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
   };
 
   this.fetchArtistGalleries = function() {
+    console.log(this.artist, 'THIS.ARTIST');
     galleryService.fetchArtistGalleries(this.artist._id)
     .then( galleries => {
+      console.log('GALLERIES IN ARTISTCTRL', galleries);
       this.galleries = galleries;
     });
   };
@@ -30,6 +32,12 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
     .then( artist => {
       console.log(artist, 'ARTIST');
       this.artist = artist;
+    })
+    .then(() => {
+      this.fetchArtistGalleries(this.artist._id);
+    // })
+    // .then(galleries => {
+    //   this.galleries = galleries;
     })
     .catch( () => {
       this.artist = null;
@@ -46,7 +54,9 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
 
   $rootScope.$on('$locationChangeSuccess', () => {
     this.checkArtistStatus();
+    this.fetchArtistGalleries();
   });
 
+  // this.fetchArtistGalleries();
   this.checkArtistStatus();
 }

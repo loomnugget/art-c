@@ -10,11 +10,14 @@ module.exports = {
     appTitle: '@',
     resolve: '<',
     loginToggle: '<',
+    artist: '<',
   },
 };
 
 function NavbarController($log, $location, $rootScope, $window, $uibModal, authService) {
   $log.debug('init navbarCtrl');
+
+  this.defaultPic = require('../../scss/images/default-profile.jpg');
 
   this.isActive = function(viewLocation) {
     return viewLocation === $location.path();

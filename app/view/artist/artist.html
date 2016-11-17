@@ -1,4 +1,4 @@
-<navbar app-title="[art-c]"></navbar>
+<navbar artist="artistCtrl.artist" app-title="[art-c]"></navbar>
 <main class="artist-container">
 
   <!-- if there is no artist, show create artist form-->
@@ -18,12 +18,14 @@
   </div>
 
   <div class="row">
-    <nav class="artist-gallery-container">
+    <create-gallery artist="artistCtrl.artist"></create-gallery>
+    <div class="artist-gallery-container">
       <ul>
-        <gallery-li ng-repeat="gallery in artistCtrl.galleries">
+        <gallery-li gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
         </gallery-li>
       </ul>
-    </nav>
+    </div>
+    <edit-gallery></edit-gallery>
   </div>
 
 </main>
