@@ -1,7 +1,8 @@
 <section class="create-artist-container">
 
 
-  <form name="artistForm"
+  <form
+    name="artistForm"
     class="artist-form"
     novalidate
     ng-hide="artistForm.$submitted"
@@ -9,50 +10,90 @@
 
       <h2>Create your artist profile</h2>
 
-        <div class="form-group">
-          <input name="firstname"
-            class="form-control"
-            type="text"
-            placeholder="First name"
-            ng-model="createArtistCtrl.artist.firstname"
-            required>
-        </div>
+        <label for="firstname"> First Name </label>
+        <input
+          required
+          type="text"
+          name="firstname"
+          class="form-control"
+          placeholder="First Name"
+          uib-tooltip="First Name Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': artistForm.firstname.$invalid,
+            'has-success': artistForm.firstname.$valid,
+          }"
+          ng-model="createArtistCtrl.artist.firstname">
 
-        <div class="form-group">
-          <input name="lastname"
-            class="form-control"
-            type="text"
-            placeholder="Last name"
-            ng-model="createArtistCtrl.artist.lastname"
-            required>
-        </div>
+        <label for="lastname"> Last Name </label>
+        <input
+          required
+          type="text"
+          name="lastname"
+          class="form-control"
+          placeholder="Last Name"
+          uib-tooltip="Last Name Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': artistForm.lastname.$invalid,
+            'has-success': artistForm.lastname.$valid,
+          }"
+          ng-model="createArtistCtrl.artist.lastname">
 
-        <div class="form-group">
-          <input name="phone"
-            class="form-control"
-            type="text"
-            placeholder="Phone"
-            ng-model="createArtistCtrl.artist.phone"
-            required>
-        </div>
+        <label for="phone"> Phone Number </label>
+        <input
+          required
+          type="text"
+          name="phone"
+          class="form-control"
+          placeholder="Phone Number"
+          uib-tooltip="Phone Number Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="7"
+          ng-class="{
+            'has-error': artistForm.phone.$invalid,
+            'has-success': artistForm.phone.$valid,
+          }"
+          ng-model="createArtistCtrl.artist.phone">
 
-        <div class="form-group">
-          <input name="city"
-            class="form-control"
-            type="text"
-            placeholder="City"
-            ng-model="createArtistCtrl.artist.city"
-            required>
-        </div>
+        <label for="city"> City </label>
+        <input
+          required
+          type="text"
+          name="city"
+          class="form-control"
+          placeholder="City"
+          uib-tooltip="City Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': artistForm.city.$invalid,
+            'has-success': artistForm.city.$valid,
+          }"
+          ng-model="createArtistCtrl.artist.city">
 
-        <div class="form-group">
-          <input name="zip"
-            class="form-control"
-            type="text"
-            placeholder="Zip"
-            ng-model="createArtistCtrl.artist.zip"
-            required>
-        </div>
+        <label for="zip"> Zip Code </label>
+        <input
+          required
+          type="text"
+          name="zip"
+          class="form-control"
+          placeholder="Zip Code"
+          uib-tooltip="Zip Code Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="5"
+          ng-class="{
+            'has-error': artistForm.zip.$invalid,
+            'has-success': artistForm.zip.$valid,
+          }"
+          ng-model="createArtistCtrl.artist.zip">
 
     <button class="btn" type="submit"> Submit </button>
   </form>
