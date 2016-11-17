@@ -22,19 +22,6 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
 
   function pageLoadHandler() {
-    //let path = $location.path();
-    // if (path === '/landing') {
-    //   this.hideLogoutButton = true;
-    //   this.hideLoginSignupButtons = false;
-    // }
-    //
-    // if (path !== '/landing') {
-    //   this.hideLogoutButton = false;
-    // }
-    //
-    // if (path === '/home') {
-    //   this.hideLoginSignupButtons = true;
-    // }
 
     authService.getToken()
       .then(token => {
