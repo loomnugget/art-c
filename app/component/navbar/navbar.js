@@ -49,7 +49,6 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
   this.logout = function() {
     $log.log('navbarCtrl.logout()');
-  //  this.hideLogoutButton = true;
     authService.logout()
       .then(() => {
         $location.url('/');
