@@ -8,6 +8,7 @@ const createError = require('http-errors');
 const AWS = require('aws-sdk');
 
 // app modules
+const User = require('../model/user.js');
 const Artist = require('../model/artist.js');
 const Gallery = require('../model/gallery.js');
 const Listing = require('../model/listing.js');
@@ -23,8 +24,24 @@ const s3 = new AWS.S3();
 artistRouter.post('/api/artist', bearerAuth, jsonParser, function(req, res, next) {
   debug('POST /api/artist');
   req.body.userID = req.user._id;
-  new Artist(req.body).save()
+  User.findById(req.user._id)
+  .then( user => {
+    req.body.username = user.username;
+    req.body.email = user.email;
+    return new Artist(req.body).save();
+  })
   .then( artist => res.json(artist))
+  .catch(next);
+});
+
+artistRouter.get('/api/artist/me', bearerAuth, function(req, res, next) {
+  debug('GET /api/artist/me');
+  console.log('REQ', req);
+  Artist.findOne({userID: req.user._id})
+  .then( artist => {
+    if(!artist) return Promise.reject(createError(404, 'artist not found'));
+    res.json(artist);
+  })
   .catch(next);
 });
 
