@@ -1,29 +1,46 @@
 <section class="login-form">
+
   <form
     name="loginForm"
     ng-submit="loginCtrl.login()" novalidate>
-    <div
-      class="form-group">
-      <input type="text"
-        name="username"
-        placeholder="Username"
-        class="form-control"
-        required ng-minlength="5"
-        ng-model="loginCtrl.user.username">
-    </div>
 
-    <div
-      class="form-group">
-      <input type="password" name="password"
-        ng-disabled="loginForm.username.$invalid"
-        placeholder="Password"
-        class="form-control has-error"
-        required ng-minlength="8"
-        ng-model="loginCtrl.user.password">
-    </div>
+    <input
+      required
+      type="text"
+      name="username"
+      class="form-control"
+      placeholder="Username"
+      ng-minlength="6"
+      ng-class="{
+        'has-error': loginForm.username.$invalid,
+        'has-success': loginForm.username.$valid,
+      }"
+      ng-model="loginCtrl.user.username">
+
+    <input
+      required
+      type="password"
+      name="password"
+      class="form-control"
+      placeholder="Password"
+      ng-minlength="8"
+      ng-class="{
+        'has-error': loginForm.password.$invalid,
+        'has-success': loginForm.password.$valid,
+      }"
+      ng-model="loginCtrl.user.password">
+
     <button class="btn"> Login </button>
-    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
 
-    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
+    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
+      <span class="fa fa-facebook"></span>
+      Sign in with Facebook
+    </a>
+
+    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}">
+      <span class="fa fa-google"></span>
+      Sign in with Google
+    </a>
+
   </form>
 </section>
