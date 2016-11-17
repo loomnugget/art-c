@@ -1,15 +1,19 @@
 @import "theme";
 
 .create-artist-container {
-  
+  width: 80%;
+  margin: 0 10%;
+
   .artist-form {
+    padding: 3% 5%;
     background-color: $app-black;
       input,
       select {
-        width: 80%;
+        width: 100%;
         font-size: 100%;
         border:none;
-        margin: 3%;
+        border-radius: 3px;
+        margin: 1%;
         padding: 1%;
         color: $app-black;
       }

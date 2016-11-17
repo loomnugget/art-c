@@ -1,41 +1,48 @@
 @import "theme";
 @import "vendor";
 
-nav {
-  .navbar .navbar-inverse {
-    border:none;
-    height: 50px;
-    margin-bottom: 0 !important;
-  }
+.navbar {
+  background-color: #212121;
+  height: 60px;
 
-  .btn-nav {
-    display: none;
-    float: right;
-    font-size: 120%;
-    padding: 1% 1.25%;
-    margin: 2%;
-    @media (min-width: 500px){
-      display: inline-block;
+  .nav-container{
+    padding: 0 10px;
+    .btn-nav {
+      display: none;
+      float: right;
+      font-size: 20px;
+      padding: 2px 5px;
+      margin: 14px 7px;
+      @media (min-width: 500px){
+        display: inline-block;
+      }
     }
-  }
-  .btn-right {
-    float: right;
-    margin-right: 2%;
-  }
 
-  .navbar-brand {
-    float: left;
-    margin: 2%;
-    font-size: 170%;
-    text-decoration: none;
+    .btn-right {
+      float: right;
+      margin-right: 100px;
+    }
 
-    a {
+    .btn-left {
+      float: left;
+    }
+
+    .navbar-brand {
+      float: left;
+      margin-left: 15px;
+      margin-top: 2px;
+      font-size: 40px;
+      vertical-align: center;
+      display:inline-block;
+      text-decoration: none;
       color: $app-secondary;
+
+    }
+
+
+    .navbar-pic {
+      width: 55px;
+      height: 55px;
     }
   }
-}
-
-.navbar-pic {
-  width: 50px;
-  height: 50px;
 }
