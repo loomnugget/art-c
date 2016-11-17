@@ -172,3 +172,10 @@ textarea::-webkit-input-placeholder {
 		width: 100%;
 	}
 }
+
+.has-error {
+  background-color: $app-warn;
+}
+.has-success {
+  background-color: $app-info;
+}
