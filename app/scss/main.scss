@@ -9,6 +9,10 @@ html, body {
   color: $app-white;
 }
 
+h1 {
+  font-family: $app-title;
+}
+
 .btn {
   background-color: rgba(255,255,255,.3);
   border: none;
@@ -20,6 +24,7 @@ html, body {
   outline: none;
   transition: all 0.3s;
   color: $app-secondary;
+  font-family: $app-button;
 }
 
 .btn:hover {
@@ -32,4 +37,13 @@ html, body {
 	position: absolute;
 	z-index: -1;
 	transition: all 0.3s;
+}
+
+button {
+  span {
+    // .fa{
+      margin-right: .5em;
+      font-size: 1.5em;
+    // }
+  }
 }
