@@ -9,26 +9,60 @@ html, body {
   color: $app-white;
 }
 
-input,
-select {
-  width: 100%;
-  font-size: 100%;
-  border:none;
-  border-radius: 3px;
-  margin: 1%;
-  padding: 1%;
-  color: $app-black;
+form {
+  /* form starting stylings ------------------------------- */
+  .group 			  {
+    position:relative;
+    margin-top:25px;
+  }
+  input 				{
+    font-size:18px;
+    padding:5px 10px 5px 5px;
+    display:block;
+    border:none;
+    border-radius: 4px;
+    width: 100%;
+    }
+  input:focus 		{ outline:none; }
+
+  /* LABEL ======================================= */
+  label 				 {
+    color:#999;
+    font-size:18px;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+
+  }
+
+  /* active state */
+  input:focus ~ label, input:valid ~ label 		{
+    top:-20px;
+    font-size:14px;
+    color:$app-primary;
+  }
+
+  /*---- Changes Placeholder Color -----*/
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: $app-black;
+  }
 }
 
-input:focus{
-  outline: $app-secondary;
-  background-color: $app-white;
+.btn-facebook {
+  background-color: $app-black;
+  color: white;
 }
-/*---- Changes Placeholder Color -----*/
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: $app-primary;
+
+.btn-google {
+  background-color: #2a2a2a;
+  color: white;
 }
+
 
 
 .btn {
@@ -37,7 +71,7 @@ textarea::-webkit-input-placeholder {
   text-transform: uppercase;
   border-radius: 3px;
   padding: 1.5% 2%;
-  margin-top: 3%;
+  margin: 2% 0;
   display: inline-block;
   outline: none;
   transition: all 0.3s;
@@ -45,8 +79,7 @@ textarea::-webkit-input-placeholder {
 }
 
 .btn-dark {
-  background-color: $app-black;
-  border: none;
+  border:1px solid $app-black;
   text-transform: uppercase;
   border-radius: 3px;
   padding: 1.5% 2%;
@@ -54,12 +87,16 @@ textarea::-webkit-input-placeholder {
   display: inline-block;
   outline: none;
   transition: all 0.3s;
-  color: $app-secondary;
+  color: $app-black;
 }
 
 .btn:hover {
   background:rgba(255,255,255,0.8);
   color: $app-black;
+}
+.btn-dark:hover {
+  background:rgba(0,0,0,0.8);
+  color: $app-white;
 }
 
 .btn:after {

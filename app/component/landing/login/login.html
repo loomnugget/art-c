@@ -4,14 +4,12 @@
     name="loginForm"
     ng-submit="loginCtrl.login()"
     novalidate>
-
-    <label for="username" ng-if="isNameFocused"> Username </label>
+   <div class="group">
     <input
       required
       type="text"
       name="username"
       class="form-control"
-      placeholder="Username"
       uib-tooltip="Username Required"
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'"
@@ -20,17 +18,16 @@
         'has-error': loginForm.username.$invalid,
         'has-success': loginForm.username.$valid,
       }"
-      ng-model="loginCtrl.user.username"
-      onfocus="this.placeholder=''" onblur="this.placeholder='Username'"
-      ng-focus="isNameFocused = true" ng-blur="isNameFocused = false">
+      ng-model="loginCtrl.user.username">
+       <label>Username</label>
+     </div>
 
-    <label for="password" ng-if="isFocused"> Password </label>
+  <div class="group">
     <input
       required
       type="password"
       name="password"
       class="form-control"
-      placeholder="Password"
       uib-tooltip="Password Required"
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'"
@@ -39,11 +36,11 @@
         'has-error': loginForm.password.$invalid,
         'has-success': loginForm.password.$valid,
       }"
-      ng-model="loginCtrl.user.password"
-      onfocus="this.placeholder=''" onblur="this.placeholder='Password'"
-      ng-focus="isFocused = true" ng-blur="isFocused = false">
+      ng-model="loginCtrl.user.password">
+       <label>Password</label>
+     </div>
 
-    <button class="btn"> Login </button>
+    <button class="btn btn-dark"> Login </button>
 
     <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
       <span class="fa fa-facebook"></span>
