@@ -3,7 +3,7 @@
   <figure class='bg-photo'>
     <div class='mask'>
         <div class='absolute-text'>
-          <img ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
+          <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
           <h2>{{ galleryLICtrl.gallery.name }} </h2>
           <p> {{ galleryLICtrl.gallery.desc }} </p>
           <p> {{ galleryLICtrl.gallery.category }} </p>

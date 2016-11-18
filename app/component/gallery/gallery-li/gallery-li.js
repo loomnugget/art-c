@@ -17,8 +17,6 @@ function GalleryLIController($log, $location, galleryService){
 
   this.showEditGallery = false;
   this.homeView = false;
-console.log("this.gallery", this.gallery)
-
 
   this.isHomeView = function(){
     if ($location.url() === '/home'){
