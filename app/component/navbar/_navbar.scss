@@ -12,26 +12,21 @@
 
   .nav-container{
     padding: 0 10px;
+
     .btn-nav {
-      display: none;
       float: right;
-      font-size: 20px;
-      padding: 2px 5px;
-      margin: 14px 7px;
-      @media (min-width: 500px){
-        display: inline-block;
-      }
+      font-size: 16px;
+      padding: 4px 10px;
+      margin: 14px 15px;
     }
 
     .btn-right {
       float: right;
       margin-right: 0px;
       margin-top: 1px;
+      background-color: tranparent;
+      border-radius: 100%;
 
-    }
-
-    .btn-left {
-      float: left;
     }
 
     .navbar-brand {
@@ -42,16 +37,16 @@
       vertical-align: center;
       display:inline-block;
       text-decoration: none;
-      color: $app-secondary;
+      color: $app-white;
     }
     .navbar-brand:hover {
-      color: $app-white;
+      color: #fff;
     }
 
     .navbar-pic {
       width: 53px;
       height: 53px;
-
+      border-radius: 100%;
     }
   }
 }

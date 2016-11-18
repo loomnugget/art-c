@@ -1,16 +1,17 @@
 <section class="signup">
+
   <form
+    class="loginSignupForm"
     name="signupForm"
     ng-submit="signupCtrl.signup(signupCtrl.user)"
     novalidate>
 
-    <label for="username"> Username </label>
+    <div class="group">
     <input
       required
       type="text"
       name="username"
       class="form-control"
-      placeholder="Username"
       uib-tooltip="Username Required"
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'"
@@ -20,44 +21,50 @@
         'has-success': signupForm.username.$valid,
       }"
       ng-model="signupCtrl.user.username">
+      <label> Username </label>
+    </div>
 
-    <label for="email"> Email </label>
-    <input
-      required
-      type="email"
-      name="email"
-      class="form-control"
-      placeholder="Email"
-      uib-tooltip="Email Required"
-      tooltip-placement="bottom-right"
-      tooltip-trigger="'focus'"
-      ng-class="{
-        'has-error': signupForm.email.$invalid,
-        'has-success': signupForm.email.$valid,
-      }"
-      ng-model="signupCtrl.user.email">
+    <div class="group">
+      <input
+        required
+        type="email"
+        name="email"
+        class="form-control"
+        uib-tooltip="Email Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-class="{
+          'has-error': signupForm.email.$invalid,
+          'has-success': signupForm.email.$valid,
+        }"
+        ng-model="signupCtrl.user.email">
+      <label> Email </label>
+    </div>
 
-    <label for="password"> Password </label>
-    <input
-      required
-      type="password"
-      name="password"
-      class="form-control"
-      placeholder="Password"
-      uib-tooltip="Password Required"
-      tooltip-placement="bottom-right"
-      tooltip-trigger="'focus'"
-      ng-minlength="8"
-      ng-class="{
-        'has-error': signupForm.password.$invalid,
-        'has-success': signupForm.password.$valid,
-      }"
-      ng-model="signupCtrl.user.password">
+    <div class="group">
+      <input
+        required
+        type="password"
+        name="password"
+        class="form-control"
+        uib-tooltip="Password Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="8"
+        ng-class="{
+          'has-error': signupForm.password.$invalid,
+          'has-success': signupForm.password.$valid,
+        }"
+        ng-model="signupCtrl.user.password">
+      <label> Password </label>
+    </div>
 
-    <input type="submit" class="btn" value="Sign Up">
+    <div class="btn-container">
+      <input type="submit" class="btn btn-block btn-dark" value="Sign Up">
 
-    <a class="btn btn-block btn-social btn-facebook" ng-href="{{signupCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
+      <a class="btn btn-block btn-social btn-facebook" ng-href="{{signupCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
 
-    <a class="btn btn-block btn-social btn-google" ng-href="{{signupCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
+      <a class="btn btn-block btn-social btn-google" ng-href="{{signupCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
+    </div>
   </form>
 </section>
