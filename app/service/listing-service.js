@@ -36,7 +36,7 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.deleteListing = function(listing) {
+  service.deleteListing = function(gallery, listing) {
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/gallery/${listing.galleryID}/listing/${listing._id}`;
@@ -49,10 +49,10 @@ function listingService($q, $log, $http, authService) {
     })
     .then( () => {
       $log.log('Successful listing deletion.');
-      for(let i = 0; i < service.listings.length; ++i) {
-        let current = service.listings[i];
+      for(let i = 0; i < gallery.listings.length; ++i) {
+        let current = gallery.listings[i];
         if (current._id === listing._id) {
-          service.listings.splice(i, 1);
+          gallery.listings.splice(i, 1);
           break;
         }
       }
