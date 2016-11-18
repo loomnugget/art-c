@@ -2,10 +2,11 @@
 
 .gallery-li {
   margin: 1.6%;
-  padding: 2%;
+  padding: 0;
   width: 30%;
   float: right;
-  background-color: $app-secondary;
+  background-color: none;
+  border: 1px solid $app-white;
 
   p {
     margin: 2%;

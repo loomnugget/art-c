@@ -1,7 +1,6 @@
 @import "theme";
 
 .artist-container {
-  background-color: #212121;
   width: 90%;
   margin: 2% 5%;
   padding: 2%;
@@ -13,12 +12,15 @@
   }
 
   .gallery-container {
-    width: 60%;
-    margin: 0 20%;
-    padding: 2%;
+    width: 100%;
+    margin: 0;
+    padding: 1%;
     input, select{
-      margin-bottom: 2%;
-      width: 100%;
+      width: 60%;
+      margin: 1% 0;
+    }
+    button {
+      text-align: center;
     }
   }
 
