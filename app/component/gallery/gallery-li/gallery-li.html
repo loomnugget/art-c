@@ -2,14 +2,14 @@
   <h2>{{ galleryLICtrl.gallery.name }} </h2>
   <p> {{ galleryLICtrl.gallery.desc }} </p>
   <p> {{ galleryLICtrl.gallery.category }} </p>
-  <p ng-hide="!galleryLICtrl.homeView"> {{ galleryLICtrl.gallery.created }} </p>
-  <span ng-hide="!galleryLICtrl.homeView"
+  <p ng-hide="galleryLICtrl.homeView"> {{ galleryLICtrl.gallery.created }} </p>
+  <span ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
     class="glypicon glyphicon-pencil"></span>
-  <span ng-hide="!galleryLICtrl.homeView"
+  <span ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.deleteGallery()"
     class="glyphicon glyphicon-trash"></span>
-  <edit-gallery ng-hide="!galleryLICtrl.homeView"
+  <edit-gallery ng-hide="galleryLICtrl.homeView"
     ng-if="galleryLICtrl.showEditGallery"
     gallery="galleryLICtrl.gallery"> </edit-gallery>
 </li>

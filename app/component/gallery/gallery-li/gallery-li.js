@@ -18,11 +18,17 @@ function GalleryLIController($log, $location, galleryService){
   this.showEditGallery = false;
   this.homeView = false;
 
+
   this.isHomeView = function(){
     if ($location.url() === '/home'){
       this.homeView = true;
     }
+    if ($location.url() === '/artist'){
+      this.homeView = false;
+    }
   };
+  
+  this.isHomeView();
 
   this.deleteGallery = function(){
     galleryService.deleteGallery(this.gallery._id, this.gallery.artistID)
