@@ -9,4 +9,12 @@
   .gallery-container {
     margin-bottom: 40px;
   }
+  img {
+    width: 80%;
+    height: 100%;
+    margin-left: 10%;
+    overflow: hidden;
+    max-height: 300px;
+    min-height: 300px;
+  }
 }
