@@ -1,1 +1,24 @@
 @import "theme";
+.listing-li {
+  margin: 1.6%;
+  padding: 0;
+  width: 30%;
+  float: right;
+  background-color: none;
+  border: 1px solid $app-white;
+
+  p {
+    margin: 2%;
+  }
+ span {
+   float: left;
+   margin: 2%;
+ }
+  .fa {
+    color: $app-black;
+    transition: 1s;
+  }
+  .fa:hover {
+    color: $app-white;
+  }
+}
