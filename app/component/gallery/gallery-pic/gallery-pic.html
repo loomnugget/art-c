@@ -8,13 +8,18 @@
     </div>
 
     <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI" class="row">
-      <button class="btn btn-upload glyphicon glyphicon-import"
+
+      <span class="fa fa-upload"
         ngf-select
         ng-model="galleryPicCtrl.pic.file">
-      </button>
+      </span>
 
-      <button class="glyphicon glyphicon-upload" ng-click="galleryPicCtrl.uploadGalleryPic()" class="btn btn-upload"></button>
+      <span
+        class="fa fa-cloud-upload"
+        ng-click="galleryPicCtrl.uploadGalleryPic()"
+        class="btn btn-upload">
+      </spam>
+
     </div>
-
   </form>
 </div>
