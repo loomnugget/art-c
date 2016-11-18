@@ -65,6 +65,8 @@ listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, function(req, r
 
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
+  console.log(req.body, 'REQ.BODYYY');
+  console.log(req.params, 'REQ.PARAMS');
   Listing.findById(req.params.listingID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( listing => {
@@ -73,6 +75,7 @@ listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, json
     return Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true, runValidators: true});
   })
   .then(listing => {
+    console.log(listing, 'NEW LISTING');
     res.json(listing);
   })
   .catch(next);

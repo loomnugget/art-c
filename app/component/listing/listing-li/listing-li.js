@@ -8,6 +8,7 @@ module.exports = {
   controllerAs: 'listingLICtrl',
   bindings: {
     listing: '<',
+    deleteListingCheck: '&',
   },
 };
 
@@ -16,8 +17,15 @@ function ListingLIController($log, listingService){
 
   this.showEditListing = false;
 
+  this.handleEditListing = function(){
+    this.showEditListing = false;
+  };
+
   this.deleteListing = function(){
-    listingService.deleteListing(this.listing._id);
+    listingService.deleteListing(this.listing)
+    .then(() => {
+      this.deleteListingCheck();
+    });
   };
 
 }

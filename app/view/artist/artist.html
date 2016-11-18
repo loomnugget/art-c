@@ -21,11 +21,10 @@
     <create-gallery artist="artistCtrl.artist"></create-gallery>
     <div class="artist-gallery-container">
       <ul>
-        <gallery-li ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
+        <gallery-li delete-check="artistCtrl.galleryDeleteCheck(gallery)" ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
         </gallery-li>
       </ul>
     </div>
-    <!-- <edit-gallery></edit-gallery> -->
   </div>
 
   <div class="row">

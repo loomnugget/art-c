@@ -36,10 +36,10 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.deleteListing = function(galleryID, listingID) {
+  service.deleteListing = function(listing) {
     return authService.getToken()
     .then( token => {
-      let url = `${__API_URL__}/api/gallery/${galleryID}/listing/${listingID}`;
+      let url = `${__API_URL__}/api/gallery/${listing.galleryID}/listing/${listing._id}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ function listingService($q, $log, $http, authService) {
       $log.log('Successful listing deletion.');
       for(let i = 0; i < service.listings.length; ++i) {
         let current = service.listings[i];
-        if (current._id === listingID) {
+        if (current._id === listing._id) {
           service.listings.splice(i, 1);
           break;
         }
@@ -87,23 +87,24 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.updateListing = function(listing, galleryID, listingID) {
+  service.updateListing = function(listing) {
     $log.debug('listingService.updateListings()');
     return authService.getToken()
     .then( token => {
-      let url = `${__API_URL__}/api/gallery/${galleryID}/listing/${listingID}`;
+      let url = `${__API_URL__}/api/gallery/${listing.galleryID}/listing/${listing._id}`;
       let config = {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application.json',
+          'Content-Type': 'application/json',
         },
       };
       return $http.put(url, listing, config);
     })
     .then( res => {
+      console.log(res.data, 'RES.DATA');
       for(let i = 0; i < service.listings.length; i++) {
-        if (service.listings[i].i_id === listingID) {
+        if (service.listings[i]._id === listing._id) {
           service.listings[i] = res.data;
           break;
         }
@@ -116,5 +117,6 @@ function listingService($q, $log, $http, authService) {
       return $q.reject(err);
     });
   };
+
   return service;
 }

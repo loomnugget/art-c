@@ -3,12 +3,12 @@
   <div>
 
     <create-listing gallery="listingContainerCtrl.gallery"> </create-listing>
-    <edit-listing ng-if="listingContainerCtrl.currentListing"> </edit-listing>
 
     <listing-li class="listing"
-    ng-repeat="listing in listingContainerCtrl.gallery.listings"
-    listing="listing"
-    gallery="listingContainerCtrl.gallery"
-    ng-click="listingContainerCtrl.currentListing = listing"> </listing-li>
+      delete-listing-check="listingContainerCtrl.currentListing"
+      ng-repeat="listing in listingContainerCtrl.gallery.listings"
+      listing="listing"
+      gallery="listingContainerCtrl.gallery"
+      ng-click="listingContainerCtrl.currentListing = listing"> </listing-li>
   </div>
 </div>
