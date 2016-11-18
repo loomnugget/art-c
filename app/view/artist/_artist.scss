@@ -1,0 +1,27 @@
+@import "theme";
+
+.artist-container {
+  width: 90%;
+  margin: 2% 5%;
+  padding: 2%;
+
+  .profile-container {
+    width: 80%;
+    margin: 2% 10%;
+    padding: 2%;
+  }
+
+  .gallery-container {
+    width: 100%;
+    margin: 0;
+    padding: 1%;
+    input, select{
+      width: 60%;
+      margin: 1% 0;
+    }
+    button {
+      text-align: center;
+    }
+  }
+
+}

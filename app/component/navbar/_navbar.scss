@@ -1,0 +1,52 @@
+@import "theme";
+@import "vendor";
+
+.navbar {
+  background-color: #212121;
+  height: 60px;
+  // position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  .nav-container{
+    padding: 0 10px;
+
+    .btn-nav {
+      float: right;
+      font-size: 16px;
+      padding: 4px 10px;
+      margin: 14px 15px;
+    }
+
+    .btn-right {
+      float: right;
+      margin-right: 0px;
+      margin-top: 1px;
+      background-color: tranparent;
+      border-radius: 100%;
+
+    }
+
+    .navbar-brand {
+      float: left;
+      margin-left: 15px;
+      margin-top: 2px;
+      font-size: 40px;
+      vertical-align: center;
+      display:inline-block;
+      text-decoration: none;
+      color: $app-white;
+    }
+    .navbar-brand:hover {
+      color: #fff;
+    }
+
+    .navbar-pic {
+      width: 53px;
+      height: 53px;
+      border-radius: 100%;
+    }
+  }
+}

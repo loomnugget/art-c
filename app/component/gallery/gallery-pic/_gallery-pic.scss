@@ -1,0 +1,15 @@
+@import "theme";
+
+.gallery-pic {
+  .img-container {
+    width: 50%;
+    margin: 2% 5%;
+    img{
+      width: 100%;
+    }
+  }
+
+  span {
+    font-size: 2em;
+  }
+}

@@ -35,7 +35,7 @@ function s3UploadPromise(params){
   });
 }
 
-photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('file'), function(req, res, next){
   debug('hit POST /api/artist/:artistID/photo');
 
   if (!req.file)
@@ -52,6 +52,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   };
 
   let tempArtist = null;
+  let tempPhoto;
 
   Artist.findById(req.params.artistID)
   .catch(err => Promise.reject(createError(404, err.message)))
@@ -63,9 +64,9 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
-      name: req.body.name,
-      username: req.user.username,
-      alt: req.body.alt,
+      name: tempArtist.firstname,
+      username: tempArtist.username,
+      alt: tempArtist.username,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       artistID: tempArtist._id,
@@ -73,7 +74,12 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('image
     };
     return new Photo(photoData).save();
   })
-  .then(photo => res.json(photo))
+  .then(photo => {
+    tempPhoto = photo;
+    tempArtist.photoID = photo._id;
+    return tempArtist.save();
+  })
+  .then(() => res.json(tempPhoto))
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);
@@ -110,7 +116,7 @@ photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(
   .catch(next);
 });
 
-photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('file'), function(req, res, next){
   debug('hit POST /api/gallery/:galleryID/photo');
 
   if (!req.file)
@@ -127,6 +133,7 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   };
 
   let tempGallery = null;
+  let tempPhoto;
 
   Gallery.findById(req.params.galleryID)
   .catch(err => Promise.reject(createError(404, err.message)))
@@ -138,9 +145,9 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
-      name: req.body.name,
-      username: req.user.username,
-      alt: req.body.alt,
+      name: tempGallery.name,
+      username: tempGallery.username,
+      alt: tempGallery.desc,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       galleryID: tempGallery._id,
@@ -149,7 +156,12 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('ima
     };
     return new Photo(photoData).save();
   })
-  .then(photo => res.json(photo))
+  .then(photo => {
+    tempPhoto = photo;
+    tempGallery.photoID = photo._id;
+    return tempGallery.save();
+  })
+  .then(() => res.json(tempPhoto))
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);
@@ -186,7 +198,7 @@ photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, functio
   .catch(next);
 });
 
-photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('image'), function(req, res, next){
+photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('file'), function(req, res, next){
   debug('hit POST /api/listing/:listingID/photo');
 
   if (!req.file)
@@ -203,6 +215,7 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
   };
 
   let tempListing = null;
+  let tempPhoto;
 
   Listing.findById(req.params.listingID)
   .catch(err => Promise.reject(createError(404, err.message)))
@@ -214,9 +227,9 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
-      name: req.body.name,
-      username: req.user.username,
-      alt: req.body.alt,
+      name: tempListing.title,
+      username: tempListing.username,
+      alt: tempListing.desc,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       listingID: tempListing._id,
@@ -226,7 +239,12 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('ima
     };
     return new Photo(photoData).save();
   })
-  .then(photo => res.json(photo))
+  .then(photo => {
+    tempPhoto = photo;
+    tempListing.photoID = photo._id;
+    return tempListing.save();
+  })
+  .then(() => res.json(tempPhoto))
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);

@@ -47,7 +47,9 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
 galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
-  .populate({path: 'listings'})
+  .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
   .then( gallery => {
     res.json(gallery);
   })
@@ -57,9 +59,24 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
   });
 });
 
+galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res, next){
+  debug('GET /api/artist/:artistID/gallery');
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page;
+  Gallery.find({artistID: req.params.artistID})
+  .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
+  .then(galleries => res.json(galleries))
+  .catch(next);
+});
+
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
+  .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())

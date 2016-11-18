@@ -12,6 +12,7 @@ const Promise = require('bluebird');
 // app modules
 const serverCtrl = require('./lib/server-control');
 const cleanDB = require('./lib/clean-db');
+const mockMultipleArtists = require('./lib/mock-multiple-artists.js');
 const mockManyGalleries = require('./lib/populate-artist-galleries-mock.js');
 const mockManyListings = require('./lib/populate-gallery-listings-mock.js');
 
@@ -70,10 +71,31 @@ describe('testing page-router', function(){
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.length).to.equal(50);
+          expect(res.body.length).to.equal(100);
           done();
         });
       });
     });
   });
+
+  describe('testing GET to /api/artist', () => {
+
+    describe('with valid token and id', () => {
+
+      before(done => mockMultipleArtists.call(this, done));
+
+      it('should status 200 and return artists', done => {
+        request.get(`${url}/api/artist`)
+        .set({
+          Authorization: `Bearer ${this.tempToken}`,
+        })
+        .end((err, res) => {
+          if(err) return done(err);
+          expect(res.status).to.equal(200);
+          done();
+        });
+      });
+    });
+  });
+
 });

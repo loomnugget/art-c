@@ -54,8 +54,18 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
   .catch(next);
 });
 
+listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, function(req, res, next){
+  debug('GET /api/gallery/:galleryID/listing');
+
+  Listing.find({galleryID: req.params.galleryID})
+  .populate('photoID')
+  .then(listings => res.json(listings))
+  .catch(next);
+});
+
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
+
   Listing.findById(req.params.listingID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( listing => {

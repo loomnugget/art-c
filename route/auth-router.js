@@ -12,8 +12,10 @@ const Listing = require('../model/listing.js');
 const Photo = require('../model/photo.js');
 const User = require('../model/user.js');
 
-const basicAuth = require('../lib/basic-auth-middleware.js');
+const basicAuth = require('../lib/basic-auth-middleware');
 const bearerAuth = require('../lib/bearer-auth-middleware');
+const googleOAUTH = require('../lib/google-oauth-middleware');
+const facebookOAUTH = require('../lib/facebook-oauth-middleware');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -82,6 +84,15 @@ authRouter.put('/api/user/updateEmail', bearerAuth, jsonParser, function(req, re
   .catch(next);
 });
 
+authRouter.put('/api/user/becomeArtist', bearerAuth, jsonParser, function(req, res, next) {
+  debug('hit route PUT /api/user/becomeArtist');
+  return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
+  .then( user => {
+    res.json(user);
+  })
+  .catch(next);
+});
+
 authRouter.put('/api/user/updateUsername', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updateUsername');
   return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
@@ -91,7 +102,6 @@ authRouter.put('/api/user/updateUsername', bearerAuth, jsonParser, function(req,
   .catch(next);
 });
 
-
 authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/user/updatePassword');
   return User.findByIdAndUpdate(req.user._id, req.body, {new: true, runValidators: true})
@@ -99,4 +109,83 @@ authRouter.put('/api/user/updatePassword', bearerAuth, jsonParser, function(req,
     res.json(user);
   })
   .catch(next);
+});
+
+// Facebook OAuth route
+authRouter.get('/api/auth/facebook_oauth_callback', facebookOAUTH, function(req, res) {
+  debug('hit route GET /api/auth/facebook_oauth_callback');
+
+  if (req.facebookError) return res.redirect('/');
+
+  User.findOne({ email: req.facebookOAUTH.email})
+  .then( user => {
+    if (!user) return Promise.reject(new Error('User not found.'));
+    return user;
+  })
+  .catch( err => {
+    if (err.message === 'User not found.') {
+      let userData = {
+        username: req.facebookOAUTH.email,
+        email: req.facebookOAUTH.email,
+        facebook: {
+          facebookID: req.facebookOAUTH.facebookID,
+          accessToken: req.facebookOAUTH.accessToken,
+          tokenTTL: req.facebookOAUTH.tokenTTL,
+          tokenTimeStamp: Date.now(),
+        },
+      };
+      return new User(userData).save();
+    }
+    return Promise.reject(err);
+  })
+  .then( user => {
+    return user.generateToken();
+  })
+  .then( token => {
+    res.redirect(`/#/home?token=${token}`);
+  })
+  .catch( err => {
+    console.error(err);
+    res.redirect('/');
+  });
+});
+
+// Google OAuth route
+authRouter.get('/api/auth/oauth_callback', googleOAUTH, function(req, res) {
+  debug('hit route GET /api/auth/oauth_callback');
+
+  if (req.googleError) return res.redirect('/');
+
+  User.findOne({ email: req.googleOAUTH.email})
+  .then( user => {
+    if (!user) return Promise.reject(new Error('User not found.'));
+    return user;
+  })
+  .catch( err => {
+    if (err.message === 'User not found.') {
+      let userData = {
+        username: req.googleOAUTH.email,
+        email: req.googleOAUTH.email,
+        google: {
+          googleID: req.googleOAUTH.googleID,
+          accessToken: req.googleOAUTH.accessToken,
+          refreshToken: req.googleOAUTH.refreshToken,
+          tokenTTL: req.googleOAUTH.tokenTTL,
+          tokenTimeStamp: Date.now(),
+        },
+      };
+      return new User(userData).save();
+    }
+    return Promise.reject(err);
+  })
+  .then( user => {
+    return user.generateToken();
+  })
+  .then( token => {
+    res.redirect(`/#/home?token=${token}`);
+  })
+  .catch( err => {
+    console.error(err);
+    res.redirect('/');
+  });
 });

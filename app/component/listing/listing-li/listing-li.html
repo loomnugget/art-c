@@ -1,0 +1,19 @@
+<li class="listing-li">
+  <h2>{{ listingLICtrl.listing.title }} </h2>
+  <p> {{ listingLICtrl.listing.desc }} </p>
+  <p> {{ listingLICtrl.listing.category }} </p>
+  <p> {{ listingLICtrl.listing.created }} </p>
+
+  <span
+    ng-click="listingLICtrl.showEditListing = !listingLICtrl.showEditListing"
+    class="fa fa-pencil fa-2x">
+  </span>
+
+  <span
+    ng-click="listingLICtrl.deleteListing()"
+    class="fa fa-trash fa-2x">
+  </span>
+
+  <edit-listing on-success="listingLICtrl.handleEditListing()" ng-if="listingLICtrl.showEditListing" listing="listingLICtrl.listing"> </edit-listing>
+  <listing-pic listing="listingLICtrl.listing"></listing-pic>
+</li>

@@ -22,7 +22,7 @@ const url = `http://localhost:${process.env.PORT}`;
 const examplePhoto = {
   name: 'goose',
   alt: 'good times',
-  image: `${__dirname}/data/dog.jpg`,
+  file: `${__dirname}/data/dog.jpg`,
 };
 
 describe('testing photo router', function() {
@@ -41,12 +41,12 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(examplePhoto.name);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
+          expect(res.body.name).to.equal(this.tempArtist.firstname);
+          expect(res.body.alt).to.equal(this.tempArtist.username);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.objectKey).to.equal(awsMocks.uploadMock.Key);
           done();
@@ -79,7 +79,7 @@ describe('testing photo router', function() {
         .set({Authorization:`Bearer ${this.tempToken}12345`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -96,7 +96,7 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
@@ -188,12 +188,12 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(examplePhoto.name);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
+          expect(res.body.name).to.equal(this.tempGallery.name);
+          expect(res.body.alt).to.equal(this.tempGallery.desc);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.objectKey).to.equal(awsMocks.uploadMock.Key);
           done();
@@ -226,7 +226,7 @@ describe('testing photo router', function() {
         .set({Authorization:`Bearer ${this.tempToken}12345`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -243,7 +243,7 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();
@@ -335,12 +335,12 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.name).to.equal(examplePhoto.name);
-          expect(res.body.alt).to.equal(examplePhoto.alt);
+          expect(res.body.name).to.equal(this.tempListing.title);
+          expect(res.body.alt).to.equal(this.tempListing.desc);
           expect(res.body.imageURI).to.equal(awsMocks.uploadMock.Location);
           expect(res.body.objectKey).to.equal(awsMocks.uploadMock.Key);
           done();
@@ -373,7 +373,7 @@ describe('testing photo router', function() {
         .set({Authorization:`Bearer ${this.tempToken}12345`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(401);
           done();
@@ -390,7 +390,7 @@ describe('testing photo router', function() {
         .set({Authorization: `Bearer ${this.tempToken}`})
         .field('name', examplePhoto.name)
         .field('alt', examplePhoto.alt)
-        .attach('image', examplePhoto.image)
+        .attach('file', examplePhoto.file)
         .end((err, res) => {
           expect(res.status).to.equal(404);
           done();

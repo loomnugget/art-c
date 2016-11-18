@@ -132,3 +132,34 @@ Devnotes need to be updated with current paths and versions.
       - Lee and Max: DELETE routes for many photos
       - Claudia: filtering, sorting, fuzzy and search queries
       - Elizabeth: Devnotes and README.md route documentation
+
+
+  **11/14/2016, 9:30am**
+
+    - Front and Back-end code bases merged.
+
+    - What are you working on till 1pm? (Pair Programming)
+
+      - Max and Lee: working on integrating both Google OAuth and Facebook OAuth.
+        - (Code for Auth sent to Claudia/Elizabeth for commit)
+      - Claudia and Elizabeth: Creating Landing View and Navbar, Signup, and Login Component
+
+  **11/14/2016, 1:30pm**
+
+    - From earlier:
+
+      - Max and Lee: integrated Google OAuth, about halfway done with Facebook OAuth
+      - Elizabeth: bootstrap research/file, help Claudia problem-solve
+      - Claudia: landing view, navbar component, login/signup component
+
+    - For rest of day:
+
+      - Max and Lee: finish Facebook OAuth integration, maybe Auth Router unit tests
+      - Elizabeth: front-end testing
+      - Claudia: modal, slider
+
+  **11/14/2016, 10:00am**
+    - Plan for the morning:
+      - Max/Liz: working on login/signup and logout functionality
+      - Lee/Claudia: pair programming to work on carousel, modal, and home view components
+      

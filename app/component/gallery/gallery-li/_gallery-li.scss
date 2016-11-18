@@ -1,0 +1,25 @@
+@import "theme";
+
+.gallery-li {
+  margin: 1.6%;
+  padding: 0;
+  width: 30%;
+  float: right;
+  background-color: none;
+  border: 1px solid $app-white;
+
+  p {
+    margin: 2%;
+  }
+ span {
+   margin: 2%;
+   font-size: 2em;
+ }
+  .fa {
+    color: $app-primary;
+    transition: 1s;
+  }
+  .fa:hover {
+    color: $app-white;
+  }
+}
