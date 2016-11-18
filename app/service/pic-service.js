@@ -54,7 +54,6 @@ function picService($q, $log, $http, Upload, authService) {
     })
     .then( res => {
       $log.log('success!\n', res.data);
-      console.log(res.data, 'RES.DATA');
       return res.data;
     })
     .catch( err => {
@@ -65,7 +64,6 @@ function picService($q, $log, $http, Upload, authService) {
 
   service.uploadArtistPic = function(artistData, picData) {
     $log.debug('picService.uploadArtistPic()');
-    console.log(artistData, 'ARTISTDATA');
 
     return authService.getToken()
     .then( token => {

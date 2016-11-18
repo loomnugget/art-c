@@ -23,7 +23,6 @@ function ListingLIController($log, listingService){
   };
 
   this.deleteListing = function(){
-    console.log(this.gallery, 'this.gallery');
     listingService.deleteListing(this.gallery, this.listing)
     .then(() => {
       this.deleteListingCheck();

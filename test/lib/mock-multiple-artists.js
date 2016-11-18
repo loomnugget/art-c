@@ -44,7 +44,6 @@ function mockUser() {
   let username = lorem({count: 5, units: 'word'}).split(' ').join('-');
   let password = lorem({count: 5, units: 'word'}).split(' ').join('-');
   let email = lorem({count: 5, units: 'word'}).split(' ').join('-');
-  console.log('name, ', username);
   let exampleUser = {
     username,
     password,

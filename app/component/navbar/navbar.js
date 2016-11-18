@@ -32,7 +32,7 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
     authService.getToken()
       .then(token => {
-        console.log('token', token);
+        $log.debug(token, 'token');
         $location.url('/home');
       })
       .catch(() => {

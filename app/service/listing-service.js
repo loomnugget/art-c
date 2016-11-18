@@ -102,7 +102,6 @@ function listingService($q, $log, $http, authService) {
       return $http.put(url, listing, config);
     })
     .then( res => {
-      console.log(res.data, 'RES.DATA');
       for(let i = 0; i < service.listings.length; i++) {
         if (service.listings[i]._id === listing._id) {
           service.listings[i] = res.data;
