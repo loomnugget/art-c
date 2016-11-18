@@ -63,6 +63,7 @@ galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res
   // let skip = offset + pageSize * page;
   Gallery.find({artistID: req.params.artistID})
   .populate('listings')
+  .populate('photoID')
   .then(galleries => res.json(galleries))
   .catch(next);
 });

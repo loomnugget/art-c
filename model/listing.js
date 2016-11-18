@@ -13,7 +13,7 @@ const listingSchema = mongoose.Schema({
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
   galleryID: {type: mongoose.Schema.Types.ObjectId, required: true},
-  photoID: {type: mongoose.Schema.Types.ObjectId},
+  photoID: {type: mongoose.Schema.Types.ObjectId, ref: 'photo'},
 });
 
 module.exports = mongoose.model('listing', listingSchema);

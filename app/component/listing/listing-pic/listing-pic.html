@@ -1,0 +1,20 @@
+<div class="listing-pic">
+
+  <form
+    novalidate>
+
+    <div class="img-container">
+      <img ng-src="{{listingPicCtrl.listing.photoID.imageURI || listingPicCtrl.defaultPic}}">
+    </div>
+
+    <div ng-if="!listingPicCtrl.listing.photoID.imageURI" class="row">
+      <button class="btn btn-upload glyphicon glyphicon-import"
+        ngf-select
+        ng-model="listingPicCtrl.pic.file">
+      </button>
+
+      <button class="glyphicon glyphicon-upload" ng-click="listingPicCtrl.uploadListingPic()" class="btn btn-upload"></button>
+    </div>
+
+  </form>
+</div>

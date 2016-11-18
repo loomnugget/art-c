@@ -13,7 +13,7 @@ const gallerySchema = mongoose.Schema({
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},
   listings: [{type: mongoose.Schema.Types.ObjectId, ref: 'listing'}],
-  photoID: {type: mongoose.Schema.Types.ObjectId},
+  photoID: {type: mongoose.Schema.Types.ObjectId, ref: 'photo'},
 });
 
 module.exports = mongoose.model('gallery', gallerySchema);
