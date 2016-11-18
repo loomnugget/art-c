@@ -27,9 +27,9 @@ function ListingPicController($log, $location, $window, picService) {
   };
 
   this.uploadListingPic = function(){
-    picService.uploadListingPic(this.listing, this.pic);
-    // .then(() => {
-    //   this.done();
-    // });
+    picService.uploadListingPic(this.listing, this.pic)
+    .then(pic => {
+      this.listing.photoID = pic;
+    });
   };
 }

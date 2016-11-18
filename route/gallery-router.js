@@ -63,6 +63,7 @@ galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res
   // let skip = offset + pageSize * page;
   Gallery.find({artistID: req.params.artistID})
   .populate('listings')
+  .populate('listings.photoID')
   .populate('photoID')
   .then(galleries => res.json(galleries))
   .catch(next);
@@ -71,6 +72,9 @@ galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res
 galleryRouter.put('/api/artist/:artistID/gallery/:galleryID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
+  .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( gallery => {
     if (gallery.userID.toString() !== req.user._id.toString())

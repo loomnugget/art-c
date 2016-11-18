@@ -2,7 +2,8 @@
   <h2>{{ listingLICtrl.listing.title }} </h2>
   <p> {{ listingLICtrl.listing.desc }} </p>
   <p> {{ listingLICtrl.listing.category }} </p>
-  <p> {{ listingLICtrl.listing.created }} </p>
+  <p> {{ listingLICtrl.listing.created | date:short }} </p>
+
   <span ng-click="listingLICtrl.showEditListing = !listingLICtrl.showEditListing"
     class="glypicon glyphicon-pencil"></span>
   <span ng-click="listingLICtrl.deleteListing()" class="glyphicon glyphicon-trash"></span>

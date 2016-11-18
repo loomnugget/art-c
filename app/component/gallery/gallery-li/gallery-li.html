@@ -9,7 +9,7 @@
         </div>
     </div>
 
-  <p ng-hide="galleryLICtrl.homeView"> {{ galleryLICtrl.gallery.created }} </p>
+  <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
   <span ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
     class="glypicon glyphicon-pencil"></span>

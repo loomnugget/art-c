@@ -15,12 +15,8 @@ function GalleryPicController($log, $location, $window, picService) {
   $log.debug('init galleryPicCtrl');
 
   this.defaultPic = require('../../../scss/images/default-thumbnail.jpg');
-  this.pic = {};
-  this.done = function(){
-    $log.log('WORKING');
-    this.reloadRoute();
-    this.pic.file = null;
-  };
+  // this.pic = {};
+
 
   this.reloadRoute = function(){
     $window.location.reload();
@@ -28,8 +24,8 @@ function GalleryPicController($log, $location, $window, picService) {
 
   this.uploadGalleryPic = function(){
     picService.uploadGalleryPic(this.gallery, this.pic)
-    .then(() => {
-      this.done();
+    .then(pic => {
+      this.gallery.photoID = pic;
     });
   };
 }
