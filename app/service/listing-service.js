@@ -9,12 +9,12 @@ function listingService($q, $log, $http, authService) {
 
   service.listings = [];
 
-  service.createListing = function(galleryID, listing) {
+  service.createListing = function(gallery, listing) {
     $log.debug('listingService.createListing');
 
     return authService.getToken()
     .then( token => {
-      let url = `${__API_URL__}/api/gallery/${galleryID}/listing`;
+      let url = `${__API_URL__}/api/gallery/${gallery._id}/listing`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -27,7 +27,7 @@ function listingService($q, $log, $http, authService) {
     .then( res => {
       $log.log('Successfully created listing');
       let listing = res.data;
-      service.listings.unshift(listing);
+      gallery.listings.unshift(listing);
       return listing;
     })
     .catch( err => {
