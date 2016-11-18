@@ -6,7 +6,6 @@
     class="form-inline"
     ng-submit="createListingCtrl.createListing(createListingCtrl.listing)">
 
-      <label for="title"> Title </label>
       <input
         required
         type="text"
@@ -23,7 +22,6 @@
         }"
         ng-model="createListingCtrl.listing.title">
 
-      <label for="desc"> Description </label>
       <input
         required
         type="text"
@@ -40,7 +38,6 @@
         }"
         ng-model="createListingCtrl.listing.desc">
 
-      <label for="category"> Category </label>
       <input
         required
         type="text"
@@ -61,5 +58,4 @@
     <button class="btn btn-primary" type="submit"> Create </button>
 
   </form>
-
 </section>
