@@ -12,10 +12,15 @@
   <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
   <span ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
-    class="glypicon glyphicon-pencil"></span>
-  <span ng-hide="galleryLICtrl.homeView"
+    class="fa fa-pencil">
+  </span>
+
+  <span
+    ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.deleteGallery()"
-    class="glyphicon glyphicon-trash"></span>
+    class="fa fa-trash">
+  </span>
+
   <edit-gallery ng-hide="galleryLICtrl.homeView"
     ng-if="galleryLICtrl.showEditGallery"
     gallery="galleryLICtrl.gallery"> </edit-gallery>
