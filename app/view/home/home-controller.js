@@ -17,7 +17,6 @@ function HomeController($log, $rootScope, galleryService, artistService){
     $log.log('init checkartiststatus');
     artistService.checkArtist()
     .then( artist => {
-      console.log(artist, 'ARTIST');
       this.loggedArtist = artist;
     })
     .catch( () => {
@@ -26,6 +25,7 @@ function HomeController($log, $rootScope, galleryService, artistService){
   };
 
   this.fetchGalleries = function(){
+    $log.debug('init homeCtrl.fetchGalleries()');
     galleryService.fetchGalleries()
     .then( galleries => {
       this.galleries = galleries;

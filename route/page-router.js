@@ -25,11 +25,11 @@ pageRouter.get('/api/artist', function(req, res, next){
   .catch(next);
 });
 
-pageRouter.get('/api/gallery', pageMiddleware, function(req, res, next){
+pageRouter.get('/api/gallery', function(req, res, next){
   debug('hit route GET /api/gallery');
-  let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  let skip = offset + pageSize * page ;
-  Gallery.find().skip(skip).limit(pageSize)
+  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
+  // let skip = offset + pageSize * page ;
+  Gallery.find()
   .then(galleries => res.json(galleries))
   .catch(next);
 });
