@@ -112,8 +112,7 @@ function galleryService($q, $log, $http, authService){
 
   service.updateGallery = function(gallery, galleryID, artistID){
     $log.debug('galleryService.updateGalleries()');
-    console.log('GALLLERY', gallery);
-    console.log('GALLERYID', galleryID);
+
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/artist/${artistID}/gallery/${galleryID}`;

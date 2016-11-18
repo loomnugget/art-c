@@ -9,6 +9,7 @@ module.exports = {
   bindings: {
     listing: '<',
     deleteListingCheck: '&',
+    gallery: '<',
   },
 };
 
@@ -22,7 +23,7 @@ function ListingLIController($log, listingService){
   };
 
   this.deleteListing = function(){
-    listingService.deleteListing(this.listing)
+    listingService.deleteListing(this.gallery, this.listing)
     .then(() => {
       this.deleteListingCheck();
     });

@@ -90,10 +90,8 @@ describe('testing page-router', function(){
           Authorization: `Bearer ${this.tempToken}`,
         })
         .end((err, res) => {
-          console.log(res.body);
           if(err) return done(err);
           expect(res.status).to.equal(200);
-          // expect(res.body.length).to.equal(10);
           done();
         });
       });
