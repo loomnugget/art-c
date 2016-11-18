@@ -48,6 +48,8 @@ galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
   .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
   .then( gallery => {
     res.json(gallery);
   })

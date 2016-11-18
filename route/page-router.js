@@ -30,6 +30,9 @@ pageRouter.get('/api/gallery', function(req, res, next){
   // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
   // let skip = offset + pageSize * page ;
   Gallery.find()
+  .populate('listings')
+  .populate('listings.photoID')
+  .populate('photoID')
   .then(galleries => res.json(galleries))
   .catch(next);
 });
