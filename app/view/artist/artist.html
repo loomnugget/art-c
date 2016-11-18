@@ -18,7 +18,7 @@
   </div>
 
   <div class="row gallery-container">
-    <create-gallery artist="artistCtrl.artist"></create-gallery>
+    <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
     <div class="artist-gallery-container">
       <ul>
         <gallery-li delete-check="artistCtrl.galleryDeleteCheck(gallery)" ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
