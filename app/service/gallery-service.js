@@ -91,17 +91,14 @@ function galleryService($q, $log, $http, authService){
 
   service.fetchGalleries = function(){
     $log.debug('galleryService.fetchGalleries()');
-    return authService.getToken()
-    .then( token => {
-      let url = `${__API_URL__}/api/gallery/?sort=desc`;
-      let config = {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      return $http.get(url, config);
-    })
+
+    let url = `${__API_URL__}/api/gallery/?sort=desc`;
+    let config = {
+      headers: {
+        Accept: 'application/json',
+      },
+    };
+    return $http.get(url, config)
     .then( res => {
       $log.log('successful fetch user galleries');
       service.galleries = res.data;

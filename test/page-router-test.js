@@ -71,7 +71,7 @@ describe('testing page-router', function(){
         .end((err, res) => {
           if (err) return done(err);
           expect(res.status).to.equal(200);
-          expect(res.body.length).to.equal(50);
+          expect(res.body.length).to.equal(100);
           done();
         });
       });

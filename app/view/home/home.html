@@ -2,24 +2,24 @@
 
 <main class="home">
 
-  <h2> Show all galleries </h2>
-  <nav class="gallery-container">
+  <h2> Featured Galleries </h2>
+  <div class="gallery-container">
     <ul>
       <gallery-li ng-repeat="item in homeCtrl.galleries"
         gallery="item"
         ng-click="homeCtrl.currentGallery=item">
       </gallery-li>
     </ul>
-  </nav>
+  </div>
 
-  <h2> Show all artists </h2>
-  <nav class="artist-container">
+  <h2> Featured Artists </h2>
+  <div class="artist-container">
     <ul>
       <artist-li ng-repeat="item in homeCtrl.artists"
         artist="item"
         ng-click="homeCtrl.currentArtist=item">
       </artist-li>
     </ul>
-  </nav>
+  </div>
 
 </main>
