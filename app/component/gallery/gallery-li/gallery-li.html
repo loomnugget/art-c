@@ -1,7 +1,14 @@
 <li class="gallery-li">
-  <h2>{{ galleryLICtrl.gallery.name }} </h2>
-  <p> {{ galleryLICtrl.gallery.desc }} </p>
-  <p> {{ galleryLICtrl.gallery.category }} </p>
+
+  <figure class='bg-photo'>
+    <div class='mask'>
+        <div class='absolute-text'>
+          <h2>{{ galleryLICtrl.gallery.name }} </h2>
+          <p> {{ galleryLICtrl.gallery.desc }} </p>
+          <p> {{ galleryLICtrl.gallery.category }} </p>
+        </div>
+    </div>
+
   <p ng-hide="galleryLICtrl.homeView"> {{ galleryLICtrl.gallery.created }} </p>
   <span ng-hide="galleryLICtrl.homeView"
     ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
@@ -13,4 +20,6 @@
     ng-if="galleryLICtrl.showEditGallery"
     gallery="galleryLICtrl.gallery"> </edit-gallery>
   <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
+
+  </figure>
 </li>

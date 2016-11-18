@@ -2,8 +2,8 @@
 
 <main class="home">
 
-  <h2> Featured Galleries </h2>
-  <div class="gallery-container">
+  <div class="gallery-container clearfix">
+      <h2> Featured Galleries </h2>
     <ul>
       <gallery-li ng-repeat="item in homeCtrl.galleries"
         gallery="item"
@@ -12,8 +12,8 @@
     </ul>
   </div>
 
-  <h2> Featured Artists </h2>
-  <div class="artist-container">
+  <div class="artist-container clearfix">
+    <h2> Featured Artists </h2>
     <ul>
       <artist-li ng-repeat="item in homeCtrl.artists"
         artist="item"
