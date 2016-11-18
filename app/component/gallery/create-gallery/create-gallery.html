@@ -1,12 +1,11 @@
 <section class="create-gallery-container">
-
-  <form
+<h2>Create a gallery</h2>
+  <div class="row">
+  <form class="create-gallery-form"
     novalidate
     name="createGalleryForm"
-    class="form-inline"
     ng-submit="createGalleryCtrl.createGallery(createGalleryCtrl.gallery)">
 
-      <label for="name"> Name </label>
       <input
         required
         type="text"
@@ -23,7 +22,6 @@
         }"
         ng-model="createGalleryCtrl.gallery.name">
 
-      <label for="desc"> Description </label>
       <input
         required
         type="text"
@@ -40,7 +38,6 @@
         }"
         ng-model="createGalleryCtrl.gallery.desc">
 
-      <label for="category"> Category </label>
       <input
         required
         type="text"
@@ -58,7 +55,9 @@
         ng-model="createGalleryCtrl.gallery.category">
     </div>
 
-    <button class="btn btn-primary" type="submit"> Create </button>
+    <div class="row">
+      <button class="btn btn-primary" type="submit"> Create </button>
+    </div>
 
   </form>
 
