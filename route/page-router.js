@@ -21,6 +21,9 @@ pageRouter.get('/api/artist', function(req, res, next){
   // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
   // let skip = offset + pageSize * page ;
   Artist.find()
+  .populate('listings')
+  .populate('artists.photoID')
+  .populate('photoID')
   .then(artists => res.json(artists))
   .catch(next);
 });
