@@ -101,7 +101,6 @@ function galleryService($q, $log, $http, authService){
     return $http.get(url, config)
     .then( res => {
       $log.log('successful fetch user galleries');
-      console.log("galleryies, ", res.data)
       service.galleries = res.data;
       return service.galleries;
     })

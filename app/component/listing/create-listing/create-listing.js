@@ -16,7 +16,7 @@ function CreateListingController($log, listingService){
 
   this.createListing = function(){
     listingService.createListing(this.gallery, this.listing)
-    .then( listing => {
+    .then( () => {
       this.listing.title = null;
       this.listing.desc = null;
       this.listing.category = null;
