@@ -5,8 +5,28 @@ html, body {
   width: 100%;
   height: 100%;
   font-family: $app-font;
-  background-color: #131313;
+  background-color: #2a2a2a;
   color: $app-white;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  float: left;
+  padding: 1%;
+  list-style: none;
+}
+
+input,
+select {
+  width: 80%;
+  font-size: 100%;
+  border: 1.5px solid $app-secondary;
+  border-radius: 10px;
+  padding: 1% 2%;
+  color: $app-black;
 }
 
 .loginSignupForm{
@@ -38,7 +58,6 @@ html, body {
 
   }
 
-  /* active state */
   input:focus ~ label, input:valid ~ label{
     top:-20px;
     font-size:14px;
@@ -51,6 +70,7 @@ html, body {
     color: $app-black;
   }
 }
+
 
 .btn-container {
   padding-top: 30px;
