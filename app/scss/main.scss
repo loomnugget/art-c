@@ -9,13 +9,13 @@ html, body {
   color: $app-white;
 }
 
-form {
-  /* form starting stylings ------------------------------- */
-  .group 			  {
+.loginSignupForm{
+  .button{ margin-top: 20px;}
+  .group {
     position:relative;
     margin-top:25px;
   }
-  input 				{
+  input{
     font-size:18px;
     padding:5px 10px 5px 5px;
     display:block;
@@ -23,10 +23,9 @@ form {
     border-radius: 4px;
     width: 100%;
     }
-  input:focus 		{ outline:none; }
+  input:focus{ outline:none; }
 
-  /* LABEL ======================================= */
-  label 				 {
+  label{
     color:#999;
     font-size:18px;
     position:absolute;
@@ -40,10 +39,10 @@ form {
   }
 
   /* active state */
-  input:focus ~ label, input:valid ~ label 		{
+  input:focus ~ label, input:valid ~ label{
     top:-20px;
     font-size:14px;
-    color:$app-primary;
+    color:$app-black;
   }
 
   /*---- Changes Placeholder Color -----*/
@@ -54,49 +53,41 @@ form {
 }
 
 .btn-facebook {
-  background-color: $app-black;
+  background-color: #3B5998;
   color: white;
 }
 
 .btn-google {
-  background-color: #2a2a2a;
+  background-color: #DD4B39;
   color: white;
 }
 
 
-
 .btn {
-  background-color: rgba(255,255,255,.3);
+  background-color: $app-white;
   border: none;
   text-transform: uppercase;
   border-radius: 3px;
-  padding: 1.5% 2%;
+  padding: 1.5% 3%;
   margin: 2% 0;
   display: inline-block;
   outline: none;
   transition: all 0.3s;
-  color: $app-secondary;
+  color: $app-black;
 }
 
 .btn-dark {
-  border:1px solid $app-black;
-  text-transform: uppercase;
-  border-radius: 3px;
+  border: none;
   padding: 1.5% 2%;
   margin-top: 3%;
-  display: inline-block;
-  outline: none;
+  background-color: $app-tertiary;
+  color: #fff;
   transition: all 0.3s;
-  color: $app-black;
 }
 
 .btn:hover {
-  background:rgba(255,255,255,0.8);
+  background:#fff;
   color: $app-black;
-}
-.btn-dark:hover {
-  background:rgba(0,0,0,0.8);
-  color: $app-white;
 }
 
 .btn:after {
@@ -114,7 +105,7 @@ form {
 }
 
 
-/*  SECTIONS  ============================================================================= */
+/*  SECTIONS  ============================================= */
 .section {
 	clear: both;
 	padding: 0px;

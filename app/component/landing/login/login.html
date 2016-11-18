@@ -1,6 +1,7 @@
 <section class="login-form">
 
   <form
+    class="loginSignupForm"
     name="loginForm"
     ng-submit="loginCtrl.login()"
     novalidate>
@@ -40,7 +41,7 @@
        <label>Password</label>
      </div>
 
-    <button class="btn btn-dark"> Login </button>
+    <button class="btn btn-block btn-dark"> Login </button>
 
     <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
       <span class="fa fa-facebook"></span>
