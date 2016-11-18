@@ -5,7 +5,7 @@ module.exports = {
   controller: ['$log', 'listingService', CreateListingController],
   controllerAs: 'createListingCtrl',
   bindings: {
-    artist: '<',
+    gallery: '<',
   },
 };
 
@@ -13,12 +13,12 @@ function CreateListingController($log, listingService){
   $log.debug('init createListingCtrl');
 
   this.createListing = function(){
-    listingService.createListing(this.artist._id, this.listing)
-    .then(() => {
+    listingService.createListing(this.gallery._id, this.listing)
+    .then( listing => {
+      this.gallery.listings.unshift(listing);
       this.listing.title = null;
       this.listing.desc = null;
       this.listing.category = null;
-      this.listing.created = null;
     });
   };
 }
