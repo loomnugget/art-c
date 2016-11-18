@@ -41,17 +41,19 @@
        <label>Password</label>
      </div>
 
-    <button class="btn btn-block btn-dark"> Login </button>
+    <div class="btn-container">
+      <button class="btn btn-block btn-dark"> Login </button>
 
-    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
-      <span class="fa fa-facebook"></span>
-      Sign in with Facebook
-    </a>
+      <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
+        <span class="fa fa-facebook"></span>
+        Sign in with Facebook
+      </a>
 
-    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}">
-      <span class="fa fa-google"></span>
-      Sign in with Google
-    </a>
+      <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}">
+        <span class="fa fa-google"></span>
+        Sign in with Google
+      </a>
+    </div>
 
   </form>
 </section>

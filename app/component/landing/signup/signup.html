@@ -56,14 +56,15 @@
           'has-success': signupForm.password.$valid,
         }"
         ng-model="signupCtrl.user.password">
-        <label> Password </label>
-      </div>
+      <label> Password </label>
+    </div>
 
+    <div class="btn-container">
+      <input type="submit" class="btn btn-block btn-dark" value="Sign Up">
 
-    <input type="submit" class="btn btn-block btn-dark" value="Sign Up">
+      <a class="btn btn-block btn-social btn-facebook" ng-href="{{signupCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
 
-    <a class="btn btn-block btn-social btn-facebook" ng-href="{{signupCtrl.facebookAuthURL}}"> <span class="fa fa-facebook"></span> Sign in with Facebook </a>
-
-    <a class="btn btn-block btn-social btn-google" ng-href="{{signupCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
+      <a class="btn btn-block btn-social btn-google" ng-href="{{signupCtrl.googleAuthURL}}"> <span class="fa fa-google"></span> Sign in with Google </a>
+    </div>
   </form>
 </section>
