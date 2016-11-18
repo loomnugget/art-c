@@ -7,4 +7,5 @@
     class="glypicon glyphicon-pencil"></span>
   <span ng-click="listingLICtrl.deleteListing()" class="glyphicon glyphicon-trash"></span>
   <edit-listing on-success="listingLICtrl.handleEditListing()" ng-if="listingLICtrl.showEditListing" listing="listingLICtrl.listing"> </edit-listing>
+  <listing-pic listing="listingLICtrl.listing"></listing-pic>
 </li>

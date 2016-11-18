@@ -215,6 +215,7 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('fil
   };
 
   let tempListing = null;
+  let tempPhoto;
 
   Listing.findById(req.params.listingID)
   .catch(err => Promise.reject(createError(404, err.message)))
@@ -226,9 +227,9 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('fil
   .then(s3data => {
     del([`${dataDir}/*`]);
     let photoData = {
-      name: req.body.name,
-      username: req.user.username,
-      alt: req.body.alt,
+      name: tempListing.title,
+      username: tempListing.username,
+      alt: tempListing.desc,
       objectKey: s3data.Key,
       imageURI: s3data.Location,
       listingID: tempListing._id,
@@ -238,7 +239,12 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('fil
     };
     return new Photo(photoData).save();
   })
-  .then(photo => res.json(photo))
+  .then(photo => {
+    tempPhoto = photo;
+    tempListing.photoID = photo._id;
+    return tempListing.save();
+  })
+  .then(() => res.json(tempPhoto))
   .catch(err => {
     del([`${dataDir}/*`]);
     next(err);

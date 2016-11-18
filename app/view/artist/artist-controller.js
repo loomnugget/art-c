@@ -2,9 +2,9 @@
 
 require('./_artist.scss');
 
-module.exports = ['$log', '$location', '$rootScope', 'galleryService', 'artistService', ArtistController];
+module.exports = ['$log', '$location', '$rootScope', '$window', 'galleryService', 'listingService', 'artistService', ArtistController];
 
-function ArtistController($log, $location, $rootScope, galleryService, artistService){
+function ArtistController($log, $location, $rootScope, $window, galleryService, listingService, artistService){
   $log.log('init artistCtrl');
 
   this.galleries = [];
@@ -24,39 +24,67 @@ function ArtistController($log, $location, $rootScope, galleryService, artistSer
     }
   };
 
-  this.fetchArtistGalleries = function() {
-    galleryService.fetchArtistGalleries(this.artist._id)
-    .then( galleries => {
-      this.galleries = galleries;
-    });
-  };
-
   this.checkArtistStatus = function() {
     $log.log('init checkartiststatus');
-    artistService.checkArtist()
+    return artistService.checkArtist()
     .then( artist => {
-      this.artist = artist;
+      return this.artist = artist;
     })
     .then(() => {
-      this.fetchArtistGalleries(this.artist._id);
+      return this.fetchArtistGalleries(this.artist._id);
     })
     .catch( () => {
       this.artist = null;
     });
   };
 
+  this.fetchArtistGalleries = function() {
+    return galleryService.fetchArtistGalleries(this.artist._id)
+    .then( galleries => {
+      this.galleries = galleries;
+      this.gallery = galleries[0];
+      console.log(this.gallery);
+    });
+  };
+
+  this.fetchArtistListings = function() {
+    $log.log('artistCtrl.fetchArtistListings');
+    return listingService.fetchGalleryListings(this.gallery._id)
+    .then(listings => {
+      this.listings = listings;
+      console.log(this.listings, 'listingis');
+    });
+  };
+
   this.artistFormSubmission = function(){
     $log.debug('artistCtrl.artistFormSubmission');
     this.checkArtistStatus();
-    // if(this.artist.firstname === artist.firstname){
-    //   this.checkArtistStatus();
-    // }
   };
 
-  $rootScope.$on('$locationChangeSuccess', () => {
-    this.checkArtistStatus();
-    this.fetchArtistGalleries();
+  this.pageLoad = function(){
+    console.log('fuuuuuuuuuuk');
+    this.fetchArtistGalleries()
+    .then(() => {
+      this.fetchArtistListings();
+    });
+  };
+
+  this.setup = function(){
+    this.checkArtistStatus()
+    .then(() => {
+      this.pageLoad();
+    });
+  };
+
+  $rootScope.$on('$stateChangeStart', () => {
+    this.setup();
   });
 
-  this.checkArtistStatus();
+  $window.onload = function(){
+    this.setup();
+  };
+
+  this.$onInit = function(){
+    this.setup();
+  };
 }

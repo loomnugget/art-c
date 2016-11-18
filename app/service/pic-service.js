@@ -6,6 +6,34 @@ function picService($q, $log, $http, Upload, authService) {
   $log.debug('init picService');
   let service = {};
 
+  service.uploadListingPic = function(listing, picData) {
+    $log.debug('picService.uploadGalleryPic()');
+    return authService.getToken()
+    .then( token => {
+      let url = `${__API_URL__}/api/listing/${listing._id}/photo`;
+      let headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+      };
+      return Upload.upload({
+        url,
+        headers,
+        method: 'POST',
+        data: {
+          file: picData.file,
+        },
+      });
+    })
+    .then( res => {
+      $log.log('success!\n', res.data);
+      return res.data;
+    })
+    .catch( err => {
+      $log.error(err.message);
+      return $q.reject(err);
+    });
+  };
+
   service.uploadGalleryPic = function(gallery, picData) {
     $log.debug('picService.uploadGalleryPic()');
     return authService.getToken()
