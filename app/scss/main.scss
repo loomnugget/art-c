@@ -13,48 +13,49 @@ html, body {
 
 
 /* background image titles  */
+//
+// .bg-photo {
+//   width: 100%;
+//   height: 200px;
+//   position: relative;
+//   overflow: hidden;
+// }
 
-.bg-photo {
-  width: 100%;
-  height: 200px;
-  position: relative;
-  overflow: hidden;
-}
+// .absolute-text {
+//   position: absolute;
+//   text-align: center;
+//   width:100%;
+//   height: 50%;
+//   margin: auto;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   z-index: 51;
+//   color: $app-white;
+//   font-size: 200%;
+// }
 
-.absolute-text {
-  position: absolute;
-  text-align: center;
-  width:100%;
-  height: 50%;
-  margin: auto;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 51;
-  color: $app-white;
-  font-size: 200%;
-}
+//
+// .bg-photo img {
+//   width: 100%;
+//   height: auto;
+//   opacity: 1;
+//   z-index: -1;
+// }
 
-.bg-photo img {
-  width: 100%;
-  height: auto;
-  opacity: 1;
-  z-index: -1;
-}
-
-.mask {
-  position: absolute;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 10;
-  background-color: rgba(0,0,0,.4);
-}
+// .mask {
+//   position: absolute;
+//   text-align: center;
+//   width: 100%;
+//   height: 100%;
+//   margin: auto;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   z-index: 10;
+//   background-color: rgba(0,0,0,.4);
+// }
 
 ul {
   padding: 0;

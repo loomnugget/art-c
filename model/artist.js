@@ -9,8 +9,8 @@ const artistSchema = mongoose.Schema({
   // query-sortable properties
   username: {type: String, unique: true},
   created: {type: Date, required: true, default: Date.now},
-  firstname: {type: String, required: true, minlength: 3},
-  lastname: {type: String, required: true, minlength: 3},
+  firstname: {type: String, required: true},
+  lastname: {type: String, required: true},
   city: {type: String, required: true},
   zip: {type: String, required: true},
   // path params

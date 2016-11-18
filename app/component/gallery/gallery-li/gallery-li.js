@@ -18,7 +18,6 @@ function GalleryLIController($log, $location, galleryService){
   this.showEditGallery = false;
   this.homeView = false;
 
-
   this.isHomeView = function(){
     if ($location.url() === '/home'){
       this.homeView = true;
@@ -27,7 +26,7 @@ function GalleryLIController($log, $location, galleryService){
       this.homeView = false;
     }
   };
-  
+
   this.isHomeView();
 
   this.deleteGallery = function(){
