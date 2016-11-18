@@ -8,7 +8,7 @@ const gallerySchema = mongoose.Schema({
   // query-sortable properties
   username: {type: String, required: true},
   category: {type: String, required: true}, //validated string
-  created: {type: Date, required: true, default: Date.now},
+  created: {type: Date, default: Date.now},
   // path params
   userID: {type: mongoose.Schema.Types.ObjectId, required: true},
   artistID: {type: mongoose.Schema.Types.ObjectId, required: true},

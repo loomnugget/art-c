@@ -47,7 +47,7 @@ galleryRouter.post('/api/artist/:artistID/gallery', bearerAuth, jsonParser, func
 galleryRouter.get('/api/gallery/:galleryID', bearerAuth, function(req, res, next) {
   debug('GET /api/gallery/:galleryID');
   Gallery.findById(req.params.galleryID)
-  .populate({path: 'listings'})
+  .populate('listings')
   .then( gallery => {
     res.json(gallery);
   })
@@ -62,6 +62,7 @@ galleryRouter.get('/api/artist/:artistID/gallery', bearerAuth, function(req, res
   // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
   // let skip = offset + pageSize * page;
   Gallery.find({artistID: req.params.artistID})
+  .populate('listings')
   .then(galleries => res.json(galleries))
   .catch(next);
 });
