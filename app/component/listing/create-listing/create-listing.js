@@ -1,7 +1,7 @@
 'use strict';
 
 
-const angular = require('angular')
+const angular = require('angular');
 module.exports = {
   template: require('./create-listing.html'),
   controller: ['$log', 'listingService', CreateListingController],
