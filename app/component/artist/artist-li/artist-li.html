@@ -2,8 +2,10 @@
   <figure class='bg-photo'>
     <div class='mask'>
         <div class='absolute-text'>
-          <img ng-src="{{artistLICtrl.artist.photoID.imageURI}}"> 
-          <h2>{{ artistLICtrl.artist.firstname }} </h2>
+          <div class="img-container">
+            <img ng-src="{{artistLICtrl.artist.photoID.imageURI}}">
+          </div>
+            <h2>{{ artistLICtrl.artist.firstname }} </h2>
         </div>
     </div>
   </figure>

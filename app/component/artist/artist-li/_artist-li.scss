@@ -22,4 +22,19 @@
   .fa:hover {
     color: $app-white;
   }
+
+  .img-container {
+    margin: 2% 5%;
+    display: inline-block;
+    position: relative;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+
+    img{
+      width: auto;
+      height: 100%;
+      margin-left: -50px;
+    }
+  }
 }

@@ -2,10 +2,11 @@
 
 .gallery-pic {
   .img-container {
-    width: 50%;
-    margin: 2% 5%;
+
     img{
-      width: 100%;
+      width: auto;
+      height: 100%;
+      margin-left: -50px;
     }
   }
 
