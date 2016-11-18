@@ -3,7 +3,7 @@
   <form
     novalidate
     name="artistForm"
-    ng-hide="artistForm.$valid && artistForm.$submitted"
+    ng-hide="createArtistCtrl.success"
     ng-submit="createArtistCtrl.createArtist()">
 
     <h2>Create your artist profile</h2>
