@@ -43,7 +43,6 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
     .then( galleries => {
       this.galleries = galleries;
       this.gallery = galleries[0];
-      console.log(this.gallery);
     });
   };
 
@@ -52,7 +51,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
     return listingService.fetchGalleryListings(this.gallery._id)
     .then(listings => {
       this.listings = listings;
-      console.log(this.listings, 'listingis');
+      this.gallery.listings = listings;
     });
   };
 
@@ -62,7 +61,6 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.pageLoad = function(){
-    console.log('fuuuuuuuuuuk');
     this.fetchArtistGalleries()
     .then(() => {
       this.fetchArtistListings();
