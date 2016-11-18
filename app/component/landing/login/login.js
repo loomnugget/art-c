@@ -12,6 +12,12 @@ module.exports = {
 function LoginController($log, $location, authService){
   $log.debug('init loginCtrl');
 
+  this.isVisible = false;
+
+  this.showLabel = function() {
+    this.isVisible = true;
+  };
+
   this.login = function(){
     $log.log('loginCtrl.login()');
 

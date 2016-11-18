@@ -1,17 +1,16 @@
 <section class="login-form">
 
   <form
+    class="loginSignupForm"
     name="loginForm"
-    ng-submit="loginCtrl.login()" 
+    ng-submit="loginCtrl.login()"
     novalidate>
-
-    <label for="username"> Username </label>
+   <div class="group">
     <input
       required
       type="text"
       name="username"
       class="form-control"
-      placeholder="Username"
       uib-tooltip="Username Required"
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'"
@@ -21,14 +20,15 @@
         'has-success': loginForm.username.$valid,
       }"
       ng-model="loginCtrl.user.username">
+       <label>Username</label>
+     </div>
 
-    <label for="password"> Password </label>
+  <div class="group">
     <input
       required
       type="password"
       name="password"
       class="form-control"
-      placeholder="Password"
       uib-tooltip="Password Required"
       tooltip-placement="bottom-right"
       tooltip-trigger="'focus'"
@@ -38,18 +38,22 @@
         'has-success': loginForm.password.$valid,
       }"
       ng-model="loginCtrl.user.password">
+       <label>Password</label>
+     </div>
 
-    <button class="btn"> Login </button>
+    <div class="btn-container">
+      <button class="btn btn-block btn-dark"> Login </button>
 
-    <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
-      <span class="fa fa-facebook"></span>
-      Sign in with Facebook
-    </a>
+      <a class="btn btn-block btn-social btn-facebook" ng-href="{{loginCtrl.facebookAuthURL}}">
+        <span class="fa fa-facebook"></span>
+        Sign in with Facebook
+      </a>
 
-    <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}">
-      <span class="fa fa-google"></span>
-      Sign in with Google
-    </a>
+      <a class="btn btn-block btn-social btn-google" ng-href="{{loginCtrl.googleAuthURL}}">
+        <span class="fa fa-google"></span>
+        Sign in with Google
+      </a>
+    </div>
 
   </form>
 </section>

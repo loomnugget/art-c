@@ -9,56 +9,78 @@ html, body {
   color: $app-white;
 }
 
-input,
-select {
-  width: 100%;
-  font-size: 100%;
-  border:none;
-  border-radius: 3px;
-  margin: 1%;
-  padding: 1%;
-  color: $app-black;
+.loginSignupForm{
+  .button{ margin-top: 20px;}
+  .group {
+    position:relative;
+    margin-top:25px;
+  }
+  input{
+    font-size:18px;
+    padding:5px 10px 5px 5px;
+    display:block;
+    border:none;
+    border-radius: 4px;
+    width: 100%;
+    }
+  input:focus{ outline:none; }
+
+  label{
+    color:#999;
+    font-size:18px;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+
+  }
+
+  /* active state */
+  input:focus ~ label, input:valid ~ label{
+    top:-20px;
+    font-size:14px;
+    color:$app-black;
+  }
+
+  /*---- Changes Placeholder Color -----*/
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: $app-black;
+  }
 }
 
-input:focus{
-  outline: $app-secondary;
-  background-color: $app-white;
-}
-/*---- Changes Placeholder Color -----*/
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-  color: $app-primary;
+.btn-container {
+  padding-top: 30px;
 }
 
 
 .btn {
-  background-color: rgba(255,255,255,.3);
+  background-color: $app-white;
   border: none;
   text-transform: uppercase;
   border-radius: 3px;
-  padding: 1.5% 2%;
-  margin-top: 3%;
+  padding: 1.5% 3%;
+  margin: 2% 0;
   display: inline-block;
   outline: none;
   transition: all 0.3s;
-  color: $app-secondary;
+  color: $app-black;
 }
 
 .btn-dark {
-  background-color: $app-black;
   border: none;
-  text-transform: uppercase;
-  border-radius: 3px;
   padding: 1.5% 2%;
   margin-top: 3%;
-  display: inline-block;
-  outline: none;
+  background-color: $app-tertiary;
+  color: #fff;
   transition: all 0.3s;
-  color: $app-secondary;
 }
 
 .btn:hover {
-  background:rgba(255,255,255,0.8);
+  background:#fff;
   color: $app-black;
 }
 
@@ -77,7 +99,7 @@ textarea::-webkit-input-placeholder {
 }
 
 
-/*  SECTIONS  ============================================================================= */
+/*  SECTIONS  ============================================= */
 .section {
 	clear: both;
 	padding: 0px;

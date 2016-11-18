@@ -1,30 +1,55 @@
 <section class ="edit-gallery-container">
 
-  <form class="edit-gallery"
+  <form
+    novalidate
     name="editGalleryForm"
-    ng-submit="editGalleryCtrl.updateGallery()"
-    novalidate>
+    class="edit-gallery"
+    ng-submit="editGalleryCtrl.updateGallery()">
 
-    <div class="form-group">
-      <label for="name"> Name: </label>
-      <input name="name"
+      <label for="name"> Name </label>
+      <input
+        type="text"
+        name="name"
         class="form-control"
+        placeholder="Name"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': editGalleryForm.name.$invalid,
+          'has-success': editGalleryForm.name.$valid,
+        }"
         ng-model="editGalleryCtrl.gallery.name">
-    </div>
 
-    <div class="form-group">
-      <label for="desc"> Description: </label>
-      <input name="desc"
+      <label for="desc"> Description </label>
+      <input
+        type="text"
+        name="name"
         class="form-control"
+        placeholder="Description"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': editGalleryForm.desc.$invalid,
+          'has-success': editGalleryForm.desc.$valid,
+        }"
         ng-model="editGalleryCtrl.gallery.desc">
-    </div>
 
-    <div class="form-group">
-      <label for="category"> Category: </label>
-      <input name="category"
+      <label for="category"> Category </label>
+      <input
+        type="text"
+        name="category"
         class="form-control"
+        placeholder="Category"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': editGalleryForm.category.$invalid,
+          'has-success': editGalleryForm.category.$valid,
+        }"
         ng-model="editGalleryCtrl.gallery.category">
-    </div>
 
     <button class="btn btn-primary"> Update </button>
 
