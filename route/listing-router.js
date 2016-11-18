@@ -12,7 +12,6 @@ const Gallery = require('../model/gallery.js');
 const Photo = require('../model/photo.js');
 const Listing = require('../model/listing.js');
 const bearerAuth = require('../lib/bearer-auth-middleware.js');
-const pageMiddleware = require('../lib/page-query-middleware.js');
 
 AWS.config.setPromisesDependency(require('bluebird'));
 
@@ -55,7 +54,7 @@ listingRouter.get('/api/listing/:listingID', bearerAuth, function(req, res, next
   .catch(next);
 });
 
-listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, pageMiddleware, function(req, res, next){
+listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, function(req, res, next){
   debug('GET /api/gallery/:galleryID/listing');
   // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
   // let skip = offset + pageSize * page;
@@ -66,6 +65,8 @@ listingRouter.get('/api/gallery/:galleryID/listing', bearerAuth, pageMiddleware,
 
 listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, jsonParser, function(req, res, next) {
   debug('hit route PUT /api/gallery/:galleryID/listing/:listingID');
+  console.log(req.body, 'REQ.BODYYY');
+  console.log(req.params, 'REQ.PARAMS');
   Listing.findById(req.params.listingID)
   .catch(err => Promise.reject(createError(404, err.message)))
   .then( listing => {
@@ -74,6 +75,7 @@ listingRouter.put('/api/gallery/:galleryID/listing/:listingID', bearerAuth, json
     return Listing.findByIdAndUpdate(req.params.listingID, req.body, {new: true, runValidators: true});
   })
   .then(listing => {
+    console.log(listing, 'NEW LISTING');
     res.json(listing);
   })
   .catch(next);
