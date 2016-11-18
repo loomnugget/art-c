@@ -1,1 +1,11 @@
 @import "theme";
+
+.listing-pic {
+  .img-container {
+    width: 50%;
+    margin: 2% 5%;
+    img{
+      width: 50%;
+    }
+  }
+}

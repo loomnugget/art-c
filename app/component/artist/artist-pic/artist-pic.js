@@ -28,8 +28,8 @@ function ArtistPicController($log, $location, $window, picService) {
 
   this.uploadArtistPic = function(){
     picService.uploadArtistPic(this.artist, this.pic)
-    .then(() => {
-      this.done();
+    .then(pic => {
+      this.artist.photoID = pic;
     });
   };
 }
