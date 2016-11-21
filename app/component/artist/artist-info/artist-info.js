@@ -14,4 +14,9 @@ module.exports = {
 function ArtistInfoController($log){
   $log.debug('init artistInfoCtrl');
 
+  this.showEditArtist = false;
+
+  this.handleEditArtist = function(){
+    this.showEditArtist = false;
+  };
 }

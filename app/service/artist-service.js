@@ -127,13 +127,13 @@ function artistService($q, $log, $http, authService){
     })
 
     .then( res => {
-
-      for(let i = 0; i < service.artists.length; i++){
-        if (service.artists[i]._id === artist._id) {
-          service.artists[i] = res.data;
-          break;
-        }
-      }
+      artist = res.data;
+      // for(let i = 0; i < service.artists.length; i++){
+      //   if (service.artists[i]._id === artist._id) {
+      //     service.artists[i] = res.data;
+      //     break;
+      //   }
+      // }
       $log.log('Successfuly updated artist profile');
       return $q.resolve('Updated!');
     })

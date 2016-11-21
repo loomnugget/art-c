@@ -6,9 +6,17 @@ module.exports = {
   controllerAs: 'editArtistCtrl',
   bindings: {
     artist: '<',
+    onUpdate: '&',
   },
 };
 
 function EditArtistController($log, artistService){
   $log.debug('init editArtistCtrl');
+
+  this.updateArtist = function(){
+    artistService.updateArtist(this.artist)
+    .then(() => {
+      this.onUpdate();
+    });
+  };
 }
