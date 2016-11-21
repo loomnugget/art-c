@@ -87,7 +87,7 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.updateListing = function(listing) {
+  service.updateListing = function(gallery, listing) {
     $log.debug('listingService.updateListings()');
     return authService.getToken()
     .then( token => {
@@ -99,12 +99,14 @@ function listingService($q, $log, $http, authService) {
           'Content-Type': 'application/json',
         },
       };
+      console.log(listing, 'LISTING');
+      console.log(gallery, 'GALLERY');
       return $http.put(url, listing, config);
     })
     .then( res => {
-      for(let i = 0; i < service.listings.length; i++) {
-        if (service.listings[i]._id === listing._id) {
-          service.listings[i] = res.data;
+      for(let i = 0; i < gallery.listings.length; i++) {
+        if (gallery.listings[i]._id === listing._id) {
+          gallery.listings[i] = res.data;
           break;
         }
       }

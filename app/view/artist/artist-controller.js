@@ -39,6 +39,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.fetchArtistGalleries = function() {
+    if(!this.artist) return;
     return galleryService.fetchArtistGalleries(this.artist._id)
     .then( galleries => {
       this.galleries = galleries;
@@ -48,6 +49,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
 
   this.fetchArtistListings = function() {
     $log.log('artistCtrl.fetchArtistListings');
+    if(!this.artist) return;
     return listingService.fetchGalleryListings(this.gallery._id)
     .then(listings => {
       this.listings = listings;
@@ -61,10 +63,8 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.pageLoad = function(){
-    this.fetchArtistGalleries()
-    .then(() => {
-      this.fetchArtistListings();
-    });
+    this.fetchArtistGalleries();
+    this.fetchArtistListings();
   };
 
   this.setup = function(){
