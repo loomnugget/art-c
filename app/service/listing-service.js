@@ -99,8 +99,6 @@ function listingService($q, $log, $http, authService) {
           'Content-Type': 'application/json',
         },
       };
-      console.log(listing, 'LISTING');
-      console.log(gallery, 'GALLERY');
       return $http.put(url, listing, config);
     })
     .then( res => {

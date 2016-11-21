@@ -50,6 +50,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   this.fetchArtistListings = function() {
     $log.log('artistCtrl.fetchArtistListings');
     if(!this.artist) return;
+    if(!this.gallery) return;
     return listingService.fetchGalleryListings(this.gallery._id)
     .then(listings => {
       this.listings = listings;
