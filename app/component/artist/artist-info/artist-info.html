@@ -3,4 +3,7 @@
   <h2> Email: {{artistInfoCtrl.artist.email}} </h2>
   <h2> Phone: {{artistInfoCtrl.artist.phone}} </h2>
   <h2> Zip: {{artistInfoCtrl.artist.zip}} </h2>
+  <span ng-click="artistInfoCtrl.updateArtist()" class="glyphicon glyphicon-pencil"></span>
+
+  <edit-artist artist="artistInfoCtrl.artist"></edit-artist>
 </section>

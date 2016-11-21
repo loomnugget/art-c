@@ -13,4 +13,5 @@ module.exports = {
 
 function ArtistInfoController($log){
   $log.debug('init artistInfoCtrl');
+
 }
