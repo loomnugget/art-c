@@ -112,7 +112,7 @@ function artistService($q, $log, $http, authService){
 
   service.updateArtist = function(artist){
     $log.debug('artistService.updateArtist()');
-
+    
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/artist/${artist._id}`;
@@ -128,7 +128,7 @@ function artistService($q, $log, $http, authService){
 
     .then( res => {
       artist = res.data;
-      
+
       $log.log('Successfuly updated artist profile');
       return $q.resolve('Updated!');
     })
