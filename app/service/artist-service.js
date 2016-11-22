@@ -112,11 +112,9 @@ function artistService($q, $log, $http, authService){
 
   service.updateArtist = function(artist, artistID){
     $log.debug('artistService.updateArtist()');
-    // call authService to get token
+    
     return authService.getToken()
-    // returns token
     .then( token => {
-      // sends info to server
       let url = `${__API_URL__}/api/artist/${artistID}`;
       let config = {
         headers: {

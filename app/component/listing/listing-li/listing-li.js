@@ -18,10 +18,6 @@ function ListingLIController($log, listingService){
 
   this.showEditListing = false;
 
-  this.handleEditListing = function(){
-    this.showEditListing = false;
-  };
-
   this.deleteListing = function(){
     listingService.deleteListing(this.gallery, this.listing)
     .then(() => {
