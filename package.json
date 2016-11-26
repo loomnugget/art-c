@@ -21,7 +21,8 @@
     "test": "npm run frontend-test && npm run backend-test",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "./node_modules/eslint/bin/eslint.js .",
-    "test-debug": "DEBUG='art-c*' ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha"
+    "test-debug": "DEBUG='art-c*' ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
