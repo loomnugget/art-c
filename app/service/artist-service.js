@@ -110,14 +110,12 @@ function artistService($q, $log, $http, authService){
     });
   };
 
-  service.updateArtist = function(artist, artistID){
+  service.updateArtist = function(artist){
     $log.debug('artistService.updateArtist()');
-    // call authService to get token
+    
     return authService.getToken()
-    // returns token
     .then( token => {
-      // sends info to server
-      let url = `${__API_URL__}/api/artist/${artistID}`;
+      let url = `${__API_URL__}/api/artist/${artist._id}`;
       let config = {
         headers: {
           Accept: 'application/json',
@@ -129,13 +127,8 @@ function artistService($q, $log, $http, authService){
     })
 
     .then( res => {
+      artist = res.data;
 
-      for(let i = 0; i < service.artists.length; i++){
-        if (service.artists[i]._id === artistID) {
-          service.artists[i] = res.data;
-          break;
-        }
-      }
       $log.log('Successfuly updated artist profile');
       return $q.resolve('Updated!');
     })

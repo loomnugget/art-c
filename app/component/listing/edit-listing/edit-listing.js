@@ -6,7 +6,7 @@ module.exports = {
   controllerAs: 'editListingCtrl',
   bindings: {
     listing: '<',
-    onSuccess: '&',
+    gallery: '<',
   },
 };
 
@@ -16,9 +16,6 @@ function EditListingController($log, listingService){
   this.updateListing = function(){
     $log.debug('editListingCtrl.updateListing()');
 
-    listingService.updateListing(this.listing)
-    .then(() => {
-      this.onSuccess();
-    });
+    listingService.updateListing(this.gallery, this.listing);
   };
 }
