@@ -4,8 +4,7 @@
   "description": "Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike",
   "main": "server.js",
   "engines": {
-    "node": "4.4.7",
-    "npm": "3.10.7"
+    "node": "4.4.7"
   },
   "directories": {
     "test": "test"
