@@ -3,9 +3,8 @@
   <form
     novalidate>
 
-    <div class="img-container">
-      <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
-    </div>
+   <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
+
 
     <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI" class="row">
 

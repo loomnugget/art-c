@@ -1,28 +1,31 @@
 <li class="gallery-li">
+ <div class="portfolio-container">
 
-          <div class="img-container">
-            <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
-          </div>
+   <figure class="wp-caption">
+      <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
+      <figcaption class="wp-caption-text">
+        <h2>{{ galleryLICtrl.gallery.name }} </h2>
+        <p> {{ galleryLICtrl.gallery.desc }} </p>
+        <p> {{ galleryLICtrl.gallery.category }} </p>
+        <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
 
-          <h2>{{ galleryLICtrl.gallery.name }} </h2>
-          <p> {{ galleryLICtrl.gallery.desc }} </p>
-          <p> {{ galleryLICtrl.gallery.category }} </p>
+        <span ng-hide="galleryLICtrl.homeView"
+          ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
+          class="fa fa-pencil">
+        </span>
 
-  <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
-  <span ng-hide="galleryLICtrl.homeView"
-    ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
-    class="fa fa-pencil">
-  </span>
+        <span
+          ng-hide="galleryLICtrl.homeView"
+          ng-click="galleryLICtrl.deleteGallery()"
+          class="fa fa-trash">
+        </span>
+      </figcaption>
 
-  <span
-    ng-hide="galleryLICtrl.homeView"
-    ng-click="galleryLICtrl.deleteGallery()"
-    class="fa fa-trash">
-  </span>
+      <edit-gallery ng-hide="galleryLICtrl.homeView"
+        ng-if="galleryLICtrl.showEditGallery"
+        gallery="galleryLICtrl.gallery"> </edit-gallery>
+      <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
 
-  <edit-gallery ng-hide="galleryLICtrl.homeView"
-    ng-if="galleryLICtrl.showEditGallery"
-    gallery="galleryLICtrl.gallery"> </edit-gallery>
-  <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
-
+    </figure>
+  </div>
 </li>

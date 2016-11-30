@@ -2,11 +2,53 @@
 
 .gallery-li {
   margin: 1.6%;
-  padding: 0;
-  width: 30%;
+  // padding: 0;
+  // width: 30%;
   float: right;
   background-color: none;
-  border: 1px solid $app-white;
+  border: 1px solid $app-black;
+  .portfolio-container{
+    width: 100%;
+  }
+.wp-caption {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+  .wp-caption img {
+    display: block;
+    width: 100%;
+  }
+  .wp-caption-text {
+    opacity: 1;
+    position: absolute;
+    width: 100%;
+
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    padding: 0.75em 1em;
+    font-weight: 700;
+    z-index: 2;
+    overflow: none;
+    background-color: rgba(0,0,0,.7);
+    -webkit-transition: opacity .3s ease-in-out;
+    transition: opacity .3s ease-in-out;
+
+    h3 {
+      font-size: 250%;
+      text-align: center;
+    }
+    h4{
+      font-size: 200%;
+      text-align: center;
+    }
+  }
+  .wp-caption:hover .wp-caption-text {
+    //opacity: 1;
+
+}
 
   p {
     margin: 2%;
