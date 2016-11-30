@@ -19,7 +19,7 @@ function SignupController($log, $location, authService){
       this.loginSuccess();
     })
     .catch(() => {
-      $log.log('Signup Failed');
+      $log.debug('Signup Failed');
     });
   };
 
