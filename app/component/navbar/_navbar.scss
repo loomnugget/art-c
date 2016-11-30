@@ -1,6 +1,10 @@
 @import "theme";
 @import "vendor";
 
+.btn-right:hover>.dropdown-menu {
+  display: block;
+}
+
 .navbar {
   background-color: #212121;
   height: 60px;
