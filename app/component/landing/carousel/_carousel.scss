@@ -35,3 +35,22 @@
 
   }
 }
+
+@media only screen and (max-width: 500px) {
+    .carousel {
+      img {
+      position: relative;
+        height: 350px;
+      }
+      .hero {
+        height: 100%;
+      }
+      .carousel .hero h1 {
+        padding-top: 120px;
+        font-size: 25px;
+      }
+      .hero h3 {
+        font-size: 15px;
+      }
+    }
+}
