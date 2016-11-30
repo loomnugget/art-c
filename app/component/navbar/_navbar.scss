@@ -50,3 +50,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 500px) {
+
+  .navbar {
+    .nav-container {
+        .btn-nav {
+        font-size: 12px;
+        margin-left: 0;
+        margin-right: 5px;
+        margin-top: 17px;
+
+
+      }
+    }
+}
+}
