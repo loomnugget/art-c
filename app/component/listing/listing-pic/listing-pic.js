@@ -17,7 +17,7 @@ function ListingPicController($log, $location, $window, picService) {
   this.defaultPic = require('../../../scss/images/default-thumbnail.jpg');
   this.pic = {};
   this.done = function(){
-    $log.log('WORKING');
+    $log.debug('WORKING');
     this.reloadRoute();
     this.pic.file = null;
   };
