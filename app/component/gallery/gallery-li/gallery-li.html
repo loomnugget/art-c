@@ -1,0 +1,31 @@
+<li class="gallery-li">
+
+  <figure class='bg-photo'>
+    <div class='mask'>
+        <div class='absolute-text'>
+          <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
+          <h2>{{ galleryLICtrl.gallery.name }} </h2>
+          <p> {{ galleryLICtrl.gallery.desc }} </p>
+          <p> {{ galleryLICtrl.gallery.category }} </p>
+        </div>
+    </div>
+
+  <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
+  <span ng-hide="galleryLICtrl.homeView"
+    ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
+    class="fa fa-pencil">
+  </span>
+
+  <span
+    ng-hide="galleryLICtrl.homeView"
+    ng-click="galleryLICtrl.deleteGallery()"
+    class="fa fa-trash">
+  </span>
+
+  <edit-gallery ng-hide="galleryLICtrl.homeView"
+    ng-if="galleryLICtrl.showEditGallery"
+    gallery="galleryLICtrl.gallery"> </edit-gallery>
+  <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
+
+  </figure>
+</li>

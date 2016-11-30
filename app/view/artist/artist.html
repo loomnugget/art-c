@@ -1,0 +1,34 @@
+<navbar artist="artistCtrl.artist" app-title="[art-c]"></navbar>
+<main class="artist-container">
+
+  <!-- if there is no artist, show create artist form-->
+  <div class="row">
+    <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
+  </div>
+
+  <div class="row profile-container">
+    <div class="col span-1-of-2">
+      <artist-pic artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-pic>
+    </div>
+
+    <!-- if there is an artist created, show artist info-->
+    <div class="col span-1-of-2">
+      <artist-info artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-info>
+    </div>
+  </div>
+
+  <div class="row gallery-container">
+    <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
+    <div class="artist-gallery-container">
+      <ul>
+        <gallery-li delete-check="artistCtrl.galleryDeleteCheck(gallery)" ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
+        </gallery-li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <listing-container ng-if="artistCtrl.currentGallery" gallery="artistCtrl.currentGallery"></listing-container>
+  </div>
+
+</main>

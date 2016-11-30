@@ -1,0 +1,33 @@
+@import "theme";
+
+.btn-facebook {
+  background-color: #3B5998;
+  color: white;
+  width: 45%;
+  margin: 2% 5% 0 0;
+}
+
+.btn-google {
+  background-color: #DD4B39;
+  color: white;
+  width: 45%;
+  margin: 2% 0 0 4%;
+}
+
+@media only (max-width: 600px) {
+
+  .btn-google {
+    background-color: #DD4B39;
+    color: white;
+    width: 100%;
+    margin: 0;
+  }
+
+  .btn-facebook {
+    background-color: #3B5998;
+    color: white;
+    width: 100%;
+    margin: 0;
+  }
+
+}

@@ -1,0 +1,63 @@
+<section class="create-listing-container">
+  <div class="list-form">
+    <form
+      novalidate
+      name="createListingForm"
+      class="form-inline"
+      ng-submit="createListingCtrl.createListing(createListingCtrl.listing)">
+
+
+        <input
+          required
+          type="text"
+          title="title"
+          class="form-control"
+          placeholder="Title"
+          uib-tooltip="Title Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': createListingForm.title.$invalid,
+            'has-success': createListingForm.title.$valid,
+          }"
+          ng-model="createListingCtrl.listing.title">
+
+        <input
+          required
+          type="text"
+          name="desc"
+          class="form-control"
+          placeholder="Description"
+          uib-tooltip="Description Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': createListingForm.desc.$invalid,
+            'has-success': createListingForm.desc.$valid,
+          }"
+          ng-model="createListingCtrl.listing.desc">
+
+        <input
+          required
+          type="text"
+          name="category"
+          class="form-control"
+          placeholder="Category"
+          uib-tooltip="Category Required"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': createListingForm.category.$invalid,
+            'has-success': createListingForm.category.$valid,
+          }"
+          ng-model="createListingCtrl.listing.category">
+
+      <button class="btn btn-primary" type="submit"> Create </button>
+
+    </form>
+
+  </div>
+</section>

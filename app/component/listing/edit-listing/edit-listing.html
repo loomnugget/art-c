@@ -1,0 +1,27 @@
+<section class ="edit-listing-container">
+
+  <form
+    class="edit-listing"
+    name="editListingForm"
+    ng-submit="editListingCtrl.updateListing()"
+    novalidate>
+
+    <input
+      name="title"
+      class="form-control"
+      ng-model="editListingCtrl.listing.title">
+
+    <input
+      name="desc"
+      class="form-control"
+      ng-model="editListingCtrl.listing.desc">
+
+    <input
+      name="category"
+      class="form-control"
+      ng-model="editListingCtrl.listing.category">
+
+    <button class="btn btn-primary"> Update </button>
+
+  </form>
+</section>

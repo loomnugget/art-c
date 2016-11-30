@@ -1,0 +1,65 @@
+<section class="create-gallery-container">
+<h2>Create a gallery</h2>
+  <div class="row">
+  <form
+    novalidate
+    name="createGalleryForm"
+    class="form-inline"
+    ng-submit="createGalleryCtrl.createGallery(createGalleryCtrl.gallery)">
+
+      <input
+        required
+        type="text"
+        name="name"
+        class="form-control"
+        placeholder="Name"
+        uib-tooltip="Name Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': createGalleryForm.name.$invalid,
+          'has-success': createGalleryForm.name.$valid,
+        }"
+        ng-model="createGalleryCtrl.gallery.name">
+
+      <input
+        required
+        type="text"
+        name="desc"
+        class="form-control"
+        placeholder="Description"
+        uib-tooltip="Description Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': createGalleryForm.desc.$invalid,
+          'has-success': createGalleryForm.desc.$valid,
+        }"
+        ng-model="createGalleryCtrl.gallery.desc">
+
+      <input
+        required
+        type="text"
+        name="category"
+        class="form-control"
+        placeholder="Category"
+        uib-tooltip="Category Required"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="4"
+        ng-class="{
+          'has-error': createGalleryForm.category.$invalid,
+          'has-success': createGalleryForm.category.$valid,
+        }"
+        ng-model="createGalleryCtrl.gallery.category">
+
+    <div class="row">
+      <button class="btn btn-primary" type="submit"> Create </button>
+    </div>
+
+  </form>
+</div>
+
+</section>

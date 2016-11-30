@@ -1,0 +1,270 @@
+
+@import "theme";
+@import "custom-bootstrap";
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: $app-font;
+  background-color: #2a2a2a;
+  color: $app-white;
+}
+
+
+
+/* background image titles  */
+//
+// .bg-photo {
+//   width: 100%;
+//   height: 200px;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+// .absolute-text {
+//   position: absolute;
+//   text-align: center;
+//   width:100%;
+//   height: 50%;
+//   margin: auto;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   z-index: 51;
+//   color: $app-white;
+//   font-size: 200%;
+// }
+
+//
+// .bg-photo img {
+//   width: 100%;
+//   height: auto;
+//   opacity: 1;
+//   z-index: -1;
+// }
+
+// .mask {
+//   position: absolute;
+//   text-align: center;
+//   width: 100%;
+//   height: 100%;
+//   margin: auto;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+//   z-index: 10;
+//   background-color: rgba(0,0,0,.4);
+// }
+
+ul {
+  padding: 0;
+}
+
+li {
+  float: left;
+  padding: 1%;
+  list-style: none;
+}
+
+input,
+select {
+  width: 80%;
+  font-size: 100%;
+  border: 1.5px solid $app-secondary;
+  border-radius: 10px;
+  padding: 1% 2%;
+  color: $app-black;
+}
+
+.loginSignupForm{
+  .button{ margin-top: 20px;}
+  .group {
+    position:relative;
+    margin-top:25px;
+  }
+  input{
+    font-size:18px;
+    padding:5px 10px 5px 5px;
+    display:block;
+    // border:none;
+    border-radius: 4px;
+    width: 100%;
+    }
+  input:focus{ outline:none; }
+
+  label{
+    color:#999;
+    font-size:18px;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+
+  }
+
+  input:focus ~ label, input:valid ~ label{
+    top:-20px;
+    font-size:14px;
+    color:$app-black;
+  }
+
+  /*---- Changes Placeholder Color -----*/
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: $app-black;
+  }
+}
+
+
+.btn-container {
+  padding-top: 30px;
+}
+
+
+.btn {
+  background-color: $app-white;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 3px;
+  padding: 1.5% 3%;
+  margin: 2% 0;
+  display: inline-block;
+  outline: none;
+  transition: all 0.3s;
+  color: $app-black;
+}
+
+.btn-dark {
+  border: none;
+  padding: 1.5% 2%;
+  margin-top: 3%;
+  background-color: $app-tertiary;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background:#fff;
+  color: $app-black;
+}
+
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	transition: all 0.3s;
+}
+
+.has-error {
+  border: 1px solid $app-warn;
+}
+.has-success {
+  border: 1px solid $app-info;
+}
+
+/*  SECTIONS  ============================================= */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/* --------- Clearfix ------------ */
+.clearfix {zoom: 1;}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/*makes every element include the margin and padding you add to it */
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+/*  GROUPING  ============================================================================= */
+
+.row {
+  max-width: 1140px;
+  margin: 0 auto;
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+.row:before,
+.row:after {
+  content:"";
+  display:table;
+}
+.row:after {
+  clear:both;
+}
+
+/*  GRID COLUMN SETUP   ==================================================================== */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; } /* all browsers except IE6 and lower */
+
+
+/*  REMOVE MARGINS AS ALL GO FULL WIDTH AT 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {
+		/*margin: 1% 0 1% 0%;*/
+      margin: 0;
+	}
+}
+
+
+/*  GRID OF TWO   ============================================================================= */
+.span-2-of-2 {
+	width: 100%;
+}
+.span-1-of-2 {
+	width: 49.2%;
+}
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+
+@media only screen and (max-width: 480px) {
+	.span-2-of-2 {
+		width: 100%;
+	}
+	.span-1-of-2 {
+		width: 100%;
+	}
+}
+
+
+/*  GRID OF THREE   ============================================================================= */
+.span-3-of-3 {
+	width: 100%;
+}
+.span-2-of-3 {
+	width: 66.13%;
+}
+.span-1-of-3 {
+	width: 32.26%;
+}
+
+
+/*  GO FULL WIDTH AT LESS THAN 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.span-3-of-3 {
+		width: 100%;
+	}
+	.span-2-of-3 {
+		width: 100%;
+	}
+	.span-1-of-3 {
+		width: 100%;
+	}
+}
