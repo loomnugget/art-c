@@ -2,7 +2,10 @@
 
 .artist-info-container {
   h2 {
-    color: $app-white;
-    font-size: 150%;
+    color: $app-black;
+    font-size: 120%;
+  }
+  span{
+    font-weight: bold;
   }
 }

@@ -2,10 +2,11 @@
 
 .artist-pic {
   .img-container {
-    width: 90%;
-    margin: 2% 5%;
+    width: 100%;
+
     img{
       width: 100%;
+      border-radius: 100%;
     }
   }
 }
