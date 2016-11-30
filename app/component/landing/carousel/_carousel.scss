@@ -1,13 +1,16 @@
 @import "theme";
 
 .carousel {
-  //  margin-top: -60px;
   img {
-    height: 100vh;
+    height: 85vh;
     width: 100%;
   }
   .carousel-indicators{
     display:none;
+  }
+
+  .carousel {
+    width: 100%;
   }
 
   .hero {
@@ -26,9 +29,28 @@
   }
   .hero h1 {
     font-family: $app-carousel;
-    font-size: 11em;
+    font-size: 5em;
     margin: 0;
     padding-top: 200px;
 
   }
+}
+
+@media only screen and (max-width: 500px) {
+    .carousel {
+      img {
+      position: relative;
+        height: 320px;
+      }
+      .hero {
+        height: 100%;
+      }
+      .carousel .hero h1 {
+        padding-top: 120px;
+        font-size: 30px;
+      }
+      .hero h3 {
+        font-size: 15px;
+      }
+    }
 }
