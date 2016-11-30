@@ -1,39 +1,51 @@
 @import "theme";
 
 .gallery-li {
-  margin: 1.6%;
-  // padding: 0;
+  margin: 1.6% 0;
   width: 100%;
   background-color: $app-black;
   border: 1px solid $app-black;
+  color: $app-disabled;
+  .edit-delete-container{
+    position: absolute;
+    bottom:0;
+    span {
+      margin: 1%;
+      padding-left: 3%;
+      font-size: 3em;
+    }
+  }
 
   .portfolio-container{
     width: 100%;
+    position: relative;
   }
-  .wp-caption {
-      width: 100%;
-      position: relative;
-      padding: 0;
-      margin: 0;
-    }
-    .wp-caption img {
-      display: block;
-      width: 100%;
-    }
 
-  p {
+  .wp-caption {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  .wp-caption img {
+    display: block;
+    width: 100%;
+  }
+
+  p, h3 {
     margin: 2%;
   }
- span {
-   margin: 2%;
-   font-size: 2em;
- }
+
   .fa {
-    color: $app-primary;
+    color: $app-tertiary;
     transition: 1s;
   }
-  .fa:hover {
-    color: $app-white;
+  .fa-trash:hover {
+    color: $app-warn;
+  }
+  .fa-pencil:hover {
+    color: $app-info;
   }
 
 }

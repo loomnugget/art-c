@@ -4,24 +4,29 @@
   width: 90%;
   margin: 2% 5%;
   padding: 2%;
+  
+  h2{
+    text-align: center;
+  }
+
+  input, select{
+    width: 100%;
+    margin: 1% 0;
+  }
 
   .profile-container {
-    width: 80%;
-    margin: 2% 10%;
+    width: 100%;
+    margin: 0 auto;
     padding: 2%;
+    background-color: $app-disabled;
   }
 
   .gallery-container {
     width: 100%;
     margin: 0;
     padding: 1%;
-    input, select{
-      width: 60%;
-      margin: 1% 0;
-    }
     button {
       text-align: center;
     }
   }
-
 }

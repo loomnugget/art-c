@@ -7,27 +7,28 @@
   </div>
 
   <div class="row profile-container">
-    <div class="col span-1-of-2">
+    <div class="col span-1-of-3">
       <artist-pic artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-pic>
     </div>
 
-    <!-- if there is an artist created, show artist info-->
-    <div class="col span-1-of-2">
+    <div class="col span-1-of-3">
       <artist-info artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-info>
+    </div>
+
+    <div class="col span-1-of-3">
+      <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
     </div>
   </div>
 
   <div class="row gallery-container">
-    <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
+    <h2>My Galleries</h2>
     <div class="artist-gallery-container">
-      <ul>
         <gallery-li delete-check="artistCtrl.galleryDeleteCheck(gallery)" ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
         </gallery-li>
-      </ul>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row"><h2>My Listings</h2>
     <listing-container ng-if="artistCtrl.currentGallery" gallery="artistCtrl.currentGallery"></listing-container>
   </div>
 

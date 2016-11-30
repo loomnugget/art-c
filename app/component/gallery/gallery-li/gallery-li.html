@@ -3,28 +3,47 @@
 
    <figure class="wp-caption">
       <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
+        <div class="row">
 
-        <h2> Name: {{ galleryLICtrl.gallery.name }} </h2>
-        <p> Description: {{ galleryLICtrl.gallery.desc }} </p>
-        <p> Category: {{ galleryLICtrl.gallery.category }} </p>
-        <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
+          <div class="col span-1-of-3 ">
 
-        <span ng-hide="galleryLICtrl.homeView"
-          ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
-          class="fa fa-pencil fa-2x">
-        </span>
+            <div class="gallery-info row"><!-- Gallery info row-->
+              <h3> Title: {{ galleryLICtrl.gallery.name }} </h3>
+              <p> Description: {{ galleryLICtrl.gallery.desc }} </p>
+              <p> Category: {{ galleryLICtrl.gallery.category }} </p>
+              <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
+            </div><!--end row-->
 
-        <span
-          ng-hide="galleryLICtrl.homeView"
-          ng-click="galleryLICtrl.deleteGallery()"
-          class="fa fa-trash fa-2x">
-        </span>
+            <div class="row edit-delete-container"><!-- Edit/delete icon row-->
+              <div class="col span-1-of-2 ">
+                <span ng-hide="galleryLICtrl.homeView"
+                  ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
+                  class="fa fa-pencil">
+                </span>
+              </div>
 
-      <edit-gallery ng-hide="galleryLICtrl.homeView"
-        ng-if="galleryLICtrl.showEditGallery"
-        gallery="galleryLICtrl.gallery"> </edit-gallery>
-      <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
+              <div class="col span-1-of-2">
+                <span
+                  ng-hide="galleryLICtrl.homeView"
+                  ng-click="galleryLICtrl.deleteGallery()"
+                  class="fa fa-trash">
+                </span>
+              </div>
+            </div> <!--end row-->
+
+            <div class="row"> <!-- Edit Gallery row-->
+              <edit-gallery ng-hide="galleryLICtrl.homeView"
+                ng-if="galleryLICtrl.showEditGallery"
+                gallery="galleryLICtrl.gallery"> </edit-gallery>
+              </div>
+            </div><!--end row-->
+
+          <div class="col span-2-of-3">
+            <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
+          </div>
+      </div>
+
 
     </figure>
-  </div>
+  </div> <!--end portfolio-container-->
 </li>
