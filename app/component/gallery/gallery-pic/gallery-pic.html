@@ -6,7 +6,7 @@
    <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
 
 
-    <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI" class="row">
+    <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI">
 
       <span class="fa fa-upload"
         ngf-select

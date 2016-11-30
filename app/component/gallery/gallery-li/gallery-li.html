@@ -3,23 +3,22 @@
 
    <figure class="wp-caption">
       <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}">
-      <figcaption class="wp-caption-text">
-        <h2>{{ galleryLICtrl.gallery.name }} </h2>
-        <p> {{ galleryLICtrl.gallery.desc }} </p>
-        <p> {{ galleryLICtrl.gallery.category }} </p>
+
+        <h2> Name: {{ galleryLICtrl.gallery.name }} </h2>
+        <p> Description: {{ galleryLICtrl.gallery.desc }} </p>
+        <p> Category: {{ galleryLICtrl.gallery.category }} </p>
         <p> Created on: {{ galleryLICtrl.gallery.created | date:short }} </p>
 
         <span ng-hide="galleryLICtrl.homeView"
           ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
-          class="fa fa-pencil">
+          class="fa fa-pencil fa-2x">
         </span>
 
         <span
           ng-hide="galleryLICtrl.homeView"
           ng-click="galleryLICtrl.deleteGallery()"
-          class="fa fa-trash">
+          class="fa fa-trash fa-2x">
         </span>
-      </figcaption>
 
       <edit-gallery ng-hide="galleryLICtrl.homeView"
         ng-if="galleryLICtrl.showEditGallery"
