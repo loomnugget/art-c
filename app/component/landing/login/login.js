@@ -1,5 +1,7 @@
 'use strict';
 
+require('./_login.scss');
+
 module.exports = {
   template: require('./login.html'),
   controller: ['$log', '$location', 'authService', LoginController],
@@ -38,10 +40,6 @@ function LoginController($log, $location, authService){
   let googleAuthAccessType = 'access_type=offline';
 
   this.googleAuthURL = `${googleAuthBase}?${googleAuthResponseType}&${googleAuthClientID}&${googleAuthScope}&${googleAuthRedirectURI}&${googleAuthAccessType}&prompt=consent`;
-
-  // if (!__DEBUG__) {
-  //   this.googleAuthURL += '&prompt=consent';
-  // }
 
   this.facebookAuthURL = '';
 

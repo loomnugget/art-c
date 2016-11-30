@@ -34,10 +34,6 @@ function SignupController($log, $location, authService){
 
   this.googleAuthURL = `${googleAuthBase}?${googleAuthResponseType}&${googleAuthClientID}&${googleAuthScope}&${googleAuthRedirectURI}&${googleAuthAccessType}&prompt=consent`;
 
-  // if (!__DEBUG__) {
-  //   this.googleAuthURL += '&prompt=consent';
-  // }
-
   this.facebookAuthURL = '';
 
   let facebookAuthBase = 'https://www.facebook.com/v2.8/dialog/oauth';
