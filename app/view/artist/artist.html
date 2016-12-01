@@ -11,14 +11,15 @@
       <artist-pic artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-pic>
     </div>
 
-    <div class="col span-1-of-3">
+    <div class="col span-2-of-3">
       <artist-info artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-info>
     </div>
+  </div>
 
-    <div class="col span-1-of-3">
+    <div class="row">
       <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
     </div>
-  </div>
+
 
   <div class="row gallery-container">
     <h2>My Galleries</h2>
@@ -28,7 +29,7 @@
     </div>
   </div>
 
-  <div class="row"><h2>My Listings</h2>
+  <div class="row">
     <listing-container ng-if="artistCtrl.currentGallery" gallery="artistCtrl.currentGallery"></listing-container>
   </div>
 

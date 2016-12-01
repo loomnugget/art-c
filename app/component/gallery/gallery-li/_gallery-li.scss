@@ -6,13 +6,28 @@
   background-color: $app-black;
   border: 1px solid $app-black;
   color: $app-disabled;
+  .gallery-info{
+    h3{
+      color: $app-white;
+      text-transform: uppercase;
+      padding-bottom: 2px;
+    }
+    span{
+      font-weight: bold;
+    }
+  }
+
   .edit-delete-container{
     position: absolute;
     bottom:0;
+    text-align: center;
     span {
       margin: 1%;
       padding-left: 3%;
       font-size: 3em;
+      display: inline-block;
+      margin:10px 10px 0 0;
+      padding:5px 10px;
     }
   }
 

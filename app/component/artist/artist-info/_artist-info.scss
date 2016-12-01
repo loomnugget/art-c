@@ -1,11 +1,10 @@
 @import "theme";
 
 .artist-info-container {
-  display: block;
-  vertical-align: center;
+
   h2 {
     color: $app-black;
-    font-size: 110%;
+    font-size: 120%;
   }
   span{
     font-weight: bold;

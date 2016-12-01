@@ -1,16 +1,16 @@
 @import "theme";
 
 .listing-pic {
-  span {
-    font-size: 2em;
-  }
-  
-  .img-container {
-    width: 50%;
-    margin: 2% 5%;
 
-    img{
-      width: 50%;
+  .container{
+    position: relative;
+    span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 2em;
+      z-index:10;
     }
   }
+
 }

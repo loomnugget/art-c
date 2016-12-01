@@ -23,10 +23,10 @@ li {
 
 input,
 select {
-  width: 80%;
   font-size: 100%;
   border: 1.5px solid $app-secondary;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin-bottom: 3px;
   padding: 1% 2%;
   color: $app-black;
 }
@@ -41,7 +41,6 @@ select {
     font-size:18px;
     padding:5px 10px 5px 5px;
     display:block;
-    // border:none;
     border-radius: 4px;
     width: 100%;
     }
@@ -80,11 +79,11 @@ select {
 
 
 .btn {
-  background-color: $app-white;
+  background-color: $app-secondary;
   border: none;
   text-transform: uppercase;
-  border-radius: 3px;
-  padding: 1.5% 3%;
+  border-radius: 10px;
+  padding: 7px 10px;
   margin: 2% 0;
   display: inline-block;
   outline: none;
@@ -93,13 +92,23 @@ select {
 }
 
 .btn-dark {
+  padding: 10px 14px;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-transform: uppercase;
+  display: inline-block;
+  outline: none;
   border: none;
-  padding: 1.5% 2%;
-  margin-top: 3%;
   background-color: $app-tertiary;
   color: #fff;
   transition: all 0.3s;
 }
+
+.btn-dark:hover{
+  background:#fff;
+  color: $app-black;
+}
+
 
 .btn:hover {
   background:#fff;
