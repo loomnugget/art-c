@@ -5,7 +5,7 @@ require('./_artist.scss');
 module.exports = ['$log', '$location', '$rootScope', '$window', 'galleryService', 'listingService', 'artistService', ArtistController];
 
 function ArtistController($log, $location, $rootScope, $window, galleryService, listingService, artistService){
-  $log.log('init artistCtrl');
+  $log.debug('init artistCtrl');
 
   this.galleries = [];
   this.listings = [];
@@ -25,7 +25,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.checkArtistStatus = function() {
-    $log.log('init checkartiststatus');
+    $log.debug('init checkartiststatus');
     return artistService.checkArtist()
     .then( artist => {
       return this.artist = artist;
@@ -39,6 +39,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.fetchArtistGalleries = function() {
+    if(!this.artist) return;
     return galleryService.fetchArtistGalleries(this.artist._id)
     .then( galleries => {
       this.galleries = galleries;
@@ -47,7 +48,9 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.fetchArtistListings = function() {
-    $log.log('artistCtrl.fetchArtistListings');
+    $log.debug('artistCtrl.fetchArtistListings');
+    if(!this.artist) return;
+    if(!this.gallery) return;
     return listingService.fetchGalleryListings(this.gallery._id)
     .then(listings => {
       this.listings = listings;
@@ -61,10 +64,8 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.pageLoad = function(){
-    this.fetchArtistGalleries()
-    .then(() => {
-      this.fetchArtistListings();
-    });
+    this.fetchArtistGalleries();
+    this.fetchArtistListings();
   };
 
   this.setup = function(){

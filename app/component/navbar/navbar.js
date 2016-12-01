@@ -32,7 +32,7 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
 
     authService.getToken()
       .then(token => {
-        console.log('token', token);
+        $log.debug(token, 'token');
         $location.url('/home');
       })
       .catch(() => {
@@ -47,15 +47,14 @@ function NavbarController($log, $location, $rootScope, $window, $uibModal, authS
   }
 
   $window.onload = pageLoadHandler.bind(this);
-  // $rootScope.$on('locationChangeSuccess', pageLoadHandler.bind(this));
 
   this.artistSignup = function(){
-    $log.log('navbarCtrl.artistSignup()');
+    $log.debug('navbarCtrl.artistSignup()');
     $location.url('/artist');
   };
 
   this.logout = function() {
-    $log.log('navbarCtrl.logout()');
+    $log.debug('navbarCtrl.logout()');
     authService.logout()
       .then(() => {
         $location.url('/');

@@ -19,7 +19,7 @@ function SignupController($log, $location, authService){
       this.loginSuccess();
     })
     .catch(() => {
-      console.log('Signup Failed');
+      $log.debug('Signup Failed');
     });
   };
 
@@ -29,15 +29,10 @@ function SignupController($log, $location, authService){
   let googleAuthResponseType = 'response_type=code';
   let googleAuthClientID = `client_id=${__GOOGLE_CLIENT_ID__}`;
   let googleAuthScope = 'scope=profile%20email%20openid';
-
   let googleAuthRedirectURI = `redirect_uri=${__API_URL__}/api/auth/oauth_callback`;
   let googleAuthAccessType = 'access_type=offline';
 
   this.googleAuthURL = `${googleAuthBase}?${googleAuthResponseType}&${googleAuthClientID}&${googleAuthScope}&${googleAuthRedirectURI}&${googleAuthAccessType}&prompt=consent`;
-
-  if (!__DEBUG__) {
-    this.googleAuthURL += '&prompt=consent';
-  }
 
   this.facebookAuthURL = '';
 

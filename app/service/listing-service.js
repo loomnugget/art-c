@@ -25,7 +25,7 @@ function listingService($q, $log, $http, authService) {
       return $http.post(url, listing, config);
     })
     .then( res => {
-      $log.log('Successfully created listing');
+      $log.debug('Successfully created listing');
       let listing = res.data;
       gallery.listings.unshift(listing);
       return listing;
@@ -36,7 +36,7 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.deleteListing = function(listing) {
+  service.deleteListing = function(gallery, listing) {
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/gallery/${listing.galleryID}/listing/${listing._id}`;
@@ -48,11 +48,11 @@ function listingService($q, $log, $http, authService) {
       return $http.delete(url, config);
     })
     .then( () => {
-      $log.log('Successful listing deletion.');
-      for(let i = 0; i < service.listings.length; ++i) {
-        let current = service.listings[i];
+      $log.debug('Successful listing deletion.');
+      for(let i = 0; i < gallery.listings.length; ++i) {
+        let current = gallery.listings[i];
         if (current._id === listing._id) {
-          service.listings.splice(i, 1);
+          gallery.listings.splice(i, 1);
           break;
         }
       }
@@ -77,7 +77,7 @@ function listingService($q, $log, $http, authService) {
       return $http.get(url, config);
     })
     .then( res => {
-      $log.log('successfull fetch gallery listings');
+      $log.debug('successfull fetch gallery listings');
       service.listings = res.data;
       return service.listings;
     })
@@ -87,7 +87,7 @@ function listingService($q, $log, $http, authService) {
     });
   };
 
-  service.updateListing = function(listing) {
+  service.updateListing = function(gallery, listing) {
     $log.debug('listingService.updateListings()');
     return authService.getToken()
     .then( token => {
@@ -102,14 +102,13 @@ function listingService($q, $log, $http, authService) {
       return $http.put(url, listing, config);
     })
     .then( res => {
-      console.log(res.data, 'RES.DATA');
-      for(let i = 0; i < service.listings.length; i++) {
-        if (service.listings[i]._id === listing._id) {
-          service.listings[i] = res.data;
+      for(let i = 0; i < gallery.listings.length; i++) {
+        if (gallery.listings[i]._id === listing._id) {
+          gallery.listings[i] = res.data;
           break;
         }
       }
-      $log.log('Successful update user listing');
+      $log.debug('Successful update user listing');
       return $q.resolve('Updated listing');
     })
     .catch(err => {

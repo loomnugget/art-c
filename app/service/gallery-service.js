@@ -25,7 +25,7 @@ function galleryService($q, $log, $http, authService){
     })
 
     .then( res => {
-      $log.log('Succesfully created gallery');
+      $log.debug('Succesfully created gallery');
       let gallery = res.data;
       service.galleries.unshift(gallery);
       return gallery;
@@ -49,7 +49,7 @@ function galleryService($q, $log, $http, authService){
       return $http.delete(url, config);
     })
     .then(() => {
-      $log.log('sucessful deletion');
+      $log.debug('sucessful deletion');
       for(let i = 0; i < service.galleries.length; i++){
         let current = service.galleries[i];
         if(current._id === galleryID){
@@ -79,7 +79,7 @@ function galleryService($q, $log, $http, authService){
       return $http.get(url, config);
     })
     .then( res => {
-      $log.log('successful fetch user galleries');
+      $log.debug('successful fetch user galleries');
       service.galleries = res.data;
       return service.galleries;
     })
@@ -100,7 +100,7 @@ function galleryService($q, $log, $http, authService){
     };
     return $http.get(url, config)
     .then( res => {
-      $log.log('successful fetch user galleries');
+      $log.debug('successful fetch user galleries');
       service.galleries = res.data;
       return service.galleries;
     })
@@ -112,8 +112,7 @@ function galleryService($q, $log, $http, authService){
 
   service.updateGallery = function(gallery, galleryID, artistID){
     $log.debug('galleryService.updateGalleries()');
-    console.log('GALLLERY', gallery);
-    console.log('GALLERYID', galleryID);
+
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/artist/${artistID}/gallery/${galleryID}`;
@@ -133,7 +132,7 @@ function galleryService($q, $log, $http, authService){
           break;
         }
       }
-      $log.log('successful update user gallery');
+      $log.debug('successful update user gallery');
       return $q.resolve('updated');
     })
     .catch(err => {

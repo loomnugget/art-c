@@ -17,7 +17,7 @@ function ArtistPicController($log, $location, $window, picService) {
   this.defaultPic = require('../../../scss/images/default-profile.jpg');
   this.pic = {};
   this.done = function(){
-    $log.log('WORKING');
+    $log.debug('WORKING');
     this.reloadRoute();
     this.pic.file = null;
   };
