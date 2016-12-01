@@ -1,6 +1,6 @@
 @import "theme";
 
-.artist-li {
+.home-gallery-li {
   margin: 1.6%;
   padding: 0;
   width: 20%;
@@ -9,7 +9,7 @@
   border: 1px solid $app-black;
   color: $app-white;
 
-  .artist-li-container{
+  .home-gallery-li-container{
     width: 100%;
   }
   .wp-caption {
@@ -21,6 +21,10 @@
   .wp-caption img {
     display: block;
     width: 100%;
+  }
+  
+  p {
+    margin: 2%;
   }
 
 }

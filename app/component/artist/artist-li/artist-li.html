@@ -1,10 +1,8 @@
 <li class="artist-li">
-  <figure class='bg-photo'>
-    <div class='mask'>
-        <div class='absolute-text'>
-          <img ng-src="{{artistLICtrl.artist.photoID.imageURI}}"> 
-          <h2>{{ artistLICtrl.artist.firstname }} </h2>
-        </div>
-    </div>
-  </figure>
+  <div class="artist-li-container">
+    <figure class="wp-caption">
+      <img ng-src="{{artistLICtrl.artist.photoID.imageURI}}">
+      <h2>{{ artistLICtrl.artist.firstname }}</h2>
+    </figure>
+  </div>
 </li>

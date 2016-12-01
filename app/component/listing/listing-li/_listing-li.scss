@@ -1,16 +1,66 @@
 @import "theme";
 
-.listing-pic {
-  .img-container {
-    width: 50%;
-    margin: 2% 5%;
-    
-    img{
-      width: 100%;
+.listing-li {
+  margin: 1.6% 0;
+  width: 100%;
+  background-color: $app-black;
+  border: 1px solid $app-black;
+  color: $app-disabled;
+
+  .listing-info{
+    h3{
+      color: $app-white;
+      text-transform: uppercase;
+      padding-bottom: 2px;
+    }
+    span{
+      font-weight: bold;
     }
   }
 
+  .edit-delete-container{
+    position: absolute;
+    bottom:0;
+    text-align: center;
+    span {
+      margin: 1%;
+      padding-left: 3%;
+      font-size: 3em;
+      display: inline-block;
+      margin:10px 10px 0 0;
+      padding:5px 10px;
+    }
+  }
+
+  .portfolio-container{
+    width: 100%;
+    position: relative;
+  }
+
+  .wp-caption {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  .wp-caption img {
+    display: block;
+    width: 100%;
+  }
+
+  p, h3 {
+    margin: 2%;
+  }
+
   .fa {
-    font-size: 2em;
+    color: $app-tertiary;
+    transition: 1s;
+  }
+  .fa-trash:hover {
+    color: $app-warn;
+  }
+  .fa-pencil:hover {
+    color: $app-info;
   }
 }

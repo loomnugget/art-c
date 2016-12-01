@@ -2,24 +2,18 @@
 
   <form
     novalidate>
-
-    <div class="img-container">
-      <img ng-src="{{listingPicCtrl.listing.photoID.imageURI || listingPicCtrl.defaultPic}}">
-    </div>
-
-    <div ng-if="!listingPicCtrl.listing.photoID.imageURI" class="row">
+    <img ng-src="{{listingPicCtrl.listing.photoID.imageURI || listingPicCtrl.defaultPic}}">
+    <div ng-if="!listingPicCtrl.listing.photoID.imageURI container">
       <span
         class="fa fa-upload"
         ngf-select
         ng-model="listingPicCtrl.pic.file">
       </span>
-
       <span
         class="fa fa-cloud-upload"
         ng-click="listingPicCtrl.uploadListingPic()"
         class="btn btn-upload">
       </span>
     </div>
-
   </form>
 </div>

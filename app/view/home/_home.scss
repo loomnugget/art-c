@@ -4,10 +4,12 @@
   h2 {
     text-align: center;
     padding: 0 3%;
-    color: $app-tertiary;
+    color: $app-white;
   }
   .gallery-container {
     margin-bottom: 40px;
+    width: 100%;
+    padding: 1%;
   }
   img {
     width: 80%;

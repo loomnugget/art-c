@@ -2,24 +2,22 @@
 
   <form
     novalidate>
+    <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI">
 
-    <div class="img-container">
-      <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
-    </div>
-
-    <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI" class="row">
-
-      <span class="fa fa-upload"
+      <span class="fa fa-upload fa-3x"
         ngf-select
         ng-model="galleryPicCtrl.pic.file">
       </span>
 
       <span
-        class="fa fa-cloud-upload"
+        class="fa fa-cloud-upload fa-3x"
         ng-click="galleryPicCtrl.uploadGalleryPic()"
         class="btn btn-upload">
       </spam>
 
     </div>
+
+   <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
+
   </form>
 </div>
