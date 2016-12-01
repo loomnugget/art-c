@@ -20,10 +20,15 @@
     }
 
     .footer-github {
-
       flex: default;
       padding-right: 3%;
       padding-top: 1%;
+      span{
+        font-size: 2em;
+      }
+      span:hover{
+        color: $app-white;
+      }
     }
   }
 }

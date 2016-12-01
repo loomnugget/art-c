@@ -11,12 +11,20 @@
     height: 150px;
   }
   .gallery-info{
+    h3, h4 {
+      margin: 2%;
+    }
+
     h3{
       color: $app-white;
       text-transform: uppercase;
       padding-bottom: 2px;
     }
+    h4{
+      padding: 2px;
+    }
     span{
+      text-transform: uppercase;
       font-weight: bold;
     }
 
@@ -78,11 +86,6 @@
       left: -100%;
     }
   }
-
-  p, h3 {
-    margin: 2%;
-  }
-
 
   .fa {
     color: $app-tertiary;

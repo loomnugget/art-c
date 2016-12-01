@@ -1,7 +1,7 @@
-
 @import "theme";
 @import "custom-bootstrap";
 
+//General Body Styles
 html, body {
   width: 100%;
   height: 100%;
@@ -10,7 +10,13 @@ html, body {
   color: $app-black;
 }
 
+//Horizontal Row
+hr {
+  width: 100%;
+  border: 1px solid $app-black;
+}
 
+//General list styles
 ul {
   padding: 0;
 }
@@ -21,16 +27,17 @@ li {
   list-style: none;
 }
 
+//General form styles
 input,
 select {
   font-size: 100%;
   border: 1.5px solid $app-secondary;
   border-radius: 5px;
-  margin-bottom: 3px;
   padding: 1% 2%;
   color: $app-black;
 }
 
+//Modal form styles
 .loginSignupForm{
   .button{ margin-top: 20px;}
   .group {
@@ -65,14 +72,14 @@ select {
     color:$app-black;
   }
 
-  /*---- Changes Placeholder Color -----*/
+  //Changes Placeholder Color
   input::-webkit-input-placeholder,
   textarea::-webkit-input-placeholder {
     color: $app-black;
   }
 }
 
-
+//General button styles
 .btn-container {
   padding-top: 30px;
 }
@@ -92,6 +99,7 @@ select {
 }
 
 .btn-dark {
+  margin: 2px;
   padding: 5px 7px;
   border-radius: 10px;
   text-transform: uppercase;
@@ -128,7 +136,8 @@ select {
   border: 1px solid $app-info;
 }
 
-/*  SECTIONS  ============================================= */
+//LAYOUT AND GRID HELPER STYLES
+//Section layout
 .section {
 	clear: both;
 	padding: 0px;
@@ -145,7 +154,7 @@ select {
     visibility: hidden;
 }
 
-/*makes every element include the margin and padding you add to it */
+//makes every element include the margin and padding you add to it
 * {
     margin:0;
     padding:0;
