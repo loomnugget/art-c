@@ -79,11 +79,11 @@ select {
 
 
 .btn {
-  background-color: $app-secondary;
+  background: transparent;
   border: none;
   text-transform: uppercase;
   border-radius: 10px;
-  padding: 7px 10px;
+  padding: 1%;
   margin: 2% 0;
   display: inline-block;
   outline: none;
