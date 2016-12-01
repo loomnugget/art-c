@@ -2,7 +2,7 @@
 
 <main class="home">
 
-  <div class="gallery-container clearfix">
+  <div class="featured-container clearfix">
     <h2> Featured Galleries </h2>
     <home-gallery-li ng-repeat="item in homeCtrl.galleries"
       gallery="item"
@@ -10,7 +10,7 @@
     </home-gallery-li>
   </div>
 
-  <div class="artist-container clearfix">
+  <div class="featured-container clearfix">
     <h2> Featured Artists </h2>
       <artist-li ng-repeat="item in homeCtrl.artists"
         artist="item"

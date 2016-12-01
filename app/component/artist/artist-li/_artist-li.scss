@@ -9,10 +9,6 @@
   color: $app-white;
   text-transform: uppercase;
   text-align:center;
-  @media (min-width: 500px){
-    width: 30%;
-    margin: 1.66667%;
-  }
 
   .portfolio-container{
       width: 100%;
@@ -27,7 +23,15 @@
   .wp-caption img {
     display: block;
     width: 100%;
-    height: 400px;
+    height: 300px;
+    max-height: 320px;
     object-fit: cover;
+  }
+}
+
+@media only screen and (min-width: 800px){
+.artist-li {
+  width: 32%;
+  margin: .666667%;
   }
 }
