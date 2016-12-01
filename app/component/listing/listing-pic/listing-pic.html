@@ -1,10 +1,9 @@
 <div class="listing-pic">
 
   <form
-    class="container"
     novalidate>
     <img ng-src="{{listingPicCtrl.listing.photoID.imageURI || listingPicCtrl.defaultPic}}">
-    <div ng-if="!listingPicCtrl.listing.photoID.imageURI">
+    <div ng-if="!listingPicCtrl.listing.photoID.imageURI container">
       <span
         class="fa fa-upload"
         ngf-select
