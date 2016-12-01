@@ -1,17 +1,16 @@
 @import "theme";
 
 .artist-li {
-  margin: 1.6%;
-  padding: 0;
-  width: 20%;
+  padding: 3px;
   float: left;
   background-color: $app-black;
   border: 1px solid $app-black;
   color: $app-white;
 
-  .artist-li-container{
-    width: 100%;
-  }
+  .portfolio-container{
+      width: 100%;
+      position: relative;
+    }
   .wp-caption {
     width: 100%;
     position: relative;
