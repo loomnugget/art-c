@@ -5,13 +5,12 @@
       <img ng-src="{{listingLICtrl.listing.photoID.imageURI}}">
 
        <div class="row">
-         <div class="col span-1-of-3 ">
 
-           <div class="listing-info row">
+           <div class="listing-info">
              <h3><span>Title: </span> {{ listingLICtrl.listing.title }} </h3>
-             <p><span>Description: </span> {{ listingLICtrl.listing.desc }} </p>
-             <p><span>Category: </span> {{ listingLICtrl.listing.category }} </p>
-             <p><span>Created on: </span> {{ listingLICtrl.listing.created }} </p>
+             <p><span>Description: </span> {{ listingLICtrl.listing.desc }}
+             <span>Category: </span> {{ listingLICtrl.listing.category }}
+             <span>Created on: </span> {{ listingLICtrl.listing.created }} </p>
            </div>
          <div class="row edit-delete-container"><!-- Edit/delete icon row-->
 
@@ -31,9 +30,13 @@
         </div>
       </div> <!--end span-1-of-3-->
 
-     <div class="col span-2-of-3">
-       <listing-pic listing="listingLICtrl.listing"></listing-pic>
-     </div>
+      <div class="row">
+        <div class="frame-square">
+          <div class="crop">
+            <listing-pic listing="listingLICtrl.listing"></listing-pic>
+          </div>
+        </div>
+      </div>
    </div> <!--end row-->
  </figure>
 </div> <!--end portfolio-container-->

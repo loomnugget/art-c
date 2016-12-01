@@ -1,8 +1,8 @@
 @import "theme";
 
 .artist-container {
-  width: 90%;
-  margin: 2% 5%;
+  width: 100%;
+  margin: 2% 0;
   padding: 2%;
 
   h2{
@@ -13,20 +13,11 @@
     width: 100%;
     margin: 1% 0;
   }
+}
 
-  .profile-container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 2%;
-    background-color: $app-tertiary;
-  }
-
-  .gallery-container {
-    width: 100%;
-    margin: 0;
-    padding: 1%;
-    button {
-      text-align: center;
-    }
-  }
+.profile-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  background-color: $app-tertiary;
 }

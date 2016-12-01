@@ -1,11 +1,15 @@
 @import "theme";
 
 .gallery-li {
-  margin: 1.6% 0;
-  width: 100%;
+  margin: 1.6% 5%;
+  width: 90%;
   background-color: $app-black;
   border: 1px solid $app-black;
   color: $app-disabled;
+  // keeps the layout from resizing when edit is clicked
+  .thumbnail-desc-container{
+    height: 150px;
+  }
   .gallery-info{
     h3{
       color: $app-white;
@@ -15,8 +19,9 @@
     span{
       font-weight: bold;
     }
-  }
 
+  }
+// contains the icons
   .edit-delete-container{
     span {
       margin: 1%;
@@ -39,14 +44,14 @@
     padding: 0;
     margin: 0;
   }
-  //
+
   .wp-caption img {
     display: block;
     width: 100%;
   }
 
   .frame-square {
-    border: 2px solid $app-black;
+    border: 2px solid #131313;
     display: inline-block;
     vertical-align: top;
     padding: 10px;
@@ -90,4 +95,14 @@
     color: $app-info;
   }
 
+}
+
+@media only screen and (min-width: 800px){
+  .gallery-li {
+    width: 47%;
+    margin: 1.5%;
+  .frame-square{
+    height: 400px;
+  }
+  }
 }

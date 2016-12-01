@@ -5,34 +5,34 @@
     name="editGalleryForm"
     class="edit-gallery"
     ng-submit="editGalleryCtrl.updateGallery()">
+    <div class="row">
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          placeholder="Name"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': editGalleryForm.name.$invalid,
+            'has-success': editGalleryForm.name.$valid,
+          }"
+          ng-model="editGalleryCtrl.gallery.name">
 
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        placeholder="Name"
-        tooltip-placement="bottom-right"
-        tooltip-trigger="'focus'"
-        ng-minlength="4"
-        ng-class="{
-          'has-error': editGalleryForm.name.$invalid,
-          'has-success': editGalleryForm.name.$valid,
-        }"
-        ng-model="editGalleryCtrl.gallery.name">
-
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        placeholder="Description"
-        tooltip-placement="bottom-right"
-        tooltip-trigger="'focus'"
-        ng-minlength="4"
-        ng-class="{
-          'has-error': editGalleryForm.desc.$invalid,
-          'has-success': editGalleryForm.desc.$valid,
-        }"
-        ng-model="editGalleryCtrl.gallery.desc">
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          placeholder="Description"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="4"
+          ng-class="{
+            'has-error': editGalleryForm.desc.$invalid,
+            'has-success': editGalleryForm.desc.$valid,
+          }"
+          ng-model="editGalleryCtrl.gallery.desc">
 
       <input
         type="text"
@@ -48,7 +48,9 @@
         }"
         ng-model="editGalleryCtrl.gallery.category">
 
-    <button class="btn"> Update </button>
+        <button class="btn-dark"> Update </button>
+
+
 
   </form>
 </section>
