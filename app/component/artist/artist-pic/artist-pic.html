@@ -8,13 +8,13 @@
     </div>
 
     <div ng-if="!artistPicCtrl.artist.photoID.imageURI" class="row">
-      <button class="btn btn-upload"
+      <button class="btn-round"
         ngf-select
         ng-model="artistPicCtrl.pic.file">
         Select Image
       </button>
 
-      <button ng-click="artistPicCtrl.uploadArtistPic()" class="btn btn-upload"> Upload Image </button>
+      <button ng-click="artistPicCtrl.uploadArtistPic()" class="btn-round"> Upload Image </button>
     </div>
 
   </form>

@@ -1,14 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Comfortaa|Lato');
 
-$app-primary: #1e90ff;
-$app-secondary: #c4afd6;
+$app-primary: #004a51;
+$app-primary-hover: #001b1e;
+
+$app-secondary: #00a4b3;
+
 $app-tertiary: #00bfff;
+$app-tertiary-hover: #0099cc;
 
 $app-disabled: #a2a2a2;
-$app-active: #fa7fa7;
+$app-active: #ff0040;
 
-$app-success: #00b500;
-$app-error: #b50000;
+$app-success: #00ff40;
+$app-error: #ff4000;
 
 $app-warn: #b55555;
 $app-info: #55b555;

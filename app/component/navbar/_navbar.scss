@@ -17,41 +17,53 @@
   .nav-container{
     padding: 0 10px;
 
+    // login and signup buttons
     .btn-nav {
       float: right;
+      -webkit-border-radius: 16px;
+      border-radius: 16px;
       font-size: 16px;
-      padding: 4px 10px;
+      padding: 4px 20px;
       margin: 14px 15px;
     }
 
+    .btn-nav:hover {
+      color: $app-white;
+      background-color: $app-tertiary;
+    }
+    
+    .navbar-pic {
+      width: 53px;
+      height: 53px;
+      border-radius: 100%;
+    }
+
+    // profile image dropdown button
     .btn-right {
       float: right;
       margin-right: 0px;
       margin-top: 1px;
       background-color: tranparent;
       border-radius: 100%;
-
     }
 
+    .btn-right:hover{
+      background-color: $app-tertiary;
+    }
+    //logo
     .navbar-brand {
       float: left;
-      margin-left: 15px;
-      margin-top: 2px;
-      font-size: 40px;
+      margin: 2px 0px 2px 15px;
+      font-size: 38px;
       vertical-align: center;
       display:inline-block;
       text-decoration: none;
       color: $app-white;
     }
     .navbar-brand:hover {
-      color: #fff;
+      color: $app-secondary;
     }
 
-    .navbar-pic {
-      width: 53px;
-      height: 53px;
-      border-radius: 100%;
-    }
   }
 }
 

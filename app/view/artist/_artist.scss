@@ -1,23 +1,39 @@
 @import "theme";
+// Profile header styles
+.profile-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  background-color: $app-tertiary;
+}
 
 .artist-container {
   width: 100%;
   margin: 2% 0;
   padding: 2%;
 
-  h2{
+  // General form styles for everything on artist profile page
+  input, select{
+    margin: 1% 0;
+    border-radius: 3px;
+    outline:none;
+  }
+  // Form styles for creating galleries and listings
+  .create-form{
+    input,select{
+      margin-right: 20px;
+      padding: 10px;
+    }
+  }
+  // Form styles for editing galleries and listings
+  .edit-form{
+    input,select{
+      width:100%;
+      padding: 5px;
+    }
+  }
+
+  h2 {
     text-transform: uppercase;
   }
-
-  input, select{
-    width: 100%;
-    margin: 1% 0;
-  }
-}
-
-.profile-container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 2%;
-  background-color: $app-tertiary;
 }
