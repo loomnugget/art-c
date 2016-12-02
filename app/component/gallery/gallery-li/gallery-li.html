@@ -9,34 +9,34 @@
               <h4><span>Description: </span>{{ galleryLICtrl.gallery.desc }}</h4>
               <h4><span>Category: </span>{{ galleryLICtrl.gallery.category }}</h4>
               <h4><span>Created on: </span>{{ galleryLICtrl.gallery.created | date:short }}</h4>
-            </div><!--end row-->
+            </div>
 
-              <edit-gallery
-                ng-if="galleryLICtrl.showEditGallery"
-                gallery="galleryLICtrl.gallery"> </edit-gallery>
-            </div><!--end row-->
+          <edit-gallery
+            ng-if="galleryLICtrl.showEditGallery"
+            gallery="galleryLICtrl.gallery"> </edit-gallery>
+        </div>
 
 
-            <div class="edit-delete-container "><!-- Edit/delete icon row-->
-              <span
-                ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
-                class="fa fa-pencil">
-              </span>
-              <span
-                ng-hide="galleryLICtrl.homeView"
-                ng-click="galleryLICtrl.deleteGallery()"
-                class="fa fa-trash">
-              </span>
-              <span class="fa fa-upload"
-                ngf-select
-                ng-model="galleryLICtrl.pic.file">
-              </span>
-              <span
-                class="fa fa-cloud-upload"
-                ng-click="galleryLICtrl.uploadGalleryPic()"
-                class="btn btn-upload">
-              </spam>
-            </div> <!--end edit-delete-container-->
+        <div class="edit-delete-container">
+          <span
+            ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
+            class="fa fa-pencil">
+          </span>
+          <span
+            ng-hide="galleryLICtrl.homeView"
+            ng-click="galleryLICtrl.deleteGallery()"
+            class="fa fa-trash">
+          </span>
+          <span class="fa fa-upload"
+            ngf-select
+            ng-model="galleryLICtrl.pic.file">
+          </span>
+          <span
+            class="fa fa-cloud-upload"
+            ng-click="galleryLICtrl.uploadGalleryPic()"
+            class="btn btn-upload">
+          </spam>
+        </div> <!--end edit-delete-container-->
 
           <div class="row">
             <div class="frame-square">
