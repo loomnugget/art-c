@@ -27,16 +27,6 @@ li {
   list-style: none;
 }
 
-//General form styles
-input,
-select {
-  font-size: 100%;
-  border: 1.5px solid $app-secondary;
-  border-radius: 5px;
-  padding: 1% 2%;
-  color: $app-black;
-}
-
 //Modal form styles
 .loginSignupForm{
   .button{ margin-top: 20px;}
@@ -46,7 +36,7 @@ select {
   }
   input{
     font-size:18px;
-    padding:5px 10px 5px 5px;
+    padding:10px;
     display:block;
     border-radius: 4px;
     width: 100%;
@@ -80,13 +70,15 @@ select {
 }
 
 //General button styles
+
+//container for login/signup form buttons
 .btn-container {
   padding-top: 30px;
 }
 
-
+//default button
 .btn {
-  background: transparent;
+  background: $app-white;
   border: none;
   text-transform: uppercase;
   border-radius: 10px;
@@ -97,6 +89,16 @@ select {
   transition: all 0.3s;
   color: $app-black;
 }
+.btn:hover {
+  background:#fff;
+  color: $app-black;
+}
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	transition: all 0.3s;
+}
 
 .btn-dark {
   margin: 2px;
@@ -106,29 +108,40 @@ select {
   display: inline-block;
   outline: none;
   border: none;
-  background-color: $app-tertiary;
+  background-color: $app-primary;
   color: #fff;
   transition: all 0.3s;
 }
-
 .btn-dark:hover{
-  background:#fff;
-  color: $app-black;
+  background:$app-primary-hover;
 }
 
-
-.btn:hover {
-  background:#fff;
-  color: $app-black;
+.btn-round {
+  background: $app-tertiary;
+  padding: 7.5px 15px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  color: $app-white;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.btn-round:hover {
+  background: $app-tertiary-hover;
+}
+.btn-round:active {
+  background:  $app-tertiary-hover;
 }
 
-.btn:after {
-	content: '';
-	position: absolute;
-	z-index: -1;
-	transition: all 0.3s;
+//signup and login button in modal are btn-dark + btn-landing
+.btn-landing{
+  padding: 14px;
 }
 
+//Error and success classes for validation
 .has-error {
   border: 1px solid $app-warn;
 }
