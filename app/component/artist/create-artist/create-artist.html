@@ -1,6 +1,7 @@
 <section class="create-artist-container">
 
   <form
+    class="create-artist-form"
     novalidate
     name="artistForm"
     ng-hide="createArtistCtrl.success"
@@ -8,7 +9,6 @@
 
     <h2>Create your artist profile</h2>
 
-    <label for="firstname"> First Name </label>
     <input
       required
       type="text"
@@ -24,7 +24,6 @@
       }"
       ng-model="createArtistCtrl.artist.firstname">
 
-    <label for="lastname"> Last Name </label>
     <input
       required
       type="text"
@@ -40,7 +39,6 @@
       }"
       ng-model="createArtistCtrl.artist.lastname">
 
-    <label for="phone"> Phone Number </label>
     <input
       required
       type="text"
@@ -57,7 +55,6 @@
       }"
       ng-model="createArtistCtrl.artist.phone">
 
-    <label for="city"> City </label>
     <input
       required
       type="text"
@@ -74,7 +71,6 @@
       }"
       ng-model="createArtistCtrl.artist.city">
 
-    <label for="zip"> Zip Code </label>
     <input
       required
       type="text"

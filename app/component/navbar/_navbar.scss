@@ -31,6 +31,13 @@
       color: $app-white;
       background-color: $app-tertiary;
     }
+    
+    .navbar-pic {
+      width: 53px;
+      height: 53px;
+      border-radius: 100%;
+    }
+
     // profile image dropdown button
     .btn-right {
       float: right;
@@ -38,6 +45,10 @@
       margin-top: 1px;
       background-color: tranparent;
       border-radius: 100%;
+    }
+
+    .btn-right:hover{
+      background-color: $app-tertiary;
     }
     //logo
     .navbar-brand {
@@ -53,11 +64,6 @@
       color: $app-secondary;
     }
 
-    .navbar-pic {
-      width: 53px;
-      height: 53px;
-      border-radius: 100%;
-    }
   }
 }
 

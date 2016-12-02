@@ -1,4 +1,11 @@
 @import "theme";
+// Profile header styles
+.profile-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2%;
+  background-color: $app-tertiary;
+}
 
 .artist-container {
   width: 100%;
@@ -29,12 +36,4 @@
   h2 {
     text-transform: uppercase;
   }
-}
-
-// Profile header styles
-.profile-container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 2%;
-  background-color: $app-tertiary;
 }
