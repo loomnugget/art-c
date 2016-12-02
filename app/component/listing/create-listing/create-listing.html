@@ -1,11 +1,10 @@
 <section class="create-listing-container">
-  <div class="list-form">
+  <div class="row">
     <form
+      class="create-form"
       novalidate
       name="createListingForm"
-      class="form-inline"
       ng-submit="createListingCtrl.createListing(createListingCtrl.listing)">
-
 
         <input
           required
@@ -33,6 +32,7 @@
           tooltip-placement="bottom-right"
           tooltip-trigger="'focus'"
           ng-minlength="4"
+          ng-maxlength="100"
           ng-class="{
             'has-error': createListingForm.desc.$invalid,
             'has-success': createListingForm.desc.$valid,
@@ -55,9 +55,8 @@
           }"
           ng-model="createListingCtrl.listing.category">
 
-      <button class="btn btn-primary" type="submit"> Create </button>
+      <button class="btn-round" type="submit"> Create </button>
 
     </form>
-
   </div>
 </section>

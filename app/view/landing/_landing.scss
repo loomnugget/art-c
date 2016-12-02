@@ -1,1 +1,47 @@
 @import "theme";
+
+//Modal form styles
+.loginSignupForm{
+  .button{ margin-top: 20px;}
+  .group {
+    position:relative;
+    margin-top:25px;
+  }
+  input{
+    font-size:18px;
+    padding:6px;
+    display:block;
+    border-radius: 4px;
+    width: 100%;
+    }
+  input:focus{ outline:none; }
+
+  label{
+    color:#999;
+    font-size:18px;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:7px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+  }
+
+  input:focus ~ label, input:valid ~ label{
+    top:-20px;
+    font-size:14px;
+    color:$app-black;
+  }
+
+  //Changes Placeholder Color
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: $app-black;
+  }
+}
+
+//container for login/signup form buttons
+.btn-container {
+  padding-top: 30px;
+}

@@ -78,13 +78,16 @@
 
   .fa {
     color: $app-tertiary;
-    transition: 1s;
+    transition: .2s;
   }
   .fa-trash:hover {
     color: $app-warn;
   }
   .fa-pencil:hover {
     color: $app-info;
+  }
+  .fa-upload:hover, .fa-cloud-upload:hover{
+    color: $app-white;
   }
 }
 
