@@ -1,22 +1,14 @@
 @import "theme";
 .home {
-  padding: 3%;
+  padding: 3% 5%;
   h2 {
     text-align: center;
+    text-transform: uppercase;
     padding: 0 3%;
-    color: $app-white;
+    color: $app-black;
   }
-  .gallery-container {
-    margin-bottom: 40px;
-    width: 100%;
-    padding: 1%;
+  .featured-container{
+    margin: 40px 0;
   }
-  img {
-    width: 80%;
-    height: 100%;
-    margin-left: 10%;
-    overflow: hidden;
-    max-height: 300px;
-    min-height: 300px;
-  }
+
 }

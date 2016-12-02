@@ -1,17 +1,19 @@
 @import "theme";
 
 .artist-li {
-  margin: 1.6%;
-  padding: 0;
-  width: 20%;
-  float: left;
+  width: 100%;
+  margin: 1.6% 0;
+  padding: 3px;
   background-color: $app-black;
   border: 1px solid $app-black;
   color: $app-white;
+  text-transform: uppercase;
+  text-align:center;
 
-  .artist-li-container{
-    width: 100%;
-  }
+  .portfolio-container{
+      width: 100%;
+      position: relative;
+    }
   .wp-caption {
     width: 100%;
     position: relative;
@@ -21,6 +23,15 @@
   .wp-caption img {
     display: block;
     width: 100%;
+    height: 300px;
+    max-height: 320px;
+    object-fit: cover;
   }
+}
 
+@media only screen and (min-width: 800px){
+.artist-li {
+  width: 32%;
+  margin: .666667%;
+  }
 }

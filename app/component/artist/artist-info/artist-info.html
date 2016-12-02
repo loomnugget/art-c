@@ -1,12 +1,21 @@
 <section class="artist-info-container">
+  <div class="row">
 
-  <h2><span>Name: </span>{{artistInfoCtrl.artist.firstname}} {{artistInfoCtrl.artist.lastname}} </h2>
-  <h2><span>Email: </span>{{artistInfoCtrl.artist.email}} </h2>
-  <h2><span>Phone: </span>{{artistInfoCtrl.artist.phone}} </h2>
-  <h2><span>Zip: </span>{{artistInfoCtrl.artist.zip}} </h2>
+    <div class="col span-2-of-3">
+      <h2><span>Name: </span>{{artistInfoCtrl.artist.firstname}} {{artistInfoCtrl.artist.lastname}} </h2>
+      <h2><span>Email: </span>{{artistInfoCtrl.artist.email}} </h2>
+      <h2><span>Phone: </span>{{artistInfoCtrl.artist.phone}} </h2>
+      <h2><span>Zip: </span>{{artistInfoCtrl.artist.zip}} </h2>
+    </div>
 
-  <span ng-click="artistInfoCtrl.showEditArtist = !artistInfoCtrl.showEditArtist" class="glyphicon glyphicon-pencil"></span>
+    <div class="col span-1-of-3">
+      <div class="update-icon">
+        <span ng-click="artistInfoCtrl.showEditArtist = !artistInfoCtrl.showEditArtist" class="glyphicon glyphicon-pencil"></span>
+      </div>
+    </div>
 
+  </div>
+<div class="row">
   <edit-artist on-update="artistInfoCtrl.handleEditArtist()" ng-if="artistInfoCtrl.showEditArtist" artist="artistInfoCtrl.artist"></edit-artist>
-
+</div>
 </section>

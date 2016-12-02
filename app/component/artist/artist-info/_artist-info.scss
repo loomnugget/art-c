@@ -1,12 +1,26 @@
 @import "theme";
+@import "custom-bootstrap";
 
 .artist-info-container {
 
   h2 {
-    color: $app-black;
-    font-size: 120%;
+    color: $app-white;
+    font-size: 110%;
+    span{
+      font-weight: bold;
+    }
   }
-  span{
-    font-weight: bold;
+  .update-icon{
+    padding: 5%;
+    margin-top: 30px;
+
+    span{
+      font-size: 2em;
+      color: $app-white;
+    }
+
+    span:hover{
+      color: $app-black;
+    }
   }
 }
