@@ -9,12 +9,10 @@
 
     <div ng-if="!artistPicCtrl.artist.photoID.imageURI" class="row">
       <button class="btn-round"
-        ngf-select
+        ngf-select="artistPicCtrl.uploadArtistPic()"
         ng-model="artistPicCtrl.pic.file">
         Select Image
       </button>
-
-      <button ng-click="artistPicCtrl.uploadArtistPic()" class="btn-round"> Upload Image </button>
     </div>
 
   </form>
