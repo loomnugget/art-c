@@ -69,6 +69,7 @@ function ArtistController($log, $location, $rootScope, $window, galleryService, 
   };
 
   this.setup = function(){
+    if(!this.artist) return;
     this.checkArtistStatus()
     .then(() => {
       this.pageLoad();

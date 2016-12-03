@@ -5,13 +5,14 @@ require('./_artist-info.scss');
 module.exports = {
   template: require('./artist-info.html'),
   controllerAs: 'artistInfoCtrl',
-  controller: ['$log', '$location', 'artistService', ArtistInfoController],
+  controller: ['$log', '$location', '$uibModal', ArtistInfoController],
   bindings: {
     artist: '<',
+    deleteToggle: '&',
   },
 };
 
-function ArtistInfoController($log, $location, artistService){
+function ArtistInfoController($log, $location, $uibModal){
   $log.debug('init artistInfoCtrl');
 
   this.showEditArtist = false;
@@ -20,10 +21,16 @@ function ArtistInfoController($log, $location, artistService){
     this.showEditArtist = false;
   };
 
-  this.deleteArtist = function(){
-    artistService.deleteArtist(this.artist)
-    .then(() => {
-      $location.url('/home');
+  this.open = function(artist) {
+    let modalInstance = $uibModal.open({
+      component: 'delete-modal',
+      resolve: {
+        deleteToggle: function(){
+          return artist;
+        },
+      },
     });
+
+    return modalInstance;
   };
 }
