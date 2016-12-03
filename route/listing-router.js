@@ -101,7 +101,7 @@ listingRouter.delete('/api/gallery/:galleryID/listing/:listingID', bearerAuth, f
     let s3DeletePhotoArray = [];
     for(var i=0; i<photos.length; i++){
       s3DeletePhotoArray.push(s3.deleteObject({
-        Bucket: 'artc-staging-assets',
+        Bucket: `${process.env.AWS_BUCKET}`,
         Key: photos[i].objectKey,
       }).promise());
     }
