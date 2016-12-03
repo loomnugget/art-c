@@ -8,6 +8,7 @@ html, body {
   font-family: $app-font;
   background-color: $app-white;
   color: $app-black;
+  overflow: auto;
 }
 
 //Horizontal Row
@@ -27,6 +28,10 @@ li {
   list-style: none;
 }
 
+footer {
+  position: relative;
+  bottom: 0;
+}
 
 //default button
 .btn {
