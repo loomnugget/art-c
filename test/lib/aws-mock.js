@@ -9,7 +9,7 @@ exports.uploadMock = {
   Location: 'https://artc-staging-assets.s3.amazonaws.com/03a7990e1adf9fa8944df58dfc81cc5b.jpg',
   key: '03a7990e1adf9fa8944df58dfc81cc5b.jpg',
   Key: '03a7990e1adf9fa8944df58dfc81cc5b.jpg',
-  Bucket: 'artc-staging-assets',
+  Bucket: `${process.env.AWS_BUCKET}`,
 };
 
 AWSMock.mock('S3', 'upload', function(params, callback){
