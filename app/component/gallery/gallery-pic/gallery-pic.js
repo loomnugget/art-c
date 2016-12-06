@@ -15,7 +15,6 @@ function GalleryPicController($log, $location, $window, picService) {
   $log.debug('init galleryPicCtrl');
 
   this.defaultPic = require('../../../scss/images/default-thumbnail.jpg');
-  // this.pic = {};
 
 
   this.reloadRoute = function(){
