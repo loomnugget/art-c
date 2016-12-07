@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   template: require('./listing-container.html'),
   controller: ['$log', 'listingService', ListingContainerController],
