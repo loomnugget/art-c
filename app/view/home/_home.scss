@@ -1,0 +1,14 @@
+@import "theme";
+.home {
+  padding: 3% 5%;
+  h2 {
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0 3%;
+    color: $app-black;
+  }
+  .featured-container{
+    margin: 40px 0;
+  }
+
+}

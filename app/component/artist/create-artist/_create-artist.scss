@@ -1,0 +1,26 @@
+@import "theme";
+
+.create-artist-container {
+  width: 80%;
+  margin: 2% 10%;
+  border-radius: 5px;
+
+  form {
+    padding: 3% 5%;
+    background-color: $app-tertiary;
+
+    input,
+    select {
+      width: 100%;
+      font-size: 100%;
+      border-radius: 4px;
+      margin: 1%;
+      padding: 1%;
+      color: $app-black;
+    }
+
+    input:focus{
+      outline: none;
+    }
+  }
+}

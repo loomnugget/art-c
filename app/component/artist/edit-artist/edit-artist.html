@@ -1,0 +1,68 @@
+<section class="edit-artist-container">
+
+  <form
+    novalidate
+    name="editArtistForm"
+    class="edit-artist"
+    ng-submit="editArtistCtrl.updateArtist()">
+
+      <input
+        type="text"
+        name="firstname"
+        class="form-control"
+        placeholder="First Name"
+        tooltip-placement="bottom-right"
+        tooltip-trigger="'focus'"
+        ng-minlength="1"
+        ng-class="{
+          'has-error': editArtistForm.firstname.$invalid,
+          'has-success': editArtistForm.firstname.$valid,
+        }"
+        ng-model="editArtistCtrl.artist.firstname">
+
+        <input
+          type="text"
+          name="lastname"
+          class="form-control"
+          placeholder="Last Name"
+          tooltip-placement="bottom-right"
+          tooltip-trigger="'focus'"
+          ng-minlength="1"
+          ng-class="{
+            'has-error': editArtistForm.lastname.$invalid,
+            'has-success': editArtistForm.lastname.$valid,
+          }"
+          ng-model="editArtistCtrl.artist.lastname">
+
+          <input
+            type="text"
+            name="phone"
+            class="form-control"
+            placeholder="Phone"
+            tooltip-placement="bottom-right"
+            tooltip-trigger="'focus'"
+            ng-minlength="1"
+            ng-class="{
+              'has-error': editArtistForm.phone.$invalid,
+              'has-success': editArtistForm.phone.$valid,
+            }"
+            ng-model="editArtistCtrl.artist.phone">
+
+            <input
+              type="text"
+              name="zip"
+              class="form-control"
+              placeholder="Zip"
+              tooltip-placement="bottom-right"
+              tooltip-trigger="'focus'"
+              ng-minlength="1"
+              ng-class="{
+                'has-error': editArtistForm.zip.$invalid,
+                'has-success': editArtistForm.zip.$valid,
+              }"
+              ng-model="editArtistCtrl.artist.zip">
+
+    <button class="btn-round"> Update </button>
+
+  </form>
+</section>

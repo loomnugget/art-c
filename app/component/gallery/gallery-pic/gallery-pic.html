@@ -1,0 +1,12 @@
+<div class="gallery-pic">
+
+  <form
+    novalidate>
+    <div ng-if="!galleryPicCtrl.gallery.photoID.imageURI">
+
+    </div>
+
+   <img ng-src="{{galleryPicCtrl.gallery.photoID.imageURI || galleryPicCtrl.defaultPic}}">
+
+  </form>
+</div>

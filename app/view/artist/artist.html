@@ -1,0 +1,38 @@
+<!-- Main navbar -->
+<navbar artist="artistCtrl.artist" app-title="[art-c]"></navbar>
+
+<!-- if there is no artist, show create artist form-->
+<section class="create-artist">
+  <create-artist submission="artistCtrl.artistFormSubmission(artistData)" ng-if="!artistCtrl.artist"></create-artist>
+</section>
+
+<!-- Profile nav/header sits outside of the main artist container -->
+<div class="profile-container">
+  <div class="row">
+    <!-- Profile picture-->
+    <div class="col span-1-of-3">
+      <artist-pic artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-pic>
+    </div>
+    <!-- Artist info -->
+    <div class="col span-2-of-3">
+      <artist-info artist="artistCtrl.artist" ng-if="artistCtrl.artist"></artist-info>
+    </div>
+  </div>
+</div>
+<!-- Main artist container has separate responsive margins than profile header -->
+<main class="artist-container">
+  <!-- Create Gallery -->
+  <div class="row">
+    <create-gallery ng-if="artistCtrl.artist" artist="artistCtrl.artist"></create-gallery>
+  </div>
+  <!-- List of galleries-->
+  <div class="row gallery-container">
+    <gallery-li delete-check="artistCtrl.galleryDeleteCheck(gallery)" ng-click="artistCtrl.currentGallery = gallery" gallery="gallery" ng-repeat="gallery in artistCtrl.galleries">
+    </gallery-li>
+  </div>
+  <!-- Listing container has create a listing and list of listings per gallery-->
+  <div class="row">
+    <listing-container ng-if="artistCtrl.currentGallery" gallery="artistCtrl.currentGallery"></listing-container>
+  </div>
+
+</main>

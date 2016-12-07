@@ -1,0 +1,21 @@
+<navbar artist="homeCtrl.loggedArtist" app-title="{{homeCtrl.title}}"> </navbar>
+
+<main class="home">
+
+  <div class="featured-container clearfix">
+    <h2> Featured Galleries </h2>
+    <home-gallery-li ng-repeat="item in homeCtrl.galleries"
+      gallery="item"
+      ng-click="homeCtrl.currentGallery=item">
+    </home-gallery-li>
+  </div>
+
+  <div class="featured-container clearfix">
+    <h2> Featured Artists </h2>
+      <artist-li ng-repeat="item in homeCtrl.artists"
+        artist="item"
+        ng-click="homeCtrl.currentArtist=item">
+      </artist-li>
+  </div>
+
+</main>

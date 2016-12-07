@@ -1,0 +1,55 @@
+<li class="listing-li">
+  <div class="portfolio-container">
+
+    <figure class="wp-caption">
+      <img ng-src="{{listingLICtrl.listing.photoID.imageURI}}">
+
+       <div class="row thumbnail-desc-container">
+
+           <div class="listing-info" ng-hide="listingLICtrl.showEditListing">
+             <h3><span>Title: </span> {{ listingLICtrl.listing.title }} </h3>
+             <h4><span>Description: </span> {{ listingLICtrl.listing.desc }}<h4>
+             <h4>Category: </span> {{ listingLICtrl.listing.category }}<h4>
+             <h4>Created on: </span> {{ listingLICtrl.listing.created }}<h4>
+           </div>
+
+           <edit-listing on-success="listingLICtrl.handleEditListing()" ng-if="listingLICtrl.showEditListing" listing="listingLICtrl.listing"> </edit-listing>
+
+         </div>
+
+         <div class="row edit-delete-container"><!-- Edit/delete icon row-->
+            <span
+              ng-click="listingLICtrl.showEditListing = !listingLICtrl.showEditListing"
+              class="fa fa-pencil">
+            </span>
+            <span
+              ng-click="listingLICtrl.deleteListing()"
+              class="fa fa-trash">
+            </span>
+            <span class="fa fa-upload"
+              ngf-select
+              ng-model="galleryLICtrl.pic.file">
+            </span>
+            <span
+              class="fa fa-cloud-upload"
+              ng-click="galleryLICtrl.uploadGalleryPic()"
+              class="btn btn-upload">
+            </spam>
+
+        </div>
+
+
+      </div>
+
+      <div class="row">
+        <div class="frame-square">
+          <div class="crop">
+            <listing-pic listing="listingLICtrl.listing"></listing-pic>
+          </div>
+        </div>
+      </div>
+   </div> <!--end row-->
+ </figure>
+</div> <!--end portfolio-container-->
+
+</li>

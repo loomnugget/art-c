@@ -1,0 +1,9 @@
+<div class="listing-pic">
+
+  <form
+    novalidate>
+    <img ng-src="{{listingPicCtrl.listing.photoID.imageURI || listingPicCtrl.defaultPic}}">
+    <div ng-if="!listingPicCtrl.listing.photoID.imageURI container">
+    </div>
+  </form>
+</div>

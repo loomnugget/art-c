@@ -1,0 +1,13 @@
+@import "theme";
+
+.artist-pic {
+  .img-container {
+    width: 80%;
+    margin: 0 10%;
+
+    img{
+      width: 100%;
+      border-radius: 100%;
+    }
+  }
+}

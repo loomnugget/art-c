@@ -1,0 +1,63 @@
+@import "theme";
+
+.footer {
+
+  background-color: #212121;
+
+  .footer-container {
+
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .footer-copyright {
+
+      flex: default;
+      padding-left: 3%;
+      padding-top: 1%;
+
+    }
+
+    .footer-github {
+      flex: default;
+      padding-right: 3%;
+      padding-top: 1%;
+      span{
+        color: $app-disabled;
+        font-size: 2em;
+      }
+      span:hover{
+        color: $app-white;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .footer {
+
+    .footer-container {
+      width: 100%;
+      display: block;
+      text-align: center;
+      padding-top: 5%;
+
+
+      .footer-copyright {
+        padding-left: 0;
+
+      }
+
+      .footer-github {
+        padding-right: 0;
+        padding-bottom: 5%;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<li class="gallery-li">
+ <div class="portfolio-container">
+
+   <figure class="wp-caption">
+        <div class="row thumbnail-desc-container">
+            <div class="gallery-info" ng-hide="galleryLICtrl.showEditGallery"><!-- Gallery info row-->
+              <h3><span>Title: </span>{{ galleryLICtrl.gallery.name }} </h3>
+              <h4><span>Description: </span>{{ galleryLICtrl.gallery.desc }}</h4>
+              <h4><span>Category: </span>{{ galleryLICtrl.gallery.category }}</h4>
+              <h4><span>Created on: </span>{{ galleryLICtrl.gallery.created | date:short }}</h4>
+            </div>
+
+          <edit-gallery
+            ng-if="galleryLICtrl.showEditGallery"
+            gallery="galleryLICtrl.gallery"> </edit-gallery>
+        </div>
+
+
+        <div class="edit-delete-container">
+          <span
+            ng-click="galleryLICtrl.showEditGallery = !galleryLICtrl.showEditGallery"
+            class="fa fa-pencil">
+          </span>
+          <span
+            ng-hide="galleryLICtrl.homeView"
+            ng-click="galleryLICtrl.deleteGallery()"
+            class="fa fa-trash">
+          </span>
+          <span class="fa fa-upload"
+            ngf-select="galleryLICtrl.uploadGalleryPic()"
+            ng-model="galleryLICtrl.pic.file">
+          </span>
+
+        </div> <!--end edit-delete-container-->
+
+          <div class="row">
+            <div class="frame-square">
+              <div class="crop">
+                <gallery-pic ng-hide="galleryLICtrl.homeView" gallery=galleryLICtrl.gallery><gallery-pic>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </figure>
+  </div> <!--end portfolio-container-->
+</li>

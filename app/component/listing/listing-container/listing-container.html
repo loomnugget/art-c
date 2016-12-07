@@ -1,0 +1,15 @@
+<div class="listing-container">
+  <h2>Create a listing for: {{listingContainerCtrl.gallery.name}} </h2>
+  <div>
+
+    <create-listing gallery="listingContainerCtrl.gallery"> </create-listing>
+    <h2>My Listings</h2>
+    <hr>
+    <listing-li class="listing"
+      delete-listing-check="listingContainerCtrl.currentListingCheck()"
+      ng-repeat="listing in listingContainerCtrl.gallery.listings"
+      listing="listing"
+      gallery="listingContainerCtrl.gallery"
+      ng-click="listingContainerCtrl.currentListing = listing"> </listing-li>
+  </div>
+</div>
