@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_gallery-pic.scss');
-
 module.exports = {
   template: require('./gallery-pic.html'),
   controller: ['$log', '$location', '$window', 'picService', GalleryPicController],

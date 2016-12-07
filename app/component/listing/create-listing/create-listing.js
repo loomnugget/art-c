@@ -1,7 +1,5 @@
 'use strict';
 
-require('./_create-listing.scss');
-
 module.exports = {
   template: require('./create-listing.html'),
   controller: ['$log', 'listingService', CreateListingController],
