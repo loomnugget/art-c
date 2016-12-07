@@ -7,7 +7,7 @@ module.exports = ['$log', '$rootScope', 'galleryService', 'artistService', HomeC
 function HomeController($log, $rootScope, galleryService, artistService){
   $log.debug('init homeCtrl');
 
-  this.title = 'You are logged in';
+  this.title = '[art-c]';
 
   this.loggedArtist;
   this.galleries = [];
@@ -20,7 +20,7 @@ function HomeController($log, $rootScope, galleryService, artistService){
       this.loggedArtist = artist;
     })
     .catch( () => {
-      this.artist = null;
+      this.loggedArtist = null;
     });
   };
 
