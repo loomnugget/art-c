@@ -58,10 +58,10 @@ function artistService($q, $log, $http, authService){
     });
   };
 
-  service.deleteArtist = function(artistID){
+  service.deleteArtist = function(artist){
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/artist/${artistID}`;
+      let url = `${__API_URL__}/api/artist/${artist._id}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,10 +70,10 @@ function artistService($q, $log, $http, authService){
       return $http.delete(url, config);
     })
     .then(() => {
-      $log.debug('sucessful deletion');
+      $log.debug('successful deletion');
       for(let i = 0; i < service.artists.length; i++){
         let current = service.artists[i];
-        if(current._id === artistID){
+        if(current._id === artist._id){
           service.artists.splice(i,1);
           break;
         }

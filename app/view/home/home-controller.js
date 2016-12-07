@@ -15,6 +15,7 @@ function HomeController($log, $rootScope, galleryService, artistService){
 
   this.checkArtistStatus = function() {
     $log.debug('init checkartiststatus');
+    if(!this.artist) return;
     artistService.checkArtist()
     .then( artist => {
       this.loggedArtist = artist;
