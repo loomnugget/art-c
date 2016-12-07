@@ -2,7 +2,6 @@
  <div class="portfolio-container">
 
    <figure class="wp-caption">
-       <!-- <img ng-hide="!galleryLICtrl.homeView" ng-src="{{galleryLICtrl.gallery.photoID.imageURI}}"> -->
         <div class="row thumbnail-desc-container">
             <div class="gallery-info" ng-hide="galleryLICtrl.showEditGallery"><!-- Gallery info row-->
               <h3><span>Title: </span>{{ galleryLICtrl.gallery.name }} </h3>
@@ -31,7 +30,7 @@
             ngf-select="galleryLICtrl.uploadGalleryPic()"
             ng-model="galleryLICtrl.pic.file">
           </span>
-          
+
         </div> <!--end edit-delete-container-->
 
           <div class="row">

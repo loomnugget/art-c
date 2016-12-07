@@ -18,8 +18,6 @@ const pageRouter = module.exports = Router();
 
 pageRouter.get('/api/artist', function(req, res, next){
   debug('hit route GET /api/artist');
-  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  // let skip = offset + pageSize * page ;
   Artist.find()
   .populate('listings')
   .populate('artists.photoID')

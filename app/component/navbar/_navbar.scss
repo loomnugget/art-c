@@ -8,7 +8,6 @@
 .navbar {
   background-color: #212121;
   height: 60px;
-  // position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -31,7 +30,7 @@
       color: $app-white;
       background-color: $app-tertiary;
     }
-    
+
     .navbar-pic {
       width: 53px;
       height: 53px;
@@ -76,8 +75,6 @@
         margin-left: 0;
         margin-right: 5px;
         margin-top: 17px;
-
-
       }
     }
 }

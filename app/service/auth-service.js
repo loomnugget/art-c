@@ -75,7 +75,5 @@ function authService($q, $log, $http, $window){
       return $q.reject(err);
     });
   };
-
-  // return service
   return service;
 }
