@@ -10,12 +10,10 @@ Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt
 
 A RESTful API built using Node.js, MongoDB, Express.js and a front-end built using AngularJS. The back-end was built over a single week, with the front-end built over another week. This was a final project for the Code Fellows 401 Javascript course.
 
-#### Technologies of Note used
-
+##### Technologies of Note used
 <sub>AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.</sub>
 
-## CURRENT VERSION `v0.5.0`
-
+### CURRENT VERSION `v0.5.0`
 <sub>Please view the Projects for all API information.</sub>
 
 The current version of this API allows:
