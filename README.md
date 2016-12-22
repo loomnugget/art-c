@@ -5,8 +5,7 @@
 Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt  
 ---
 # **ART-C**
-##### Technologies of Note used
-<sub>AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.</sub>
+##### Built using AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.
 
 #### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
@@ -23,9 +22,6 @@ The current version of this API allows:
   - For **all Users** to **GET** Artist's _Listings_ by **artistID**, **galleryID** or **listingID**.
 
 ---
-
-# **Contribution and Use**
-
 
 ### **Issues**
 
