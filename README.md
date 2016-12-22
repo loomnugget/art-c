@@ -12,11 +12,11 @@ A RESTful API built using Node.js, MongoDB, Express.js and a front-end built usi
 
 #### Technologies of Note used
 
-- AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.
+<sub>AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.</sub>
 
 ## CURRENT VERSION `v0.5.0`
 
-- Please view the Projects for all API information.
+<sub>Please view the Projects for all API information.</sub>
 
 The current version of this API allows:
   - For **authorized Users** to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
