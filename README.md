@@ -5,14 +5,15 @@
 Lee Broxson, Max Friedrichsen, Claudia Cedfeldt, Elizabeth Kleinschmidt  
 ---
 # **ART-C**
-##### Built using AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.
-
-#### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
 
 A RESTful API built using Node.js, MongoDB, Express.js and a front-end built using AngularJS. The back-end was built over a single week, with the front-end built over another week. This was a final project for the Code Fellows 401 Javascript course.
 
+#### Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike.
+
+###### Built using AngularJS, Node.js, Express,js, MongoDB, SASS, HTML5, Webpack, AWS S3, Facebook Oauth, Google OAuth, Karma, Chai, Mocha.
+
 ### CURRENT VERSION `v0.5.0`
-<sub>Please view the Projects for all API information.</sub>
+<sub>Please view the Projects for all API routes and information.</sub>
 
 The current version of this API allows:
   - For **authorized Users** to **POST**, **GET**, **PUT** and **DELETE** User _Accounts_.
