@@ -4,7 +4,7 @@ require('./_gallery-li.scss');
 
 module.exports = {
   template: require('./gallery-li.html'),
-  controller: ['$log', '$location', 'galleryService',  GalleryLIController],
+  controller: ['$log', '$location', 'galleryService', 'picService',  GalleryLIController],
   controllerAs: 'galleryLICtrl',
   bindings: {
     gallery: '<',
@@ -12,7 +12,7 @@ module.exports = {
   },
 };
 
-function GalleryLIController($log, $location, galleryService){
+function GalleryLIController($log, $location, galleryService, picService){
   $log.debug('init galleryLICtrl');
 
   this.showEditGallery = false;
@@ -33,6 +33,13 @@ function GalleryLIController($log, $location, galleryService){
     galleryService.deleteGallery(this.gallery._id, this.gallery.artistID)
     .then(() => {
       this.deleteCheck({gallery: this.gallery});
+    });
+  };
+
+  this.uploadGalleryPic = function(){
+    picService.uploadGalleryPic(this.gallery, this.pic)
+    .then(pic => {
+      this.gallery.photoID = pic;
     });
   };
 

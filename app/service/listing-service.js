@@ -25,7 +25,7 @@ function listingService($q, $log, $http, authService) {
       return $http.post(url, listing, config);
     })
     .then( res => {
-      $log.log('Successfully created listing');
+      $log.debug('Successfully created listing');
       let listing = res.data;
       gallery.listings.unshift(listing);
       return listing;
@@ -48,7 +48,7 @@ function listingService($q, $log, $http, authService) {
       return $http.delete(url, config);
     })
     .then( () => {
-      $log.log('Successful listing deletion.');
+      $log.debug('Successful listing deletion.');
       for(let i = 0; i < gallery.listings.length; ++i) {
         let current = gallery.listings[i];
         if (current._id === listing._id) {
@@ -77,7 +77,7 @@ function listingService($q, $log, $http, authService) {
       return $http.get(url, config);
     })
     .then( res => {
-      $log.log('successfull fetch gallery listings');
+      $log.debug('successfull fetch gallery listings');
       service.listings = res.data;
       return service.listings;
     })
@@ -108,7 +108,7 @@ function listingService($q, $log, $http, authService) {
           break;
         }
       }
-      $log.log('Successful update user listing');
+      $log.debug('Successful update user listing');
       return $q.resolve('Updated listing');
     })
     .catch(err => {

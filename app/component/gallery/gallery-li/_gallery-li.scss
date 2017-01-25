@@ -1,25 +1,114 @@
 @import "theme";
 
 .gallery-li {
-  margin: 1.6%;
-  padding: 0;
-  width: 30%;
-  float: right;
-  background-color: none;
-  border: 1px solid $app-white;
+  margin: 1.6% 5%;
+  width: 90%;
+  background-color: $app-black;
+  border: 1px solid $app-black;
+  color: $app-disabled;
+  // keeps the layout from resizing when edit is clicked
+  .thumbnail-desc-container{
+    height: 150px;
+  }
+  .gallery-info{
+    h3, h4 {
+      margin: 2%;
+    }
 
-  p {
-    margin: 2%;
+    h3{
+      color: $app-white;
+      text-transform: uppercase;
+      padding-bottom: 2px;
+    }
+    h4{
+      padding: 2px;
+    }
+    span{
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
   }
- span {
-   margin: 2%;
-   font-size: 2em;
- }
+// contains the icons
+  .edit-delete-container{
+    span {
+      margin: 1%;
+      padding-left: 3%;
+      font-size: 3em;
+      display: inline-block;
+      margin:10px 10px 0 0;
+      padding:5px 10px;
+    }
+  }
+
+  .portfolio-container{
+    width: 100%;
+    position: relative;
+  }
+
+  .wp-caption {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+  }
+
+  .wp-caption img {
+    display: block;
+    width: 100%;
+  }
+
+  .frame-square {
+    border: 2px solid #131313;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    width: 100%;
+    height: 350px;
+    margin-bottom: .3em;
+  }
+
+
+  .crop {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      display: block;
+      min-width: 100%;
+      min-height: 100%;
+      margin: auto;
+      position: absolute;
+      top: -100%;
+      right: -100%;
+      bottom: -100%;
+      left: -100%;
+    }
+  }
+
   .fa {
-    color: $app-primary;
-    transition: 1s;
+    color: $app-tertiary;
+    transition: .2s;
   }
-  .fa:hover {
+  .fa-trash:hover {
+    color: $app-warn;
+  }
+  .fa-pencil:hover {
+    color: $app-info;
+  }
+  .fa-upload:hover, .fa-cloud-upload:hover{
     color: $app-white;
+  }
+
+}
+
+@media only screen and (min-width: 800px){
+  .gallery-li {
+    width: 47%;
+    margin: 1.5%;
+  .frame-square{
+    height: 400px;
+  }
   }
 }

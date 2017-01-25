@@ -7,20 +7,20 @@ module.exports = ['$log', '$rootScope', 'galleryService', 'artistService', HomeC
 function HomeController($log, $rootScope, galleryService, artistService){
   $log.debug('init homeCtrl');
 
-  this.title = 'You are logged in';
+  this.title = '[art-c]';
 
   this.loggedArtist;
   this.galleries = [];
   this.artists =[];
 
   this.checkArtistStatus = function() {
-    $log.log('init checkartiststatus');
+    $log.debug('init checkartiststatus');
     artistService.checkArtist()
     .then( artist => {
       this.loggedArtist = artist;
     })
     .catch( () => {
-      this.artist = null;
+      this.loggedArtist = null;
     });
   };
 
@@ -30,7 +30,7 @@ function HomeController($log, $rootScope, galleryService, artistService){
     .then( galleries => {
       this.galleries = galleries;
       this.currentGallery = galleries[0];
-      $log.log('Succesfully found gallery');
+      $log.debug('Succesfully found gallery');
     });
   };
 
@@ -39,7 +39,7 @@ function HomeController($log, $rootScope, galleryService, artistService){
     .then( artists => {
       this.artists = artists;
       this.currentArtist = artists[0];
-      $log.log('Succesfully found artist');
+      $log.debug('Succesfully found artist');
     });
   };
   // When page is loaded (controller gets created), call fetchGalleries and fetchArtists

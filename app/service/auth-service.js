@@ -44,7 +44,7 @@ function authService($q, $log, $http, $window){
 
     return $http.post(url, user, config)
     .then( res => {
-      $log.log('success', res.data);
+      $log.debug('success', res.data);
       return service.setToken(res.data);
     })
     .catch(err => {
@@ -67,7 +67,7 @@ function authService($q, $log, $http, $window){
 
     return $http.get(url, config)
     .then( res => {
-      $log.log('success', res.data);
+      $log.debug('success', res.data);
       return service.setToken(res.data);
     })
     .catch( err => {
@@ -75,7 +75,5 @@ function authService($q, $log, $http, $window){
       return $q.reject(err);
     });
   };
-
-  // return service
   return service;
 }
