@@ -1,6 +1,6 @@
 {
   "name": "art-c",
-  "version": "0.0.0",
+  "version": "1.1.1",
   "description": "Art-C is a global-local art market, spotlighting local artists to both customers and other artists alike",
   "main": "server.js",
   "engines": {
@@ -10,6 +10,7 @@
     "test": "test"
   },
   "scripts": {
+    "watch": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot",
     "build": "./node_modules/webpack/bin/webpack.js",
     "build-watch": "./node_modules/webpack/bin/webpack.js -w",
     "frontend-test": "./node_modules/karma/bin/karma start --single-run",

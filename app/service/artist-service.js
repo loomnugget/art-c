@@ -26,7 +26,7 @@ function artistService($q, $log, $http, authService){
     })
 
     .then( res => {
-      $log.log('Succesfully created artist');
+      $log.debug('Succesfully created artist');
       let artist = res.data;
       service.artists.unshift(artist);
       return artist;
@@ -49,19 +49,19 @@ function artistService($q, $log, $http, authService){
       return $http.get(url, config);
     })
     .then( res => {
-      $log.log('found artist profile');
+      $log.debug('found artist profile');
       return res.data;
     })
     .catch( err => {
-      $log.log('no artist profile');
+      $log.debug('no artist profile');
       return $q.reject(err);
     });
   };
 
-  service.deleteArtist = function(artistID){
+  service.deleteArtist = function(artist){
     return authService.getToken()
     .then(token => {
-      let url = `${__API_URL__}/api/artist/${artistID}`;
+      let url = `${__API_URL__}/api/artist/${artist._id}`;
       let config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,10 +70,10 @@ function artistService($q, $log, $http, authService){
       return $http.delete(url, config);
     })
     .then(() => {
-      $log.log('sucessful deletion');
+      $log.debug('successful deletion');
       for(let i = 0; i < service.artists.length; i++){
         let current = service.artists[i];
-        if(current._id === artistID){
+        if(current._id === artist._id){
           service.artists.splice(i,1);
           break;
         }
@@ -100,7 +100,7 @@ function artistService($q, $log, $http, authService){
       return $http.get(url, config);
     })
     .then( res => {
-      $log.log('Succesfully fetched artist profiles');
+      $log.debug('Succesfully fetched artist profiles');
       service.artists = res.data;
       return service.artists;
     })
@@ -112,7 +112,7 @@ function artistService($q, $log, $http, authService){
 
   service.updateArtist = function(artist){
     $log.debug('artistService.updateArtist()');
-    
+
     return authService.getToken()
     .then( token => {
       let url = `${__API_URL__}/api/artist/${artist._id}`;
@@ -129,7 +129,7 @@ function artistService($q, $log, $http, authService){
     .then( res => {
       artist = res.data;
 
-      $log.log('Successfuly updated artist profile');
+      $log.debug('Successfuly updated artist profile');
       return $q.resolve('Updated!');
     })
     .catch(err => {

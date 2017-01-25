@@ -1,10 +1,10 @@
 <section class="create-gallery-container">
-<h2>Create a gallery</h2>
+<h2>Create a new gallery</h2>
   <div class="row">
   <form
+    class="create-form"
     novalidate
     name="createGalleryForm"
-    class="form-inline"
     ng-submit="createGalleryCtrl.createGallery(createGalleryCtrl.gallery)">
 
       <input
@@ -33,6 +33,7 @@
         tooltip-placement="bottom-right"
         tooltip-trigger="'focus'"
         ng-minlength="4"
+        ng-maxlength="100"
         ng-class="{
           'has-error': createGalleryForm.desc.$invalid,
           'has-success': createGalleryForm.desc.$valid,
@@ -55,11 +56,8 @@
         }"
         ng-model="createGalleryCtrl.gallery.category">
 
-    <div class="row">
-      <button class="btn btn-primary" type="submit"> Create </button>
-    </div>
+      <button class="btn-round" type="submit"> Create </button>
 
-  </form>
-</div>
-
+    </form>
+  </div>
 </section>

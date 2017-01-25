@@ -46,7 +46,7 @@ photoRouter.post('/api/artist/:artistID/photo', bearerAuth, upload.single('file'
 
   let params = {
     ACL: 'public-read',
-    Bucket: 'artc-staging-assets',
+    Bucket: `${process.env.AWS_BUCKET}`,
     Key: `${req.file.filename}${ext}`,
     Body: fs.createReadStream(req.file.path),
   };
@@ -104,7 +104,7 @@ photoRouter.delete('/api/artist/:artistID/photo/:photoID', bearerAuth, function(
   })
   .then( () => {
     let params = {
-      Bucket: 'artc-staging-assets',
+      Bucket: `${process.env.AWS_BUCKET}`,
       Key: tempPhoto.objectKey,
     };
     return s3.deleteObject(params).promise();
@@ -127,7 +127,7 @@ photoRouter.post('/api/gallery/:galleryID/photo', bearerAuth, upload.single('fil
 
   let params = {
     ACL: 'public-read',
-    Bucket: 'artc-staging-assets',
+    Bucket: `${process.env.AWS_BUCKET}`,
     Key: `${req.file.filename}${ext}`,
     Body: fs.createReadStream(req.file.path),
   };
@@ -186,7 +186,7 @@ photoRouter.delete('/api/gallery/:galleryID/photo/:photoID', bearerAuth, functio
   })
   .then( () => {
     let params = {
-      Bucket: 'artc-staging-assets',
+      Bucket: `${process.env.AWS_BUCKET}`,
       Key: tempPhoto.objectKey,
     };
     return s3.deleteObject(params).promise();
@@ -209,7 +209,7 @@ photoRouter.post('/api/listing/:listingID/photo', bearerAuth, upload.single('fil
 
   let params = {
     ACL: 'public-read',
-    Bucket: 'artc-staging-assets',
+    Bucket: `${process.env.AWS_BUCKET}`,
     Key: `${req.file.filename}${ext}`,
     Body: fs.createReadStream(req.file.path),
   };
@@ -269,7 +269,7 @@ photoRouter.delete('/api/listing/:listingID/photo/:photoID', bearerAuth, functio
   })
   .then( () => {
     let params = {
-      Bucket: 'artc-staging-assets',
+      Bucket: `${process.env.AWS_BUCKET}`,
       Key: tempPhoto.objectKey,
     };
     return s3.deleteObject(params).promise();
