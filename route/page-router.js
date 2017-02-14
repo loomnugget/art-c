@@ -28,8 +28,6 @@ pageRouter.get('/api/artist', function(req, res, next){
 
 pageRouter.get('/api/gallery', function(req, res, next){
   debug('hit route GET /api/gallery');
-  // let offset = req.query.offset, pageSize = req.query.pagesize, page = req.query.page;
-  // let skip = offset + pageSize * page ;
   Gallery.find()
   .populate('listings')
   .populate('listings.photoID')
